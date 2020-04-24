@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <tab
+        icon="@drawable/ic_back"
+        id="@+id/tab1"
+        title="首页" />
+
+    <tab
+        icon="@drawable/ic_back"
+        id="@+id/tab2"
+        title="发现" />
+
+    <tab
+        icon="@drawable/ic_back"
+        id="@+id/tab3"
+        title="广场" />
+
+    <tab
+        icon="@drawable/ic_back"
+        id="@+id/tab4"
+        title="我的" />
+
+
+</PreferenceScreen>

@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">WMS</string>
+    <string name="httperror">网络请求失败...</string>
+    <string name="nomore">没有更多数据</string>
+    <string name="press_again_to_leave">再按一次退出程序</string>
+    <string name="hwdj">货物登记</string>
+    <string name="rksh">入库收货</string>
+    <string name="ckjh">出库拣货</string>
+    <string name="kccx">库存查询</string>
+    <string name="kcpd">库存盘点</string>
+    <string name="gdgn">更多功能</string>
+    <string name="sjzy">上架作业</string>
+    <string name="xjzy">下架作业</string>
+
+    <string name="xzhwdj">新增货物登记</string>
+    <string name="hangban">航班</string>
+    <string name="hwpm">货物品名</string>
+    <string name="jianshu">件数</string>
+    <string name="djjs">登记件数</string>
+    <string name="fjdjdd">分拣登记地点</string>
+    <string name="hwfl">货物分类</string>
+    <string name="qxz">请选择</string>
+    <string name="hdxq">航单详情</string>
+    <string name="baocun">保存</string>
+</resources>

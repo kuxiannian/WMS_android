@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF8201</color>
+    <color name="colorPrimaryDark">#FF8201</color>
+    <color name="colorAccent">#FF8201</color>
+    <color name="main_color">#FF8201</color>
+
+    <color name="color_xjzy">#FD3543</color>
+    <color name="color_sjzy">#FF8200</color>
+    <color name="color_ckjh">#BB44F3</color>
+    <color name="color_hwdj">#FF6D00</color>
+    <color name="color_kccx">#0087E1</color>
+    <color name="color_kcpd">#26BD38</color>
+    <color name="color_gdgn">#A0A0A0</color>
+    <color name="color_rksh">#FD3543</color>
+
+
+    <color name="color_unselect">#FF959DA5</color>
+    <color name="color_select">#FFE9C56F</color>
+    <color name="main_start_color">#FFFFE4A4</color>
+    <color name="main_end_color">#FFE7CA84</color>
+    <color name="mine_color">#FFFFD800</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="color_men">#74B7FC</color>
+    <color name="color_women">#FF7592</color>
+    <color name="colorThemes">#EFB642</color>
+    <color name="colorTheme">#EFB642</color>
+    <color name="start_color">#A1C4FC</color>
+    <color name="end_color">#998cf5</color>
+    <!--页面背景的颜色-->
+    <color name="colorPageBg">#f2f4f5</color>
+
+    <color name="colorWhite">#ffffffff</color>
+    <!--分割线-->
+    <color name="colorLine">#E5E5E5</color>
+    <!--首页分割线-->
+    <color name="colorHomeLine">#D4D4D4</color>
+
+    <color name="colorLineDeep">#E6E6E6</color>
+
+
+    <color name="color_2d">#2d2d2d</color>
+
+    <!--item的分割线-->
+    <color name="colorLineItem">#FFDDDDDD</color>
+
+    <!--tab标签栏文字的颜色-->
+    <color name="colorTabText">#666666</color>
+    <!--正文文字颜色-->
+    <color name="colorContent">#ff333333</color>
+    <!--水波纹或5.0以下选择器颜色-->
+    <color name="tabBackground">#777D7D7D</color>
+    <!--item的水波纹颜色-->
+    <color name="itemBackground">#DD7D7D7D</color>
+    <!--item的5.0一下版本选择器颜色-->
+    <color name="itemLowBackground">#d9d9d9</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="ssss">#1A1A1A</color>
+
+    <!--透明色-->
+    <color name="colorTransparent">#00000000</color>
+    <!--半透明-->
+    <color name="colorBanTransparent">#11000000</color>
+    <!--半透明-->
+    <color name="colorWTransparent">#70ffffff</color>
+    <!--半透明-->
+    <color name="colorWTranssparent">#c0000000</color>
+    <!--首页item文字颜色-->
+    <color name="colorSubtitle">#999</color>
+
+    <color name="colorTitle">#1a1a1a</color>
+    <!--谈红色  用于首页调整点击变色-->
+    <color name="colorSmallRed">#faebeb</color>
+
+    <!--电影评分-->
+    <color name="colorRateRed">#FE0175</color>
+
+    <!--没有水波纹效果的颜色选择器-->
+    <color name="colorItemBackground">#d9d9d9</color>
+
+    <!--选择分类按下颜色-->
+    <color name="colorChoosePress">#DDD</color>
+
+    <!--暂时用于反馈文字-->
+    <color name="text_common">#191919</color>
+
+    <color name="text_deed_bg">#f6f6f6</color>
+    <!--dialog的查看详情键-->
+    <color name="colorBtDialog">#38659C</color>
+
+    <color name="bule">#1196f5</color>
+
+    <color name="boy">#AEC7F2</color>
+    <color name="girl">#FEB3C5</color>
+
+    <!-- QRCode scanner color begin -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#B0000000</color>
+    <color name="viewfinder_frame">#90FFFFFF</color>
+    <color name="result_point_color">#C0FFFF00</color>
+    <color name="laser_color">#0F0</color>
+    <color name="corner_color">#00FF00</color>
+    <color name="yello">#FFA311</color>
+    <color name="red">#FF0000</color>
+    <color name="light_red">#FC5C67</color>
+    <color name="orange">#FF9103</color>
+    <color name="gray2">#F8F8F8</color>
+    <color name="vipchoose">#B5C5FF</color>
+    <color name="txt_33">#333333</color>
+    <color name="txt_66">#666666</color>
+    <color name="txt_f2">#f2f2f2</color>
+
+    <color name="indicator">#B2B2B2</color>
+    <color name="svipcolor">#fff55f2b</color>
+    <color name="svipbgcolor">#FFCD36</color>
+    <color name="vipcolor">#ffffffff</color>
+    <color name="vipbgcolor">#F34725</color>
+    <color name="txt_main">#EFB642</color>
+    <color name="txt_lv1">#939393</color>
+    <color name="txt_lv2">#7C7C7C</color>
+    <color name="txt_lv3">#64676C</color>
+    <color name="txt_lv4">#696969</color>
+    <color name="txt_lv5">#403A35</color>
+    <color name="txt_lv6">#292929</color>
+    <color name="txt_lv7">#1A1A1A</color>
+    <color name="txt_lv8">#000000</color>
+    <color name="line">#EEEEEE</color>
+    <color name="et_line">#FFE7E7E7</color>
+    <color name="space">#EBF0F7</color>
+    <color name="space_light">#FAFAFA</color>
+    <color name="bg_et">#F6F6F6</color>
+    <color name="gg">#FF3975</color>
+    <color name="yellow_light">#FFB400</color>
+    <color name="color_zd">#FFA800</color>
+</resources>
