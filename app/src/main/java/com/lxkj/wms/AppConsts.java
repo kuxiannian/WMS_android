@@ -6,10 +6,9 @@ package com.lxkj.wms;
 public class AppConsts {
 
 
-    public static final String UID = "uid";
-    public static final String PHONE = "phone";
-
-
+    public static String userId = "";
+    public static String account = "";
+    public static String userName = "";
 
 
 

@@ -4,15 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.util.Log;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.lxkj.wms.AppConsts;
 import com.lxkj.wms.GlobalBeans;
 import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.ui.fragment.login.LoginFra;
-import com.lxkj.wms.utils.SharePrefUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.zhy.m.permission.MPermissions;
 
@@ -81,7 +78,6 @@ public class WelcomeActivity extends BaseFragAct {
         uiHandler.post(new Runnable() {
             @Override
             public void run() {
-                Log.e("uid", SharePrefUtil.getString(context, AppConsts.UID, ""));
                 ActivitySwitcher.startFragment(WelcomeActivity.this, LoginFra.class);
                 finish();
             }

@@ -18,7 +18,6 @@ import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ScreenUtil;
-import com.lxkj.wms.utils.SharePrefUtil;
 
 
 public abstract class TitleFragment extends Fragment implements EventCenter.EventListener {
@@ -60,8 +59,8 @@ public abstract class TitleFragment extends Fragment implements EventCenter.Even
             act = (NaviActivity) activity;
         }
         mContext = act;
-        userPhone = SharePrefUtil.getString(mContext, AppConsts.PHONE,null);
-        userId = SharePrefUtil.getString(mContext,AppConsts.UID,null);
+        userPhone = AppConsts.account;
+        userId = AppConsts.userId;
     }
 
     @Override
@@ -121,11 +120,11 @@ public abstract class TitleFragment extends Fragment implements EventCenter.Even
     public void onEvent(EventCenter.HcbEvent e) {
         switch (e.type){
             case EVT_LOGIN:
-                userId = SharePrefUtil.getString(mContext,AppConsts.UID,null);
+                userId = AppConsts.userId;
                 break;
             case EVT_LOGOUT:
                 act.finish();
-                userId = SharePrefUtil.getString(mContext,AppConsts.UID,null);
+                userId = "";
                 break;
         }
     }

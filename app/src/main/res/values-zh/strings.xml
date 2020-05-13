@@ -15,13 +15,174 @@
 
     <string name="xzhwdj">新增货物登记</string>
     <string name="hangban">航班</string>
-    <string name="hwpm">货物品名</string>
+    <string name="hwpm">货物品名(包括包装、体积或尺寸)</string>
     <string name="jianshu">件数</string>
     <string name="djjs">登记件数</string>
     <string name="fjdjdd">分拣登记地点</string>
     <string name="hwfl">货物分类</string>
     <string name="qxz">请选择</string>
-    <string name="hdxq">航单详情</string>
+    <string name="hdxq">舱单详情</string>
     <string name="baocun">保存</string>
+
+
+    <string name="sfz">始发站、第一承运人地址及要求的线路</string>
+    <string name="mdd">目的站</string>
+    <string name="tyrxm">托运人姓名</string>
+    <string name="tyrdz">托运人地址</string>
+    <string name="tyrlxfs">托运人联系方式</string>
+    <string name="shrxm">收货人姓名</string>
+    <string name="shrdz">收货人地址</string>
+    <string name="shrlxfs">收货人联系方式</string>
+    <string name="spdh">商品代号</string>
+    <string name="cx">查询</string>
+    <string name="js">件数</string>
+    <string name="rcp">运价点</string>
+    <string name="grossWeight">毛重(kg)</string>
+    <string name="rateClass">运价种类</string>
+    <string name="productCode">商品代号</string>
+    <string name="queren">确认</string>
+
+    <string name="sx">筛选</string>
+    <string name="lscx">历史查询</string>
+    <string name="jlsx">记录筛选</string>
+    <string name="lscxxq">历史查询详情</string>
+    <string name="txm">条形码</string>
+
+
+    <string name="xiugai">修改</string>
+    <string name="shanchu">删除</string>
+
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+
+    <string name="hint_delete">确认是否删除本条记录？</string>
+
+    <string name="fksh">入库收货</string>
+    <string name="sgrk">手工入库</string>
+    <string name="qdksmqsm">请打开扫描抢扫描</string>
+    <string name="rkrq">入库日期</string>
+    <string name="rkck">入库仓库</string>
+    <string name="tph">托盘号</string>
+    <string name="zhongliang">重量(kg)</string>
+    <string name="xzrk">新增入库</string>
+    <string name="sglr">手工录入</string>
+    <string name="hint_smq">请打开扫描枪扫描</string>
+
+    <string name="xzck">新增出库</string>
+    <string name="ckrq">出库日期</string>
+    <string name="thdbh">提货单编号</string>
+    <string name="thr">提货人</string>
+    <string name="thrlxfs">提货联系方式</string>
+    <string name="ckck">出库仓库</string>
+
+    <string name="ck">仓库</string>
+    <string name="cw">储位</string>
+    <string name="hwmc">货物名称</string>
+    <string name="zkts">在库天数</string>
+    <string name="ckzt">仓库状态</string>
+
+    <string name="pdksrq">盘点开始日期</string>
+    <string name="pdjsrq">盘点结束日期</string>
+    <string name="zt">状态</string>
+    <string name="bccg">保存草稿</string>
+    <string name="wcpd">完成盘点</string>
+    <string name="pdxq">盘点详情</string>
+    <string name="xz">新增</string>
+
+    <string name="qsrzh">请输入账号</string>
+    <string name="qsrmm">请输入密码</string>
+    <string name="dl">登 录</string>
+    <string name="login_bottom">版权所有©2020，同方威视技术股份有限公司</string>
+    <string name="ChangeSuccess">编辑成功</string>
+    <string name="DiffTwoPass">两次编辑密码不一致</string>
+    <string name="DiffoldPass">新密码和旧密码不能相同</string>
+    <string name="EnterConPass">请确认密码</string>
+    <string name="EnterLogOut">确认要退出吗？</string>
+    <string name="EnterNewPass">请输入新密码</string>
+    <string name="EnterOldPass">请输入旧密码</string>
+    <string name="EnterPassLength">密码格式不正确</string>
+    <string name="LogOutSuccess">退出成功</string>
+    <string name="LowercaseLetter">小写字母</string>
+    <string name="SpecialCharacter">特殊字符</string>
+    <string name="UppercaseLetter">大写字母</string>
+    <string name="allpassword">且长度为%1$d-%1$d位</string>
+    <string name="passwordLength">密码长度为%1$d-%2$d位</string>
+    <string name="changePass">编辑密码</string>
+    <string name="conPassword">确认密码</string>
+    <string name="mustHave">必须包含</string>
+    <string name="newPassword">新密码</string>
+    <string name="number">数字</string>
+    <string name="oldPassword">旧密码</string>
+
+
+
+    <string name="hint_00000">未处理的异常</string>
+    <string name="hint_00001">内部实现错误</string>
+    <string name="hint_00406">参数不满足要求</string>
+    <string name="hint_20001">用户会话已超时或因重复登录会话被关闭，请重新登录</string>
+    <string name="hint_20002">用户无权限</string>
+    <string name="hint_20003">用户权限为空</string>
+    <string name="hint_20005">非法请求</string>
+    <string name="hint_20006">非法请求</string>
+    <string name="hint_20010">非法请求</string>
+    <string name="hint_29999">内部错误</string>
+    <string name="hint_10000">数据有误</string>
+    <string name="hint_10001">数据约束性错误</string>
+    <string name="hint_10100">用户不存在</string>
+    <string name="hint_10101">用户已存在</string>
+    <string name="hint_10102">组织机构被禁用，用户禁止登录</string>
+    <string name="hint_10103">密码不正确</string>
+    <string name="hint_10104">必须更改密码后才能登录</string>
+    <string name="hint_10105">用户处于不可用状态</string>
+    <string name="hint_10106">用户被锁定</string>
+    <string name="hint_10107">新密码不满足安全规则</string>
+    <string name="hint_10108">新密码不满足安全规则</string>
+    <string name="hint_10109">用户处于不可用状态</string>
+    <string name="hint_10110">新密码不能与默认密码相同</string>
+    <string name="hint_10111">信息有误</string>
+    <string name="hint_10112">链接过期</string>
+    <string name="hint_10117">登录错误，%1$s次后将锁定</string>
+    <string name="hint_10304">密码不能为默认密码</string>
+    <string name="hint_10305">重置密码信息有误</string>
+    <string name="hint_11200">链接过期</string>
+    <string name="hint_10113">内置帐号禁止操作</string>
+    <string name="hint_10114">帐号已使用禁止删除</string>
+    <string name="hint_10115">用户需要审核</string>
+    <string name="hint_10116">用户未登录</string>
+    <string name="hint_11100">账号或密码不正确</string>
+    <string name="hint_11101">验证码有误</string>
+    <string name="hint_11102">验证码已过期</string>
+    <string name="hint_11103">账号或密码不正确</string>
+    <string name="E029999">内部错误</string>
+    <string name="logOut">登出</string>
+
+    // 分拣登记错误提示
+    <string name="VE210001">主键必须不能为空</string>
+    <string name="VE210002">舱单信息不能为空</string>
+    <string name="VE210003">航班不能为空</string>
+    <string name="VE210004">货物品名(包括包装、体积或尺寸)不能为空</string>
+    <string name="VE210005">分拣登记地点不能为空</string>
+    <string name="VE210006">登记数量不能为空</string>
+    <string name="VE210007">登记数量，必须在1-9999999之间</string>
+    <string name="VE210008">货物分类不能为空</string>
+    <string name="VE210009">货物分类，请选择正确的选项</string>
+    <string name="VE210010">备注，只能输入1~200位长度</string>
+    <string name="VE210011">版本号不能为空</string>
+    <string name="SE210001">舱单信息不正确</string>
+    <string name="SE210002">货物品名(包括包装、体积或尺寸)不正确</string>
+    <string name="SE210003">条形码：%1$d，货物已经进行了其他事件，无法删除</string>
+    <string name="SE210004">该货物已经分拣登记%1$d件，登记件数不能超过%2$d件</string>
+    <string name="SE180009">未查询此AWB相关的舱单信息</string>
+    <string name="SE180010">一次登记件数不能超过1000</string>
+
+    <string name="goodsTypeA">A类货物</string>
+    <string name="goodsTypeB">B类货物</string>
+    <string name="goodsTypeC">C类货物</string>
+
+    <string name="select">请选择</string>
+    <string name="seDelete">删除成功</string>
+    <string name="seEdit">编辑成功</string>
+    <string name="seSave">添加成功</string>
+
 
 </resources>

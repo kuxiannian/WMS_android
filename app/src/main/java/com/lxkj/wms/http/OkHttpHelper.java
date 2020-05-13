@@ -6,17 +6,17 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.lxkj.wms.AppConsts;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.BaseBean;
-import com.lxkj.wms.utils.NetUtil;
+import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,10 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -45,7 +48,19 @@ public class OkHttpHelper {
     private Context context;
     private Handler mHandler;
     private Map<String, Map<String, String>> mMap;
+    private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+    CookieJar cookieJar = new CookieJar() {
+        @Override
+        public void saveFromResponse(HttpUrl httpUrl, List<Cookie> list) {
+            cookieStore.put(httpUrl.host(), list);
+        }
 
+        @Override
+        public List<Cookie> loadForRequest(HttpUrl httpUrl) {
+            List<Cookie> cookies = cookieStore.get(httpUrl.host());
+            return cookies != null ? cookies : new ArrayList<Cookie>();
+        }
+    };
 
     enum HttpMethodType {
         GET,
@@ -58,14 +73,16 @@ public class OkHttpHelper {
 
     private OkHttpHelper() {
         mHttpClient = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(false)
+                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())//配置
+                .hostnameVerifier(SSLSocketClient.getHostnameVerifier())//配置
                 .build();
         mGson = new Gson();
         mHandler = new Handler(Looper.getMainLooper());
         mMap = new HashMap<>();
-
     }
 
     /**
@@ -79,6 +96,7 @@ public class OkHttpHelper {
 
     /**
      * get 请求
+     *
      * @param url
      * @param callback
      */
@@ -108,22 +126,28 @@ public class OkHttpHelper {
      *
      * @param context
      * @param url
-     * @param params  json 参数Map
+     * @param params   json 参数Map
      * @param callback
      */
-    Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
-
-    public void post_json(Context context, String url, Map<String, Object> params, BaseCallback callback) {
-
-        String gson = gson2.toJson(params);
-        Log.e("http--json", gson);
-        Map<String, String> param = new HashMap<>();
-        param.put("json", gson);
+    public void post_json(Context context, String url, Map<String, String> params, BaseCallback callback) {
         this.context = context;
-        Request request = buildPostRequest(url, param);
+        Request request = buildPostRequest(url, params);
         request(request, callback);
     }
 
+    /**
+     * get请求 将请求参数封装为json
+     *
+     * @param context
+     * @param url
+     * @param params   json 参数Map
+     * @param callback
+     */
+    public void get_json(Context context, String url, Map<String, String> params, BaseCallback callback) {
+        this.context = context;
+        Request request = buildGetRequest(url, params);
+        request(request, callback);
+    }
 
     public void post_file(Context context, String url, Map<String, List<File>> fileParams, BaseCallback callback) {
         this.context = context;
@@ -131,84 +155,6 @@ public class OkHttpHelper {
         request(request, callback);
     }
 
-    /**
-     * 除文件外其他参数josn形式传递
-     * @param context
-     * @param url
-     * @param params
-     * @param fileParams
-     * @param callback
-     */
-    public void post_json_file(Context context, String url, Map<String, Object> params, Map<String, List<File>> fileParams, BaseCallback callback) {
-        this.context = context;
-        Request request = buildRequestFiles(url, params, fileParams);
-        request(request, callback);
-    }
-
-    /**
-     * 文件上传 参数以 key value 形式上传
-     * @param context
-     * @param url
-     * @param params
-     * @param fileParams
-     * @param callback
-     */
-    public void post_map_file(Context context, String url, Map<String, Object> params, Map<String, List<File>> fileParams, BaseCallback callback) {
-        this.context = context;
-        Request request = buildRequestMapFiles(url, params, fileParams);
-        request(request, callback);
-    }
-
-
-
-    /**
-     * POST 请求 附加 header
-     *
-     * @param url
-     * @param param
-     * @param callback
-     * @param context
-     */
-    public void post_header(String url, Map<String, String> param, BaseCallback callback, final Context context) {
-        this.context = context;
-        this.mMap.put(url, param);
-        if (!NetUtil.isNetWork(context)) {
-            Toast.makeText(context, "当前无网络连接", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Request request = buildRequest_header(url, param);
-        request(request, callback);
-    }
-
-    /**
-     * POST 请求 附加 header,带文件
-     *
-     * @param url
-     * @param param
-     * @param callback
-     * @param context
-     */
-    public void post_header_file(String url, Map<String, String> param, BaseCallback callback, final Context context, File file, String key) {
-        this.context = context;
-        this.mMap.put("url_map", param);
-        if (!NetUtil.isNetWork(context)) {
-            Toast.makeText(context, "当前无网络连接", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Request request = buildRequest_header_file(url, param, file, key);
-        request(request, callback);
-    }
-
-    public void post_header_files(String url, Map<String, String> param, BaseCallback callback, final Context context, List<File> files, String key) {
-        this.context = context;
-        this.mMap.put("url_map", param);
-        if (!NetUtil.isNetWork(context)) {
-            Toast.makeText(context, "当前无网络连接", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Request request = buildRequest_header_files(url, param, files, key);
-        request(request, callback);
-    }
 
     /**
      * 执行 网络请求 get\post\post_header
@@ -217,7 +163,6 @@ public class OkHttpHelper {
      * @param callback
      */
     private void request(final Request request, final BaseCallback callback) {
-        callback.onBeforeRequest(request);
         mHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -227,8 +172,6 @@ public class OkHttpHelper {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 callbackResponse(callback, response);
-                callback.onResponse(response);
-
                 if (response.isSuccessful()) {
                     Log.e("http--url", request.url().toString());
                     String resultStr = response.body().string();
@@ -237,8 +180,8 @@ public class OkHttpHelper {
                         callbackSuccess(callback, response, resultStr);
                     } else {
                         try {
-                            Object obj = mGson.fromJson(resultStr, callback.mType);
-                            callbackSuccess(callback, response, obj);
+//                            Object obj = mGson.fromJson(resultStr, callback.mType);
+                            callbackSuccess(callback,response, resultStr);
                         } catch (com.google.gson.JsonParseException e) { // Json解析的错误
                             e.printStackTrace();
                             callbackError(callback, response, e);
@@ -261,14 +204,22 @@ public class OkHttpHelper {
      */
     private Request buildRequest(String url, HttpMethodType methodType, Map<String, String> params) {
         Request.Builder builder = new Request.Builder()
-                .url(url);
+                .url(url)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
+                .addHeader("X-APP-UACCOUNT", AppConsts.account);
         if (methodType == HttpMethodType.POST) {
             RequestBody body = builderFormData(params);
             builder.post(body);
-        } else if (methodType == HttpMethodType.GET) {
-            builder.get();
+            return builder.build();
+        } else {
+            HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
+            if (params != null) {
+                for (Map.Entry<String, String> param : params.entrySet()) {
+                    httpBuilder.addQueryParameter(param.getKey(), param.getValue());
+                }
+            }
+           return new Request.Builder().url(httpBuilder.build()).build();
         }
-        return builder.build();
     }
 
     private Request buildFiles(String url, Map<String, List<File>> fileParams) {
@@ -279,80 +230,6 @@ public class OkHttpHelper {
         return builder.build();
     }
 
-    private Request buildRequestFiles(String url, Map<String, Object> params, Map<String, List<File>> fileParams) {
-        Request.Builder builder = new Request.Builder()
-                .url(url);
-        RequestBody body = builderFormDataFiles(params, fileParams);
-        builder.post(body);
-        return builder.build();
-    }
-
-    private Request buildRequestMapFiles(String url, Map<String, Object> params, Map<String, List<File>> fileParams) {
-        Request.Builder builder = new Request.Builder()
-                .url(url);
-        RequestBody body = builderFormDataMapFiles(params, fileParams);
-        builder.post(body);
-        return builder.build();
-    }
-
-
-    /**
-     * 构建请求参数 附加请求头
-     * @param url
-     * @param params
-     * @return
-     */
-    private Request buildRequest_header(String url, Map<String, String> params) {
-        /**
-         * 添加的header参数（根据需求改变）
-         */
-        String apiKey = "";
-        String currentBabyId = "";
-        String clubid = "";
-        Request.Builder builder;
-        builder = new Request.Builder().url(url)
-                .addHeader("X-Apikey", apiKey)
-                .addHeader("X-Baby", currentBabyId)
-                .addHeader("X-CLUB", clubid);
-        RequestBody body = builderFormData(params);
-        builder.post(body);
-        return builder.build();
-    }
-
-    /**
-     * 构建请求参数 附加请求头，带文件
-     *
-     * @param url
-     * @param params
-     * @return
-     */
-    private Request buildRequest_header_file(String url, Map<String, String> params, File file, String key) {
-        String apiKey = "";
-        String currentBabyId = "";
-        String clubid = "";
-        Request.Builder builder;
-        builder = new Request.Builder().url(url)
-                .addHeader("X-Apikey", apiKey)
-                .addHeader("X-Baby", currentBabyId)
-                .addHeader("X-CLUB", clubid);
-        RequestBody body = builderFormData_file(params, file, key);
-        builder.post(body);
-        return builder.build();
-    }
-
-    private Request buildRequest_header_files(String url, Map<String, String> params, List<File> files, String key) {
-        String apiKey = "";
-        String currentBabyId = "";
-        String clubid = "";
-        Request.Builder builder;
-        builder = new Request.Builder().url(url)
-                .addHeader("X-Apikey", apiKey)
-                .addHeader("X-Baby", currentBabyId)
-                .addHeader("X-CLUB", clubid);
-        RequestBody body = builderFormData_files(params, files, key);
-        builder.post(body);
-        return builder.build();
-    }
 
     /**
      * 组装表单数据
@@ -361,6 +238,11 @@ public class OkHttpHelper {
      * @return
      */
     private RequestBody builderFormData(Map<String, String> params) {
+//        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+//        String json = gson.toJson(params);
+//        Log.e("http--json", json);
+//        RequestBody body = FormBody.create(MediaType.parse("application/json;charset=UTF-8"), json);
+
         FormBody.Builder builder = new FormBody.Builder();
         if (params != null) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -370,56 +252,6 @@ public class OkHttpHelper {
         return builder.build();
     }
 
-    /**
-     * 组装表单数据带文件
-     *
-     * @param params
-     * @return
-     */
-    private MultipartBody builderFormData_file(Map<String, String> params, File file, String key) {
-        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if (file != null) {
-            // MediaType.parse() 里面是上传的文件类型。
-            RequestBody body = RequestBody.create(MediaType.parse("application/octet-stream"), file);
-            String filename = file.getName();
-            // 参数分别为， 请求key ，文件名称 ， RequestBody
-            requestBody.addFormDataPart(key, filename, body);
-        }
-
-        if (params != null) {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                requestBody.addFormDataPart(entry.getKey(), entry.getValue());
-            }
-        }
-        return requestBody.build();
-    }
-
-    /**
-     * 多文件上传
-     *
-     * @param params
-     * @param files
-     * @param key
-     * @return
-     */
-    private MultipartBody builderFormData_files(Map<String, String> params, List<File> files, String key) {
-        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if (files != null) {
-            // MediaType.parse() 里面是上传的文件类型。
-            for (int i = 0; i < files.size(); i++) {
-                RequestBody body = RequestBody.create(MediaType.parse("image/png"), files.get(i));
-                String filename = files.get(i).getName();
-                // 参数分别为， 请求key ，文件名称 ， RequestBody
-                requestBody.addFormDataPart(key + "[]", filename, body);
-            }
-        }
-        if (params != null) {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                requestBody.addFormDataPart(entry.getKey(), entry.getValue());
-            }
-        }
-        return requestBody.build();
-    }
 
     private MultipartBody builderFiles(Map<String, List<File>> fileParams) {
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
@@ -441,6 +273,7 @@ public class OkHttpHelper {
 
     /**
      * 多文件上传
+     *
      * @param params
      * @param fileParams
      * @return
@@ -488,21 +321,22 @@ public class OkHttpHelper {
         return requestBody.build();
     }
 
-    private void callbackSuccess(final BaseCallback callback, final Response response, final Object obj) {
+    private void callbackSuccess(final BaseCallback callback, Response response,final String resultStr) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 if (callback.mType == String.class) {
-                    callback.onSuccess(response, obj);
-                }else {
+                    callback.onSuccess(response, resultStr);
+                } else {
                     try {
-                        if (((BaseBean) obj).result.equals("0"))
-                            callback.onSuccess(response, obj);
+                        BaseBean baseBean = mGson.fromJson(resultStr, BaseBean.class);
+                        if (!baseBean.flag)
+                            ShowErrorCodeUtil.showError(context, baseBean.errorCode);
                         else{
-                            ToastUtil.show(((BaseBean) obj).resultNote);
-                            callback.onError(response,1,new Exception());
+                            Object obj = mGson.fromJson(resultStr, callback.mType);
+                            callback.onSuccess(response, obj);
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -535,13 +369,12 @@ public class OkHttpHelper {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                callback.onResponse(response);
             }
         });
     }
 
-    private Request buildGetRequest(String url) {
-        return buildRequest(url, HttpMethodType.GET, null);
+    private Request buildGetRequest(String url, Map<String, String> params) {
+        return buildRequest(url, HttpMethodType.GET, params);
     }
 
     private Request buildPostRequest(String url, Map<String, String> params) {

@@ -14,20 +14,30 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.lxkj.wms.AppConsts;
 import com.lxkj.wms.R;
+import com.lxkj.wms.bean.ResultBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.biz.EventCenter;
+import com.lxkj.wms.http.BaseCallback;
+import com.lxkj.wms.http.SpotsCallBack;
+import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.MainActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.PasswordUtil;
 import com.lxkj.wms.utils.ToastUtil;
-import com.orhanobut.logger.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by kxn on 2020/1/9 0009.
@@ -43,16 +53,11 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
     EditText etAccount;
     @BindView(R.id.etPsw)
     EditText etPsw;
-    @BindView(R.id.ivCk)
-    ImageView ivCk;
-    @BindView(R.id.llCk)
-    LinearLayout llCk;
-    @BindView(R.id.ivCc)
-    ImageView ivCc;
-    @BindView(R.id.llCc)
-    LinearLayout llCc;
     @BindView(R.id.webView)
     WebView webview;
+
+    private int minLength, maxLength;
+    private String containsUppercaseLetters, containsLowercaseLetters, containsDigitalNumber, containsSpecialCharacters;
 
     @Override
     public String getTitleName() {
@@ -74,10 +79,8 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
         eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGIN);
         tvLogin.setOnClickListener(this);
         ivLanguage.setOnClickListener(this::onClick);
-        llCc.setOnClickListener(this::onClick);
-        llCk.setOnClickListener(this::onClick);
         webview.getSettings().setJavaScriptEnabled(true);
-
+        initPwdRule();
     }
 
 
@@ -89,11 +92,48 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
 
     private void userLogin() {
         if (TextUtils.isEmpty(etAccount.getText())) {
-            ToastUtil.show("请输入手机号");
+            ToastUtil.show(mContext.getString(R.string.qsrzh));
             return;
         }
         if (TextUtils.isEmpty(etPsw.getText())) {
-            ToastUtil.show("请输入密码");
+            ToastUtil.show(mContext.getString(R.string.qsrmm));
+            return;
+        }
+        String account = etPsw.getText().toString();
+
+        if (null != containsUppercaseLetters && !containsUppercaseLetters.equals("0")) {
+            if (!PasswordUtil.isContainUp(account)) {
+                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.UppercaseLetter));
+                return;
+            }
+        }
+
+        if (null != containsLowercaseLetters && !containsLowercaseLetters.equals("0")) {
+            if (!PasswordUtil.isContainLower(account)) {
+                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.LowercaseLetter));
+                return;
+            }
+        }
+
+        if (null != containsDigitalNumber && !containsDigitalNumber.equals("0")) {
+            if (!PasswordUtil.isContainDigitalNumber(account)) {
+                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.number));
+                return;
+            }
+        }
+
+        if (null != containsSpecialCharacters && !containsSpecialCharacters.equals("0")) {
+            if (!PasswordUtil.isContainSpecialCharacters(account)) {
+                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.SpecialCharacter));
+                return;
+            }
+        }
+
+
+        if (maxLength > 0 && !PasswordUtil.isLength(account, minLength, maxLength)) {
+            String testStr = getResources().getString(R.string.passwordLength);
+            String result = String.format(testStr, minLength, maxLength);
+            ToastUtil.show(result);
             return;
         }
         webview.loadUrl("file:///android_asset/crypto.html");
@@ -106,29 +146,76 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
                 webview.evaluateJavascript(script, new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String value) {
-                        Log.e("onReceiveValue", value);
-                        Logger.d("crypto value: " + value);
+                        value = value.replace("\"", "");
+                        Log.e("loginStr",value);
+                        doLogin(value);
                     }
                 });
             }
         });
 
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("cmd", "userLogin");
-//        params.put("phone", etAccount.getText().toString());
-//        params.put("password", Md5.encode(etPsw.getText().toString()));
-//        mOkHttpHelper.post_json(mContext, Url.THE_SERVER_URL, params, new SpotsCallBack<ResultBean>(mContext) {
-//            @Override
-//            public void onSuccess(Response response, ResultBean resultBean) {
-//                eventCenter.sendType(EventCenter.EventType.EVT_LOGOUT); //关闭 重新打开
-//                SharePrefUtil.saveString(mContext, AppConsts.UID, resultBean.uid);
-//                SharePrefUtil.saveString(mContext, AppConsts.PHONE, etAccount.getText().toString());
-//                ActivitySwitcher.start(act, MainActivity.class);
-//            }
-//            @Override
-//            public void onError(Response response, int code, Exception e) {
-//            }
-//        });
+
+    }
+
+    private void doLogin(String loginStr) {
+        Map<String, String> params = new HashMap<>();
+        params.put("loginStr", loginStr);
+        mOkHttpHelper.post_json(mContext, Url.LOGIN, params, new SpotsCallBack<String>(mContext) {
+            @Override
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result,ResultBean.class);
+                if (resultBean.flag) {
+                    if (null != resultBean.result) {
+                        AppConsts.userId = resultBean.result.userId;
+                        AppConsts.account = resultBean.result.account;
+                        AppConsts.userName = resultBean.result.userName;
+                        ActivitySwitcher.start(act, MainActivity.class);
+                    }
+                }else if (resultBean.errorCode.equals("I010104")){ //更改密码  待完善
+                    ToastUtil.show("更改密码");
+                }else if (resultBean.errorCode.equals("I010117")){
+                    String testStr = getResources().getString(R.string.hint_10117);
+                    String hint = String.format(testStr,resultBean.result.leftTimes);
+                    ToastUtil.show(hint);
+                }
+            }
+
+            @Override
+            public void onError(Response response, int code, Exception e) {
+            }
+        });
+    }
+
+
+    /**
+     * 获取密码规则
+     */
+    private void initPwdRule() {
+        Map<String, String> params = new HashMap<>();
+        mOkHttpHelper.get_json(mContext, Url.InitPwdRule, params, new BaseCallback<ResultBean>() {
+
+            @Override
+            public void onFailure(Request request, Exception e) {
+
+            }
+
+
+            @Override
+            public void onSuccess(Response response, ResultBean resultBean) {
+                if (resultBean.flag) {
+                    containsUppercaseLetters = resultBean.result.containsUppercaseLetters;
+                    containsLowercaseLetters = resultBean.result.containsLowercaseLetters;
+                    containsDigitalNumber = resultBean.result.containsDigitalNumber;
+                    containsSpecialCharacters = resultBean.result.containsSpecialCharacters;
+                    minLength = resultBean.result.minLength;
+                    maxLength = resultBean.result.maxLength;
+                }
+            }
+
+            @Override
+            public void onError(Response response, int code, Exception e) {
+            }
+        });
     }
 
     @Override
@@ -143,18 +230,9 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
         switch (view.getId()) {
             case R.id.tvLogin:
                 userLogin();
-                ActivitySwitcher.start(act, MainActivity.class);
                 break;
             case R.id.ivLanguage:
 
-                break;
-            case R.id.llCk:
-                ivCk.setImageResource(R.mipmap.ic_checked);
-                ivCc.setImageResource(R.mipmap.ic_uncheck);
-                break;
-            case R.id.llCc:
-                ivCc.setImageResource(R.mipmap.ic_checked);
-                ivCk.setImageResource(R.mipmap.ic_uncheck);
                 break;
         }
     }

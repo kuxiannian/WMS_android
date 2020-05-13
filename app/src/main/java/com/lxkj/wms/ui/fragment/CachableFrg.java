@@ -13,7 +13,6 @@ import com.lxkj.wms.GlobalBeans;
 import com.lxkj.wms.biz.EventCenter;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.utils.ScreenUtil;
-import com.lxkj.wms.utils.SharePrefUtil;
 
 import butterknife.ButterKnife;
 
@@ -38,7 +37,7 @@ public abstract class CachableFrg extends Fragment implements EventCenter.EventL
         eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGIN);
         eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGOUT);
         mOkHttpHelper = OkHttpHelper.getInstance();
-        userId = SharePrefUtil.getString(getContext(),AppConsts.UID,null);
+        userId = AppConsts.userId;
 
     }
 
@@ -93,10 +92,8 @@ public abstract class CachableFrg extends Fragment implements EventCenter.EventL
     public void onEvent(EventCenter.HcbEvent e) {
         switch (e.type){
             case EVT_LOGIN:
-                userId = SharePrefUtil.getString(getActivity(),AppConsts.UID,null);
                 break;
             case EVT_LOGOUT:
-                userId = SharePrefUtil.getString(getActivity(),AppConsts.UID,null);
                 break;
         }
     }

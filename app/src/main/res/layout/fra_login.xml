@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -50,8 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="请输入账号"
-                android:inputType="phone"
+                android:hint="@string/qsrzh"
+                android:text="wms"
                 android:maxLength="12"
                 android:padding="10dp"
                 android:singleLine="true"
@@ -81,7 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="请输入密码"
+                android:hint="@string/qsrmm"
+                android:text="abc123"
                 android:inputType="textPassword"
                 android:maxLength="12"
                 android:padding="10dp"
@@ -111,63 +114,28 @@
             android:background="@drawable/btn_main_rect_50dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="登 录"
+            android:text="@string/dl"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/llCk"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:layout_weight="1">
-                <ImageView
-                    android:id="@+id/ivCk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:src="@mipmap/ic_checked"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="仓库管理PDA"
-                    android:textColor="@color/txt_lv5"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llCc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:layout_weight="1">
-                <ImageView
-                    android:id="@+id/ivCc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:src="@mipmap/ic_uncheck"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="叉车平板电脑"
-                    android:textColor="@color/txt_lv5"/>
-
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
-
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:background="@null"
+        android:layout_marginBottom="50dp"
+        android:hint="@string/login_bottom"
+        android:maxLength="12"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textSize="12sp" />
 
 
 </LinearLayout>

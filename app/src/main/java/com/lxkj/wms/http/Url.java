@@ -6,34 +6,37 @@ package com.lxkj.wms.http;
  */
 
 public class Url {
-    public static String PIC = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1579176004833&di=26ee339481ec605d834d783a917b9c6a&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsc%2F533%2Fw1280h853%2F20180622%2FSJJB-hefphqm4199055.jpg";
-    public static String IP = "http://122.114.49.242";
-    public static String SETLOGO = "http://47.96.125.3//bbschat/static/common/images/xitongtongzhi.png";
-
     //服务器地址
-    public static String THE_SERVER_URL = IP + "/downkitchen/api/service";
-
-    //上传图片
-    public static String THE_SERVER_UPLOADIMAGE = IP + "/downkitchen/api/uploadFile"; //file object["123.jpg","456.jpg"]
-
-
-
-
-
-    //用户协议
-    public static String YHXY = IP + "/downkitchen/display/agreement?id=1";
-    //关于我们
-    public static String AboutUs = IP + "/downkitchen/display/agreement?id=2";
-    //使用手册
-    public static String SYSC = IP + "/downkitchen/display/agreement?id=3";
-    //新手教程
-    public static String XSJC = IP + "/downkitchen/display/agreement?id=4";
-    //隐私协议
-    public static String YSXY = IP + "/downkitchen/display/agreement?id=5";
-
-
-
-
-
-
+    public static String IP = "https://218.93.19.166:8080";
+    //用户登录
+    public static String LOGIN = IP + "/upmsapi/user/login";
+    //获取密码规则
+    public static String InitPwdRule = IP + "/upmsapi/user/initPwdRule";
+    //获取权限编码列表
+    public static String getPrmCodeList = IP + "/upmsapi/prm/getPrmCodeList";
+    //登出
+    public static String logout = IP + "/upmsapi/user/logout";
+    /**
+     * 分拣登记
+     */
+    //根据AWB搜索舱单信息接口
+    public static String findManifestByAwb = IP + "/wms/manifest/findManifestByAwb";
+    //新增数据接口
+    public static String addSortingRegister = IP + "/wms/sortingRegister/addSortingRegister";
+    //分页查询数据接口
+    public static String findSortingRegisterPage = IP + "/wms/sortingRegister/findSortingRegisterPage";
+    //编辑数据接口
+    public static String updateSortingRegister = IP + "/wms/sortingRegister/updateSortingRegister";
+    //删除数据接口
+    public static String deleteSortingRegister = IP + "/wms/sortingRegister/deleteSortingRegister";
+    //查询仓库列表接口
+    public static String findWarehouseList = IP + "/wms/sortingRegister/findWarehouseList";
+    //根据舱单信息ID查询舱单航班信息接口
+    public static String findFlightByWmsManifestId = IP + "/wms/manifest/findFlightByWmsManifestId";
+    //根据舱单信息ID查询舱单货物信息接口
+    public static String findGoodsNameByWmsManifestId = IP + "/wms/manifest/findGoodsNameByWmsManifestId";
+    //根据舱单货物ID查询舱单货物信息接口
+    public static String findWmsManifestGoodsByGoodsNameId = IP + "/wms/manifest/findWmsManifestGoodsByGoodsNameId";
+    //根据分拣登记ID查询分拣登记明细信息接口
+    public static String findWmsSortingRegisterDetailList = IP + "/wms/sortingRegister/findWmsSortingRegisterDetailList";
 }

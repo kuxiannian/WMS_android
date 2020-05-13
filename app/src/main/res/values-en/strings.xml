@@ -4,23 +4,180 @@
     <string name="nomore">没有更多数据</string>
     <string name="press_again_to_leave">再按一次退出程序</string>
 
-    <string name="hwdj">货物登记</string>
-    <string name="rksh">入库收货</string>
-    <string name="ckjh">出库拣货</string>
-    <string name="kccx">库存查询</string>
-    <string name="kcpd">库存盘点</string>
-    <string name="gdgn">更多功能</string>
-    <string name="sjzy">上架作业</string>
-    <string name="xjzy">下架作业</string>
+    <string name="hwdj">SORTINGREGISTER</string>
+    <string name="rksh">BILLINPUT</string>
+    <string name="ckjh">BILLOUTPUT</string>
+    <string name="kccx">STOCK</string>
+    <string name="kcpd">BILLSTOCKCHECK</string>
+    <string name="sjzy">BILLPUTON</string>
+    <string name="xjzy">BILLPUTOFF</string>
 
-    <string name="xzhwdj">新增货物登记</string>
-    <string name="hangban">航班</string>
-    <string name="hwpm">货物品名</string>
-    <string name="jianshu">件数</string>
-    <string name="djjs">登记件数</string>
-    <string name="fjdjdd">分拣登记地点</string>
-    <string name="hwfl">货物分类</string>
-    <string name="qxz">请选择</string>
-    <string name="hdxq">航单详情</string>
-    <string name="baocun">保存</string>
+    <string name="xzhwdj">appAddTitle</string>
+    <string name="hangban">Flight</string>
+    <string name="hwpm">Goods name(package, volume or size)</string>
+    <string name="jianshu">Number</string>
+    <string name="djjs">Regist number</string>
+    <string name="fjdjdd">Sorting registration place</string>
+    <string name="hwfl">goodsType</string>
+    <string name="qxz">Please select</string>
+    <string name="hdxq">Manifest Information</string>
+    <string name="baocun">Save</string>
+
+    <string name="sfz">Departure, first carrier address</string>
+    <string name="mdd">Destination</string>
+    <string name="tyrxm">Shipper name</string>
+    <string name="tyrdz">Shipper address</string>
+    <string name="tyrlxfs">Shipper contact</string>
+    <string name="shrxm">Receiver name</string>
+    <string name="shrdz">Receiver address</string>
+    <string name="shrlxfs">Receiver contact</string>
+    <string name="js">Number</string>
+    <string name="rcp">Freight point</string>
+    <string name="grossWeight">Gross weight (kg)</string>
+    <string name="rateClass">Freight type</string>
+    <string name="productCode">Goods code</string>
+    <string name="queren">Confirm</string>
+
+    <string name="sx">Filter</string>
+    <string name="lscx">History</string>
+    <string name="jlsx">Filter</string>
+    <string name="lscxxq">History Detail</string>
+    <string name="txm">Bar code</string>
+    <string name="spdh">Goods code</string>
+    <string name="cx">Query</string>
+
+    <string name="xiugai">Modify</string>
+    <string name="shanchu">Delete</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="hint_delete">Delete record?</string>
+
+    <string name="fksh">Input</string>
+    <string name="sgrk">手工入库</string>
+    <string name="qdksmqsm">请打开扫描抢扫描</string>
+    <string name="rkrq">入库日期</string>
+    <string name="rkck">入库仓库</string>
+    <string name="tph">托盘号</string>
+    <string name="zhongliang">重量(kg)</string>
+    <string name="xzrk">新增入库</string>
+    <string name="sglr">手工录入</string>
+    <string name="hint_smq">请打开扫描枪扫描</string>
+
+    <string name="xzck">新增出库</string>
+    <string name="ckrq">出库日期</string>
+    <string name="thdbh">提货单编号</string>
+    <string name="thr">提货人</string>
+    <string name="thrlxfs">提货联系方式</string>
+    <string name="ckck">出库仓库</string>
+
+    <string name="ck">仓库</string>
+    <string name="cw">储位</string>
+    <string name="hwmc">货物名称</string>
+    <string name="zkts">在库天数</string>
+    <string name="ckzt">仓库状态</string>
+
+    <string name="pdksrq">盘点开始日期</string>
+    <string name="pdjsrq">盘点结束日期</string>
+    <string name="zt">状态</string>
+    <string name="bccg">保存草稿</string>
+    <string name="wcpd">完成盘点</string>
+    <string name="pdxq">盘点详情</string>
+    <string name="xz">新增</string>
+
+    <string name="qsrzh">Please enter account ID</string>
+    <string name="qsrmm">Please enter password</string>
+    <string name="dl">Login</string>
+    <string name="login_bottom">Copyright ©2020, NUCTECH COMPANY LIMITED. All Rights Reserved</string>
+    <string name="ChangeSuccess">Edit successfully</string>
+    <string name="DiffTwoPass">Mismatch passwords</string>
+    <string name="DiffoldPass">The new password and the old password cannot be the same</string>
+    <string name="EnterConPass">Please confirm password</string>
+    <string name="EnterLogOut">Confirm to log out?</string>
+    <string name="EnterNewPass">Please enter new password</string>
+    <string name="EnterOldPass">Please enter original password</string>
+    <string name="EnterPassLength">Incorrect password format</string>
+    <string name="LogOutSuccess">Log out successfully</string>
+    <string name="LowercaseLetter">Lowercase letters</string>
+    <string name="SpecialCharacter">Special Characters</string>
+    <string name="UppercaseLetter">Uppercase Letters</string>
+    <string name="allpassword">The length of password should be %1$d-%1$d</string>
+    <string name="passwordLength">The length of password should be %1$d-%2$d digits</string>
+    <string name="changePass">Change Password</string>
+    <string name="conPassword">Confirm Password</string>
+    <string name="mustHave">Must include</string>
+    <string name="newPassword">New Password</string>
+    <string name="number">Number</string>
+    <string name="oldPassword">Original Password</string>
+
+
+    <string name="hint_00000">Unhandled exception</string>
+    <string name="hint_00001">Internal error</string>
+    <string name="hint_00406">Parameter does not meet requirements</string>
+    <string name="hint_20001">The user session has timed out or was closed due to a repeated login session. Please log in again</string>
+    <string name="hint_20002">Unauthorized user</string>
+    <string name="hint_20003">User permissions is empty</string>
+    <string name="hint_20005">Illegal request</string>
+    <string name="hint_20006">Illegal request</string>
+    <string name="hint_20010">Illegal request</string>
+    <string name="hint_29999">Internal error</string>
+    <string name="hint_10000">Incorrect data</string>
+    <string name="hint_10001">Data constraint error</string>
+    <string name="hint_10100">Invalid user</string>
+    <string name="hint_10101">User has existed</string>
+    <string name="hint_10102">Organizations are disabled, users are forbidden to login</string>
+    <string name="hint_10103">Incorrect password</string>
+    <string name="hint_10104">You are not allowed to log in until changing your password</string>
+    <string name="hint_10105">The user is invalid</string>
+    <string name="hint_10106">User is locked</string>
+    <string name="hint_10107">New password does not meet security rule</string>
+    <string name="hint_10108">New password does not meet security rule</string>
+    <string name="hint_10109">The user is invalid</string>
+    <string name="hint_10110">Password cannot be the same as the default one</string>
+    <string name="hint_10111">Incorrect information</string>
+    <string name="hint_10112">Link expired</string>
+    <string name="hint_10113">Built-in account prohibited operation</string>
+    <string name="hint_10114">The account ID has been used and it cannot be deleted</string>
+    <string name="hint_10115">User needs to be audited</string>
+    <string name="hint_10116">User does not login</string>
+    <string name="hint_10117">Error, it will be locked in %1$s times</string>
+    <string name="hint_10304">The organization type does not exist</string>
+    <string name="hint_10305">The organization type has existed</string>
+    <string name="hint_11200">International information does not exist</string>
+    <string name="hint_11100">Incorrect account ID or password</string>
+    <string name="hint_11101">Incorrect Verification Code</string>
+    <string name="hint_11102">Verification code has expired</string>
+    <string name="hint_11103">Incorrect account ID or password</string>
+    <string name="E029999">Internal error</string>
+    <string name="logOut">Sign out</string>
+
+    // 分拣登记错误提示
+    <string name="VE210001">Primary key must not be empty</string>
+    <string name="VE210002">Manifest information cannot be empty</string>
+    <string name="VE210003">Flight cannot be empty</string>
+    <string name="VE210004">The goods name (including packaging, volume or size) cannot be empty</string>
+    <string name="VE210005">Sorting registration location cannot be empty</string>
+    <string name="VE210006">Registration quantity cannot be empty</string>
+    <string name="VE210007">Registration quantity, must be between 1-9999999</string>
+    <string name="VE210008">Goods classification cannot be empty</string>
+    <string name="VE210009">Goods classification, please select the correct option</string>
+    <string name="VE210010">Remarks, only 1 ~ 200 characters length can be entered</string>
+    <string name="VE210011">Version number cannot be empty</string>
+    <string name="SE210001">Manifest information is incorrect</string>
+    <string name="SE210002">The goods name (including packaging, volume or size) is incorrect</string>
+    <string name="SE210003">Barcode: %1$d, the cargo has undergone other events and cannot be deleted</string>
+    <string name="SE210004">The goods have been sorted and registered %1$d, the number of registrations cannot exceed %2$d</string>
+    <string name="SE180009">Did not query the manifest information related to this AWB</string>
+    <string name="SE180010">The number of registration pieces at a time cannot exceed 1000</string>
+
+    <string name="goodsTypeA">Class A cargo</string>
+    <string name="goodsTypeB">Class B cargo</string>
+    <string name="goodsTypeC">Class C cargo</string>
+
+    <string name="select">Please select</string>
+
+    <string name="seDelete">Delete successfully</string>
+    <string name="seEdit">Edit successfully</string>
+    <string name="seSave">Add successfully</string>
 </resources>

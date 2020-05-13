@@ -126,9 +126,9 @@
     <color name="txt_lv6">#292929</color>
     <color name="txt_lv7">#1A1A1A</color>
     <color name="txt_lv8">#000000</color>
-    <color name="line">#EEEEEE</color>
+    <color name="line">#B2B2B2</color>
     <color name="et_line">#FFE7E7E7</color>
-    <color name="space">#EBF0F7</color>
+    <color name="space">#F3EFEF</color>
     <color name="space_light">#FAFAFA</color>
     <color name="bg_et">#F6F6F6</color>
     <color name="gg">#FF3975</color>

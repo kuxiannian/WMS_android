@@ -29,15 +29,13 @@ public class SingleChooseDialog extends Dialog {
     TextView tvSure;
     private Context context;
     private List<String> list;
-    private String title;
     private int position = 0;
     OnItemClick onItemClick;
 
-    public SingleChooseDialog(Context context, String title, List<String> list, OnItemClick onItemClick) {
+    public SingleChooseDialog(Context context,  List<String> list, OnItemClick onItemClick) {
         super(context, R.style.MyDialogStyle);
         this.context = context;
         this.list = list;
-        this.title = title;
         this.onItemClick = onItemClick;
     }
 
@@ -59,7 +57,6 @@ public class SingleChooseDialog extends Dialog {
         tvCancle = (TextView) view.findViewById(R.id.tv_cancle);
         tvSure = (TextView) view.findViewById(R.id.tv_sure);
 
-        tvTitle.setText(title);
 
         wheelView.setCyclic(false);
         wheelView.setTextSize(16);

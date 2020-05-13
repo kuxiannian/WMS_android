@@ -56,9 +56,8 @@ public class EventCenter {
         EVT_LOGIN, // 登录
         EVT_LOGOUT, // 注销
 
-
-
-
+        EVT_DELETE, // 删除
+        EVT_EDIT, // 编辑
 
 
     }

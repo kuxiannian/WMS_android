@@ -4,22 +4,23 @@ package com.lxkj.wms.bean;
  * Created by kxn on 2019/12/5 0005.
  */
 public class BaseBean {
-    public String result;//0成功 1失败
-    public String resultNote;
+    public boolean flag;
+    public String errorCode;
 
-    public String getResultNote() {
-        return resultNote;
+    public boolean isFlag() {
+        return flag;
     }
 
-    public void setResultNote(String resultNote) {
-        this.resultNote = resultNote;
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
-    public String getResult() {
-        return result;
+
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 }

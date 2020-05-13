@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="AWB"
                 android:textColor="@color/txt_lv6" />
             <EditText
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="@string/hangban"
                 android:textColor="@color/txt_lv6" />
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="@string/hwpm"
                 android:textColor="@color/txt_lv6" />
             <TextView
@@ -77,11 +77,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="@string/jianshu"
                 android:textColor="@color/txt_lv6" />
-            <EditText
-                android:id="@+id/etJs"
+            <TextView
+                android:id="@+id/tvJs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="@string/djjs"
                 android:textColor="@color/txt_lv6" />
             <LinearLayout
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="@string/fjdjdd"
                 android:textColor="@color/txt_lv6" />
             <TextView
@@ -169,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="@string/hwfl"
                 android:textColor="@color/txt_lv6" />
             <TextView

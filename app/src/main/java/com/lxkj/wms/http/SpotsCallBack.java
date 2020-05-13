@@ -2,11 +2,9 @@ package com.lxkj.wms.http;
 
 import android.content.Context;
 
-
 import com.android.tu.loadingdialog.LoadingDailog;
 
 import okhttp3.Request;
-import okhttp3.Response;
 
 
 public abstract class SpotsCallBack<T> extends BaseCallback<T> {
@@ -46,13 +44,4 @@ public abstract class SpotsCallBack<T> extends BaseCallback<T> {
         dismissDialog();
     }
 
-    @Override
-    public void onBeforeRequest(Request request) {
-        showDialog();
-    }
-
-    @Override
-    public void onResponse(Response response) {
-        dismissDialog();
-    }
 }
