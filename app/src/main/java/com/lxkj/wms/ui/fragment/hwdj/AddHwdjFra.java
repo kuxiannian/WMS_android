@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lxkj.wms.R;
-import com.lxkj.wms.bean.BaseBean;
 import com.lxkj.wms.bean.FindAwbBean;
 import com.lxkj.wms.bean.FlightBean;
 import com.lxkj.wms.bean.GoodsBean;
@@ -22,10 +22,12 @@ import com.lxkj.wms.bean.WareHouseBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
+import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.ListUtil;
+import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.HangDanDetailDialog;
 import com.lxkj.wms.view.SingleChooseDialog;
@@ -68,6 +70,8 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
     ImageView ivReduce;
     @BindView(R.id.tvFjdjdd)
     TextView tvFjdjdd;
+    @BindView(R.id.etRemark)
+    EditText etRemark;
     private int djNum = 0;
 
     private List<FlightBean.ResultBean> flightList;
@@ -222,6 +226,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 
     /**
      * 根据舱单信息ID查询舱单航班信息接口
+     *
      * @param wmsManifestId
      */
     private void findFlightByWmsManifestId(String wmsManifestId) {
@@ -254,6 +259,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 
     /**
      * 根据舱单信息ID查询舱单货物信息接口
+     *
      * @param wmsManifestId
      */
     private void findGoodsNameByWmsManifestId(String wmsManifestId) {
@@ -344,17 +350,34 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
         params.put("rateClass", rateClass);
         params.put("productCode", productCode);
         params.put("chargeableWeight", chargeableWeight);
-        OkHttpHelper.getInstance().post_json(mContext, Url.addSortingRegister, params, new BaseCallback<BaseBean>() {
+        if (!TextUtils.isEmpty(etRemark.getText()))
+            params.put("remarks", etRemark.getText().toString());
+        OkHttpHelper.getInstance().post_json(mContext, Url.addSortingRegister, params, new SpotsCallBack<String>(mContext) {
             @Override
             public void onFailure(Request request, Exception e) {
             }
+
             @Override
-            public void onSuccess(Response response, BaseBean resultBean) {
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
                 if (resultBean.flag) {
                     ToastUtil.show(mContext.getResources().getString(R.string.seSave));
                     act.finishSelf();
+                } else {
+                    switch (resultBean.errorCode) {
+                        case "SE210003":
+                            ToastUtil.show(String.format(getResources().getString(R.string.SE210003),resultBean.result.barCod));
+                            break;
+                        case "SE210004":
+                            ToastUtil.show(String.format(getResources().getString(R.string.SE210004),resultBean.result.alNumber,resultBean.result.canNumber));
+                            break;
+                        default:
+                            ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
+                            break;
+                    }
                 }
             }
+
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -464,8 +487,8 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 addressDialog.show();
                 break;
             case R.id.tvHdxq:
-                new HangDanDetailDialog(mContext,departureStation,destinationStation,shipperName,shipperAddress,shipperPhone,
-                        receiverName,receiverAddress,receiverPhone,grossWeight,rateClass,number,productCode).show();
+                new HangDanDetailDialog(mContext, departureStation, destinationStation, shipperName, shipperAddress, shipperPhone,
+                        receiverName, receiverAddress, receiverPhone, grossWeight, rateClass, number, productCode).show();
                 break;
             case R.id.tvSave:
                 addSortingRegister();

@@ -25,6 +25,7 @@
                 android:text="@string/txm"
                 android:textColor="@color/txt_lv6" />
             <EditText
+                android:id="@+id/etBarCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -40,14 +41,57 @@
                 android:textSize="15sp"
                 android:text="@string/ckrq"
                 android:textColor="@color/txt_lv6" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_efefef_5dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvOutputDateStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/txt_lv6"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/txt_size_14"
+                    android:hint="@string/startPlace"
+                    android:padding="12dp"
+                    />
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/line"/>
+                <TextView
+                    android:id="@+id/tvOutputDateEnd"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/txt_lv6"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/txt_size_14"
+                    android:hint="@string/endPlace"
+                    android:padding="12dp"
+                    />
+            </LinearLayout>
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:textSize="15sp"
+                android:text="@string/ladingNumber"
+                android:textColor="@color/txt_lv6" />
+            <EditText
+                android:id="@+id/etLadingNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
-                android:drawableRight="@mipmap/ic_arrow_down"
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
-                android:hint="@string/qxz"
                 android:padding="12dp"
                 android:background="@drawable/bg_border_efefef_5dp"/>
             <TextView
@@ -56,25 +100,10 @@
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
-                android:text="@string/thdbh"
+                android:text="@string/consignor"
                 android:textColor="@color/txt_lv6" />
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/txt_lv6"
-                android:layout_marginTop="5dp"
-                android:textSize="@dimen/txt_size_14"
-                android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="12dp"
-                android:textSize="15sp"
-                android:text="@string/thr"
-                android:textColor="@color/txt_lv6" />
-            <EditText
+                android:id="@+id/etConsignor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -89,9 +118,10 @@
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
-                android:text="@string/thrlxfs"
+                android:text="@string/consignorPhone"
                 android:textColor="@color/txt_lv6" />
             <EditText
+                android:id="@+id/etConsignorPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -108,6 +138,7 @@
                 android:text="@string/hwfl"
                 android:textColor="@color/txt_lv6" />
             <TextView
+                android:id="@+id/tvGoodsType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -117,15 +148,17 @@
                 android:hint="@string/qxz"
                 android:padding="12dp"
                 android:background="@drawable/bg_border_efefef_5dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
-                android:text="@string/ckck"
+                android:text="@string/wmsWarehouseId"
                 android:textColor="@color/txt_lv6" />
             <TextView
+                android:id="@+id/tvWmsWarehouseId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -141,9 +174,10 @@
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
-                android:text="@string/hwpm"
+                android:text="@string/goodsName"
                 android:textColor="@color/txt_lv6" />
             <EditText
+                android:id="@+id/etGoodsName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -151,6 +185,67 @@
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
                 android:background="@drawable/bg_border_efefef_5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:textSize="15sp"
+                android:text="@string/updaterId"
+                android:textColor="@color/txt_lv6" />
+            <EditText
+                android:id="@+id/etupdaterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txt_lv6"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/txt_size_14"
+                android:padding="12dp"
+                android:background="@drawable/bg_border_efefef_5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:textSize="15sp"
+                android:text="@string/updateDate"
+                android:textColor="@color/txt_lv6" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/bg_border_efefef_5dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvUpdateDateStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/txt_lv6"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/txt_size_14"
+                    android:hint="@string/startPlace"
+                    android:padding="12dp"
+                    />
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/line"/>
+                <TextView
+                    android:id="@+id/tvUpdateDateEnd"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/txt_lv6"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/txt_size_14"
+                    android:hint="@string/endPlace"
+                    android:padding="12dp"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

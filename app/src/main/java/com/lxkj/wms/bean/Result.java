@@ -43,6 +43,20 @@ public class Result {
     public String goodsNameId;//	货物品名（包括包装、体积或尺寸）
     public String wmsSortingRegisterId	;//	分拣登记ID
 
+    public String goodsType;//	货物类型
+    public String weight;//	重量
+    public String wmsWarehouseId;//	入库仓库ID
+    public String wmsWarehouseIdName;//	入库仓库名称
+    public String suspicion;//	是否有嫌疑
+    public String wmsStockId;//	String	库存表ID
+
+
+
+    public String barCode;
+    public String alNumber;
+    public String canNumber;
+
+
 
 
 }

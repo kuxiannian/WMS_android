@@ -11,7 +11,6 @@
     <string name="gdgn">更多功能</string>
     <string name="sjzy">上架作业</string>
     <string name="xjzy">下架作业</string>
-
     <string name="xzhwdj">新增货物登记</string>
     <string name="hangban">航班</string>
     <string name="hwpm">货物品名</string>
@@ -21,6 +20,8 @@
     <string name="hwfl">货物分类</string>
     <string name="qxz">请选择</string>
     <string name="hdxq">航单详情</string>
+    <string name="remarks">备注</string>
+
     <string name="baocun">保存</string>
 
     <string name="sfz">始发站、第一承运人地址及要求的线路</string>
@@ -69,7 +70,7 @@
     <string name="ckrq">出库日期</string>
     <string name="thdbh">提货单编号</string>
     <string name="thr">提货人</string>
-    <string name="thrlxfs">提货联系方式</string>
+    <string name="thrlxfs">提货人联系方式</string>
     <string name="ckck">出库仓库</string>
 
     <string name="ck">仓库</string>
@@ -166,10 +167,98 @@
     <string name="VE210011">版本号不能为空</string>
     <string name="SE210001">舱单信息不正确</string>
     <string name="SE210002">货物品名(包括包装、体积或尺寸)不正确</string>
-    <string name="SE210003">条形码：%{barCode}，货物已经进行了其他事件，无法删除</string>
-    <string name="SE210004">该货物已经分拣登记%{alNumber}件，登记件数不能超过%{canNumber}件</string>
+    <string name="SE210003">条形码：%1$s，货物已经进行了其他事件，无法删除</string>
+    <string name="SE210004">该货物已经分拣登记%1$s件，登记件数不能超过%2$s件</string>
     <string name="SE180009">未查询此AWB相关的舱单信息</string>
     <string name="SE180010">一次登记件数不能超过1000</string>
+
+    // 入库单错误提示
+    <string name="VE100001">主键必须不能为空</string>
+    <string name="VE100002">条形码不能为空</string>
+    <string name="VE100003">条形码，只能输入1~50位长度</string>
+    <string name="VE100004">入库日期不能为空</string>
+    <string name="VE100005">托盘号不能为空</string>
+    <string name="VE100006">托盘号，只能输入1~50位长度</string>
+    <string name="VE100007">重量不能为空</string>
+    <string name="VE100008">重量，必须在0.001-9999999.999之间</string>
+    <string name="VE100009">备注，只能输入1~200位长度</string>
+    <string name="VE100010">版本号不能为空</string>
+    <string name="SE100001">条形码：%1$s，此货物已经入库，无法重复入库</string>
+    <string name="SE100002">条形码：%1$s，此货物没有进行货物安检，请先进行货物安检</string>
+    <string name="SE100003">条形码：%1$s，此货物为A类货物，必须进[进口企业直采仓库]类型的仓库，请进行分拨配送</string>
+    <string name="SE100004">条形码：%1$s，此货物为B类货物，必须进[使馆人员、侨民、居民进口货物仓库]类型的仓库，请进行分拨配送</string>
+    <string name="SE100005">条形码：%1$s，此货物为C类大件货物，必须进[使馆人员、侨民、居民进口货物仓库]，[居民进口货物小件分拨/大件库仓库]类型的仓库，请进行分拨配送</string>
+    <string name="SE100006">此货物没有进行货物称重，请先进行货物称重和货物安检</string>
+    <string name="SE100007">条形码：%1$s，此货物为C类小件无嫌疑货物，必须进[小件仓库]类型的仓库，请进行分拨配送</string>
+    <string name="SE100008">条形码：%1$s，此货物为C类小件有嫌疑货物，必须进[使馆人员、侨民、居民进口货物仓库]，[居民进口货物小件分拨/大件库仓库]类型的仓库，请进行分拨配送</string>
+    <string name="SE100009">条形码：%1$s，此货物进行过分拨配送，入库前请先确认收货</string>
+
+    // 出库单错误提示
+    <string name="VE130001">主键必须不能为空</string>
+    <string name="VE130002">条形码不能为空</string>
+    <string name="VE130003">条形码，只能输入1~50位长度</string>
+    <string name="VE130004">出库日期不能为空</string>
+    <string name="VE130005">提货单编号不能为空</string>
+    <string name="VE130006">提货单编号，只能输入1~50位长度</string>
+    <string name="VE130007">提货人不能为空</string>
+    <string name="VE130008">提货人，只能输入1~50位长度</string>
+    <string name="VE130009">提货人联系方式不能为空</string>
+    <string name="VE130010">提货人联系方式，只能输入1~50位长度</string>
+    <string name="VE130011">嫌疑问题，只能输入1~200位长度</string>
+    <string name="VE130012">备注，只能输入1~200位长度</string>
+    <string name="VE130013">版本号不能为空</string>
+    <string name="VE130014">库存表Id不能为空</string>
+    <string name="SE130001">条形码：%1$s，货物没有进行下架，请先下架</string>
+    <string name="SE130002">条形码：%1$s，货物无库存信息可查，已经不在库存中</string>
+    <string name="SE130003">该货物有嫌疑，嫌疑问题栏位不能为空</string>
+
+    <string name="titleInfo">分拣管理</string>
+    <string name="name">货物安检</string>
+    <string name="input">请输入</string>
+    <string name="sure">确认</string>
+    <string name="Query">查询</string>
+    <string name="Reset">重置</string>
+    <string name="add">新增</string>
+    <string name="addDetail">新增明细</string>
+    <string name="operation">操作</string>
+    <string name="edit">编辑</string>
+    <string name="detail">详情</string>
+    <string name="delete">删除</string>
+    <string name="data">数据</string>
+    <string name="modalDataTitleAdd">新增窗口</string>
+    <string name="modalDataTitleDetail">查看窗口</string>
+    <string name="modalDataTitleEdit">编辑窗口</string>
+    <string name="modalDataTitleDelete">删除窗口</string>
+    <string name="beError">错误</string>
+    <string name="beSuccess">成功</string>
+    <string name="beSuccessMessageAdd">新增成功</string>
+    <string name="beSuccessMessageUpdate">更新成功</string>
+    <string name="beSuccessMessageDelete">删除成功</string>
+    <string name="beSuccessMessagePrint">打印成功</string>
+    <string name="length1And50">只能输入1~50位长度</string>
+    <string name="length1And200">只能输入1~200位长度</string>
+    <string name="barCode">条形码</string>
+    <string name="suspicion">是否有嫌疑</string>
+    <string name="suspicionProblem">嫌疑问题</string>
+    <string name="suspicionY">有嫌疑</string>
+    <string name="suspicionN">无嫌疑</string>
+    <string name="selectSuspicion">请选择是否有嫌疑</string>
+    <string name="goodsName">货物品名(包括包装、体积或尺寸)</string>
+    <string name="goodsType">货物分类</string>
+
+    <string name="outputDate">出库日期</string>
+    <string name="ladingNumber">提货单编号</string>
+    <string name="consignor">提货人</string>
+    <string name="consignorPhone">提货人联系方式</string>
+    <string name="wmsWarehouseId">出库仓库</string>
+
+
+
+    <string name="CE100001">页面信息已过期，请刷新页面</string>
+    <string name="CE100002">未知错误</string>
+    <string name="CE100003">新增操作，主键必须为空</string>
+    <string name="CE210004">未查询到此条形码相关的货物信息</string>
+    <string name="CE210005">此条形码相关的货物未完成分拨配送或此条形码相关的货物已经完成分拨收货</string>
 
 
 
@@ -182,5 +271,20 @@
     <string name="seDelete">删除成功</string>
     <string name="seEdit">编辑成功</string>
     <string name="seSave">添加成功</string>
+
+    <string name="startPlace">开始日期</string>
+    <string name="endPlace">结束日期</string>
+    <string name="updaterId">操作员姓名</string>
+    <string name="updateDate">操作时间</string>
+
+    <string name="wmsWarehouseName">仓库</string>
+    <string name="wmsWarehouseDetailName">储位</string>
+    <string name="stockState">库存状态</string>
+    <string name="inputDate">入库日期</string>
+    <string name="inStockDay">在库天数</string>
+    <string name="inStockDayStart">在库天数（最小天数）</string>
+    <string name="inStockDayEnd">在库天数（最大天数）</string>
+    <string name="updaterId_stock">最后操作员姓名</string>
+    <string name="updateDate_stock">最后操作时间</string>
 
 </resources>

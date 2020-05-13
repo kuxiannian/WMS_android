@@ -11,8 +11,6 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.ui.fragment.fksh.AddRkFra;
-import com.lxkj.wms.ui.fragment.fksh.HistoryRkFra;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -202,6 +202,99 @@ public class ShowErrorCodeUtil {
             case "SE180010":
                 ToastUtil.show(context.getString(R.string.SE180010));
                 break;
+            // 入库单错误提示
+            case "VE100001":
+                ToastUtil.show(context.getString(R.string.VE100001));
+                break;
+            case "VE100002":
+                ToastUtil.show(context.getString(R.string.VE100002));
+                break;
+            case "VE100003":
+                ToastUtil.show(context.getString(R.string.VE100003));
+                break;
+            case "VE100004":
+                ToastUtil.show(context.getString(R.string.VE100004));
+                break;
+            case "VE100005":
+                ToastUtil.show(context.getString(R.string.VE100005));
+                break;
+            case "CE100001":
+                ToastUtil.show(context.getString(R.string.CE100001));
+                break;
+            case "VE100006":
+                ToastUtil.show(context.getString(R.string.VE100006));
+                break;
+            case "VE100007":
+                ToastUtil.show(context.getString(R.string.VE100007));
+                break;
+            case "VE100008":
+                ToastUtil.show(context.getString(R.string.VE100008));
+                break;
+            case "VE100009":
+                ToastUtil.show(context.getString(R.string.VE100009));
+                break;
+            case "VE100010":
+                ToastUtil.show(context.getString(R.string.VE100010));
+                break;
+            case "CE100002":
+                ToastUtil.show(context.getString(R.string.CE100002));
+                break;
+            case "CE100003":
+                ToastUtil.show(context.getString(R.string.CE100003));
+                break;
+            case "CE100004":
+                ToastUtil.show(context.getString(R.string.CE210004));
+                break;
+            case "CE100005":
+                ToastUtil.show(context.getString(R.string.CE210005));
+                break;
+            // 出库单错误提示
+            case "VE130001":
+                ToastUtil.show(context.getString(R.string.VE130001));
+                break;
+            case "VE130002":
+                ToastUtil.show(context.getString(R.string.VE130002));
+                break;
+            case "VE130003":
+                ToastUtil.show(context.getString(R.string.VE130003));
+                break;
+            case "VE130004":
+                ToastUtil.show(context.getString(R.string.VE130004));
+                break;
+            case "VE130005":
+                ToastUtil.show(context.getString(R.string.VE130005));
+                break;
+            case "VE130006":
+                ToastUtil.show(context.getString(R.string.VE130006));
+                break;
+            case "VE130007":
+                ToastUtil.show(context.getString(R.string.VE130007));
+                break;
+            case "VE130008":
+                ToastUtil.show(context.getString(R.string.VE130008));
+                break;
+            case "VE130009":
+                ToastUtil.show(context.getString(R.string.VE130009));
+                break;
+            case "VE130010":
+                ToastUtil.show(context.getString(R.string.VE130010));
+                break;
+            case "VE130011":
+                ToastUtil.show(context.getString(R.string.VE130011));
+                break;
+            case "VE130012":
+                ToastUtil.show(context.getString(R.string.VE130012));
+                break;
+            case "VE130013":
+                ToastUtil.show(context.getString(R.string.VE130013));
+                break;
+            case "VE130014":
+                ToastUtil.show(context.getString(R.string.VE130014));
+                break;
+            case "SE130003":
+                ToastUtil.show(context.getString(R.string.SE130003));
+                break;
+
 
 
         }

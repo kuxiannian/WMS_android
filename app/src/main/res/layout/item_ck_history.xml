@@ -27,11 +27,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvbarCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="AWB_001"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -51,11 +51,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvgoodsType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="KB-001"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -75,11 +75,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvoutputDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="电视"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -99,11 +99,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvwmsWarehouseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="5"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -114,8 +114,10 @@
                 android:background="@color/line" />
 
             <LinearLayout
+                android:id="@+id/llladingNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -128,11 +130,11 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvladingNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="分拣仓库"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
@@ -142,10 +144,38 @@
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
             </LinearLayout>
-
             <LinearLayout
+                android:id="@+id/llconsignor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/thr"
+                    android:textColor="@color/txt_lv6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvconsignor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="A类货物"
+                    android:textColor="@color/txt_lv4"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llconsignorPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -158,19 +188,21 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvconsignorPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llgoodsName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -178,16 +210,68 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/hwpm"
+                    android:text="@string/goodsName"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvgoodsName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
+                    android:textColor="@color/txt_lv4"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llupdaterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/updaterId"
+                    android:textColor="@color/txt_lv6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvupdaterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/txt_lv4"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llupdateDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/updateDate"
+                    android:textColor="@color/txt_lv6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvupdateDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 

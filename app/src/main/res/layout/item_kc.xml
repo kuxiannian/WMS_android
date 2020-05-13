@@ -27,11 +27,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvBarCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="AWB_001"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -51,11 +51,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvGoodsType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="KB-001"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -75,11 +75,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvWmsWarehouseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="电视"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -99,11 +99,11 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvWmsWarehouseDetailName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="5"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
 
@@ -128,11 +128,11 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvInStockDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="分拣仓库"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
@@ -144,8 +144,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llAwb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -158,17 +160,19 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvAwb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llGoodsName"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -183,16 +187,18 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvGoodsName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/llProductCode"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -207,16 +213,18 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvProductCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/llStockState"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -231,16 +239,18 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvStockState"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/llInputDate"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -255,16 +265,18 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvInputDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/llOutputDate"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -279,11 +291,63 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvOutputDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="A类货物"
+                    android:textColor="@color/txt_lv4"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llUpdaterName"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/updaterId_stock"
+                    android:textColor="@color/txt_lv6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvUpdaterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/txt_lv4"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llUpdateDate"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/updateDate_stock"
+                    android:textColor="@color/txt_lv6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvUpdateDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 

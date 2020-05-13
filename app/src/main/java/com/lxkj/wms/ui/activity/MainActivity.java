@@ -22,7 +22,8 @@ import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.ckjh.CkjhFra;
-import com.lxkj.wms.ui.fragment.fksh.RkshFra;
+import com.lxkj.wms.ui.fragment.kccx.KccxFra;
+import com.lxkj.wms.ui.fragment.rksh.RkshFra;
 import com.lxkj.wms.ui.fragment.hwdj.AddHwdjFra;
 import com.lxkj.wms.ui.fragment.login.LoginFra;
 import com.lxkj.wms.utils.ListUtil;
@@ -76,6 +77,9 @@ public class MainActivity extends BaseFragAct implements EventCenter.EventListen
                         break;
                     case R.mipmap.ic_ckjh:
                         ActivitySwitcher.startFragment(MainActivity.this, CkjhFra.class);
+                        break;
+                    case R.mipmap.ic_kccx:
+                        ActivitySwitcher.startFragment(MainActivity.this, KccxFra.class);
                         break;
                 }
             }

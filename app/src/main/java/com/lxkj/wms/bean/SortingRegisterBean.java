@@ -54,7 +54,146 @@ public class SortingRegisterBean extends BaseBean {
             private String wmsManifestId;//	舱单信息ID
             private String wmsWarehouseId;//	仓库ID
             private String wmsWarehouseName;//	仓库名称
+
+            private String barCode;//条形码
+            private String inputDate;//	入库日期
+            private String palletNumber;//托盘号
+            private String weight;//	重量
+            private String wmsStockId;//	库存表ID
+
+            private String consignor;//	提货人
+            private String consignorPhone;//	提货人联系方式
+            private String ladingNumber;//	提货单编号
+            private String outputDate;//	出库日期
+            private String suspicion;//	是否有嫌疑
+            private String suspicionProblem;//	嫌疑问题
+            private String inStockDay;//	在库天数
+            private String stockState;//	库存状态
+            private String wmsWarehouseDetailName;//	储位
+
+
+
             public boolean isOpen;
+
+            public String getInStockDay() {
+                return inStockDay;
+            }
+
+            public void setInStockDay(String inStockDay) {
+                this.inStockDay = inStockDay;
+            }
+
+            public String getStockState() {
+                return stockState;
+            }
+
+            public void setStockState(String stockState) {
+                this.stockState = stockState;
+            }
+
+            public String getWmsWarehouseDetailName() {
+                return wmsWarehouseDetailName;
+            }
+
+            public void setWmsWarehouseDetailName(String wmsWarehouseDetailName) {
+                this.wmsWarehouseDetailName = wmsWarehouseDetailName;
+            }
+
+            public String getConsignor() {
+                return consignor;
+            }
+
+            public void setConsignor(String consignor) {
+                this.consignor = consignor;
+            }
+
+            public String getConsignorPhone() {
+                return consignorPhone;
+            }
+
+            public void setConsignorPhone(String consignorPhone) {
+                this.consignorPhone = consignorPhone;
+            }
+
+            public String getLadingNumber() {
+                return ladingNumber;
+            }
+
+            public void setLadingNumber(String ladingNumber) {
+                this.ladingNumber = ladingNumber;
+            }
+
+            public String getOutputDate() {
+                return outputDate;
+            }
+
+            public void setOutputDate(String outputDate) {
+                this.outputDate = outputDate;
+            }
+
+            public String getSuspicion() {
+                return suspicion;
+            }
+
+            public void setSuspicion(String suspicion) {
+                this.suspicion = suspicion;
+            }
+
+            public String getSuspicionProblem() {
+                return suspicionProblem;
+            }
+
+            public void setSuspicionProblem(String suspicionProblem) {
+                this.suspicionProblem = suspicionProblem;
+            }
+
+            public String getBarCode() {
+                return barCode;
+            }
+
+            public void setBarCode(String barCode) {
+                this.barCode = barCode;
+            }
+
+            public String getInputDate() {
+                return inputDate;
+            }
+
+            public void setInputDate(String inputDate) {
+                this.inputDate = inputDate;
+            }
+
+            public String getPalletNumber() {
+                return palletNumber;
+            }
+
+            public void setPalletNumber(String palletNumber) {
+                this.palletNumber = palletNumber;
+            }
+
+            public String getWeight() {
+                return weight;
+            }
+
+            public void setWeight(String weight) {
+                this.weight = weight;
+            }
+
+            public String getWmsStockId() {
+                return wmsStockId;
+            }
+
+            public void setWmsStockId(String wmsStockId) {
+                this.wmsStockId = wmsStockId;
+            }
+
+            public boolean isOpen() {
+                return isOpen;
+            }
+
+            public void setOpen(boolean open) {
+                isOpen = open;
+            }
 
             public String getAwb() {
                 return awb;

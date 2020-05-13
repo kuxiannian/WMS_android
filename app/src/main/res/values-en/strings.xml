@@ -21,6 +21,7 @@
     <string name="hwfl">goodsType</string>
     <string name="qxz">Please select</string>
     <string name="hdxq">Manifest Information</string>
+    <string name="remarks">Remark</string>
     <string name="baocun">Save</string>
 
     <string name="sfz">Departure, first carrier address</string>
@@ -166,10 +167,96 @@
     <string name="VE210011">Version number cannot be empty</string>
     <string name="SE210001">Manifest information is incorrect</string>
     <string name="SE210002">The goods name (including packaging, volume or size) is incorrect</string>
-    <string name="SE210003">Barcode: %1$d, the cargo has undergone other events and cannot be deleted</string>
-    <string name="SE210004">The goods have been sorted and registered %1$d, the number of registrations cannot exceed %2$d</string>
+    <string name="SE210003">Barcode: %1$s, the cargo has undergone other events and cannot be deleted</string>
+    <string name="SE210004">The goods have been sorted and registered %1$s, the number of registrations cannot exceed %2$s</string>
     <string name="SE180009">Did not query the manifest information related to this AWB</string>
     <string name="SE180010">The number of registration pieces at a time cannot exceed 1000</string>
+
+    // 入库单错误提示
+    <string name="VE100001">Primary key must not be empty</string>
+    <string name="VE100002">Barcode cannot be empty</string>
+    <string name="VE100003">Barcode, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE100004">Storage date cannot be empty</string>
+    <string name="VE100005">Pallet number cannot be empty</string>
+    <string name="VE100006">Pallet number, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE100007">Weight cannot be empty</string>
+    <string name="VE100008">Weight, must be between 0.001-9999999.999</string>
+    <string name="VE100009">Remarks, only 1 ~ 200 characters length can be entered</string>
+    <string name="VE100010">Version number cannot be empty</string>
+    <string name="SE100001">Barcode: %1$s, this item has already been stored in the warehouse and cannot be repeatedly stored</string>
+    <string name="SE100002">Bar code: %1$s, this cargo has not undergone cargo security inspection, please perform cargo security inspection first</string>
+    <string name="SE100003">Bar code: %1$s, this cargo is a A-type cargo, which must be entered into a warehouse of the [Imported Enterprise Direct Mining Warehouse] type, please perform distribution</string>
+    <string name="SE100004">Bar code: %1$s, this cargo is a B-type cargo, which must be entered into a warehouse of the type [Import staff, diaspora, residents import goods warehouse], please assign and distribute</string>
+    <string name="SE100005">Bar code: %1$s, this cargo is a C-type large cargo, which must be entered into the warehouse of the [Import staff, diaspora, residents imported goods warehouse], [resident imported goods small piece distribution / large goods warehouse warehouse] type, please divide Dial delivery</string>
+    <string name="SE100006">This cargo has not been weighed. Please perform cargo weighing and cargo security check first</string>
+    <string name="SE100007">Bar code: %1$s, this cargo is a C-type small piece without suspicious goods. It must be entered into a warehouse of the type [small warehouse]</string>
+    <string name="SE100008">Bar code: %1$s, this cargo is a suspected small cargo of category C. It must be entered into the warehouse of [embassy personnel, diaspora, residents import goods warehouse], [resident import goods distribution of small goods / large warehouse] type warehouse, please Make distribution</string>
+    <string name="SE100009">Bar code: %1$s, this product has been over-allocated, please confirm receipt before entering the warehouse</string>
+
+    <string name="CE100001">Page information has expired, please refresh the page</string>
+    <string name="CE100002">unknown mistake</string>
+    <string name="CE100003">New operation, primary key must be empty</string>
+    <string name="CE210004">No information about this bar code was found</string>
+    <string name="CE210005">The barcode-related goods have not completed distribution and distribution or the barcode-related goods have completed distribution and receipt</string>
+
+    // 出库单错误提示
+    <string name="VE130001">Primary key must not be empty</string>
+    <string name="VE130002">Barcode cannot be empty</string>
+    <string name="VE130003">Barcode, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE130004">Outbound date cannot be empty</string>
+    <string name="VE130005">Bill of lading number cannot be empty</string>
+    <string name="VE130006">Bill of lading number, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE130007">Consignee cannot be empty</string>
+    <string name="VE130008">Consignee, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE130009">Consignee contact cannot be empty</string>
+    <string name="VE130010">Consignee contact, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE130011">Suspect problem, only 1 ~ 200 characters length can be entered</string>
+    <string name="VE130012">Remarks, only 1 ~ 200 characters length can be entered</string>
+    <string name="VE130013">Version number cannot be empty</string>
+    <string name="VE130014">Inventory table Id cannot be empty</string>
+    <string name="SE130001">Barcode: %1$s, the goods have not been removed, please remove them first</string>
+    <string name="SE130002">Barcode: %1$s, the goods have no inventory information to check, it is no longer in stock</string>
+    <string name="SE130003">The goods are suspected. The suspected problem field cannot be empty</string>
+
+
+    <string name="titleInfo">Cargo Distribution Management Module</string>
+    <string name="name">Cargo security</string>
+    <string name="input">Please enter</string>
+    <string name="sure">confirm</string>
+    <string name="Query">Query</string>
+    <string name="Reset">Reset</string>
+    <string name="add">Add</string>
+    <string name="addDetail">Add detail</string>
+    <string name="operation">Operation</string>
+    <string name="edit">Edit</string>
+    <string name="detail">Detail</string>
+    <string name="delete">Delete</string>
+    <string name="data">Data</string>
+    <string name="modalDataTitleAdd">New window</string>
+    <string name="modalDataTitleDetail">View window</string>
+    <string name="modalDataTitleEdit">Edit window</string>
+    <string name="modalDataTitleDelete">Delete window</string>
+    <string name="beError">error</string>
+    <string name="beSuccess">success</string>
+    <string name="beSuccessMessageAdd">Added successfully</string>
+    <string name="beSuccessMessageUpdate">Updated successfully</string>
+    <string name="beSuccessMessageDelete">Deleted successfully</string>
+    <string name="beSuccessMessagePrint">Print successfully</string>
+    <string name="length1And50">Only 1 ~ 50 characters can be entered</string>
+    <string name="length1And200">Only 1 ~ 200 characters can be entered</string>
+    <string name="barCode">Bar code</string>
+    <string name="suspicion">Is there any suspicion</string>
+    <string name="suspicionProblem">Suspect</string>
+    <string name="suspicionY">Suspect</string>
+    <string name="suspicionN">No doubt</string>
+    <string name="selectSuspicion">Please select whether it is suspect</string>
+    <string name="goodsName">Goods name(package, volume or size)</string>
+    <string name="goodsType">Cargo type</string>
+    <string name="outputDate">Outbound date</string>
+    <string name="ladingNumber">Bill of lading number</string>
+    <string name="consignor">Consignee</string>
+    <string name="consignorPhone">Consignee contact</string>
+    <string name="wmsWarehouseId">Outbound warehouse</string>
 
     <string name="goodsTypeA">Class A cargo</string>
     <string name="goodsTypeB">Class B cargo</string>
@@ -180,4 +267,18 @@
     <string name="seDelete">Delete successfully</string>
     <string name="seEdit">Edit successfully</string>
     <string name="seSave">Add successfully</string>
+    <string name="startPlace">Start date</string>
+    <string name="endPlace">End date</string>
+    <string name="updaterId">Operator name</string>
+    <string name="updateDate">Operating time</string>
+
+    <string name="wmsWarehouseName">Warehouse</string>
+    <string name="wmsWarehouseDetailName">Storage spaces</string>
+    <string name="stockState">Stock state</string>
+    <string name="inputDate">Storage date</string>
+    <string name="inStockDay">Days in warehouse</string>
+    <string name="inStockDayStart">Days in warehouse (minimum days)</string>
+    <string name="inStockDayEnd">Days in warehouse (maximum days)</string>
+    <string name="updaterId_stock">Operator name</string>
+    <string name="updateDate_stock">Operation time</string>
 </resources>

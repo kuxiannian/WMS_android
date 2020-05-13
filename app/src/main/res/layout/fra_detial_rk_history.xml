@@ -35,11 +35,11 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvBarCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="AWB_001"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
@@ -59,11 +59,11 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvInputDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="KB-001"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
@@ -83,11 +83,11 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvWmsWarehouseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="电视"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
@@ -107,11 +107,11 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvPalletNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="5"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
 
@@ -137,11 +137,11 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tvWeight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingTop="5dp"
-                        android:text="分拣仓库"
                         android:textColor="@color/txt_lv4"
                         android:textSize="15sp" />
 
@@ -168,11 +168,11 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tvGoodsType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingTop="5dp"
-                        android:text="A类货物"
                         android:textColor="@color/txt_lv4"
                         android:textSize="15sp" />
                     <View
@@ -196,11 +196,11 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tvProductCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingTop="5dp"
-                        android:text="A类货物"
                         android:textColor="@color/txt_lv4"
                         android:textSize="15sp" />
                     <View
@@ -224,11 +224,11 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tvGoodsName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingTop="5dp"
-                        android:text="A类货物"
                         android:textColor="@color/txt_lv4"
                         android:textSize="15sp" />
                     <View

@@ -20,6 +20,7 @@ import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.ui.fragment.hwdj.adapter.HistoryHdAdapter;
+import com.lxkj.wms.ui.fragment.rksh.ShaiXuanRkFra;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.StringUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -168,7 +169,6 @@ public class HistoryHdFra extends TitleFragment implements NaviRightListener {
                     if (null != resultBean.result) {
                         if (!ListUtil.isEmpty(resultBean.result.getContent())) {
                             isMore = true;
-
                             list.addAll(resultBean.result.getContent());
                             adapter.notifyDataSetChanged();
                         } else

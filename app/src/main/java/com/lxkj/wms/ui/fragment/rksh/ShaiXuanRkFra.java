@@ -1,4 +1,4 @@
-package com.lxkj.wms.ui.fragment.ckjh;
+package com.lxkj.wms.ui.fragment.rksh;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -13,7 +14,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.WareHouseBean;
-import com.lxkj.wms.event.BillOutputSxEvent;
+import com.lxkj.wms.event.BillInputSxEvent;
 import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
@@ -41,48 +42,49 @@ import okhttp3.Response;
 /**
  * Created by kxn on 2020/4/25 0025.
  */
-public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRigthImageListener, View.OnClickListener {
+public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRigthImageListener, View.OnClickListener {
     Unbinder unbinder;
     @BindView(R.id.etBarCode)
     EditText etBarCode;
-    @BindView(R.id.tvOutputDateStart)
-    TextView tvOutputDateStart;
-    @BindView(R.id.tvOutputDateEnd)
-    TextView tvOutputDateEnd;
-    @BindView(R.id.etLadingNumber)
-    EditText etLadingNumber;
-    @BindView(R.id.etConsignor)
-    EditText etConsignor;
-    @BindView(R.id.etConsignorPhone)
-    EditText etConsignorPhone;
-    @BindView(R.id.tvGoodsType)
-    TextView tvGoodsType;
+    @BindView(R.id.tvInputDateStart)
+    TextView tvInputDateStart;
+    @BindView(R.id.tvInputDateEnd)
+    TextView tvInputDateEnd;
     @BindView(R.id.tvWmsWarehouseId)
     TextView tvWmsWarehouseId;
+    @BindView(R.id.etPalletNumber)
+    EditText etPalletNumber;
+    @BindView(R.id.tvWeight)
+    TextView tvWeight;
+    @BindView(R.id.ivAdd)
+    ImageView ivAdd;
+    @BindView(R.id.ivReduce)
+    ImageView ivReduce;
+    @BindView(R.id.tvGoodsType)
+    TextView tvGoodsType;
     @BindView(R.id.etGoodsName)
     EditText etGoodsName;
-    @BindView(R.id.etupdaterName)
-    EditText etupdaterName;
+    @BindView(R.id.etUpdaterName)
+    EditText etUpdaterName;
     @BindView(R.id.tvUpdateDateStart)
     TextView tvUpdateDateStart;
     @BindView(R.id.tvUpdateDateEnd)
     TextView tvUpdateDateEnd;
     @BindView(R.id.tvCx)
     TextView tvCx;
+    private int djNum = 0;
 
-    public String barCode;//条形码
-    public String outputDateStart;//出库开始日期
-    public String outputDateEnd;//出库结束日期
-    public String ladingNumber;//提货单编号
-    public String consignor;//提货人
-    public String consignorPhone;//提货人联系方式
-    public String goodsType;//货物分类
-    public String wmsWarehouseId;//出库仓库
-    public String goodsName;//货物品名（包括包装、体积或尺寸）
-    public String updaterName;//操作员姓名
-    public String updateDateStart;//操作开始时间
-    public String updateDateEnd;//操作结束时间
-
+    private String barCode;//条形码
+    private String inputDateStart;//入库开始日期
+    private String inputDateEnd;//入库结束日期
+    private String wmsWarehouseId;//入库仓库
+    private String palletNumber;//托盘号
+    private String weight;//	重量
+    private String goodsType;//	货物分类
+    private String goodsName;//	货物品名（包括包装、体积或尺寸）
+    private String updaterName;//	操作员姓名
+    private String updateDateStart;//	操作开始时间
+    private String updateDateEnd;//	操作结束时间
     private List<WareHouseBean.ResultBean> wareHouseList;
     private List<String> goodsTypeList;
     private int type = 0; //时间筛选标识 0 inputDateStart，1 inputDateEnd，2 updateDateStart，3 updateDateEnd
@@ -95,7 +97,7 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fra_jlsx_ck, container, false);
+        rootView = inflater.inflate(R.layout.fra_jlsx_rk, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         initView();
         return rootView;
@@ -104,8 +106,8 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
     private void initView() {
         tvWmsWarehouseId.setOnClickListener(this);
         tvGoodsType.setOnClickListener(this::onClick);
-        tvOutputDateStart.setOnClickListener(this::onClick);
-        tvOutputDateEnd.setOnClickListener(this::onClick);
+        tvInputDateStart.setOnClickListener(this::onClick);
+        tvInputDateEnd.setOnClickListener(this::onClick);
         tvUpdateDateStart.setOnClickListener(this::onClick);
         tvUpdateDateEnd.setOnClickListener(this::onClick);
         wareHouseList = new ArrayList<>();
@@ -113,6 +115,8 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
         goodsTypeList.add(mContext.getString(R.string.goodsTypeA));
         goodsTypeList.add(mContext.getString(R.string.goodsTypeB));
         goodsTypeList.add(mContext.getString(R.string.goodsTypeC));
+        ivAdd.setOnClickListener(this);
+        ivReduce.setOnClickListener(this);
         tvCx.setOnClickListener(this);
         findWarehouseListBillInput();
     }
@@ -122,7 +126,7 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
      */
     private void findWarehouseListBillInput() {
         Map<String, String> params = new HashMap<>();
-        OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseListBillOnput, params, new BaseCallback<WareHouseBean>() {
+        OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseListBillInput, params, new BaseCallback<WareHouseBean>() {
             @Override
             public void onFailure(Request request, Exception e) {
             }
@@ -159,12 +163,12 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
             public void onTimeSelect(Date date, View v) {
                 switch (type) {
                     case 0://inputDateStart
-                        outputDateStart = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
-                        tvOutputDateStart.setText(outputDateStart);
+                        inputDateStart = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
+                        tvInputDateStart.setText(inputDateStart);
                         break;
                     case 1://inputDateEnd
-                        outputDateEnd = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
-                        tvOutputDateEnd.setText(outputDateEnd);
+                        inputDateEnd = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
+                        tvInputDateEnd.setText(inputDateEnd);
                         break;
                     case 2://updateDateStart
                         updateDateStart = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
@@ -208,6 +212,15 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.ivAdd:
+                djNum++;
+                tvWeight.setText(djNum + "");
+                break;
+            case R.id.ivReduce:
+                if (djNum > 0)
+                    djNum--;
+                tvWeight.setText(djNum + "");
+                break;
             case R.id.tvWmsWarehouseId:
                 if (ListUtil.isEmpty(wareHouseList))
                     return;
@@ -244,11 +257,11 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
                 });
                 goodsTypeChooseDialog.show();
                 break;
-            case R.id.tvOutputDateStart:
+            case R.id.tvInputDateStart:
                 type = 0;
                 selectDate();
                 break;
-            case R.id.tvOutputDateEnd:
+            case R.id.tvInputDateEnd:
                 type = 1;
                 selectDate();
                 break;
@@ -262,14 +275,13 @@ public class ShaiXuanCkFra extends TitleFragment implements NaviActivity.NaviRig
                 break;
             case R.id.tvCx:
                 barCode = etBarCode.getText().toString();
-                ladingNumber = etLadingNumber.getText().toString();
-                consignor = etConsignor.getText().toString();
-                consignorPhone= etConsignorPhone.getText().toString();
+                palletNumber = etPalletNumber.getText().toString();
                 goodsName = etGoodsName.getText().toString();
+                weight = tvWeight.getText().toString();
                 goodsName = etGoodsName.getText().toString();
-                updaterName = etupdaterName.getText().toString();
-                EventBus.getDefault().post(new BillOutputSxEvent(barCode, outputDateStart,outputDateEnd, ladingNumber,
-                        consignor, consignorPhone, goodsType,wmsWarehouseId, goodsName, updaterName, updateDateStart, updateDateEnd));
+                updaterName = etUpdaterName.getText().toString();
+                EventBus.getDefault().post(new BillInputSxEvent(barCode, inputDateStart, inputDateEnd, wmsWarehouseId,
+                        palletNumber, weight, goodsType, goodsName, updaterName,updateDateStart,updateDateEnd));
                 act.finishSelf();
                 break;
         }

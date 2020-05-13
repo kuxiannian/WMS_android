@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.lxkj.wms.R;
+import com.lxkj.wms.bean.SortingRegisterBean;
 
 import java.util.List;
 
@@ -17,23 +20,20 @@ import butterknife.ButterKnife;
 /**
  * Created by kxn on 2020/4/25 0025.
  */
-public class KccxAdapter  extends RecyclerView.Adapter<KccxAdapter.ViewHolder>{
+public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
     protected Context mContext;
-    protected List mDatas;
+    protected List<SortingRegisterBean.ResultBean.ContentBean> mDatas;
     protected LayoutInflater mInflater;
 
 
-    private OnItemClickListener onItemClickListener;
 
-    public KccxAdapter(Context mContext, List mDatas) {
+
+    public KccxAdapter(Context mContext, List<SortingRegisterBean.ResultBean.ContentBean> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
         mInflater = LayoutInflater.from(mContext);
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,30 +42,104 @@ public class KccxAdapter  extends RecyclerView.Adapter<KccxAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.tvAwb.setText(mDatas.get(position).getAwb());
+        holder.tvBarCode.setText(mDatas.get(position).getBarCode());
+        holder.tvGoodsName.setText(mDatas.get(position).getGoodsName());
+        holder.tvGoodsType.setText(mDatas.get(position).getGoodsType());
+        holder.tvInputDate.setText(mDatas.get(position).getInputDate());
+        holder.tvInStockDay.setText(mDatas.get(position).getInStockDay());
+        holder.tvOutputDate.setText(mDatas.get(position).getOutputDate());
+        holder.tvProductCode.setText(mDatas.get(position).getProductCode());
+        holder.tvStockState.setText(mDatas.get(position).getStockState());
+        holder.tvUpdateDate.setText(mDatas.get(position).getUpdateDate());
+        holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
+        holder.tvWmsWarehouseDetailName.setText(mDatas.get(position).getWmsWarehouseDetailName());
+        holder.tvWmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
+
         holder.ivZk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mDatas.get(position).isOpen = !mDatas.get(position).isOpen;
+                notifyDataSetChanged();
             }
         });
+        if (mDatas.get(position).isOpen) {
+            holder.llAwb.setVisibility(View.VISIBLE);
+            holder.llGoodsName.setVisibility(View.VISIBLE);
+            holder.llInputDate.setVisibility(View.VISIBLE);
+            holder.llOutputDate.setVisibility(View.VISIBLE);
+            holder.llProductCode.setVisibility(View.VISIBLE);
+            holder.llStockState.setVisibility(View.VISIBLE);
+            holder.llUpdateDate.setVisibility(View.VISIBLE);
+            holder.llUpdaterName.setVisibility(View.VISIBLE);
+        } else {
+            holder.llAwb.setVisibility(View.GONE);
+            holder.llGoodsName.setVisibility(View.GONE);
+            holder.llInputDate.setVisibility(View.GONE);
+            holder.llOutputDate.setVisibility(View.GONE);
+            holder.llProductCode.setVisibility(View.GONE);
+            holder.llStockState.setVisibility(View.GONE);
+            holder.llUpdateDate.setVisibility(View.GONE);
+            holder.llUpdaterName.setVisibility(View.GONE);
+        }
+        if (mDatas.get(position).isOpen)
+            holder.ivZk.setImageResource(R.mipmap.ic_arrow_up_main);
+        else
+            holder.ivZk.setImageResource(R.mipmap.ic_arrow_down_main);
     }
 
     @Override
     public int getItemCount() {
-        return 5;
-//        return mDatas != null ? mDatas.size() : 0;
+        return mDatas != null ? mDatas.size() : 0;
     }
 
 
-    public interface OnItemClickListener {
-        void OnItemClick(int position);
-
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tvBarCode)
+        TextView tvBarCode;
+        @BindView(R.id.tvGoodsType)
+        TextView tvGoodsType;
+        @BindView(R.id.tvWmsWarehouseName)
+        TextView tvWmsWarehouseName;
+        @BindView(R.id.tvWmsWarehouseDetailName)
+        TextView tvWmsWarehouseDetailName;
+        @BindView(R.id.tvInStockDay)
+        TextView tvInStockDay;
+        @BindView(R.id.tvAwb)
+        TextView tvAwb;
+        @BindView(R.id.llAwb)
+        LinearLayout llAwb;
+        @BindView(R.id.tvGoodsName)
+        TextView tvGoodsName;
+        @BindView(R.id.llGoodsName)
+        LinearLayout llGoodsName;
+        @BindView(R.id.tvProductCode)
+        TextView tvProductCode;
+        @BindView(R.id.llProductCode)
+        LinearLayout llProductCode;
+        @BindView(R.id.tvStockState)
+        TextView tvStockState;
+        @BindView(R.id.llStockState)
+        LinearLayout llStockState;
+        @BindView(R.id.tvInputDate)
+        TextView tvInputDate;
+        @BindView(R.id.llInputDate)
+        LinearLayout llInputDate;
+        @BindView(R.id.tvOutputDate)
+        TextView tvOutputDate;
+        @BindView(R.id.llOutputDate)
+        LinearLayout llOutputDate;
+        @BindView(R.id.tvUpdaterName)
+        TextView tvUpdaterName;
+        @BindView(R.id.llUpdaterName)
+        LinearLayout llUpdaterName;
+        @BindView(R.id.tvUpdateDate)
+        TextView tvUpdateDate;
+        @BindView(R.id.llUpdateDate)
+        LinearLayout llUpdateDate;
         @BindView(R.id.ivZk)
         ImageView ivZk;
-
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

@@ -39,4 +39,40 @@ public class Url {
     public static String findWmsManifestGoodsByGoodsNameId = IP + "/wms/manifest/findWmsManifestGoodsByGoodsNameId";
     //根据分拣登记ID查询分拣登记明细信息接口
     public static String findWmsSortingRegisterDetailList = IP + "/wms/sortingRegister/findWmsSortingRegisterDetailList";
+
+    /**
+     * 入库单
+     */
+    //分页查询数据接口
+    public static String findBillInputPage = IP + "/wms/billInput/findBillInputPage";
+    //新增数据接口
+    public static String addBillInput = IP + "/wms/billInput/addBillInput";
+    //查询仓库列表接口
+    public static String findWarehouseListBillInput = IP + "/wms/billInput/findWarehouseList";
+    //根据条形码查询入库所需相关信息接口
+    public static String findInfoByBarCode = IP + "/wms/billInput/findInfoByBarCode";
+
+
+    /**
+     * 出库单
+     */
+    //分页查询数据接口
+    public static String findBillOutputPage = IP + "/wms/billOutput/findBillOutputPage";
+    //新增数据接口
+    public static String addBillOutput = IP + "/wms/billOutput/addBillOutput";
+    //查询仓库列表接口
+    public static String findWarehouseListBillOnput = IP + "/wms/billOutput/findWarehouseList";
+    //根据条形码查询入库所需相关信息接口
+    public static String findInfoByBarCodeBillOut = IP + "/wms/billOutput/findInfoByBarCode";
+
+    /**
+     *库存查询
+     */
+    //分页查询数据接口
+    public static String findStockPage = IP + "/wms/stock/findStockPage";
+    //查询仓库列表接口
+    public static String findWarehouseListStock = IP + "/wms/stock/findWarehouseList";
+
+
+
 }
