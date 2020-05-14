@@ -1,134 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    android:background="@drawable/bg_border_line"
-    android:orientation="horizontal">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/space" />
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/txm"
-                android:textColor="@color/txt_lv6"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tvBarCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:textColor="@color/txt_lv4"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="@color/line" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:text="@string/hwfl"
-                android:textColor="@color/txt_lv6"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tvGoodsType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:textColor="@color/txt_lv4"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="@color/line" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:text="@string/ck"
-                android:textColor="@color/txt_lv6"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tvWmsWarehouseName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:textColor="@color/txt_lv4"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="@color/line" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:text="@string/cw"
-                android:textColor="@color/txt_lv6"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tvWmsWarehouseDetailName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:textColor="@color/txt_lv4"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="@color/line" />
+            android:layout_margin="12dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/zkts"
+                    android:text="@string/txm"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvInStockDay"
+                    android:id="@+id/tvBarCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -141,82 +48,110 @@
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llAwb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="AWM"
+                    android:text="@string/putOnDate"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvAwb"
+                    android:id="@+id/tvPutOnDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llGoodsName"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/hwpm"
+                    android:text="@string/ck"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvGoodsName"
+                    android:id="@+id/tvWmsWarehouseIdName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llProductCode"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="@string/weight"
+                        android:textColor="@color/txt_lv6"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/txt_lv4"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/line" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/spdh"
+                    android:text="@string/palletNumber"
+                    android:textColor="@color/txt_lv6"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvPalletNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/txt_lv4"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/productCode"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
@@ -233,25 +168,39 @@
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llStockState"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="@string/goodsName"
+                        android:textColor="@color/txt_lv6"
+                        android:textSize="16sp" />
 
+                    <TextView
+                        android:id="@+id/tvGoodsName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/txt_lv4"
+                        android:textSize="15sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/line" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/ckzt"
+                    android:text="@string/length"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvStockState"
+                    android:id="@+id/tvLength"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -263,25 +212,17 @@
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llInputDate"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/rkrq"
+                    android:text="@string/width"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvInputDate"
+                    android:id="@+id/tvWidth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -293,25 +234,17 @@
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llOutputDate"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/ckrq"
+                    android:text="@string/height"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvOutputDate"
+                    android:id="@+id/tvHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -323,25 +256,17 @@
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llUpdaterName"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/updaterId_stock"
+                    android:text="@string/cw"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvUpdaterName"
+                    android:id="@+id/tvWmsWarehouseDetailIdName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -353,55 +278,33 @@
                     android:layout_height="1px"
                     android:layout_marginTop="10dp"
                     android:background="@color/line" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llUpdateDate"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/updateDate_stock"
+                    android:text="@string/remarks"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvUpdateDate"
+                    android:id="@+id/tvRemarks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@color/line" />
 
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/line" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <ImageView
-            android:id="@+id/ivZk"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="12dp"
-            android:src="@mipmap/ic_arrow_down_main" />
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

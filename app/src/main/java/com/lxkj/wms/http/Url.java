@@ -73,6 +73,48 @@ public class Url {
     //查询仓库列表接口
     public static String findWarehouseListStock = IP + "/wms/stock/findWarehouseList";
 
+    /**
+     * 盘点单
+     */
+    //分页查询数据接口
+    public static String findBillStockCheckPage = IP + "/wms/billStockCheck/findBillStockCheckPage";
+    //新增数据接口
+    public static String addBillStockCheck = IP + "/wms/billStockCheck/addBillStockCheck";
+    //保存草稿数据接口
+    public static String updateBillStockCheckTemp = IP + "/wms/billStockCheck/updateBillStockCheckTemp";
+    //完成盘点接口
+    public static String updateBillStockCheckOver = IP + "/wms/billStockCheck/updateBillStockCheckOver";
+    //盘点作废接口
+    public static String deleteBillStockCheck = IP + "/wms/billStockCheck/deleteBillStockCheck";
+    //查询仓库列表接口
+    public static String findWarehouseListStockCheck = IP + "/wms/billStockCheck/findWarehouseList";
+    //查询储位列表接口
+    public static String findWarehouseDetailList = IP + "/wms/warehouseDetail/findWarehouseDetailList";
+    //查询盘点明细数据接口
+    public static String findBillStockCheckDetailList = IP + "/wms/billStockCheck/findBillStockCheckDetailList";
 
+    /**
+     * 上架单
+     */
+    //分页查询数据接口
+    public static String findBillPutOnPage = IP + "/wms/billPutOn/findBillPutOnPage";
+    //新增数据接口
+    public static String addBillPutOn = IP + "/wms/billPutOn/addBillPutOn";
+    //根据条形码查询上架单所需相关信息接口
+    public static String findInfoByBarCodeBillPutOn = IP + "/wms/billPutOn/findInfoByBarCode";
+    //上架时输入长、宽、高自动分配储位接口
+    public static String findTopByPriority = IP + "/wms/warehouseDetail/findTopByPriority";
+    //查询仓库列表接口
+    public static String findWarehouseListBillPutOn = IP + "/wms/billPutOn/findWarehouseList";
+
+    /**
+     * 上架单
+     */
+    //分页查询数据接口
+    public static String findBillPutOffPage = IP + "/wms/billPutOff/findBillPutOffPage";
+    //新增数据接口
+    public static String addBillPutOff = IP + "/wms/billPutOff/addBillPutOff";
+    //查询仓库列表接口
+    public static String findWarehouseListBillPutOff = IP + "/wms/billPutOff/findWarehouseList";
 
 }

@@ -31,7 +31,7 @@ public class ShowErrorCodeUtil {
             case "E020001":
                 GlobalBeans.getSelf().getEventCenter().evtLogout();
                 ToastUtil.show(context.getString(R.string.hint_20001));
-                ActivitySwitcher.startFragment(context, LoginFra.class,new Bundle());
+                ActivitySwitcher.startFragment(context, LoginFra.class, new Bundle());
                 break;
             case "E020002":
                 ToastUtil.show(context.getString(R.string.hint_20002));
@@ -294,8 +294,55 @@ public class ShowErrorCodeUtil {
             case "SE130003":
                 ToastUtil.show(context.getString(R.string.SE130003));
                 break;
-
-
+//上架单错误提示
+            case "VE110001":
+                ToastUtil.show(context.getString(R.string.VE110001));
+                break;
+            case "VE110002":
+                ToastUtil.show(context.getString(R.string.VE110002));
+                break;
+            case "VE110003":
+                ToastUtil.show(context.getString(R.string.VE110003));
+                break;
+            case "VE110004":
+                ToastUtil.show(context.getString(R.string.VE110004));
+                break;
+            case "VE110005":
+                ToastUtil.show(context.getString(R.string.VE110005));
+                break;
+            case "VE110006":
+                ToastUtil.show(context.getString(R.string.VE110006));
+                break;
+            case "VE110007":
+                ToastUtil.show(context.getString(R.string.VE110007));
+                break;
+            case "VE110008":
+                ToastUtil.show(context.getString(R.string.VE110008));
+                break;
+            case "VE110009":
+                ToastUtil.show(context.getString(R.string.VE110009));
+                break;
+            case "VE110010":
+                ToastUtil.show(context.getString(R.string.VE110010));
+                break;
+            case "VE110011":
+                ToastUtil.show(context.getString(R.string.VE110011));
+                break;
+            case "VE110012":
+                ToastUtil.show(context.getString(R.string.VE110012));
+                break;
+            case "VE110013":
+                ToastUtil.show(context.getString(R.string.VE110013));
+                break;
+            case "VE110014":
+                ToastUtil.show(context.getString(R.string.VE110014));
+                break;
+            case "SE110003":
+                ToastUtil.show(context.getString(R.string.SE110003));
+                break;
+            case "SE110004":
+                ToastUtil.show(context.getString(R.string.SE110004));
+                break;
 
         }
     }

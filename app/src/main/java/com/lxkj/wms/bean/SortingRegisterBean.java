@@ -71,9 +71,72 @@ public class SortingRegisterBean extends BaseBean {
             private String stockState;//	库存状态
             private String wmsWarehouseDetailName;//	储位
 
+            private String height;//	高
+            private String length;//	长
+            private String putOnDate;//	上架日期
+            private String width;//	宽
+            private String wmsWarehouseDetailId;//	储位ID
+            private String wmsWarehouseDetailIdName;//	储位名称
+            private String wmsWarehouseIdName;//	仓库名称
 
 
             public boolean isOpen;
+
+            public String getHeight() {
+                return height;
+            }
+
+            public void setHeight(String height) {
+                this.height = height;
+            }
+
+            public String getLength() {
+                return length;
+            }
+
+            public void setLength(String length) {
+                this.length = length;
+            }
+
+            public String getPutOnDate() {
+                return putOnDate;
+            }
+
+            public void setPutOnDate(String putOnDate) {
+                this.putOnDate = putOnDate;
+            }
+
+            public String getWidth() {
+                return width;
+            }
+
+            public void setWidth(String width) {
+                this.width = width;
+            }
+
+            public String getWmsWarehouseDetailId() {
+                return wmsWarehouseDetailId;
+            }
+
+            public void setWmsWarehouseDetailId(String wmsWarehouseDetailId) {
+                this.wmsWarehouseDetailId = wmsWarehouseDetailId;
+            }
+
+            public String getWmsWarehouseDetailIdName() {
+                return wmsWarehouseDetailIdName;
+            }
+
+            public void setWmsWarehouseDetailIdName(String wmsWarehouseDetailIdName) {
+                this.wmsWarehouseDetailIdName = wmsWarehouseDetailIdName;
+            }
+
+            public String getWmsWarehouseIdName() {
+                return wmsWarehouseIdName;
+            }
+
+            public void setWmsWarehouseIdName(String wmsWarehouseIdName) {
+                this.wmsWarehouseIdName = wmsWarehouseIdName;
+            }
 
             public String getInStockDay() {
                 return inStockDay;

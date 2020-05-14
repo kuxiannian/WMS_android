@@ -221,6 +221,25 @@
     <string name="SE130001">条形码：%1$s，货物没有进行下架，请先下架</string>
     <string name="SE130002">条形码：%1$s，货物无库存信息可查，已经不在库存中</string>
     <string name="SE130003">该货物有嫌疑，嫌疑问题栏位不能为空</string>
+    //上架单错误提示
+    <string name="VE110001">主键必须不能为空</string>
+    <string name="VE110002">条形码不能为空</string>
+    <string name="VE110003">条形码，只能输入1~50位长度</string>
+    <string name="VE110004">上架日期不能为空</string>
+    <string name="VE110005">重量不能为空</string>
+    <string name="VE110006">重量，必须在0.001-9999999.999之间</string>
+    <string name="VE110007">长度不能为空</string>
+    <string name="VE110008">宽度不能为空</string>
+    <string name="VE110009">高度不能为空</string>
+    <string name="VE110010">储位不能为空</string>
+    <string name="VE110011">备注，只能输入1~200位长度</string>
+    <string name="VE110012">版本号不能为空</string>
+    <string name="VE110013">仓库不能为空</string>
+    <string name="VE110014">库存表Id不能为空</string>
+    <string name="SE110001">条形码：%1$s，货物已上架到储位：%2$s，无法重复上架，若需更换储位，请先进行下架操作</string>
+    <string name="SE110002">条形码：%1$s，货物无库存信息可查，未入库</string>
+    <string name="SE110003">选择的储位信息不正确，请重新操作</string>
+    <string name="SE110004">储位上已经有货物，请选择其他储位</string>
 
     <string name="titleInfo">分拣管理</string>
     <string name="name">货物安检</string>
@@ -285,6 +304,28 @@
     <string name="inStockDayEnd">在库天数（最大天数）</string>
     <string name="updaterId_stock">最后操作员姓名</string>
     <string name="updateDate_stock">最后操作时间</string>
+
+    <string name="InStock">在库</string>
+    <string name="Outbound">出库</string>
+
+    <string name="putOnDate">上架日期</string>
+    <string name="palletNumber">托盘号</string>
+    <string name="volume">货物体积(m³)</string>
+    <string name="weight">重量(kg)</string>
+    <string name="length">长(mm)</string>
+    <string name="width">宽(mm)</string>
+    <string name="height">高(mm)</string>
+    <string name="wmsWarehouseDetailId">储位</string>
+    <string name="wmsStockId">库存表</string>
+    <string name="wmsStockDetailId">库存明细</string>
+    <string name="mustBeNumber">必须是数字</string>
+    <string name="number1_9999999">数字必须在1-9999999之间</string>
+    <string name="decimal_2_Limit">数字必须在0.01-9999999.99之间</string>
+    <string name="numberLimit">数字必须在0.001-9999999.999之间</string>
+    <string name="appAddTitle">新增上架作业</string>
+
+
+
 
 
 </resources>

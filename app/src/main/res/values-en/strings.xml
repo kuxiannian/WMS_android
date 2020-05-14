@@ -217,6 +217,25 @@
     <string name="SE130001">Barcode: %1$s, the goods have not been removed, please remove them first</string>
     <string name="SE130002">Barcode: %1$s, the goods have no inventory information to check, it is no longer in stock</string>
     <string name="SE130003">The goods are suspected. The suspected problem field cannot be empty</string>
+    //上架单错误提示
+    <string name="VE110001">Primary key must not be empty</string>
+    <string name="VE110002">Barcode cannot be empty</string>
+    <string name="VE110003">Barcode, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE110004">Shelves date cannot be empty</string>
+    <string name="VE110005">Weight cannot be empty</string>
+    <string name="VE110006">Weight, must be between 0.001-9999999.999</string>
+    <string name="VE110007">Length cannot be empty</string>
+    <string name="VE110008">Width cannot be empty</string>
+    <string name="VE110009">Height cannot be empty</string>
+    <string name="VE110010">Storage cannot be empty</string>
+    <string name="VE110011">Remarks, only 1 ~ 200 characters length can be entered</string>
+    <string name="VE110012">Version number cannot be empty</string>
+    <string name="VE110013">Warehouse cannot be empty</string>
+    <string name="VE110014">Inventory table Id cannot be empty</string>
+    <string name="SE110001">Barcode: %1$s, the goods have been stored in the storage place: %2$s, can not be repeatedly placed on the shelf, if you need to change the storage position, please remove the shelf</string>
+    <string name="SE110002">Barcode: %1$s, the goods have no inventory information to check, they are not in storage</string>
+    <string name="SE110003">The selected storage location information is incorrect, please try again</string>
+    <string name="SE110004">There are already goods in the storage space, please choose another storage space</string>
 
 
     <string name="titleInfo">Cargo Distribution Management Module</string>
@@ -281,4 +300,23 @@
     <string name="inStockDayEnd">Days in warehouse (maximum days)</string>
     <string name="updaterId_stock">Operator name</string>
     <string name="updateDate_stock">Operation time</string>
+
+    <string name="InStock">In stock</string>
+    <string name="Outbound">Outbound</string>
+
+    <string name="putOnDate">Added Date</string>
+    <string name="palletNumber">Pallet number</string>
+    <string name="volume">Cargo volume (m³)</string>
+    <string name="weight">Weight (kg)</string>
+    <string name="length">Length (mm)</string>
+    <string name="width">Width (mm)</string>
+    <string name="height">Height (mm)</string>
+    <string name="wmsWarehouseDetailId">Storage</string>
+    <string name="wmsStockId">Inventory table</string>
+    <string name="wmsStockDetailId">Inventory details</string>
+    <string name="mustBeNumber">Must be number</string>
+    <string name="number1_9999999">The number must be between 1-9999999</string>
+    <string name="decimal_2_Limit">The number must be between 0.01-9999999.99</string>
+    <string name="numberLimit">The number must be between 0.001-9999999.999</string>
+    <string name="appAddTitle">Add Put On Bill</string>
 </resources>

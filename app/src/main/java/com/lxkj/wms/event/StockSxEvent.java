@@ -21,4 +21,25 @@ public class StockSxEvent {
     public String updaterName;//	否	最后操作人
     public String updateDateStart;//	否	最后操作开始日期
     public String updateDateEnd;//	否	最后操作结束日期
+
+    public StockSxEvent(String barCode, String awb, String goodsType, String goodsName, String productCode, String wmsWarehouseId, String wmsWarehouseDetailName, String stockState, String inputDateStart, String inputDateEnd, String outputDateStart, String outputDateEnd, String inStockDayStart,
+                        String inStockDayEnd, String updaterName, String updateDateStart, String updateDateEnd) {
+        this.barCode = barCode;
+        this.awb = awb;
+        this.goodsType = goodsType;
+        this.goodsName = goodsName;
+        this.productCode = productCode;
+        this.wmsWarehouseId = wmsWarehouseId;
+        this.wmsWarehouseDetailName = wmsWarehouseDetailName;
+        this.stockState = stockState;
+        this.inputDateStart = inputDateStart;
+        this.inputDateEnd = inputDateEnd;
+        this.outputDateStart = outputDateStart;
+        this.outputDateEnd = outputDateEnd;
+        this.inStockDayStart = inStockDayStart;
+        this.inStockDayEnd = inStockDayEnd;
+        this.updaterName = updaterName;
+        this.updateDateStart = updateDateStart;
+        this.updateDateEnd = updateDateEnd;
+    }
 }

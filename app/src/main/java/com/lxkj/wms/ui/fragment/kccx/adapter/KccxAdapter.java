@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
+import com.lxkj.wms.utils.StringUtil;
+import com.lxkj.wms.utils.TimeUtil;
 
 import java.util.List;
 
@@ -24,8 +26,6 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
     protected Context mContext;
     protected List<SortingRegisterBean.ResultBean.ContentBean> mDatas;
     protected LayoutInflater mInflater;
-
-
 
 
     public KccxAdapter(Context mContext, List<SortingRegisterBean.ResultBean.ContentBean> mDatas) {
@@ -46,12 +46,24 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
         holder.tvBarCode.setText(mDatas.get(position).getBarCode());
         holder.tvGoodsName.setText(mDatas.get(position).getGoodsName());
         holder.tvGoodsType.setText(mDatas.get(position).getGoodsType());
-        holder.tvInputDate.setText(mDatas.get(position).getInputDate());
+        if (!StringUtil.isEmpty(mDatas.get(position).getInputDate()))
+            holder.tvInputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getInputDate(), "yyyy-MM-dd"));
         holder.tvInStockDay.setText(mDatas.get(position).getInStockDay());
-        holder.tvOutputDate.setText(mDatas.get(position).getOutputDate());
+        if (!StringUtil.isEmpty(mDatas.get(position).getOutputDate()))
+            holder.tvOutputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getOutputDate(), "yyyy-MM-dd"));
         holder.tvProductCode.setText(mDatas.get(position).getProductCode());
-        holder.tvStockState.setText(mDatas.get(position).getStockState());
-        holder.tvUpdateDate.setText(mDatas.get(position).getUpdateDate());
+        if (null != mDatas.get(position).getStockState()){
+            switch (mDatas.get(position).getStockState()){
+                case "0":
+                    holder.tvStockState.setText(mContext.getString(R.string.InStock));
+                    break;
+                case "1":
+                    holder.tvStockState.setText(mContext.getString(R.string.Outbound));
+                    break;
+            }
+        }
+        if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
         holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
         holder.tvWmsWarehouseDetailName.setText(mDatas.get(position).getWmsWarehouseDetailName());
         holder.tvWmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
@@ -92,7 +104,6 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
     public int getItemCount() {
         return mDatas != null ? mDatas.size() : 0;
     }
-
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -140,6 +151,7 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
         LinearLayout llUpdateDate;
         @BindView(R.id.ivZk)
         ImageView ivZk;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
