@@ -11,7 +11,6 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.ui.fragment.rksh.AddRkFra;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +63,7 @@ public class PutOnBillFra extends TitleFragment implements NaviActivity.NaviRigt
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvSglr:
-                ActivitySwitcher.startFragment(act, AddRkFra.class);
+                ActivitySwitcher.startFragment(act, AddPutOnBillFra.class);
                 break;
         }
     }

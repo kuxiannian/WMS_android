@@ -60,7 +60,8 @@ public class Result {
     public String palletNumber;//托盘号
     public String  wmsWarehouseName;//仓库名称
 
-
+    public String wmsWarehouseDetailId;//下架的储位Id
+    public String wmsWarehouseDetailName;//	下架的储位
 
 
 }

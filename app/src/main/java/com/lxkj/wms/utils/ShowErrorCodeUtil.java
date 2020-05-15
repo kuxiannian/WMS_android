@@ -294,7 +294,7 @@ public class ShowErrorCodeUtil {
             case "SE130003":
                 ToastUtil.show(context.getString(R.string.SE130003));
                 break;
-//上架单错误提示
+            //上架单错误提示
             case "VE110001":
                 ToastUtil.show(context.getString(R.string.VE110001));
                 break;
@@ -342,6 +342,35 @@ public class ShowErrorCodeUtil {
                 break;
             case "SE110004":
                 ToastUtil.show(context.getString(R.string.SE110004));
+                break;
+
+            // 下架单错误提示
+            case "VE120001":
+                ToastUtil.show(context.getString(R.string.VE120001));
+                break;
+            case "VE120002":
+                ToastUtil.show(context.getString(R.string.VE120002));
+                break;
+            case "VE120003":
+                ToastUtil.show(context.getString(R.string.VE120003));
+                break;
+            case "VE120004":
+                ToastUtil.show(context.getString(R.string.VE120004));
+                break;
+            case "VE120005":
+                ToastUtil.show(context.getString(R.string.VE120005));
+                break;
+            case "VE120006":
+                ToastUtil.show(context.getString(R.string.VE120006));
+                break;
+            case "VE120007":
+                ToastUtil.show(context.getString(R.string.VE120007));
+                break;
+            case "VE120008":
+                ToastUtil.show(context.getString(R.string.VE120008));
+                break;
+            case "VE120009":
+                ToastUtil.show(context.getString(R.string.VE120009));
                 break;
 
         }

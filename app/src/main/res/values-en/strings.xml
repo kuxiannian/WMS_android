@@ -81,7 +81,6 @@
 
     <string name="pdksrq">盘点开始日期</string>
     <string name="pdjsrq">盘点结束日期</string>
-    <string name="zt">状态</string>
     <string name="bccg">保存草稿</string>
     <string name="wcpd">完成盘点</string>
     <string name="pdxq">盘点详情</string>
@@ -237,6 +236,21 @@
     <string name="SE110003">The selected storage location information is incorrect, please try again</string>
     <string name="SE110004">There are already goods in the storage space, please choose another storage space</string>
 
+    // 下架单错误提示
+    <string name="VE120001">Primary key must not be empty</string>
+    <string name="VE120002">Barcode cannot be empty</string>
+    <string name="VE120003">Barcode, only 1 ~ 50 characters length can be entered</string>
+    <string name="VE120004">Off shelf date cannot be empty</string>
+    <string name="VE120005">Remarks, only 1 ~ 200 characters length can be entered</string>
+    <string name="VE120006">Version number cannot be empty</string>
+    <string name="VE120007">Warehouse cannot be empty</string>
+    <string name="VE120008">Storage cannot be empty</string>
+    <string name="VE120009">Inventory table Id cannot be empty</string>
+    <string name="SE120001">Bar code: %1$s, the goods are not on the shelves and cannot be removed</string>
+    <string name="SE120002">Bar code: %1$s, no inventory information can be checked for the goods, not in storage</string>
+
+
+
 
     <string name="titleInfo">Cargo Distribution Management Module</string>
     <string name="name">Cargo security</string>
@@ -319,4 +333,19 @@
     <string name="decimal_2_Limit">The number must be between 0.01-9999999.99</string>
     <string name="numberLimit">The number must be between 0.001-9999999.999</string>
     <string name="appAddTitle">Add Put On Bill</string>
+
+    <string name="appPutOffTitle">Add Pull Off Bill</string>
+    <string name="putOffDate">Withdrawal date</string>
+    <string name="wmsWarehouseId_putoff">Delisted warehouse</string>
+    <string name="wmsWarehouseDetailId_putoff">Removed storage</string>
+
+    <string name="startDate">Inventory start date</string>
+    <string name="endDate">Inventory end date</string>
+    <string name="wmsWarehouseId_StockCheck">Warehouse</string>
+    <string name="state">State</string>
+    <string name="Inventory">Inventory</string>
+    <string name="Einventory">End of inventory</string>
+    <string name="Void">Void</string>
+
+
 </resources>

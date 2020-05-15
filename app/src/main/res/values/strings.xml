@@ -81,7 +81,7 @@
 
     <string name="pdksrq">盘点开始日期</string>
     <string name="pdjsrq">盘点结束日期</string>
-    <string name="zt">状态</string>
+
     <string name="bccg">保存草稿</string>
     <string name="wcpd">完成盘点</string>
     <string name="pdxq">盘点详情</string>
@@ -232,6 +232,21 @@
     <string name="SE110003">选择的储位信息不正确，请重新操作</string>
     <string name="SE110004">储位上已经有货物，请选择其他储位</string>
 
+    // 下架单错误提示
+    <string name="VE120001">主键必须不能为空</string>
+    <string name="VE120002">条形码不能为空</string>
+    <string name="VE120003">条形码，只能输入1~50位长度</string>
+    <string name="VE120004">下架日期不能为空</string>
+    <string name="VE120005">备注，只能输入1~200位长度</string>
+    <string name="VE120006">版本号不能为空</string>
+    <string name="VE120007">仓库不能为空</string>
+    <string name="VE120008">储位不能为空</string>
+    <string name="VE120009">库存表Id不能为空</string>
+    <string name="SE120001">条形码：%1$s，货物并未上架，无法下架</string>
+    <string name="SE120002">条形码：%1$s，货物无库存信息可查，未入库</string>
+
+
+
     <string name="titleInfo">分拣管理</string>
     <string name="name">货物安检</string>
     <string name="input">请输入</string>
@@ -326,5 +341,18 @@
     <string name="numberLimit">数字必须在0.001-9999999.999之间</string>
     <string name="appAddTitle">新增上架作业</string>
 
+    <string name="appPutOffTitle">新增下架作业</string>
+    <string name="putOffDate">下架日期</string>
+    <string name="wmsWarehouseId_putoff">下架的仓库</string>
+    <string name="wmsWarehouseDetailId_putoff">下架的储位</string>
+
+
+    <string name="startDate">盘点开始日期</string>
+    <string name="endDate">盘点结束日期</string>
+    <string name="wmsWarehouseId_StockCheck">仓库</string>
+    <string name="state">状态</string>
+    <string name="Inventory">盘点中</string>
+    <string name="Einventory">盘点结束</string>
+    <string name="Void">作废</string>
 
 </resources>

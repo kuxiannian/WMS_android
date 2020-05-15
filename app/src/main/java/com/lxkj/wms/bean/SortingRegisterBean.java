@@ -78,9 +78,45 @@ public class SortingRegisterBean extends BaseBean {
             private String wmsWarehouseDetailId;//	储位ID
             private String wmsWarehouseDetailIdName;//	储位名称
             private String wmsWarehouseIdName;//	仓库名称
+            private String putOffDate;
+            private String endDate;//盘点结束日期
+            private String startDate;//盘点开始日期
+            private String state;//	状态
 
 
             public boolean isOpen;
+
+            public String getEndDate() {
+                return endDate;
+            }
+
+            public void setEndDate(String endDate) {
+                this.endDate = endDate;
+            }
+
+            public String getStartDate() {
+                return startDate;
+            }
+
+            public void setStartDate(String startDate) {
+                this.startDate = startDate;
+            }
+
+            public String getState() {
+                return state;
+            }
+
+            public void setState(String state) {
+                this.state = state;
+            }
+
+            public String getPutOffDate() {
+                return putOffDate;
+            }
+
+            public void setPutOffDate(String putOffDate) {
+                this.putOffDate = putOffDate;
+            }
 
             public String getHeight() {
                 return height;

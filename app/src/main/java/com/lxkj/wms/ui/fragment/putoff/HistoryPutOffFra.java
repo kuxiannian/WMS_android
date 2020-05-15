@@ -1,4 +1,4 @@
-package com.lxkj.wms.ui.fragment.puton;
+package com.lxkj.wms.ui.fragment.putoff;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,12 +13,12 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.actlink.NaviRightListener;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
-import com.lxkj.wms.event.BillPutOnEvent;
+import com.lxkj.wms.event.BillPutOffEvent;
 import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.ui.fragment.puton.adapter.PutOnAdapter;
+import com.lxkj.wms.ui.fragment.putoff.adapter.PutOffAdapter;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.StringUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -41,28 +41,27 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by kxn on 2020/5/14 0014.
+ * Created by kxn on 2020/5/15 0015.
  */
-public class HistoryPutOnFra extends TitleFragment implements NaviRightListener {
+public class HistoryPutOffFra extends TitleFragment implements NaviRightListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     Unbinder unbinder;
     List<SortingRegisterBean.ResultBean.ContentBean> list;
-    PutOnAdapter adapter;
+    PutOffAdapter adapter;
     private int page = 0;
     private boolean isMore = true;//是否有更多数据
 
     private String barCode;//	条形码
-    private String putOnDateStart;//	上架开始日期
-    private String putOnDateEnd;//	上架结束日期
-    private String weight;//	重量
-    private String palletNumber;//	托盘号
+    private String putOffDateStart;//	下架开始日期
+    private String putOffDateEnd;//	下架结束日期
     private String productCode;//	商品代号
-    private String wmsWarehouseId;//	仓库Id
-    private String wmsWarehouseDetailIdName;//	储位名称
-    private String updaterName;//	操作员姓名
+    private String goodsName;//货物名称
+    private String wmsWarehouseId;//下架的仓库
+    private String wmsWarehouseDetailName;//下架的储位
+    private String updaterName;//操作员姓名
     private String updateDateStart;//	操作开始时间
     private String updateDateEnd;//	操作结束时间
 
@@ -84,7 +83,7 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
     private void initView() {
         EventBus.getDefault().register(this);
         list = new ArrayList<>();
-        adapter = new PutOnAdapter(mContext, list);
+        adapter = new PutOffAdapter(mContext, list);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
         refreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
@@ -95,13 +94,13 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
                     return;
                 }
                 page++;
-                findBillPutOnPage();
+                findBillPutOffPage();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 page = 0;
-                findBillPutOnPage();
+                findBillPutOffPage();
                 refreshLayout.setNoMoreData(false);
             }
         });
@@ -109,18 +108,17 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSelectSx(BillPutOnEvent billPutOnEvent) {
-        barCode = billPutOnEvent.barCode;
-        putOnDateStart = billPutOnEvent.putOnDateStart;
-        putOnDateEnd = billPutOnEvent.putOnDateEnd;
-        weight = billPutOnEvent.weight;
-        palletNumber = billPutOnEvent.palletNumber;
-        productCode = billPutOnEvent.productCode;
-        wmsWarehouseId = billPutOnEvent.wmsWarehouseId;
-        wmsWarehouseDetailIdName = billPutOnEvent.wmsWarehouseDetailIdName;
-        updaterName = billPutOnEvent.updaterName;
-        updateDateStart = billPutOnEvent.updateDateStart;
-        updateDateEnd = billPutOnEvent.updateDateEnd;
+    public void onSelectSx(BillPutOffEvent billPutOffEvent) {
+        barCode = billPutOffEvent.barCode;
+        putOffDateStart = billPutOffEvent.putOffDateStart;
+        putOffDateEnd = billPutOffEvent.putOffDateEnd;
+        productCode = billPutOffEvent.productCode;
+        goodsName = billPutOffEvent.goodsName;
+        wmsWarehouseId = billPutOffEvent.wmsWarehouseId;
+        wmsWarehouseDetailName = billPutOffEvent.wmsWarehouseDetailName;
+        updaterName = billPutOffEvent.updaterName;
+        updateDateStart = billPutOffEvent.updateDateStart;
+        updateDateEnd = billPutOffEvent.updateDateEnd;
         refreshLayout.autoRefresh();
     }
 
@@ -128,26 +126,24 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
     /**
      * 分页查询数据接口
      */
-    private void findBillPutOnPage() {
+    private void findBillPutOffPage() {
         Map<String, String> params = new HashMap<>();
         params.put("page", page + "");
         params.put("size", "10");
         if (null != barCode)
             params.put("barCode", barCode);
-        if (!StringUtil.isEmpty(putOnDateStart))
-            params.put("putOnDateStart", putOnDateStart);
-        if (!StringUtil.isEmpty(putOnDateEnd))
-            params.put("putOnDateEnd", putOnDateEnd);
-        if (!StringUtil.isEmpty(weight))
-            params.put("weight", weight);
-        if (null != palletNumber)
-            params.put("palletNumber", palletNumber);
-        if (null != productCode)
+        if (!StringUtil.isEmpty(putOffDateStart))
+            params.put("putOffDateStart", putOffDateStart);
+        if (!StringUtil.isEmpty(putOffDateEnd))
+            params.put("putOffDateEnd", putOffDateEnd);
+        if (!StringUtil.isEmpty(productCode))
             params.put("productCode", productCode);
-        if (!StringUtil.isEmpty(wmsWarehouseId))
+        if (null != goodsName)
+            params.put("goodsName", goodsName);
+        if (null != wmsWarehouseId)
             params.put("wmsWarehouseId", wmsWarehouseId);
-        if (!StringUtil.isEmpty(wmsWarehouseDetailIdName))
-            params.put("wmsWarehouseDetailIdName", wmsWarehouseDetailIdName);
+        if (!StringUtil.isEmpty(wmsWarehouseDetailName))
+            params.put("wmsWarehouseDetailName", wmsWarehouseDetailName);
         if (!StringUtil.isEmpty(updaterName))
             params.put("updaterName", updaterName);
         if (!StringUtil.isEmpty(updateDateStart))
@@ -155,7 +151,7 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
         if (!StringUtil.isEmpty(updateDateEnd))
             params.put("updateDateEnd", updateDateEnd);
 
-        OkHttpHelper.getInstance().get_json(mContext, Url.findBillPutOnPage, params, new BaseCallback<SortingRegisterBean>() {
+        OkHttpHelper.getInstance().get_json(mContext, Url.findBillPutOffPage, params, new BaseCallback<SortingRegisterBean>() {
             @Override
             public void onFailure(Request request, Exception e) {
                 refreshLayout.finishRefresh();
@@ -205,8 +201,9 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
 
     @Override
     public void onRightClicked(View v) {
-        ActivitySwitcher.startFragment(act, ShaiXuanPutOnFra.class);
+        ActivitySwitcher.startFragment(act, ShaiXuanPutOffFra.class);
     }
 
 }
+
 

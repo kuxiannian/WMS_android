@@ -85,7 +85,7 @@ public class Url {
     //完成盘点接口
     public static String updateBillStockCheckOver = IP + "/wms/billStockCheck/updateBillStockCheckOver";
     //盘点作废接口
-    public static String deleteBillStockCheck = IP + "/wms/billStockCheck/deleteBillStockCheck";
+//    public static String deleteBillStockCheck = IP + "/wms/billStockCheck/deleteBillStockCheck";
     //查询仓库列表接口
     public static String findWarehouseListStockCheck = IP + "/wms/billStockCheck/findWarehouseList";
     //查询储位列表接口
@@ -108,10 +108,12 @@ public class Url {
     public static String findWarehouseListBillPutOn = IP + "/wms/billPutOn/findWarehouseList";
 
     /**
-     * 上架单
+     * 下架单
      */
     //分页查询数据接口
     public static String findBillPutOffPage = IP + "/wms/billPutOff/findBillPutOffPage";
+    //根据条形码查询所需相关信息接口
+    public static String findInfoByBarCodeBillPutOff = IP + "wms/billPutOff/findInfoByBarCode";
     //新增数据接口
     public static String addBillPutOff = IP + "/wms/billPutOff/addBillPutOff";
     //查询仓库列表接口
