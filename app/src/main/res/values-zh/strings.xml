@@ -253,6 +253,7 @@
     <string name="VE120009">库存表Id不能为空</string>
     <string name="SE120001">条形码：%1$s，货物并未上架，无法下架</string>
     <string name="SE120002">条形码：%1$s，货物无库存信息可查，未入库</string>
+    <string name="VE500003">储位编号不能为空</string>
 
     <string name="titleInfo">分拣管理</string>
     <string name="name">货物安检</string>
@@ -349,4 +350,6 @@
     <string name="Inventory">盘点中</string>
     <string name="Einventory">盘点结束</string>
     <string name="Void">作废</string>
+    <string name="saveBtnText">保存草稿</string>
+    <string name="endBtnText">完成盘点</string>
 </resources>

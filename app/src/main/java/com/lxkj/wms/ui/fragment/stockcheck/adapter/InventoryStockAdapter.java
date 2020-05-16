@@ -13,7 +13,7 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.bean.WareHouseBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
-import com.lxkj.wms.ui.fragment.stockcheck.HistoryStockCheckDetailFra;
+import com.lxkj.wms.ui.fragment.stockcheck.AddStockCheckFra;
 import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.TimeUtil;
 
@@ -23,16 +23,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by kxn on 2020/5/15 0015.
+ * Created by kxn on 2020/5/16 0016.
  */
-public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.ViewHolder> {
+public class InventoryStockAdapter extends RecyclerView.Adapter<InventoryStockAdapter.ViewHolder> {
     protected Context mContext;
     protected List<SortingRegisterBean.ResultBean.ContentBean> mDatas;
     protected LayoutInflater mInflater;
+
     private List<WareHouseBean.ResultBean> wareHouseList;
 
 
-    public StockCheckAdapter(Context mContext, List<SortingRegisterBean.ResultBean.ContentBean> mDatas) {
+    public InventoryStockAdapter(Context mContext, List<SortingRegisterBean.ResultBean.ContentBean> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
         mInflater = LayoutInflater.from(mContext);
@@ -45,7 +46,7 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mInflater.inflate(R.layout.item_stockcheck_history, parent, false));
+        return new ViewHolder(mInflater.inflate(R.layout.item_stockcheck, parent, false));
     }
 
     @Override
@@ -55,8 +56,8 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
         if (!StringUtil.isEmpty(mDatas.get(position).getEndDate()))
             holder.tvEndDate.setText(TimeUtil.stampToDate(mDatas.get(position).getEndDate(), "yyyy-MM-dd"));
         holder.tvWmsWarehouseName.setText(getWmsWarehouseName(mDatas.get(position).getWmsWarehouseId()));
-        if (null != mDatas.get(position).getState()){
-            switch (mDatas.get(position).getState()){
+        if (null != mDatas.get(position).getState()) {
+            switch (mDatas.get(position).getState()) {
                 case "1": //盘点中
                     holder.tvState.setText(mContext.getString(R.string.Inventory));
                     break;
@@ -68,21 +69,23 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
                     break;
             }
         }
+        holder.tvUpdaterId.setText(getWmsWarehouseName(mDatas.get(position).getUpdaterName()));
+        if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
 
-
-        holder.ivDetail.setOnClickListener(new View.OnClickListener() {
+        holder.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("bean", mDatas.get(position));
-                bundle.putString("wmsWarehouseName",  holder.tvWmsWarehouseName.getText().toString());
-                ActivitySwitcher.startFragment(mContext, HistoryStockCheckDetailFra.class, bundle);
+                bundle.putString("wmsWarehouseName", holder.tvWmsWarehouseName.getText().toString());
+                ActivitySwitcher.startFragment(mContext, AddStockCheckFra.class, bundle);
             }
         });
     }
 
     private String getWmsWarehouseName(String wmsWarehouseId) {
-        if (null != wareHouseList){
+        if (null != wareHouseList) {
             for (int i = 0; i < wareHouseList.size(); i++) {
                 if (wareHouseList.get(i).getId().equals(wmsWarehouseId))
                     return wareHouseList.get(i).getName();
@@ -109,8 +112,12 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
         TextView tvEndDate;
         @BindView(R.id.tvState)
         TextView tvState;
-        @BindView(R.id.ivDetail)
-        ImageView ivDetail;
+        @BindView(R.id.tvUpdaterId)
+        TextView tvUpdaterId;
+        @BindView(R.id.tvUpdateDate)
+        TextView tvUpdateDate;
+        @BindView(R.id.ivEdit)
+        ImageView ivEdit;
 
 
         public ViewHolder(View itemView) {
@@ -119,6 +126,7 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
         }
     }
 }
+
 
 
 

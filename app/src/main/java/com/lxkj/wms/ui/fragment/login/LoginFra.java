@@ -27,10 +27,14 @@ import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.MainActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.LanguageUtils;
 import com.lxkj.wms.utils.PasswordUtil;
 import com.lxkj.wms.utils.ToastUtil;
+import com.lxkj.wms.view.BottomMenuFra;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -147,7 +151,7 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
                     @Override
                     public void onReceiveValue(String value) {
                         value = value.replace("\"", "");
-                        Log.e("loginStr",value);
+                        Log.e("loginStr", value);
                         doLogin(value);
                     }
                 });
@@ -163,19 +167,20 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
         mOkHttpHelper.post_json(mContext, Url.LOGIN, params, new SpotsCallBack<String>(mContext) {
             @Override
             public void onSuccess(Response response, String result) {
-                ResultBean resultBean = new Gson().fromJson(result,ResultBean.class);
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
                 if (resultBean.flag) {
                     if (null != resultBean.result) {
                         AppConsts.userId = resultBean.result.userId;
                         AppConsts.account = resultBean.result.account;
                         AppConsts.userName = resultBean.result.userName;
                         ActivitySwitcher.start(act, MainActivity.class);
+                        act.finishSelf();
                     }
-                }else if (resultBean.errorCode.equals("I010104")){ //更改密码  待完善
+                } else if (resultBean.errorCode.equals("I010104")) { //更改密码  待完善
                     ToastUtil.show("更改密码");
-                }else if (resultBean.errorCode.equals("I010117")){
+                } else if (resultBean.errorCode.equals("I010117")) {
                     String testStr = getResources().getString(R.string.hint_10117);
-                    String hint = String.format(testStr,resultBean.result.leftTimes);
+                    String hint = String.format(testStr, resultBean.result.leftTimes);
                     ToastUtil.show(hint);
                 }
             }
@@ -218,6 +223,7 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
         });
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -232,10 +238,28 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
                 userLogin();
                 break;
             case R.id.ivLanguage:
-
+                List<String> items = new ArrayList<>();
+                items.add("简体中文");
+                items.add("English");
+                new BottomMenuFra().setItems(items).setOnItemClick(new BottomMenuFra.OnItemClick() {
+                    @Override
+                    public void onItemClick(int i) {
+                        switch (i) {
+                            case 0:
+                                LanguageUtils.SetAppLanguage(mContext, "1");
+                                break;
+                            case 1:
+                                LanguageUtils.SetAppLanguage(mContext, "2");
+                                break;
+                        }
+                        ActivitySwitcher.startFragment(act,LoginFra.class);
+                        act.finishSelf();
+                    }
+                }).show(getActivity().getSupportFragmentManager(), "Menu");
                 break;
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

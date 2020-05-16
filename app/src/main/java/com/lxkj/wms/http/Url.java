@@ -78,14 +78,10 @@ public class Url {
      */
     //分页查询数据接口
     public static String findBillStockCheckPage = IP + "/wms/billStockCheck/findBillStockCheckPage";
-    //新增数据接口
-    public static String addBillStockCheck = IP + "/wms/billStockCheck/addBillStockCheck";
     //保存草稿数据接口
     public static String updateBillStockCheckTemp = IP + "/wms/billStockCheck/updateBillStockCheckTemp";
     //完成盘点接口
     public static String updateBillStockCheckOver = IP + "/wms/billStockCheck/updateBillStockCheckOver";
-    //盘点作废接口
-//    public static String deleteBillStockCheck = IP + "/wms/billStockCheck/deleteBillStockCheck";
     //查询仓库列表接口
     public static String findWarehouseListStockCheck = IP + "/wms/billStockCheck/findWarehouseList";
     //查询储位列表接口

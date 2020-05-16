@@ -22,97 +22,69 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:text="@string/barCode"
+                android:textColor="@color/txt_lv6"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvBarCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:textColor="@color/txt_lv4"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
                 android:text="@string/wmsWarehouseId_StockCheck"
                 android:textColor="@color/txt_lv6"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvWmsWarehouseId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="AWB_001"
+                android:text=""
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="10dp"
                 android:background="@color/line" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:text="@string/startDate"
+                android:text="@string/wmsWarehouseDetailId"
                 android:textColor="@color/txt_lv6"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvWmsWarehouseDetailId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="KB-001"
+                android:text=""
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="@color/line" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:text="@string/endDate"
-                android:textColor="@color/txt_lv6"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:text="电视"
-                android:textColor="@color/txt_lv4"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="@color/line" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:text="@string/state"
-                android:textColor="@color/txt_lv6"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:text="5"
-                android:textColor="@color/txt_lv4"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="@color/line" />
-
         </LinearLayout>
     </LinearLayout>
 
@@ -127,25 +99,13 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/ivDetail"
+            android:id="@+id/ivDelete"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="12dp"
-            android:src="@mipmap/ic_more_main" />
+            android:src="@mipmap/ic_delete_main" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line" />
-
-        <ImageView
-            android:id="@+id/ivZk"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="12dp"
-            android:src="@mipmap/ic_arrow_down_main" />
     </LinearLayout>
 
 </LinearLayout>

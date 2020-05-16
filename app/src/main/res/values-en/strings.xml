@@ -248,7 +248,7 @@
     <string name="VE120009">Inventory table Id cannot be empty</string>
     <string name="SE120001">Bar code: %1$s, the goods are not on the shelves and cannot be removed</string>
     <string name="SE120002">Bar code: %1$s, no inventory information can be checked for the goods, not in storage</string>
-
+    <string name="VE500003">Storage slot number cannot be empty</string>
 
 
 
@@ -346,6 +346,8 @@
     <string name="Inventory">Inventory</string>
     <string name="Einventory">End of inventory</string>
     <string name="Void">Void</string>
+    <string name="saveBtnText">Save draft</string>
+    <string name="endBtnText">Complete inventory</string>
 
 
 </resources>

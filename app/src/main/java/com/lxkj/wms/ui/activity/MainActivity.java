@@ -22,11 +22,13 @@ import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.ckjh.CkjhFra;
-import com.lxkj.wms.ui.fragment.kccx.KccxFra;
-import com.lxkj.wms.ui.fragment.kcpd.KcpdFra;
-import com.lxkj.wms.ui.fragment.rksh.RkshFra;
 import com.lxkj.wms.ui.fragment.hwdj.AddHwdjFra;
+import com.lxkj.wms.ui.fragment.kccx.KccxFra;
 import com.lxkj.wms.ui.fragment.login.LoginFra;
+import com.lxkj.wms.ui.fragment.putoff.PutOffBillFra;
+import com.lxkj.wms.ui.fragment.puton.PutOnBillFra;
+import com.lxkj.wms.ui.fragment.rksh.RkshFra;
+import com.lxkj.wms.ui.fragment.stockcheck.StockCheckFra;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
@@ -83,7 +85,13 @@ public class MainActivity extends BaseFragAct implements EventCenter.EventListen
                         ActivitySwitcher.startFragment(MainActivity.this, KccxFra.class);
                         break;
                     case R.mipmap.ic_kcpd:
-                        ActivitySwitcher.startFragment(MainActivity.this, KcpdFra.class);
+                        ActivitySwitcher.startFragment(MainActivity.this, StockCheckFra.class);
+                        break;
+                    case R.mipmap.ic_sjzy:
+                        ActivitySwitcher.startFragment(MainActivity.this, PutOnBillFra.class);
+                        break;
+                    case R.mipmap.ic_xjzy:
+                        ActivitySwitcher.startFragment(MainActivity.this, PutOffBillFra.class);
                         break;
                 }
             }
