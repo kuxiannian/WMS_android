@@ -79,7 +79,7 @@ public class PutOnBillFra extends TitleFragment implements NaviActivity.NaviRigt
             case R.id.tvOpen:
                 isOpen = false;
                 //手持打开扫描
-                api.ContinuousScanning();
+                api.scan();
 
                 //平板打开扫描
                 Intent it=new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");

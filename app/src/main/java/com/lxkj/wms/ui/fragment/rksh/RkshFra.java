@@ -78,7 +78,7 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
                 break;
             case R.id.tvOpen:
                 isOpen = false;
-                api.ContinuousScanning();
+                api.scan();
                 Intent it=new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");
                 act.sendBroadcast(it);
                 // 添加剪贴板数据改变监听器
