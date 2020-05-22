@@ -43,13 +43,13 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias 'lxkj_xcf'
+            keyAlias 'wms'
             keyPassword '123456'
             storeFile file('key.jks')
             storePassword '123456'
         }
         debug {
-            keyAlias 'lxkj_xcf'
+            keyAlias 'wms'
             keyPassword '123456'
             storeFile file('key.jks')
             storePassword '123456'

@@ -87,7 +87,6 @@ public class OkHttpHelper {
 
     /**
      * 获取 OkHttp 实例
-     *
      * @return
      */
     public static OkHttpHelper getInstance() {
@@ -96,7 +95,6 @@ public class OkHttpHelper {
 
     /**
      * get 请求
-     *
      * @param url
      * @param callback
      */
@@ -110,7 +108,6 @@ public class OkHttpHelper {
 
     /**
      * post 请求方法
-     *
      * @param url
      * @param param
      * @param callback
@@ -137,7 +134,6 @@ public class OkHttpHelper {
 
     /**
      * get请求 将请求参数封装为json
-     *
      * @param context
      * @param url
      * @param params   json 参数Map
@@ -203,8 +199,9 @@ public class OkHttpHelper {
      * @return
      */
     private Request buildRequest(String url, HttpMethodType methodType, Map<String, String> params) {
+
         Request.Builder builder = new Request.Builder()
-                .url(url)
+                .url(Url.IP + url)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
                 .addHeader("X-APP-UACCOUNT", AppConsts.account);
         if (methodType == HttpMethodType.POST) {
@@ -212,7 +209,7 @@ public class OkHttpHelper {
             builder.post(body);
             return builder.build();
         } else {
-            HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
+            HttpUrl.Builder httpBuilder = HttpUrl.parse(Url.IP +url).newBuilder();
             if (params != null) {
                 for (Map.Entry<String, String> param : params.entrySet()) {
                     httpBuilder.addQueryParameter(param.getKey(), param.getValue());

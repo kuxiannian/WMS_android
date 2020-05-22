@@ -6,7 +6,7 @@
         <selector>
             <!-- 未点击背景图-->
             <item
-                android:drawable="@drawable/bg_rect_border_main_50dp"
+                android:drawable="@drawable/btn_main_rect_50dp"
                 android:state_pressed="false" />
         </selector>
     </item>

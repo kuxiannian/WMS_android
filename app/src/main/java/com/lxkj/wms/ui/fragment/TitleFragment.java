@@ -2,6 +2,7 @@ package com.lxkj.wms.ui.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.lxkj.wms.AppConsts;
 import com.lxkj.wms.GlobalBeans;
 import com.lxkj.wms.biz.EventCenter;
 import com.lxkj.wms.http.OkHttpHelper;
+import com.lxkj.wms.serialportapi.SoftDecodingAPI;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ScreenUtil;
@@ -32,6 +34,9 @@ public abstract class TitleFragment extends Fragment implements EventCenter.Even
     public Context mContext;
     public String userId,cityId,lat,lng,userPhone;
     public EventCenter eventCenter;
+    public SoftDecodingAPI api;
+    public ClipboardManager clipboardManager;
+    public boolean isOpen = false;//是否已经跳转  避免多次跳转
     public TitleFragment() {
         beans = GlobalBeans.getSelf();
         screenWidth = ScreenUtil.getScreenWidth(getContext());
@@ -43,6 +48,8 @@ public abstract class TitleFragment extends Fragment implements EventCenter.Even
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         try {
+            // 获取系统剪贴板
+            clipboardManager=(ClipboardManager)act.getSystemService(Context.CLIPBOARD_SERVICE);
             mContext = act;
             eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGIN);
             eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGOUT);

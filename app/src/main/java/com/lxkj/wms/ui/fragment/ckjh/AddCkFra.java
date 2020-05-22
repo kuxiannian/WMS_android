@@ -70,7 +70,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     @BindView(R.id.etLadingNumber)
     EditText etLadingNumber;
 
-    private String outputDate, wmsStockId;
+    private String outputDate, wmsStockId,barCode;
 
     public String getTitleName() {
         return act.getString(R.string.xzck);
@@ -86,6 +86,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     }
 
     private void initView() {
+        barCode = getArguments().getString("barCode");
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,6 +105,8 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     findInfoByBarCode(etBarCode.getText().toString());
             }
         });
+        if (null != barCode)
+            etBarCode.setText(barCode);
         /**
          * 设置事件的点击事件
          */

@@ -85,6 +85,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
     }
 
     private void initView() {
+        barCode = getArguments().getString("barCode");
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -103,6 +104,8 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                     findInfoByBarCodeBillPutOn(etBarCode.getText().toString());
             }
         });
+        if (null != barCode)
+            etBarCode.setText(barCode);
         /**
          * 设置事件的点击事件
          */
@@ -119,11 +122,9 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
         Map<String, String> params = new HashMap<>();
         params.put("barCode", barCode);
         OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillPutOff, params, new SpotsCallBack<ResultBean>(mContext) {
-
             @Override
             public void onFailure(Request request, Exception e) {
             }
-
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (null != resultBean.result) {

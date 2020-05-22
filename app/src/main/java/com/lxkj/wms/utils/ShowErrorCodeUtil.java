@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.lxkj.wms.GlobalBeans;
 import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivitySwitcher;
-import com.lxkj.wms.ui.fragment.login.LoginFra;
+import com.lxkj.wms.ui.activity.LoginAct;
 
 /**
  * Created by kxn on 2020/5/8 0008.
@@ -31,7 +31,7 @@ public class ShowErrorCodeUtil {
             case "E020001":
                 GlobalBeans.getSelf().getEventCenter().evtLogout();
                 ToastUtil.show(context.getString(R.string.hint_20001));
-                ActivitySwitcher.startFragment(context, LoginFra.class, new Bundle());
+                ActivitySwitcher.start(context, LoginAct.class, new Bundle());
                 break;
             case "E020002":
                 ToastUtil.show(context.getString(R.string.hint_20002));
@@ -242,8 +242,11 @@ public class ShowErrorCodeUtil {
             case "CE100003":
                 ToastUtil.show(context.getString(R.string.CE100003));
                 break;
-            case "CE100004":
+            case "CE210004":
                 ToastUtil.show(context.getString(R.string.CE210004));
+                break;
+            case "CE210005":
+                ToastUtil.show(context.getString(R.string.CE210005));
                 break;
             case "CE100005":
                 ToastUtil.show(context.getString(R.string.CE210005));
@@ -372,6 +375,8 @@ public class ShowErrorCodeUtil {
             case "VE120009":
                 ToastUtil.show(context.getString(R.string.VE120009));
                 break;
+
+
 
         }
     }

@@ -24,7 +24,6 @@ import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.ckjh.CkjhFra;
 import com.lxkj.wms.ui.fragment.hwdj.AddHwdjFra;
 import com.lxkj.wms.ui.fragment.kccx.KccxFra;
-import com.lxkj.wms.ui.fragment.login.LoginFra;
 import com.lxkj.wms.ui.fragment.putoff.PutOffBillFra;
 import com.lxkj.wms.ui.fragment.puton.PutOnBillFra;
 import com.lxkj.wms.ui.fragment.rksh.RkshFra;
@@ -164,7 +163,8 @@ public class MainActivity extends BaseFragAct implements EventCenter.EventListen
                     AppConsts.userId = "";
                     AppConsts.account = "";
                     AppConsts.userName = "";
-                    ActivitySwitcher.startFragment(MainActivity.this, LoginFra.class);
+                    ActivitySwitcher.start(MainActivity.this, LoginAct.class);
+                    finish();
                 }
             }
 

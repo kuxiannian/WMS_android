@@ -8,12 +8,14 @@ import com.lxkj.wms.GlobalBeans;
 import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivityWatcher;
 import com.lxkj.wms.biz.EventCenter;
+import com.yalantis.ucrop.util.ScreenUtils;
 
 
 public class BaseFragAct extends AppCompatActivity {
     public GlobalBeans beans;
     public EventCenter eventCenter;
     protected ImmersionBar mImmersionBar;
+
     @Override
     protected void onCreate(Bundle arg0) {
         if (null == GlobalBeans.getSelf()) {
@@ -23,6 +25,11 @@ public class BaseFragAct extends AppCompatActivity {
         eventCenter = beans.getEventCenter();
         super.onCreate(arg0);
         initImmersionBar();
+        int screenWidth = ScreenUtils.getScreenWidth(this);
+//        if (screenWidth > 950)
+//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        else
+//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
 
@@ -30,10 +37,9 @@ public class BaseFragAct extends AppCompatActivity {
         //在BaseActivity里初始化
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.statusBarColor(R.color.white);
-        mImmersionBar.statusBarDarkFont(true,0.2f);
+        mImmersionBar.statusBarDarkFont(true, 0.2f);
         mImmersionBar.init();
     }
-
 
 
     @Override
@@ -47,6 +53,7 @@ public class BaseFragAct extends AppCompatActivity {
         super.onPause();
         ActivityWatcher.setCurAct(null);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

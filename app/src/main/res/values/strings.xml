@@ -64,7 +64,7 @@
     <string name="zhongliang">重量(kg)</string>
     <string name="xzrk">新增入库</string>
     <string name="sglr">手工录入</string>
-    <string name="hint_smq">请打开扫描枪扫描</string>
+    <string name="hint_smq">打开扫描枪扫描</string>
 
     <string name="xzck">新增出库</string>
     <string name="ckrq">出库日期</string>
@@ -111,7 +111,7 @@
     <string name="newPassword">新密码</string>
     <string name="number">数字</string>
     <string name="oldPassword">旧密码</string>
-
+    <string name="intputappServer">请输入应用服务器</string>
 
     <string name="hint_00000">未处理的异常</string>
     <string name="hint_00001">内部实现错误</string>
@@ -247,6 +247,9 @@
     <string name="VE500003">储位编号不能为空</string>
 
 
+
+
+
     <string name="titleInfo">分拣管理</string>
     <string name="name">货物安检</string>
     <string name="input">请输入</string>
@@ -356,5 +359,7 @@
     <string name="Void">作废</string>
     <string name="saveBtnText">保存草稿</string>
     <string name="endBtnText">完成盘点</string>
+
+
 
 </resources>

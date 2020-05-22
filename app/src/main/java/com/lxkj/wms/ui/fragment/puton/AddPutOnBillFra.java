@@ -122,6 +122,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
     }
 
     private void initView() {
+        barCode = getArguments().getString("barCode");
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -191,6 +192,9 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     findTopByPriority();
             }
         });
+
+        if (null != barCode)
+            etBarCode.setText(barCode);
         /**
          * 设置事件的点击事件
          */

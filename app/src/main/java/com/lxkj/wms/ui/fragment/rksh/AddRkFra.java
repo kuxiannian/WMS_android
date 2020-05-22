@@ -75,6 +75,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     private String palletNumber;//托盘号
     private String weight;//重量
     private int djNum = 0;
+
     public String getTitleName() {
         return act.getString(R.string.xzrk);
     }
@@ -89,6 +90,8 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     }
 
     private void initView() {
+        barCode = getArguments().getString("barCode");
+
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -107,6 +110,8 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     findInfoByBarCode(etBarCode.getText().toString());
             }
         });
+        if (null != barCode)
+            etBarCode.setText(barCode);
         /**
          * 设置事件的点击事件
          */
@@ -129,7 +134,6 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
             @Override
             public void onFailure(Request request, Exception e) {
             }
-
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (null != resultBean.result) {
@@ -139,7 +143,6 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
                 }
             }
-
             @Override
             public void onError(Response response, int code, Exception e) {
             }

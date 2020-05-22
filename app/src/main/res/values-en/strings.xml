@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">WMS</string>
-    <string name="httperror">网络请求失败...</string>
-    <string name="nomore">没有更多数据</string>
-    <string name="press_again_to_leave">再按一次退出程序</string>
+    <string name="httperror">network error</string>
+    <string name="nomore">No more data</string>
+    <string name="press_again_to_leave">Press again to exit the program</string>
 
     <string name="hwdj">SORTINGREGISTER</string>
     <string name="rksh">BILLINPUT</string>
@@ -56,35 +56,30 @@
     <string name="hint_delete">Delete record?</string>
 
     <string name="fksh">Input</string>
-    <string name="sgrk">手工入库</string>
-    <string name="qdksmqsm">请打开扫描抢扫描</string>
-    <string name="rkrq">入库日期</string>
-    <string name="rkck">入库仓库</string>
-    <string name="tph">托盘号</string>
-    <string name="zhongliang">重量(kg)</string>
-    <string name="xzrk">新增入库</string>
-    <string name="sglr">手工录入</string>
-    <string name="hint_smq">请打开扫描枪扫描</string>
+    <string name="rkrq">Storage date</string>
+    <string name="rkck">Warehouse</string>
+    <string name="tph">Pallet number</string>
+    <string name="zhongliang">Weight (Kg)</string>
+    <string name="xzrk">Add Sorting Register</string>
+    <string name="sglr">By Hand</string>
+    <string name="hint_smq">Please Scan</string>
 
-    <string name="xzck">新增出库</string>
-    <string name="ckrq">出库日期</string>
-    <string name="thdbh">提货单编号</string>
-    <string name="thr">提货人</string>
-    <string name="thrlxfs">提货联系方式</string>
-    <string name="ckck">出库仓库</string>
+    <string name="xzck">Add Put On Bill</string>
+    <string name="ckrq">Outbound date</string>
+    <string name="thdbh">Bill of lading number</string>
+    <string name="thr">Consignee</string>
+    <string name="thrlxfs">Consignee contact</string>
+    <string name="ckck">Outbound warehouse</string>
 
-    <string name="ck">仓库</string>
-    <string name="cw">储位</string>
-    <string name="hwmc">货物名称</string>
-    <string name="zkts">在库天数</string>
-    <string name="ckzt">仓库状态</string>
+    <string name="ck">Warehouse</string>
+    <string name="cw">Storage</string>
+    <string name="hwmc">Goods name(package, volume or size)</string>
+    <string name="zkts">Days in warehouse</string>
+    <string name="ckzt">Stock state</string>
 
-    <string name="pdksrq">盘点开始日期</string>
-    <string name="pdjsrq">盘点结束日期</string>
-    <string name="bccg">保存草稿</string>
-    <string name="wcpd">完成盘点</string>
-    <string name="pdxq">盘点详情</string>
-    <string name="xz">新增</string>
+    <string name="bccg">Save draft</string>
+    <string name="wcpd">Complete inventory</string>
+    <string name="pdxq">Stock Check</string>
 
     <string name="qsrzh">Please enter account ID</string>
     <string name="qsrmm">Please enter password</string>
@@ -110,6 +105,7 @@
     <string name="newPassword">New Password</string>
     <string name="number">Number</string>
     <string name="oldPassword">Original Password</string>
+    <string name="intputappServer">Input App Server</string>
 
 
     <string name="hint_00000">Unhandled exception</string>

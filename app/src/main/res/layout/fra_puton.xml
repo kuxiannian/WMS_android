@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:gravity="center">
     <TextView
+        android:id="@+id/tvOpen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"
