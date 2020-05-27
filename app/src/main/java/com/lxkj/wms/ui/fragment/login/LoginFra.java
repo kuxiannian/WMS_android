@@ -29,6 +29,7 @@ import com.lxkj.wms.ui.activity.MainActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.LanguageUtils;
 import com.lxkj.wms.utils.PasswordUtil;
+import com.lxkj.wms.utils.SharePrefUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.BottomMenuFra;
 
@@ -246,9 +247,11 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
                     public void onItemClick(int i) {
                         switch (i) {
                             case 0:
+                                SharePrefUtil.saveString(mContext,AppConsts.Language,"1");
                                 LanguageUtils.SetAppLanguage(mContext, "1");
                                 break;
                             case 1:
+                                SharePrefUtil.saveString(mContext,AppConsts.Language,"2");
                                 LanguageUtils.SetAppLanguage(mContext, "2");
                                 break;
                         }

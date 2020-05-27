@@ -26,6 +26,7 @@ import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.utils.LanguageUtils;
 import com.lxkj.wms.utils.PasswordUtil;
+import com.lxkj.wms.utils.SharePrefUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.BottomMenuFra;
 import com.lxkj.wms.view.ChangePswDialog;
@@ -78,6 +79,16 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
         ivSet.setOnClickListener(this::onClick);
         webview.getSettings().setJavaScriptEnabled(true);
         initPwdRule();
+
+        String language = SharePrefUtil.getString(this, AppConsts.Language, "1");
+        switch (language) {
+            case "1":
+                ivLanguage.setImageResource(R.mipmap.ic_cn);
+                break;
+            case "2":
+                ivLanguage.setImageResource(R.mipmap.ic_en);
+                break;
+        }
     }
 
     @Override
@@ -350,10 +361,12 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
                     public void onItemClick(int i) {
                         switch (i) {
                             case 0:
+                                SharePrefUtil.saveString(mContext,AppConsts.Language,"1");
                                 ivLanguage.setImageResource(R.mipmap.ic_cn);
                                 LanguageUtils.SetAppLanguage(mContext, "1");
                                 break;
                             case 1:
+                                SharePrefUtil.saveString(mContext,AppConsts.Language,"2");
                                 ivLanguage.setImageResource(R.mipmap.ic_en);
                                 LanguageUtils.SetAppLanguage(mContext, "2");
                                 break;

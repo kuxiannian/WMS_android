@@ -10,6 +10,8 @@ import android.support.multidex.MultiDexApplication;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.lxkj.wms.biz.CrashHandler;
+import com.lxkj.wms.utils.LanguageUtils;
+import com.lxkj.wms.utils.SharePrefUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -27,8 +29,6 @@ public class HcbApp extends MultiDexApplication {
         MultiDex.install(this);
 
 
-
-
 //        //百度地图初始化
 //        SDKInitializer.initialize(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -43,11 +43,10 @@ public class HcbApp extends MultiDexApplication {
 
 //        RongIM.getInstance().registerConversationTemplate(new CustomSystemConversationProvider());
 
-
-
+        String language = SharePrefUtil.getString(this, AppConsts.Language, "1");
+        LanguageUtils.SetAppLanguage(this, language);
 
     }
-
 
 
     private HttpProxyCacheServer proxy;
@@ -62,9 +61,9 @@ public class HcbApp extends MultiDexApplication {
     }
 
 
-
     /**
      * 获得当前进程的名字
+     *
      * @param context
      * @return 进程号
      */

@@ -56,7 +56,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
     @BindView(R.id.tvJs)
     TextView tvJs;
     @BindView(R.id.tvDjjs)
-    TextView tvDjjs;
+    EditText tvDjjs;
     @BindView(R.id.tvHwfl)
     TextView tvHwfl;
     @BindView(R.id.tvHdxq)
@@ -298,6 +298,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 
     /**
      * 根据舱单货物ID查询舱单货物信息接口
+     *
      * @param goodsNameId 舱单货物ID
      */
     private void findWmsManifestGoodsByGoodsNameId(String goodsNameId) {
@@ -328,28 +329,53 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
      * 新增货物登记数据
      */
     private void addSortingRegister() {
-        registerNumber = djNum + "";
+        if (!TextUtils.isEmpty(tvDjjs.getText()))
+            djNum = Integer.parseInt(tvDjjs.getText().toString());
+        else
+            djNum = 0;
+        if (djNum > 0)
+            registerNumber = djNum + "";
         Map<String, String> params = new HashMap<>();
-        params.put("awb", awb);
-        params.put("flightId", flightId);
-        params.put("goodsNameId", goodsNameId);
-        params.put("registerNumber", registerNumber);
-        params.put("wmsWarehouseId", wmsWarehouseId);
-        params.put("goodsType", goodsType);
-        params.put("wmsManifestId", wmsManifestId);
-        params.put("number", number);
-        params.put("departureStation", departureStation);
-        params.put("destinationStation", destinationStation);
-        params.put("shipperName", shipperName);
-        params.put("shipperAddress", shipperAddress);
-        params.put("shipperPhone", shipperPhone);
-        params.put("receiverName", receiverName);
-        params.put("receiverAddress", receiverAddress);
-        params.put("receiverPhone", receiverPhone);
-        params.put("grossWeight", grossWeight);
-        params.put("rateClass", rateClass);
-        params.put("productCode", productCode);
-        params.put("chargeableWeight", chargeableWeight);
+        if (null != awb)
+            params.put("awb", awb);
+        if (null != flightId)
+            params.put("flightId", flightId);
+        if (null != goodsNameId)
+            params.put("goodsNameId", goodsNameId);
+        if (null != registerNumber)
+            params.put("registerNumber", registerNumber);
+        if (null != wmsWarehouseId)
+            params.put("wmsWarehouseId", wmsWarehouseId);
+        if (null != goodsType)
+            params.put("goodsType", goodsType);
+        if (null != wmsManifestId)
+            params.put("wmsManifestId", wmsManifestId);
+        if (null != number)
+            params.put("number", number);
+        if (null != departureStation)
+            params.put("departureStation", departureStation);
+        if (null != destinationStation)
+            params.put("destinationStation", destinationStation);
+        if (null != shipperName)
+            params.put("shipperName", shipperName);
+        if (null != shipperAddress)
+            params.put("shipperAddress", shipperAddress);
+        if (null != shipperPhone)
+            params.put("shipperPhone", shipperPhone);
+        if (null != receiverName)
+            params.put("receiverName", receiverName);
+        if (null != receiverAddress)
+            params.put("receiverAddress", receiverAddress);
+        if (null != receiverPhone)
+            params.put("receiverPhone", receiverPhone);
+        if (null != grossWeight)
+            params.put("grossWeight", grossWeight);
+        if (null != rateClass)
+            params.put("rateClass", rateClass);
+        if (null != productCode)
+            params.put("productCode", productCode);
+        if (null != chargeableWeight)
+            params.put("chargeableWeight", chargeableWeight);
         if (!TextUtils.isEmpty(etRemark.getText()))
             params.put("remarks", etRemark.getText().toString());
         OkHttpHelper.getInstance().post_json(mContext, Url.addSortingRegister, params, new SpotsCallBack<String>(mContext) {
@@ -366,10 +392,10 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 } else {
                     switch (resultBean.errorCode) {
                         case "SE210003":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE210003),resultBean.result.barCod));
+                            ToastUtil.show(String.format(getResources().getString(R.string.SE210003), resultBean.result.barCod));
                             break;
                         case "SE210004":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE210004),resultBean.result.alNumber,resultBean.result.canNumber));
+                            ToastUtil.show(String.format(getResources().getString(R.string.SE210004), resultBean.result.alNumber, resultBean.result.canNumber));
                             break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
@@ -442,10 +468,18 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 goodsChooseDialog.show();
                 break;
             case R.id.ivAdd:
+                if (!TextUtils.isEmpty(tvDjjs.getText()))
+                    djNum = Integer.parseInt(tvDjjs.getText().toString());
+                else
+                    djNum = 0;
                 djNum++;
                 tvDjjs.setText(djNum + "");
                 break;
             case R.id.ivReduce:
+                if (!TextUtils.isEmpty(tvDjjs.getText()))
+                    djNum = Integer.parseInt(tvDjjs.getText().toString());
+                else
+                    djNum = 0;
                 if (djNum > 0)
                     djNum--;
                 tvDjjs.setText(djNum + "");
