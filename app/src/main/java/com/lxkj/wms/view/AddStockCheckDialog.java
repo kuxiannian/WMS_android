@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.WareHouseBean;
 import com.lxkj.wms.utils.ListUtil;
+import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class AddStockCheckDialog extends Dialog {
     String wmsWarehouseDetailId;
     OnConfirmListener onConfirmListener;
 
-    public AddStockCheckDialog(Context context, List<WareHouseBean.ResultBean> warehouseDetailList, String wmsWarehouseName, OnConfirmListener onConfirmListener) {
+    public AddStockCheckDialog(Context context, List<WareHouseBean.ResultBean> warehouseDetailList, String wmsWarehouseName, String barCode, OnConfirmListener onConfirmListener) {
         super(context, R.style.Theme_dialog); //dialog的样式
         this.context = context;
         Window window = getWindow();
@@ -53,12 +54,14 @@ public class AddStockCheckDialog extends Dialog {
         tvCancel = findViewById(R.id.tv_cancel);
         tvWmsWarehouseIdName.setText(wmsWarehouseName);
         this.onConfirmListener = onConfirmListener;
+        etBarCode.setText(barCode);
         tvWmsWarehouseDetailId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ListUtil.isEmpty(warehouseDetailList))
                     return;
                 List<String> codeList = new ArrayList<>();
+                codeList.add("");
                 for (int i = 0; i < warehouseDetailList.size(); i++) {
                     codeList.add(warehouseDetailList.get(i).getCode());
                 }
@@ -66,7 +69,11 @@ public class AddStockCheckDialog extends Dialog {
                     @Override
                     public void onItemClick(int position) {
                         tvWmsWarehouseDetailId.setText(codeList.get(position));
-                        wmsWarehouseDetailId = warehouseDetailList.get(position).getId();
+                        if (StringUtil.isEmpty(codeList.get(position))) {
+                            wmsWarehouseDetailId = null;
+                        } else {
+                            wmsWarehouseDetailId = warehouseDetailList.get(position).getId();
+                        }
                     }
                 });
                 addressDialog.show();

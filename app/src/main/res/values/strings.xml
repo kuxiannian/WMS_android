@@ -62,11 +62,11 @@
     <string name="rkck">入库仓库</string>
     <string name="tph">托盘号</string>
     <string name="zhongliang">重量(kg)</string>
-    <string name="xzrk">新增入库</string>
+    <string name="xzrk">新增入库单</string>
     <string name="sglr">手工录入</string>
     <string name="hint_smq">打开扫描枪扫描</string>
 
-    <string name="xzck">新增出库</string>
+    <string name="xzck">新增出库拣货</string>
     <string name="ckrq">出库日期</string>
     <string name="thdbh">提货单编号</string>
     <string name="thr">提货人</string>
@@ -156,10 +156,7 @@
     // 分拣登记错误提示
     <string name="VE210001">主键必须不能为空</string>
     <string name="VE210002">舱单信息不能为空</string>
-    <string name="VE210003">航班不能为空</string>
     <string name="VE210004">货物品名(包括包装、体积或尺寸)不能为空</string>
-    <string name="VE210005">分拣登记地点不能为空</string>
-    <string name="VE210006">登记数量不能为空</string>
     <string name="VE210007">登记数量，必须在1-9999999之间</string>
     <string name="VE210008">货物分类不能为空</string>
     <string name="VE210009">货物分类，请选择正确的选项</string>
@@ -361,5 +358,10 @@
     <string name="endBtnText">完成盘点</string>
 
 
-
+    <string name="hbxq">航班详情</string>
+    <string name="VE180002">AWB不能为空</string>
+    <string name="VE210006">登记数量不能为空</string>
+    <string name="VE210005">分拣登记地点不能为空</string>
+    <string name="VE210003">航班不能为空</string>
+    <string name="xzckd">新增出库单</string>
 </resources>

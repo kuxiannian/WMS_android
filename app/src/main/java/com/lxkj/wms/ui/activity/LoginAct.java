@@ -79,7 +79,6 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
         ivSet.setOnClickListener(this::onClick);
         webview.getSettings().setJavaScriptEnabled(true);
         initPwdRule();
-
         String language = SharePrefUtil.getString(this, AppConsts.Language, "1");
         switch (language) {
             case "1":

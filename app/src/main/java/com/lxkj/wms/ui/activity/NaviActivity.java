@@ -249,6 +249,7 @@ public class NaviActivity extends BaseFragAct {
     public void finishSelf() {
         arrowLeft.setVisibility(View.GONE);
         ActivitySwitcher.finish(this);
+
     }
 
     public void finishDown() {

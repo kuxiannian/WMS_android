@@ -43,6 +43,8 @@ public class HistoryCkDetailFra extends TitleFragment {
     TextView tvsuspicionProblem;
     Unbinder unbinder;
     SortingRegisterBean.ResultBean.ContentBean contentBean;
+    @BindView(R.id.tvremarks)
+    TextView tvremarks;
 
     @Override
     public String getTitleName() {
@@ -72,6 +74,7 @@ public class HistoryCkDetailFra extends TitleFragment {
             tvgoodsName.setText(contentBean.getGoodsName());
             tvsuspicion.setText(contentBean.getSuspicion());
             tvsuspicionProblem.setText(contentBean.getSuspicionProblem());
+            tvremarks.setText(contentBean.getRemarks());
         }
     }
 

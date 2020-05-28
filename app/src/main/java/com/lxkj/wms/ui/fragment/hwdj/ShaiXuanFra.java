@@ -2,6 +2,7 @@ package com.lxkj.wms.ui.fragment.hwdj;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class ShaiXuanFra extends TitleFragment implements NaviActivity.NaviRigth
     @BindView(R.id.etDestinationStation)
     EditText etDestinationStation;
     @BindView(R.id.tvDjjs)
-    TextView tvDjjs;
+    EditText tvDjjs;
     @BindView(R.id.ivAdd)
     ImageView ivAdd;
     @BindView(R.id.ivReduce)
@@ -155,10 +156,18 @@ public class ShaiXuanFra extends TitleFragment implements NaviActivity.NaviRigth
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivAdd:
+                if (!TextUtils.isEmpty(tvDjjs.getText()))
+                    djNum = Integer.parseInt(tvDjjs.getText().toString());
+                else
+                    djNum = 0;
                 djNum++;
                 tvDjjs.setText(djNum + "");
                 break;
             case R.id.ivReduce:
+                if (!TextUtils.isEmpty(tvDjjs.getText()))
+                    djNum = Integer.parseInt(tvDjjs.getText().toString());
+                else
+                    djNum = 0;
                 if (djNum > 1)
                     djNum--;
                 if (djNum > 0)

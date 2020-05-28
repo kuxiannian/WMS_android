@@ -55,9 +55,9 @@
                 android:id="@+id/tvStartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="-"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text=""
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
             <View
@@ -82,10 +82,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text=""
+                android:text="-"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,6 +109,11 @@
                 android:text=""
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,9 +129,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text=""
+                android:text="-"
                 android:textColor="@color/txt_lv4"
                 android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

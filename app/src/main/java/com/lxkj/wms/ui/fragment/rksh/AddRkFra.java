@@ -29,6 +29,8 @@ import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,7 +57,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     @BindView(R.id.etPalletNumber)
     EditText etPalletNumber;
     @BindView(R.id.tvWeight)
-    TextView tvWeight;
+    EditText tvWeight;
     @BindView(R.id.ivAdd)
     ImageView ivAdd;
     @BindView(R.id.ivReduce)
@@ -74,7 +76,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     private String inputDate;//入库日期
     private String palletNumber;//托盘号
     private String weight;//重量
-    private int djNum = 0;
+    private double djNum = 0;
 
     public String getTitleName() {
         return act.getString(R.string.xzrk);
@@ -106,8 +108,15 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 
             @Override
             public void afterTextChanged(Editable editable) {
+                tvGoodsName.setText("");
+                tvGoodsType.setText("");
+                tvProductCode.setText("");
+                tvWmsWarehouseIdName.setText("");
+                tvWeight.setText("");
                 if (!TextUtils.isEmpty(etBarCode.getText()))
                     findInfoByBarCode(etBarCode.getText().toString());
+
+
             }
         });
         if (null != barCode)
@@ -265,13 +274,21 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 selectDate();
                 break;
             case R.id.ivAdd:
+                if (!TextUtils.isEmpty(tvWeight.getText()))
+                    djNum = Double.parseDouble(tvWeight.getText().toString());
+                else
+                    djNum = 0;
                 djNum++;
-                tvWeight.setText(djNum + "");
+                tvWeight.setText(new BigDecimal(djNum+"").setScale(3, RoundingMode.FLOOR).toString());
                 break;
             case R.id.ivReduce:
+                if (!TextUtils.isEmpty(tvWeight.getText()))
+                    djNum = Integer.parseInt(tvWeight.getText().toString());
+                else
+                    djNum = 0;
                 if (djNum > 0)
                     djNum--;
-                tvWeight.setText(djNum + "");
+                tvWeight.setText(new BigDecimal(djNum+"").setScale(3, RoundingMode.FLOOR).toString());
                 break;
         }
     }

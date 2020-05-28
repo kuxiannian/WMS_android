@@ -52,8 +52,8 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
         if (!StringUtil.isEmpty(mDatas.get(position).getOutputDate()))
             holder.tvOutputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getOutputDate(), "yyyy-MM-dd"));
         holder.tvProductCode.setText(mDatas.get(position).getProductCode());
-        if (null != mDatas.get(position).getStockState()){
-            switch (mDatas.get(position).getStockState()){
+        if (null != mDatas.get(position).getStockState()) {
+            switch (mDatas.get(position).getStockState()) {
                 case "0":
                     holder.tvStockState.setText(mContext.getString(R.string.InStock));
                     break;
@@ -65,7 +65,8 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
             holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
         holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
-        holder.tvWmsWarehouseDetailName.setText(mDatas.get(position).getWmsWarehouseDetailName());
+        if (null != mDatas.get(position).getWmsWarehouseDetailName())
+            holder.tvWmsWarehouseDetailName.setText(mDatas.get(position).getWmsWarehouseDetailName());
         holder.tvWmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
 
         holder.ivZk.setOnClickListener(new View.OnClickListener() {

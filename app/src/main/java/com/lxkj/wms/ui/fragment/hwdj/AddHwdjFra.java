@@ -26,6 +26,7 @@ import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.AppViewCanDoUtil;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
@@ -151,6 +152,23 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 
             @Override
             public void afterTextChanged(Editable editable) {
+                AppViewCanDoUtil.setBtnCanDo(false,tvHdxq);
+                AppViewCanDoUtil.setCanDo(false,tvHangBan);
+                AppViewCanDoUtil.setCanDo(false,tvHwpm);
+                wmsManifestId = null;
+                departureStation = null;
+                destinationStation = null;
+                shipperName = null;
+                shipperAddress = null;
+                shipperPhone = null;
+                receiverName = null;
+                receiverAddress = null;
+                receiverPhone = null;
+                awb = null;
+                tvHangBan.setText("");
+                tvHwpm.setText("");
+
+
                 if (!TextUtils.isEmpty(etAwb.getText()))
                     findManifestByAwb(etAwb.getText().toString());
             }
@@ -215,6 +233,8 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     receiverPhone = resultBean.getResult().getReceiverPhone();
 
                     awb = awbStr;
+                    AppViewCanDoUtil.setCanDo(true,tvHangBan);
+                    AppViewCanDoUtil.setCanDo(true,tvHwpm);
                 }
             }
 
@@ -247,6 +267,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                             flightId = resultBean.getResult().get(0).getId();
                             tvHangBan.setText(resultBean.getResult().get(0).getFlight());
                         }
+                        AppViewCanDoUtil.setBtnCanDo(true,tvHdxq);
                     }
                 }
             }
@@ -276,7 +297,6 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 if (resultBean.flag) {
                     if (null != resultBean.getResult()) {
                         goodsList = resultBean.getResult();
-
                         if (resultBean.getResult().size() == 1) {
                             tvHwpm.setText(resultBean.getResult().get(0).getGoodsName());
                             goodsNameId = resultBean.getResult().get(0).getId();
@@ -336,8 +356,37 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
         if (djNum > 0)
             registerNumber = djNum + "";
         Map<String, String> params = new HashMap<>();
-        if (null != awb)
-            params.put("awb", awb);
+        if (null == awb) {
+            ToastUtil.show(mContext.getString(R.string.VE180002));
+            return;
+        }
+
+        if (null == flightId) {
+            ToastUtil.show(mContext.getString(R.string.VE210003));
+            return;
+        }
+
+        if (TextUtils.isEmpty(tvHwpm.getText())) {
+            ToastUtil.show(mContext.getString(R.string.VE210004));
+            return;
+        }
+
+        if (TextUtils.isEmpty(tvDjjs.getText())) {
+            ToastUtil.show(mContext.getString(R.string.VE210006));
+            return;
+        }
+
+        if (TextUtils.isEmpty(tvFjdjdd.getText())) {
+            ToastUtil.show(mContext.getString(R.string.VE210005));
+            return;
+        }
+
+        if (TextUtils.isEmpty(tvHwfl.getText())) {
+            ToastUtil.show(mContext.getString(R.string.VE210008));
+            return;
+        }
+
+        params.put("awb", awb);
         if (null != flightId)
             params.put("flightId", flightId);
         if (null != goodsNameId)

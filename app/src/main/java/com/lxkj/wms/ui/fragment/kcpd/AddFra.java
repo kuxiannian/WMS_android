@@ -1,4 +1,4 @@
-package com.lxkj.wms.ui.fragment.ckjh;
+package com.lxkj.wms.ui.fragment.kcpd;
 
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import com.lxkj.wms.serialportapi.SoftDecodingAPI;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.ui.fragment.rksh.AddRkFra;
+import com.lxkj.wms.ui.fragment.rksh.HistoryRkFra;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +24,7 @@ import butterknife.Unbinder;
 /**
  * Created by kxn on 2020/4/25 0025.
  */
-public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImageListener, View.OnClickListener, SoftDecodingAPI.IBarCodeData {
+public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImageListener, View.OnClickListener, SoftDecodingAPI.IBarCodeData {
     @BindView(R.id.tvSglr)
     TextView tvSglr;
     Unbinder unbinder;
@@ -31,15 +32,16 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
     TextView tvOpen;
     private int djNum = 0;
 
+
     @Override
     public String getTitleName() {
-        return act.getString(R.string.xzckd);
+        return act.getString(R.string.modalDataTitleAdd);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fra_ckjh, container, false);
+        rootView = inflater.inflate(R.layout.fra_rksh, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         initView();
         return rootView;
@@ -61,7 +63,7 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
 
     @Override
     public void onRightClicked(View v) {
-        ActivitySwitcher.startFragment(act, HistoryCkFra.class);
+        ActivitySwitcher.startFragment(act, HistoryRkFra.class);
     }
 
     @Override
@@ -74,14 +76,13 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvSglr:
-                ActivitySwitcher.startFragment(act, AddCkFra.class);
+                act.setResult(2,new Intent().putExtra("barCode",""));
+                act.finishSelf();
+//                ActivitySwitcher.startFragment(act, AddRkFra.class);
                 break;
             case R.id.tvOpen:
                 isOpen = false;
-                //手持打开扫描
                 api.scan();
-
-                //平板打开扫描
                 Intent it=new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");
                 act.sendBroadcast(it);
                 // 添加剪贴板数据改变监听器
@@ -91,9 +92,11 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
                         if (!isOpen){
                             // 剪贴板中的数据被改变，此方法将被回调
                             String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("barCode",str.replace("\n",""));
-                            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("barCode",str.replace("\n",""));
+//                            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+                            act.setResult(2,new Intent().putExtra("barCode",str.replace("\n","")));
+                            act.finishSelf();
                             isOpen = true;
                         }
                     }
@@ -112,7 +115,7 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
         api.closeScan();
         Bundle bundle = new Bundle();
         bundle.putString("barCode",data.replace("\n",""));
-        ActivitySwitcher.startFragment(act, AddCkFra.class,bundle);
+        ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
     }
 
     @Override

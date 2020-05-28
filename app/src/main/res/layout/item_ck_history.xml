@@ -169,7 +169,11 @@
                     android:text="A类货物"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llconsignorPhone"
@@ -195,7 +199,11 @@
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
             </LinearLayout>
 
             <LinearLayout
@@ -222,7 +230,11 @@
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llupdaterName"
@@ -248,7 +260,11 @@
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llupdateDate"

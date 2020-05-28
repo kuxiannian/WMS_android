@@ -52,9 +52,9 @@ public class InventoryStockAdapter extends RecyclerView.Adapter<InventoryStockAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         if (!StringUtil.isEmpty(mDatas.get(position).getStartDate()))
-            holder.tvStartDate.setText(TimeUtil.stampToDate(mDatas.get(position).getStartDate(), "yyyy-MM-dd"));
+            holder.tvStartDate.setText(TimeUtil.stampToDate(mDatas.get(position).getStartDate(), "yyyy-MM-dd HH:mm:ss"));
         if (!StringUtil.isEmpty(mDatas.get(position).getEndDate()))
-            holder.tvEndDate.setText(TimeUtil.stampToDate(mDatas.get(position).getEndDate(), "yyyy-MM-dd"));
+            holder.tvEndDate.setText(TimeUtil.stampToDate(mDatas.get(position).getEndDate(), "yyyy-MM-dd HH:mm:ss"));
         holder.tvWmsWarehouseName.setText(getWmsWarehouseName(mDatas.get(position).getWmsWarehouseId()));
         if (null != mDatas.get(position).getState()) {
             switch (mDatas.get(position).getState()) {
@@ -69,7 +69,8 @@ public class InventoryStockAdapter extends RecyclerView.Adapter<InventoryStockAd
                     break;
             }
         }
-        holder.tvUpdaterId.setText(getWmsWarehouseName(mDatas.get(position).getUpdaterName()));
+        if (!StringUtil.isEmpty(mDatas.get(position).getUpdaterName()))
+            holder.tvUpdaterId.setText(getWmsWarehouseName(mDatas.get(position).getUpdaterName()));
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
             holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
 

@@ -22,9 +22,9 @@ public final class ToastUtil {
     }
 
     private static void showToast(final String title, final int dur) {
-//        if (mToast == null) {
+        if (mToast == null) {
             mToast = Toast.makeText(GlobalBeans.getSelf().getApp(), title, dur);
-//        }
+        }
         mToast.setText(title);
         mToast.show();
     }

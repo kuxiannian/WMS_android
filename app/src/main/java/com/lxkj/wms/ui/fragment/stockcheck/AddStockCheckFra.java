@@ -1,5 +1,6 @@
 package com.lxkj.wms.ui.fragment.stockcheck;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,11 +18,13 @@ import com.lxkj.wms.bean.BaseBean;
 import com.lxkj.wms.bean.DetailBean;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.bean.WareHouseBean;
+import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.ui.fragment.kcpd.AddFra;
 import com.lxkj.wms.ui.fragment.stockcheck.adapter.StockCheckDetailAdapter;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.ToastUtil;
@@ -322,6 +325,28 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
         unbinder.unbind();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 2) {
+            String barCode = data.getStringExtra("barCode");
+            if (null == barCode)
+                barCode = "";
+            new AddStockCheckDialog(mContext, warehouseDetailList, wmsWarehouseName, barCode, new AddStockCheckDialog.OnConfirmListener() {
+                @Override
+                public void onConfirm(String barCode, String wmsWarehouseDetailId) {
+                    AddStockCheckFra.this.barCode = barCode;
+                    AddStockCheckFra.this.wmsWarehouseDetailId = wmsWarehouseDetailId;
+                    WareHouseBean.ResultBean resultBean = new WareHouseBean.ResultBean();
+                    resultBean.setBarCode(barCode);
+                    resultBean.setWmsWarehouseId(bean.getWmsWarehouseId());
+                    resultBean.setWmsWarehouseDetailId(wmsWarehouseDetailId);
+                    list.add(resultBean);
+                    adapter.notifyDataSetChanged();
+                }
+            }).show();
+        }
+    }
 
     @Override
     public int rightText() {
@@ -331,19 +356,9 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
     @Override
     public void onRightClicked(View v) {
 
-        new AddStockCheckDialog(mContext, warehouseDetailList, wmsWarehouseName, new AddStockCheckDialog.OnConfirmListener() {
-            @Override
-            public void onConfirm(String barCode, String wmsWarehouseDetailId) {
-                AddStockCheckFra.this.barCode = barCode;
-                AddStockCheckFra.this.wmsWarehouseDetailId = wmsWarehouseDetailId;
-                WareHouseBean.ResultBean resultBean = new WareHouseBean.ResultBean();
-                resultBean.setBarCode(barCode);
-                resultBean.setWmsWarehouseId(bean.getWmsWarehouseId());
-                resultBean.setWmsWarehouseDetailId(wmsWarehouseDetailId);
-                list.add(resultBean);
-                adapter.notifyDataSetChanged();
-            }
-        }).show();
+        ActivitySwitcher.startFrgForResult(act, AddFra.class, 1);
+
+
     }
 
     @Override

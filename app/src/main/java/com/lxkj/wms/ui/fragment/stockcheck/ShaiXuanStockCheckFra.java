@@ -17,7 +17,6 @@ import com.lxkj.wms.event.StockCheckEvent;
 import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
-import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.DateUtil;
 import com.lxkj.wms.utils.ListUtil;
@@ -41,7 +40,7 @@ import okhttp3.Response;
 /**
  * Created by kxn on 2020/5/15 0015.
  */
-public class ShaiXuanStockCheckFra extends TitleFragment implements NaviActivity.NaviRigthImageListener, View.OnClickListener {
+public class ShaiXuanStockCheckFra extends TitleFragment implements  View.OnClickListener {
     Unbinder unbinder;
     @BindView(R.id.tvWmsWarehouseId)
     TextView tvWmsWarehouseId;
@@ -191,15 +190,6 @@ public class ShaiXuanStockCheckFra extends TitleFragment implements NaviActivity
     }
 
 
-    @Override
-    public int rightImg() {
-        return R.mipmap.ic_time;
-    }
-
-    @Override
-    public void onRightClicked(View v) {
-        act.finishSelf();
-    }
 
     @Override
     public void onDestroyView() {

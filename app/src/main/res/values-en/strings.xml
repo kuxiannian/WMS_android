@@ -64,7 +64,7 @@
     <string name="sglr">By Hand</string>
     <string name="hint_smq">Please Scan</string>
 
-    <string name="xzck">Add Put On Bill</string>
+    <string name="xzck">Add Output Bill</string>
     <string name="ckrq">Outbound date</string>
     <string name="thdbh">Bill of lading number</string>
     <string name="thr">Consignee</string>
@@ -345,5 +345,6 @@
     <string name="saveBtnText">Save draft</string>
     <string name="endBtnText">Complete inventory</string>
 
-
+    <string name="hbxq">Flight Detail</string>
+    <string name="xzckd">Add OutputBill</string>
 </resources>

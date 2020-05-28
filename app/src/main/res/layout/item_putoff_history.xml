@@ -91,7 +91,11 @@
                     android:text=""
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llGoodsName"
@@ -118,7 +122,11 @@
                     android:text=""
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llUpdaterName"
@@ -144,7 +152,11 @@
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llUpdateDate"

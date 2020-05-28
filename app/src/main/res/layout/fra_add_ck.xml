@@ -19,6 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -37,6 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -56,6 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -74,6 +77,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -92,6 +96,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -124,7 +129,24 @@
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:textSize="15sp"
+                android:text="@string/wmsWarehouseId"
+                android:textColor="@color/txt_lv6" />
+            <TextView
+                android:id="@+id/tvWmsWarehouseIdName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txt_lv6"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/txt_size_14"
+                android:padding="12dp"
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,24 +163,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="12dp"
-                android:textSize="15sp"
-                android:text="@string/spdh"
-                android:textColor="@color/txt_lv6" />
-            <TextView
-                android:id="@+id/tvWmsWarehouseIdName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/txt_lv6"
-                android:layout_marginTop="5dp"
-                android:textSize="@dimen/txt_size_14"
-                android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,7 +180,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -186,6 +191,23 @@
                 android:textColor="@color/txt_lv6" />
             <TextView
                 android:id="@+id/tvSuspicion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txt_lv6"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/txt_size_14"
+                android:padding="12dp"
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:textSize="15sp"
+                android:text="@string/suspicionProblem"
+                android:textColor="@color/txt_lv6" />
+            <EditText
+                android:id="@+id/etSuspicionProblem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
@@ -205,29 +227,13 @@
                 android:id="@+id/etRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/txt_lv6"
-                android:layout_marginTop="5dp"
-                android:textSize="@dimen/txt_size_14"
-                android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="12dp"
-                android:textSize="15sp"
-                android:text="@string/suspicionProblem"
-                android:textColor="@color/txt_lv6" />
-            <EditText
-                android:id="@+id/etSuspicionProblem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
                 android:textColor="@color/txt_lv6"
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
                 android:background="@drawable/bg_border_efefef_5dp"/>
+
         </LinearLayout>
     </ScrollView>
 

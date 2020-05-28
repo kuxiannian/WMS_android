@@ -20,7 +20,6 @@ import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.ui.fragment.ckjh.adapter.HistoryCkAdapter;
-import com.lxkj.wms.ui.fragment.rksh.ShaiXuanRkFra;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.StringUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -214,7 +213,7 @@ public class HistoryCkFra  extends TitleFragment implements NaviRightListener {
 
     @Override
     public void onRightClicked(View v) {
-        ActivitySwitcher.startFragment(act, ShaiXuanRkFra.class);
+        ActivitySwitcher.startFragment(act, ShaiXuanCkFra.class);
     }
 
     @Override

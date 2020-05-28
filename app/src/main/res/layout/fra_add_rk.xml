@@ -19,6 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -37,6 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -69,11 +71,12 @@
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -92,6 +95,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -103,11 +107,13 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/bg_border_efefef_5dp"
                 android:orientation="horizontal">
-                <TextView
+                <EditText
                     android:id="@+id/tvWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@null"
                     android:layout_weight="1"
+                    android:inputType="numberDecimal"
                     android:text=""
                     android:textColor="@color/txt_lv6"
                     android:textSize="@dimen/txt_size_14"
@@ -152,15 +158,16 @@
                 android:textSize="15sp"
                 android:text="@string/hwfl"
                 android:textColor="@color/txt_lv6" />
+
             <TextView
                 android:id="@+id/tvGoodsType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/txt_lv6"
                 android:layout_marginTop="5dp"
-                android:textSize="@dimen/txt_size_14"
+                android:background="@drawable/bg_border_efefef_unused_5dp"
                 android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
+                android:textColor="@color/txt_lv6"
+                android:textSize="@dimen/txt_size_14" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,14 +184,14 @@
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
-                android:text="@string/hwpm"
+                android:text="@string/goodsName"
                 android:textColor="@color/txt_lv6" />
             <TextView
                 android:id="@+id/tvGoodsName"
@@ -194,7 +201,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
-                android:background="@drawable/bg_border_efefef_5dp"/>
+                android:background="@drawable/bg_border_efefef_unused_5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

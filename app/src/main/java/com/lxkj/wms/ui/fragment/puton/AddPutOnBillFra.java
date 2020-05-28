@@ -25,7 +25,6 @@ import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.ui.fragment.rksh.HistoryRkFra;
 import com.lxkj.wms.utils.DateUtil;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
@@ -364,7 +363,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
     @Override
     public void onRightClicked(View v) {
-        ActivitySwitcher.startFragment(act, HistoryRkFra.class);
+        ActivitySwitcher.startFragment(act, HistoryPutOnFra.class);
     }
 
     @Override

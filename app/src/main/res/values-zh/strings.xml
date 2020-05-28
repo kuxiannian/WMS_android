@@ -65,11 +65,11 @@
     <string name="rkck">入库仓库</string>
     <string name="tph">托盘号</string>
     <string name="zhongliang">重量(kg)</string>
-    <string name="xzrk">新增入库</string>
+    <string name="xzrk">新增入库单</string>
     <string name="sglr">手工录入</string>
     <string name="hint_smq">打开扫描枪扫描</string>
 
-    <string name="xzck">新增出库</string>
+    <string name="xzck">新增出库单</string>
     <string name="ckrq">出库日期</string>
     <string name="thdbh">提货单编号</string>
     <string name="thr">提货人</string>
@@ -336,7 +336,7 @@
     <string name="number1_9999999">数字必须在1-9999999之间</string>
     <string name="decimal_2_Limit">数字必须在0.01-9999999.99之间</string>
     <string name="numberLimit">数字必须在0.001-9999999.999之间</string>
-    <string name="appAddTitle">新增上架作业</string>
+    <string name="appAddTitle">新增上架单</string>
 
     <string name="appPutOffTitle">新增下架作业</string>
     <string name="putOffDate">下架日期</string>
@@ -352,4 +352,7 @@
     <string name="Void">作废</string>
     <string name="saveBtnText">保存草稿</string>
     <string name="endBtnText">完成盘点</string>
+
+
+    <string name="xzckd">新增出库单</string>
 </resources>
