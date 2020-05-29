@@ -57,12 +57,13 @@ public class HistoryPutOffDetailFra extends TitleFragment {
         contentBean = ((SortingRegisterBean.ResultBean.ContentBean) getArguments().getSerializable("bean"));
         if (null != contentBean) {
             tvBarCode.setText(contentBean.getBarCode());
-            if (!StringUtil.isEmpty(contentBean.getPutOnDate()))
+            if (!StringUtil.isEmpty(contentBean.getPutOffDate()))
                 tvPutOffDate.setText(TimeUtil.stampToDate(contentBean.getPutOffDate(), "yyyy-MM-dd"));
             tvProductCode.setText(contentBean.getProductCode());
             tvGoodsName.setText(contentBean.getGoodsName());
             tvWmsWarehouseName.setText(contentBean.getWmsWarehouseName());
-            tvWmsWarehouseDetailName.setText(contentBean.getWmsWarehouseDetailIdName());
+            tvWmsWarehouseDetailName.setText(contentBean.getWmsWarehouseDetailName());
+            if (!StringUtil.isEmpty(contentBean.getRemarks()))
             tvRemarks.setText(contentBean.getRemarks());
         }
     }

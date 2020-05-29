@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
+import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.TimeUtil;
@@ -32,6 +33,8 @@ public class HistoryStockCheckDetailFra extends TitleFragment {
     TextView tvEndDate;
     @BindView(R.id.tvState)
     TextView tvState;
+    @BindView(R.id.tvSeeDetail)
+    TextView tvSeeDetail;
 
     @Override
     public String getTitleName() {
@@ -70,6 +73,16 @@ public class HistoryStockCheckDetailFra extends TitleFragment {
                 }
             }
         }
+
+        tvSeeDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("bean", contentBean);
+                bundle.putString("wmsWarehouseName", wmsWarehouseName);
+                ActivitySwitcher.startFragment(act,HistoryDetailFra.class,bundle);
+            }
+        });
     }
 
     @Override

@@ -24,11 +24,14 @@ import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.DateUtil;
+import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -191,6 +194,25 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                             break;
                         case "SE130002":
                             ToastUtil.show(String.format(getResources().getString(R.string.SE130002), etBarCode.getText().toString()));
+                            break;
+                        case "E000406":
+                            List<String> errors = new ArrayList<>();
+                            if (null != resultBean.result.ladingNumber)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.ladingNumber));
+                            if (null != resultBean.result.outputDate)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.outputDate));
+                            if (null != resultBean.result.wmsStockId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsStockId));
+                            if (null != resultBean.result.consignor)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.consignor));
+                            if (null != resultBean.result.barCode)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.barCode));
+                            if (null != resultBean.result.consignorPhone)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.consignorPhone));
+                            ToastUtil.showCustom(mContext,errors);
+                            break;
+                        default:
+                            ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
                             break;
                     }
                 }

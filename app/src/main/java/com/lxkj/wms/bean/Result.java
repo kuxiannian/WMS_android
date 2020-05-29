@@ -58,10 +58,20 @@ public class Result {
 
 
     public String palletNumber;//托盘号
-    public String  wmsWarehouseName;//仓库名称
+    public String wmsWarehouseName;//仓库名称
 
     public String wmsWarehouseDetailId;//下架的储位Id
     public String wmsWarehouseDetailName;//	下架的储位
 
+    public String inputDate;//入库日期
+    public String remarks;//备注
 
+    public String registerNumber;
+
+    public String ladingNumber;
+    public String outputDate;
+    public String consignor;
+    public String consignorPhone;
+    public String putOnDate;
+    public String putOffDate;
 }

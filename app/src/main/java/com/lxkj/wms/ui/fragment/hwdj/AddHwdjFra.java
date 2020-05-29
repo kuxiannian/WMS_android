@@ -360,7 +360,6 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
             ToastUtil.show(mContext.getString(R.string.VE180002));
             return;
         }
-
         if (null == flightId) {
             ToastUtil.show(mContext.getString(R.string.VE210003));
             return;
@@ -385,8 +384,8 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
             ToastUtil.show(mContext.getString(R.string.VE210008));
             return;
         }
-
-        params.put("awb", awb);
+        if (null != awb)
+            params.put("awb", awb);
         if (null != flightId)
             params.put("flightId", flightId);
         if (null != goodsNameId)
@@ -445,6 +444,22 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                             break;
                         case "SE210004":
                             ToastUtil.show(String.format(getResources().getString(R.string.SE210004), resultBean.result.alNumber, resultBean.result.canNumber));
+                            break;
+                        case "E000406":
+                            List<String> errors = new ArrayList<>();
+                            if (null != resultBean.result.goodsNameId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.goodsNameId));
+                            if (null != resultBean.result.wmsWarehouseId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseId));
+                            if (null != resultBean.result.wmsManifestId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsManifestId));
+                            if (null != resultBean.result.flightId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.flightId));
+                            if (null != resultBean.result.registerNumber)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.registerNumber));
+                            if (null != resultBean.result.goodsType)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.goodsType));
+                            ToastUtil.showCustom(mContext,errors);
                             break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);

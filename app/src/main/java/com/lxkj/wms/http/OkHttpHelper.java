@@ -327,7 +327,7 @@ public class OkHttpHelper {
                 } else {
                     try {
                         BaseBean baseBean = mGson.fromJson(resultStr, BaseBean.class);
-                        if (!baseBean.flag)
+                        if (!baseBean.flag && !baseBean.errorCode.equals("E000406"))
                             ShowErrorCodeUtil.showError(context, baseBean.errorCode);
                         else{
                             Object obj = mGson.fromJson(resultStr, callback.mType);

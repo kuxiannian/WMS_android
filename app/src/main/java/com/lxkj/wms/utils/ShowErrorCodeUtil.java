@@ -377,7 +377,206 @@ public class ShowErrorCodeUtil {
                 break;
 
 
+        }
+    }
+
+    public static String getErrorString(Context context, String errorCode) {
+        String error = "";
+        switch (errorCode) {
+            //分拣登记
+            case "VE210001":
+                error = context.getString(R.string.VE210001);
+                break;
+            case "VE210002":
+                error = context.getString(R.string.VE210002);
+                break;
+            case "VE210003":
+                error = context.getString(R.string.VE210003);
+                break;
+            case "VE210004":
+                error = context.getString(R.string.VE210004);
+                break;
+            case "VE210005":
+                error = context.getString(R.string.VE210005);
+                break;
+            case "VE210006":
+                error = context.getString(R.string.VE210006);
+                break;
+            case "VE210007":
+                error = context.getString(R.string.VE210007);
+                break;
+            case "VE210008":
+                error = context.getString(R.string.VE210008);
+                break;
+            case "VE210009":
+                error = context.getString(R.string.VE210008);
+                break;
+            case "VE210010":
+                error = context.getString(R.string.VE210008);
+                break;
+            case "VE210011":
+                error = context.getString(R.string.VE210008);
+                break;
+            //入库单
+            case "VE100001":
+                error = context.getString(R.string.VE100001);
+                break;
+            case "VE100002":
+                error = context.getString(R.string.VE100002);
+                break;
+            case "VE100003":
+                error = context.getString(R.string.VE100003);
+                break;
+            case "VE100004":
+                error = context.getString(R.string.VE100004);
+                break;
+            case "VE100005":
+                error = context.getString(R.string.VE100005);
+                break;
+            case "VE100006":
+                error =  context.getString(R.string.VE100006);
+                break;
+            case "VE100007":
+                error = context.getString(R.string.VE100007);
+                break;
+            case "VE100008":
+                error = context.getString(R.string.VE100008);
+                break;
+            case "VE100009":
+                error = context.getString(R.string.VE100009);
+                break;
+            case "VE100010":
+                error = context.getString(R.string.VE100010);
+                break;
+            //上架单
+            case "VE110001":
+                error = context.getString(R.string.VE110001);
+                break;
+            case "VE110002":
+                error = context.getString(R.string.VE110002);
+                break;
+            case "VE110003":
+                error = context.getString(R.string.VE110003);
+                break;
+            case "VE110004":
+                error = context.getString(R.string.VE110004);
+                break;
+            case "VE110005":
+                error = context.getString(R.string.VE110005);
+                break;
+            case "VE110006":
+                error = context.getString(R.string.VE110006);
+                break;
+            case "VE110007":
+                error = context.getString(R.string.VE110007);
+                break;
+            case "VE110008":
+                error = context.getString(R.string.VE110008);
+                break;
+            case "VE110009":
+                error = context.getString(R.string.VE110009);
+                break;
+            case "VE110010":
+                error = context.getString(R.string.VE110010);
+                break;
+            case "VE110011":
+                error = context.getString(R.string.VE110011);
+                break;
+            case "VE110012":
+                error = context.getString(R.string.VE110012);
+                break;
+            case "VE110013":
+                error = context.getString(R.string.VE110013);
+                break;
+            case "VE110014":
+                error = context.getString(R.string.VE110014);
+                break;
+            //下架单提示
+            case "VE120001":
+                error = context.getString(R.string.VE120001);
+                break;
+            case "VE120002":
+                error = context.getString(R.string.VE120002);
+                break;
+            case "VE120003":
+                error = context.getString(R.string.VE120003);
+                break;
+            case "VE120004":
+                error = context.getString(R.string.VE120004);
+                break;
+            case "VE120005":
+                error = context.getString(R.string.VE120005);
+                break;
+            case "VE120006":
+                error = context.getString(R.string.VE120006);
+                break;
+            case "VE120007":
+                error = context.getString(R.string.VE120007);
+                break;
+            case "VE120008":
+                error = context.getString(R.string.VE120008);
+                break;
+            //出库单
+            case "VE130001":
+                error = context.getString(R.string.VE130001);
+                break;
+            case "VE130002":
+                error = context.getString(R.string.VE130002);
+                break;
+            case "VE130003":
+                error = context.getString(R.string.VE130003);
+                break;
+            case "VE130004":
+                error = context.getString(R.string.VE130004);
+                break;
+            case "VE130005":
+                error = context.getString(R.string.VE130005);
+                break;
+            case "VE130006":
+                error = context.getString(R.string.VE130006);
+                break;
+            case "VE130007":
+                error = context.getString(R.string.VE130007);
+                break;
+            case "VE130008":
+                error = context.getString(R.string.VE130008);
+                break;
+            case "VE130009":
+                error = context.getString(R.string.VE130009);
+                break;
+            case "VE130010":
+                error = context.getString(R.string.VE130010);
+                break;
+            case "VE130011":
+                error = context.getString(R.string.VE130011);
+                break;
+            case "VE130012":
+                error = context.getString(R.string.VE130012);
+                break;
+            case "VE130013":
+                error = context.getString(R.string.VE130013);
+                break;
+            case "VE130014":
+                error = context.getString(R.string.VE130014);
+                break;
+            //盘点单
+            case "VE170001":
+                error = context.getString(R.string.VE170001);
+                break;
+            case "VE170002":
+                error = context.getString(R.string.VE170002);
+                break;
+            case "VE170003":
+                error = context.getString(R.string.VE170003);
+                break;
+            case "VE170004":
+                error = context.getString(R.string.VE170004);
+                break;
+            case "VE170005":
+                error = context.getString(R.string.VE170005);
+                break;
 
         }
+        return error;
     }
 }

@@ -28,6 +28,7 @@ import com.lxkj.wms.utils.DateUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -175,6 +176,20 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                             break;
                         case "SE120002":
                             ToastUtil.show(String.format(getResources().getString(R.string.SE110002), resultBean.result.code));
+                            break;
+                        case "E000406":
+                            List<String> errors = new ArrayList<>();
+                            if (null != resultBean.result.wmsWarehouseId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseId));
+                            if (null != resultBean.result.wmsStockId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsStockId));
+                            if (null != resultBean.result.putOffDate)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.putOffDate));
+                            if (null != resultBean.result.wmsWarehouseDetailId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseDetailId));
+                            if (null != resultBean.result.barCode)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.barCode));
+                            ToastUtil.showCustom(mContext,errors);
                             break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);

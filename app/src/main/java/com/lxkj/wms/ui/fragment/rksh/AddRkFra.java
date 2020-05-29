@@ -31,9 +31,11 @@ import com.lxkj.wms.utils.ToastUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -143,6 +145,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
             @Override
             public void onFailure(Request request, Exception e) {
             }
+
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (null != resultBean.result) {
@@ -152,6 +155,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
                 }
             }
+
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -209,6 +213,18 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                             break;
                         case "SE100009":
                             ToastUtil.show(String.format(getResources().getString(R.string.SE100009), barCode));
+                            break;
+                        case "E000406":
+                            List<String> errors = new ArrayList<>();
+                            if (null != resultBean.result.palletNumber)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.palletNumber));
+                            if (null != resultBean.result.barCode)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.barCode));
+                            if (null != resultBean.result.inputDate)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.inputDate));
+                            if (null != resultBean.result.weight)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.weight));
+                            ToastUtil.showCustom(mContext, errors);
                             break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
@@ -279,16 +295,23 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 else
                     djNum = 0;
                 djNum++;
-                tvWeight.setText(new BigDecimal(djNum+"").setScale(3, RoundingMode.FLOOR).toString());
+                tvWeight.setText(new BigDecimal(djNum + "").setScale(3, RoundingMode.FLOOR).toString());
                 break;
             case R.id.ivReduce:
                 if (!TextUtils.isEmpty(tvWeight.getText()))
-                    djNum = Integer.parseInt(tvWeight.getText().toString());
-                else
+                    djNum = Double.parseDouble(tvWeight.getText().toString());
+                else {
                     djNum = 0;
+
+                }
+
                 if (djNum > 0)
                     djNum--;
-                tvWeight.setText(new BigDecimal(djNum+"").setScale(3, RoundingMode.FLOOR).toString());
+
+                if (djNum > 0)
+                    tvWeight.setText(new BigDecimal(djNum + "").setScale(3, RoundingMode.FLOOR).toString());
+                else
+                    tvWeight.setText("");
                 break;
         }
     }

@@ -313,6 +313,23 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                         case "SE110002":
                             ToastUtil.show(String.format(getResources().getString(R.string.SE110002), resultBean.result.code));
                             break;
+
+                        case "E000406":
+                            List<String> errors = new ArrayList<>();
+                            if (null != resultBean.result.wmsStockId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsStockId));
+                            if (null != resultBean.result.wmsWarehouseId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseId));
+                            if (null != resultBean.result.putOnDate)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.putOnDate));
+                            if (null != resultBean.result.weight)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.weight));
+                            if (null != resultBean.result.wmsWarehouseDetailId)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseDetailId));
+                            if (null != resultBean.result.barCode)
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.barCode));
+                            ToastUtil.showCustom(mContext,errors);
+                            break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
                             break;

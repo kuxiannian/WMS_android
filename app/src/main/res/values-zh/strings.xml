@@ -253,7 +253,12 @@
     <string name="SE120002">条形码：%1$s，货物无库存信息可查，未入库</string>
     <string name="VE500003">储位编号不能为空</string>
 
-
+    //盘点点错误提示
+    <string name="VE170001">主键必须不能为空</string>
+    <string name="VE170002">仓库不能为空</string>
+    <string name="VE170003">仓库长度不能超过50</string>
+    <string name="VE170004">备注长度不能超过200</string>
+    <string name="VE170005">版本号不能为空</string>
 
     <string name="titleInfo">分拣管理</string>
     <string name="name">货物安检</string>
@@ -338,7 +343,7 @@
     <string name="numberLimit">数字必须在0.001-9999999.999之间</string>
     <string name="appAddTitle">新增上架单</string>
 
-    <string name="appPutOffTitle">新增下架作业</string>
+    <string name="appPutOffTitle">新增下架单</string>
     <string name="putOffDate">下架日期</string>
     <string name="wmsWarehouseId_putoff">下架的仓库</string>
     <string name="wmsWarehouseDetailId_putoff">下架的储位</string>
@@ -355,4 +360,15 @@
 
 
     <string name="xzckd">新增出库单</string>
+    <string name="appShowDetail">查看明细</string>
+    <string name="appShowHistoryDetail">历史查询明细</string>
+    <string name="wmsWarehouseIdActual">实际仓库</string>
+    <string name="wmsWarehouseDetailIdActual">实际储位</string>
+    <string name="diffFlag">差异</string>
+
+    <string name="ND">无差异</string>
+    <string name="DWS">仓库和储位有差异</string>
+    <string name="DS">储位有差异</string>
+    <string name="MI">遗漏盘点</string>
+    <string name="NIM">无库存匹配</string>
 </resources>

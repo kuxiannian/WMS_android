@@ -246,7 +246,12 @@
     <string name="SE120002">Bar code: %1$s, no inventory information can be checked for the goods, not in storage</string>
     <string name="VE500003">Storage slot number cannot be empty</string>
 
-
+    //盘点点错误提示
+    <string name="VE170001">Primary key must not be empty</string>
+    <string name="VE170002">Warehouse cannot be empty</string>
+    <string name="VE170003">Warehouse length cannot exceed 50</string>
+    <string name="VE170004">Remarks length cannot exceed 200</string>
+    <string name="VE170005">Version number cannot be empty</string>
 
     <string name="titleInfo">Cargo Distribution Management Module</string>
     <string name="name">Cargo security</string>
@@ -347,4 +352,15 @@
 
     <string name="hbxq">Flight Detail</string>
     <string name="xzckd">Add OutputBill</string>
+    <string name="appShowDetail">Show Detail</string>
+    <string name="appShowHistoryDetail">Detail</string>
+    <string name="wmsWarehouseIdActual">Actual warehouse</string>
+    <string name="wmsWarehouseDetailIdActual">Actual storage</string>
+    <string name="diffFlag">Difference</string>
+
+    <string name="ND">No difference</string>
+    <string name="DWS">Difference between warehouse and storage</string>
+    <string name="DS">Different storage</string>
+    <string name="MI">Missing inventory</string>
+    <string name="NIM">No inventory matching</string>
 </resources>

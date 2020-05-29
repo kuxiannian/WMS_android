@@ -51,6 +51,15 @@ public class WareHouseBean extends BaseBean{
         private String wmsWarehouseDetailId;//	页面填写的储位
         private String wmsWarehouseDetailIdActual;//	系统中所在的储位
         private String wmsWarehouseIdActual;//	系统中所在的仓库
+        private String checkDiff;
+
+        public String getCheckDiff() {
+            return checkDiff;
+        }
+
+        public void setCheckDiff(String checkDiff) {
+            this.checkDiff = checkDiff;
+        }
 
         public WmsWarehouseModelBean getWmsWarehouseModel() {
             return wmsWarehouseModel;

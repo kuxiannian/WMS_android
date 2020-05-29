@@ -92,10 +92,10 @@ public class InventoryStockAdapter extends RecyclerView.Adapter<InventoryStockAd
                     return wareHouseList.get(i).getName();
             }
 
-            return "";
+            return "-";
         }
 
-        return "";
+        return "-";
     }
 
     @Override

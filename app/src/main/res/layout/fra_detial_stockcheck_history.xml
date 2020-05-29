@@ -121,6 +121,13 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvSeeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                style="@style/button_stytle"
+                android:text="@string/appShowDetail"/>
         </LinearLayout>
 
     </ScrollView>

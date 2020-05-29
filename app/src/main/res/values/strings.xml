@@ -208,6 +208,12 @@
     <string name="SE130001">条形码：%1$s，货物没有进行下架，请先下架</string>
     <string name="SE130002">条形码：%1$s，货物无库存信息可查，已经不在库存中</string>
     <string name="SE130003">该货物有嫌疑，嫌疑问题栏位不能为空</string>
+    //盘点点错误提示
+    <string name="VE170001">主键必须不能为空</string>
+    <string name="VE170002">仓库不能为空</string>
+    <string name="VE170003">仓库长度不能超过50</string>
+    <string name="VE170004">备注长度不能超过200</string>
+    <string name="VE170005">版本号不能为空</string>
 
     //上架单错误提示
     <string name="VE110001">主键必须不能为空</string>
@@ -242,9 +248,6 @@
     <string name="SE120001">条形码：%1$s，货物并未上架，无法下架</string>
     <string name="SE120002">条形码：%1$s，货物无库存信息可查，未入库</string>
     <string name="VE500003">储位编号不能为空</string>
-
-
-
 
 
     <string name="titleInfo">分拣管理</string>
@@ -288,13 +291,11 @@
     <string name="wmsWarehouseId">出库仓库</string>
 
 
-
     <string name="CE100001">页面信息已过期，请刷新页面</string>
     <string name="CE100002">未知错误</string>
     <string name="CE100003">新增操作，主键必须为空</string>
     <string name="CE210004">未查询到此条形码相关的货物信息</string>
     <string name="CE210005">此条形码相关的货物未完成分拨配送或此条形码相关的货物已经完成分拨收货</string>
-
 
 
     <string name="goodsTypeA">A类货物</string>
@@ -341,7 +342,7 @@
     <string name="numberLimit">数字必须在0.001-9999999.999之间</string>
     <string name="appAddTitle">新增上架作业</string>
 
-    <string name="appPutOffTitle">新增下架作业</string>
+    <string name="appPutOffTitle">新增下架单</string>
     <string name="putOffDate">下架日期</string>
     <string name="wmsWarehouseId_putoff">下架的仓库</string>
     <string name="wmsWarehouseDetailId_putoff">下架的储位</string>
@@ -364,4 +365,17 @@
     <string name="VE210005">分拣登记地点不能为空</string>
     <string name="VE210003">航班不能为空</string>
     <string name="xzckd">新增出库单</string>
+    <string name="appShowDetail">查看明细</string>
+    <string name="appShowHistoryDetail">历史查询明细</string>
+    <string name="wmsWarehouseIdActual">实际仓库</string>
+    <string name="wmsWarehouseDetailIdActual">实际储位</string>
+    <string name="diffFlag">差异</string>
+
+
+    <string name="ND">无差异</string>
+    <string name="DWS">仓库和储位有差异</string>
+    <string name="DS">储位有差异</string>
+    <string name="MI">遗漏盘点</string>
+    <string name="NIM">无库存匹配</string>
+
 </resources>
