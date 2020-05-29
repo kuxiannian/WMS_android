@@ -76,7 +76,7 @@ public class OkHttpHelper {
                 .cookieJar(cookieJar)
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(false)
+                .retryOnConnectionFailure(true)
                 .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())//配置
                 .hostnameVerifier(SSLSocketClient.getHostnameVerifier())//配置
                 .build();
@@ -203,7 +203,7 @@ public class OkHttpHelper {
         Request.Builder builder = new Request.Builder()
                 .url(Url.IP + url)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
-                .addHeader("X-APP-UACCOUNT", AppConsts.account);
+                .addHeader("X-APP-UACCOUNT", AppConsts.account).addHeader("Connection", "close");
         if (methodType == HttpMethodType.POST) {
             RequestBody body = builderFormData(params);
             builder.post(body);

@@ -95,7 +95,15 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 
     private void initView() {
         barCode = getArguments().getString("barCode");
-
+        etBarCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    if (null != etBarCode && !TextUtils.isEmpty(etBarCode.getText()))
+                        findInfoByBarCode(etBarCode.getText().toString());
+                }
+            }
+        });
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,10 +123,6 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 tvProductCode.setText("");
                 tvWmsWarehouseIdName.setText("");
                 tvWeight.setText("");
-                if (!TextUtils.isEmpty(etBarCode.getText()))
-                    findInfoByBarCode(etBarCode.getText().toString());
-
-
             }
         });
         if (null != barCode)
@@ -140,19 +144,68 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     private void findInfoByBarCode(String barCode) {
         Map<String, String> params = new HashMap<>();
         params.put("barCode", barCode);
-        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCode, params, new SpotsCallBack<ResultBean>(mContext) {
+        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCode, params, new SpotsCallBack<String>(mContext) {
 
             @Override
             public void onFailure(Request request, Exception e) {
             }
 
             @Override
-            public void onSuccess(Response response, ResultBean resultBean) {
-                if (null != resultBean.result) {
-                    tvGoodsName.setText(resultBean.result.goodsName);
-                    tvGoodsType.setText(resultBean.result.goodsType);
-                    tvProductCode.setText(resultBean.result.productCode);
-                    tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
+                if (resultBean.flag) {
+                    if (null != resultBean.result) {
+                        tvGoodsName.setText(resultBean.result.goodsName);
+                        tvGoodsType.setText(ShowErrorCodeUtil.getGoodsType(mContext,resultBean.result.goodsType));
+                        tvProductCode.setText(resultBean.result.productCode);
+                        tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
+                    }
+                } else {
+                    etBarCode.setText("");
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "SE100001":
+                                errors.add(String.format(getResources().getString(R.string.SE100001), barCode));
+                                break;
+                            case "SE100002":
+                                errors.add(String.format(getResources().getString(R.string.SE100002), barCode));
+                                break;
+                            case "SE100003":
+                                errors.add(String.format(getResources().getString(R.string.SE100003), barCode));
+                                break;
+                            case "SE100004":
+                                errors.add(String.format(getResources().getString(R.string.SE100004), barCode));
+                                break;
+                            case "SE100005":
+                                errors.add(String.format(getResources().getString(R.string.SE100005), barCode));
+                                break;
+                            case "SE100007":
+                                errors.add(String.format(getResources().getString(R.string.SE100007), barCode));
+                                break;
+                            case "SE100008":
+                                errors.add(String.format(getResources().getString(R.string.SE100008), barCode));
+                                break;
+                            case "SE100009":
+                                errors.add(String.format(getResources().getString(R.string.SE100009), barCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    } else {
+                        List<String> errors = new ArrayList<>();
+                        switch (resultBean.errorCode) {
+                            case "SE100006":
+                                errors.add(getResources().getString(R.string.SE100006));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    }
                 }
             }
 
@@ -167,13 +220,13 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
      */
     private void addBillInput() {
         Map<String, String> params = new HashMap<>();
-        if (null != barCode)
-            params.put("barCode", barCode);
+        if (!TextUtils.isEmpty(etBarCode.getText()))
+            params.put("barCode", etBarCode.getText().toString());
         if (null != inputDate)
             params.put("inputDate", inputDate);
-        if (StringUtil.isEmpty(etPalletNumber.getText().toString()))
+        if (!StringUtil.isEmpty(etPalletNumber.getText().toString()))
             params.put("palletNumber", etPalletNumber.getText().toString());
-        if (StringUtil.isEmpty(tvWeight.getText().toString()))
+        if (!StringUtil.isEmpty(tvWeight.getText().toString()))
             params.put("weight", tvWeight.getText().toString());
         if (!TextUtils.isEmpty(etRemark.getText()))
             params.put("remarks", etRemark.getText().toString());
@@ -189,31 +242,39 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     ToastUtil.show(mContext.getResources().getString(R.string.seSave));
                     act.finishSelf();
                 } else {
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        switch (errorCode) {
+                            case "SE100001":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100001), barCode));
+                                break;
+                            case "SE100002":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100002), barCode));
+                                break;
+                            case "SE100003":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100003), barCode));
+                                break;
+                            case "SE100004":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100004), barCode));
+                                break;
+                            case "SE100005":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100005), barCode));
+                                break;
+                            case "SE100007":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100007), barCode));
+                                break;
+                            case "SE100008":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100008), barCode));
+                                break;
+                            case "SE100009":
+                                ToastUtil.show(String.format(getResources().getString(R.string.SE100009), barCode));
+                                break;
+                        }
+                    }
                     switch (resultBean.errorCode) {
-                        case "SE100001":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100001), barCode));
-                            break;
-                        case "SE100002":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100002), barCode));
-                            break;
-                        case "SE100003":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100003), barCode));
-                            break;
-                        case "SE100004":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100004), barCode));
-                            break;
-                        case "SE100005":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100005), barCode));
-                            break;
-                        case "SE100007":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100007), barCode));
-                            break;
-                        case "SE100008":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100008), barCode));
-                            break;
-                        case "SE100009":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE100009), barCode));
-                            break;
                         case "E000406":
                             List<String> errors = new ArrayList<>();
                             if (null != resultBean.result.palletNumber)

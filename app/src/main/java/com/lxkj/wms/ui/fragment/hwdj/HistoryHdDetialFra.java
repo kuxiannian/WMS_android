@@ -118,10 +118,20 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
             tvGoodsName.setText(contentBean.getGoodsName());
             tvRegisterNumber.setText(contentBean.getRegisterNumber());
             tvWmsWarehouseName.setText(contentBean.getWmsWarehouseName());
-            tvGoodsType.setText(contentBean.getGoodsType());
+            goodsType = contentBean.getGoodsType();
+            switch (goodsType) {
+                case "A":
+                    tvGoodsType.setText(R.string.goodsTypeA);
+                    break;
+                case "B":
+                    tvGoodsType.setText(R.string.goodsTypeB);
+                    break;
+                case "C":
+                    tvGoodsType.setText(R.string.goodsTypeC);
+                    break;
+            }
             awb = contentBean.getAwb();
             registerNumber = contentBean.getRegisterNumber();
-            goodsType = contentBean.getGoodsType();
             number = contentBean.getNumber();
             departureStation = contentBean.getDepartureStation();
             destinationStation = contentBean.getDestinationStation();
@@ -143,6 +153,7 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
 
     /**
      * 编辑数据接口
+     *
      * @param goodsType
      */
     private void updateSortingRegister(String goodsType) {

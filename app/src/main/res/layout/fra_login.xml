@@ -105,9 +105,9 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="@string/qsrmm"
-                android:text="abc123"
                 android:inputType="textPassword"
                 android:maxLength="12"
+                android:text="abc123"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textSize="14sp" />

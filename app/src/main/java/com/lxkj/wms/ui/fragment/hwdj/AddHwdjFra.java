@@ -152,9 +152,9 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 
             @Override
             public void afterTextChanged(Editable editable) {
-                AppViewCanDoUtil.setBtnCanDo(false,tvHdxq);
-                AppViewCanDoUtil.setCanDo(false,tvHangBan);
-                AppViewCanDoUtil.setCanDo(false,tvHwpm);
+                AppViewCanDoUtil.setBtnCanDo(false, tvHdxq);
+                AppViewCanDoUtil.setCanDo(false, tvHangBan);
+                AppViewCanDoUtil.setCanDo(false, tvHwpm);
                 wmsManifestId = null;
                 departureStation = null;
                 destinationStation = null;
@@ -165,12 +165,12 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 receiverAddress = null;
                 receiverPhone = null;
                 awb = null;
+                number = null;
                 tvHangBan.setText("");
                 tvHwpm.setText("");
-
-
-                if (!TextUtils.isEmpty(etAwb.getText()))
-                    findManifestByAwb(etAwb.getText().toString());
+                tvJs.setText("");
+//                if (!TextUtils.isEmpty(etAwb.getText()))
+//                    findManifestByAwb(etAwb.getText().toString());
             }
         });
         findWarehouseList();
@@ -233,8 +233,8 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     receiverPhone = resultBean.getResult().getReceiverPhone();
 
                     awb = awbStr;
-                    AppViewCanDoUtil.setCanDo(true,tvHangBan);
-                    AppViewCanDoUtil.setCanDo(true,tvHwpm);
+                    AppViewCanDoUtil.setCanDo(true, tvHangBan);
+                    AppViewCanDoUtil.setCanDo(true, tvHwpm);
                 }
             }
 
@@ -267,7 +267,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                             flightId = resultBean.getResult().get(0).getId();
                             tvHangBan.setText(resultBean.getResult().get(0).getFlight());
                         }
-                        AppViewCanDoUtil.setBtnCanDo(true,tvHdxq);
+                        AppViewCanDoUtil.setBtnCanDo(true, tvHdxq);
                     }
                 }
             }
@@ -436,7 +436,14 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
                 if (resultBean.flag) {
                     ToastUtil.show(mContext.getResources().getString(R.string.seSave));
-                    act.finishSelf();
+                    etAwb.setText("");
+                    tvDjjs.setText("");
+                    tvFjdjdd.setText("");
+                    tvHwfl.setText("");
+                    etRemark.setText("");
+                    tvHangBan.setText("");
+                    tvHwpm.setText("");
+                    tvJs.setText("");
                 } else {
                     switch (resultBean.errorCode) {
                         case "SE210003":
@@ -448,18 +455,18 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                         case "E000406":
                             List<String> errors = new ArrayList<>();
                             if (null != resultBean.result.goodsNameId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.goodsNameId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.goodsNameId));
                             if (null != resultBean.result.wmsWarehouseId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseId));
                             if (null != resultBean.result.wmsManifestId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsManifestId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsManifestId));
                             if (null != resultBean.result.flightId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.flightId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.flightId));
                             if (null != resultBean.result.registerNumber)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.registerNumber));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.registerNumber));
                             if (null != resultBean.result.goodsType)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.goodsType));
-                            ToastUtil.showCustom(mContext,errors);
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.goodsType));
+                            ToastUtil.showCustom(mContext, errors);
                             break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
@@ -537,7 +544,10 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 else
                     djNum = 0;
                 djNum++;
-                tvDjjs.setText(djNum + "");
+                if (djNum > 0)
+                    tvDjjs.setText(djNum + "");
+                else
+                    tvDjjs.setText("");
                 break;
             case R.id.ivReduce:
                 if (!TextUtils.isEmpty(tvDjjs.getText()))
@@ -546,7 +556,10 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     djNum = 0;
                 if (djNum > 0)
                     djNum--;
-                tvDjjs.setText(djNum + "");
+                if (djNum > 0)
+                    tvDjjs.setText(djNum + "");
+                else
+                    tvDjjs.setText("");
                 break;
             case R.id.tvHwfl:
                 SingleChooseDialog goodsTypeChooseDialog = new SingleChooseDialog(mContext, goodsTypeList, new SingleChooseDialog.OnItemClick() {

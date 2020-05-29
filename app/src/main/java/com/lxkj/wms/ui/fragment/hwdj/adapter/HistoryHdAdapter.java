@@ -68,7 +68,17 @@ public class HistoryHdAdapter extends RecyclerView.Adapter<HistoryHdAdapter.View
         holder.tvGoodsName.setText(mDatas.get(position).getGoodsName());
         holder.tvRegisterNumber.setText(mDatas.get(position).getRegisterNumber());
         holder.tvWmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
-        holder.tvGoodsType.setText(mDatas.get(position).getGoodsType());
+        switch (mDatas.get(position).getGoodsType()) {
+            case "A":
+                holder.tvGoodsType.setText(R.string.goodsTypeA);
+                break;
+            case "B":
+                holder.tvGoodsType.setText(R.string.goodsTypeB);
+                break;
+            case "C":
+                holder.tvGoodsType.setText(R.string.goodsTypeC);
+                break;
+        }
         if (mDatas.get(position).isOpen) {
             holder.llFjdjdd.setVisibility(View.VISIBLE);
             holder.llHwfl.setVisibility(View.VISIBLE);

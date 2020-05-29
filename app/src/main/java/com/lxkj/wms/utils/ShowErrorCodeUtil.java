@@ -8,6 +8,9 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.ui.activity.LoginAct;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by kxn on 2020/5/8 0008.
  */
@@ -578,5 +581,43 @@ public class ShowErrorCodeUtil {
 
         }
         return error;
+    }
+
+
+
+    public static Map<String, String> getErrorValue(String errorString){
+        Map<String,String> errorValuesMap = new HashMap<>();
+        if (errorString.contains("&")){
+            String[] errors = errorString.split("&");
+            for (int i = 0; i < errors.length; i++) {
+                String error = errors[i];
+                if (error.contains("=")){
+                   String[] errorValues = error.split("=");
+                    errorValuesMap.put(errorValues[0],errorValues[1]);
+                }
+            }
+        }else {
+            if (errorString.contains("=")){
+                String[] errorValues = errorString.split("=");
+                errorValuesMap.put(errorValues[0],errorValues[1]);
+            }
+        }
+        return errorValuesMap;
+    }
+
+    public static String getGoodsType(Context context,String goodsType){
+        String value = "";
+        switch (goodsType){
+            case "A":
+                value = context.getString(R.string.goodsTypeA);
+                break;
+            case "B":
+                value = context.getString(R.string.goodsTypeB);
+                break;
+            case "C":
+                value = context.getString(R.string.goodsTypeC);
+                break;
+        }
+        return value;
     }
 }
