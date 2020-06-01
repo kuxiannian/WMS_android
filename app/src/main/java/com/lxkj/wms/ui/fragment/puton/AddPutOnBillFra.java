@@ -18,8 +18,9 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.Gson;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.ResultBean;
-import com.lxkj.wms.bean.TopBean;
+import com.lxkj.wms.bean.WareHouseBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
+import com.lxkj.wms.http.BaseCallback;
 import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
@@ -104,7 +105,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
     private String remarks;//备注
     private String wmsStockId;//库存表ID
     private String wmsWarehouseId;//仓库Id
-    private List<TopBean.ResultBean> topList;//储位列表
+    private List<WareHouseBean.ResultBean> topList;//储位列表
     private double djNum = 0;
 
     public String getTitleName() {
@@ -122,6 +123,16 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
     private void initView() {
         barCode = getArguments().getString("barCode");
+        etBarCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    if (null != etBarCode && !TextUtils.isEmpty(etBarCode.getText()))
+                        findInfoByBarCodeBillPutOn(etBarCode.getText().toString());
+                }
+            }
+        });
+
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -136,8 +147,11 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(etBarCode.getText()))
-                    findInfoByBarCodeBillPutOn(etBarCode.getText().toString());
+                tvGoodsName.setText("");
+                tvPalletNumber.setText("");
+                tvProductCode.setText("");
+                wmsStockId = null;
+                wmsWarehouseId = null;
             }
         });
         etLength.addTextChangedListener(new TextWatcher() {
@@ -153,7 +167,6 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(etBarCode.getText()))
                     findTopByPriority();
             }
         });
@@ -170,7 +183,6 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(etBarCode.getText()))
                     findTopByPriority();
             }
         });
@@ -187,7 +199,6 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(etBarCode.getText()))
                     findTopByPriority();
             }
         });
@@ -218,21 +229,90 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
     private void findInfoByBarCodeBillPutOn(String barCode) {
         Map<String, String> params = new HashMap<>();
         params.put("barCode", barCode);
-        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillPutOn, params, new SpotsCallBack<ResultBean>(mContext) {
+        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillPutOn, params, new BaseCallback<String>() {
 
             @Override
             public void onFailure(Request request, Exception e) {
             }
 
             @Override
-            public void onSuccess(Response response, ResultBean resultBean) {
-                if (null != resultBean.result) {
-                    tvGoodsName.setText(resultBean.result.goodsName);
-                    tvPalletNumber.setText(resultBean.result.palletNumber);
-                    tvProductCode.setText(resultBean.result.productCode);
-                    wmsStockId = resultBean.result.wmsStockId;
-                    wmsWarehouseId = resultBean.result.wmsWarehouseId;
-                    findTopByPriority();
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
+                if (resultBean.flag) {
+                    if (null != resultBean.result) {
+                        tvGoodsName.setText(resultBean.result.goodsName);
+                        tvPalletNumber.setText(resultBean.result.palletNumber);
+                        tvProductCode.setText(resultBean.result.productCode);
+                        tvWmsWarehouseId.setText(resultBean.result.wmsWarehouseName);
+                        wmsStockId = resultBean.result.wmsStockId;
+                        wmsWarehouseId = resultBean.result.wmsWarehouseId;
+                        findWarehouseDetailList(wmsWarehouseId);
+                    }
+                } else {
+                    etBarCode.setText("");
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "SE110001":
+                                errors.add(String.format(getResources().getString(R.string.SE110001), barCode, errorValues.get("code")));
+                                break;
+                            case "SE110002":
+                                errors.add(String.format(getResources().getString(R.string.SE110002), barCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    } else {
+                        List<String> errors = new ArrayList<>();
+                        switch (resultBean.errorCode) {
+                            case "SE110003":
+                                errors.add(getResources().getString(R.string.SE110003));
+                                break;
+                            case "SE110004":
+                                errors.add(getResources().getString(R.string.SE110004));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(Response response, int code, Exception e) {
+            }
+        });
+    }
+
+    /**
+     * 查询储位列表接口
+     */
+    private void findWarehouseDetailList(String wmsWarehouseId) {
+        Map<String, String> params = new HashMap<>();
+        params.put("wmsWarehouseId", wmsWarehouseId);
+        params.put("state", "1");
+
+        OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseDetailList, params, new BaseCallback<WareHouseBean>() {
+            @Override
+            public void onFailure(Request request, Exception e) {
+            }
+
+            @Override
+            public void onSuccess(Response response, WareHouseBean resultBean) {
+                if (resultBean.flag) {
+                    if (null != resultBean.getResult()) {
+                        topList = resultBean.getResult();
+                        if (resultBean.getResult().size() == 1) {
+                            wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
+                            tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
+                        }
+                        tvWmsWarehouseDetailId.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
+                    }
                 }
             }
 
@@ -246,26 +326,24 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
      * 上架时输入长、宽、高自动分配储位接口
      */
     private void findTopByPriority() {
-        if (TextUtils.isEmpty(etLength.getText()) || TextUtils.isEmpty(etWidth.getText()) || TextUtils.isEmpty(etHeight.getText()) || null != wmsWarehouseId)
-            return;
+//        if (TextUtils.isEmpty(etLength.getText()) || TextUtils.isEmpty(etWidth.getText()) || TextUtils.isEmpty(etHeight.getText()) || null != wmsWarehouseId)
+//            return;
         Map<String, String> params = new HashMap<>();
         params.put("length", etLength.getText().toString());//长
         params.put("width", etWidth.getText().toString());//宽
         params.put("height", etHeight.getText().toString());//高
         params.put("wmsWarehouseId", wmsWarehouseId);//仓库ID
-        OkHttpHelper.getInstance().get_json(mContext, Url.findTopByPriority, params, new SpotsCallBack<TopBean>(mContext) {
-
+        OkHttpHelper.getInstance().get_json(mContext, Url.findTopByPriority, params, new SpotsCallBack<WareHouseBean>(mContext) {
 
             @Override
-            public void onSuccess(Response response, TopBean resultBean) {
+            public void onSuccess(Response response, WareHouseBean resultBean) {
                 if (resultBean.flag) {
-                    if (null != resultBean.getResult()) {
-                        topList = resultBean.getResult();
-                        if (resultBean.getResult().size() == 1) {
-                            wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
-                            tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
-                        }
+                    topList = resultBean.getResult();
+                    if (resultBean.getResult().size() == 1) {
+                        wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
+                        tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
                     }
+                    tvWmsWarehouseDetailId.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
                 }
             }
 
@@ -280,17 +358,17 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
      */
     private void addBillPutOn() {
         Map<String, String> params = new HashMap<>();
-        if (null != barCode)
-            params.put("barCode", barCode);
+        if (!StringUtil.isEmpty(etBarCode.getText().toString()))
+            params.put("barCode", etBarCode.getText().toString());
         if (null != putOnDate)
             params.put("putOnDate", putOnDate);
-        if (StringUtil.isEmpty(etWeight.getText().toString()))
+        if (!StringUtil.isEmpty(etWeight.getText().toString()))
             params.put("weight", etWeight.getText().toString());
-        if (StringUtil.isEmpty(etHeight.getText().toString()))
-            params.put("length", etHeight.getText().toString());
-        if (StringUtil.isEmpty(etHeight.getText().toString()))
-            params.put("width", etHeight.getText().toString());
-        if (StringUtil.isEmpty(etHeight.getText().toString()))
+        if (!StringUtil.isEmpty(etLength.getText().toString()))
+            params.put("length", etLength.getText().toString());
+        if (!StringUtil.isEmpty(etWidth.getText().toString()))
+            params.put("width", etWidth.getText().toString());
+        if (!StringUtil.isEmpty(etHeight.getText().toString()))
             params.put("height", etHeight.getText().toString());
         if (null != wmsWarehouseDetailId)
             params.put("wmsWarehouseDetailId", wmsWarehouseDetailId);
@@ -298,37 +376,47 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
             params.put("remarks", etRemark.getText().toString());
         if (null != wmsStockId)
             params.put("wmsStockId", wmsStockId);
+        if (null != wmsWarehouseId)
+        params.put("wmsWarehouseId", wmsWarehouseId);//仓库ID
         OkHttpHelper.getInstance().post_json(mContext, Url.addBillPutOn, params, new SpotsCallBack<String>(mContext) {
             @Override
             public void onSuccess(Response response, String result) {
                 ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
                 if (resultBean.flag) {
                     ToastUtil.show(mContext.getResources().getString(R.string.seSave));
-                    act.finishSelf();
+                    etBarCode.setText("");
+                    etHeight.setText("");
+                    etLength.setText("");
+                    etRemark.setText("");
+                    etWeight.setText("");
+                    etWidth.setText("");
+                    tvGoodsName.setText("");
+                    tvPalletNumber.setText("");
+                    tvProductCode.setText("");
+                    tvPutOnDate.setText("");
+                    tvWmsWarehouseDetailId.setText("");
+                    tvWmsWarehouseId.setText("");
+                    putOnDate = null;
+                    wmsStockId = null;
+                    wmsWarehouseId = null;
+                    wmsWarehouseDetailId = null;
                 } else {
                     switch (resultBean.errorCode) {
-                        case "SE110001":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE110001), resultBean.result.barCod, resultBean.result.code));
-                            break;
-                        case "SE110002":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE110002), resultBean.result.code));
-                            break;
-
                         case "E000406":
                             List<String> errors = new ArrayList<>();
                             if (null != resultBean.result.wmsStockId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsStockId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsStockId));
                             if (null != resultBean.result.wmsWarehouseId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseId));
                             if (null != resultBean.result.putOnDate)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.putOnDate));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.putOnDate));
                             if (null != resultBean.result.weight)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.weight));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.weight));
                             if (null != resultBean.result.wmsWarehouseDetailId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseDetailId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseDetailId));
                             if (null != resultBean.result.barCode)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.barCode));
-                            ToastUtil.showCustom(mContext,errors);
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.barCode));
+                            ToastUtil.showCustom(mContext, errors);
                             break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);

@@ -23,12 +23,15 @@ public class StockCheckDetailAdapter extends RecyclerView.Adapter<StockCheckDeta
     protected Context mContext;
     protected List<WareHouseBean.ResultBean> mDatas;
     protected LayoutInflater mInflater;
+
     private List<WareHouseBean.ResultBean> wareHouseList;
     private List<WareHouseBean.ResultBean> warehouseDetailList;
-    OnDeleteListener onDeleteListener;
+    OnDoListener onDoListener;
 
-    public interface OnDeleteListener {
+    public interface OnDoListener {
         void onDelete(int position);
+
+        void onEdit(int positon);
     }
 
     public StockCheckDetailAdapter(Context mContext, List<WareHouseBean.ResultBean> mDatas) {
@@ -47,8 +50,8 @@ public class StockCheckDetailAdapter extends RecyclerView.Adapter<StockCheckDeta
         notifyDataSetChanged();
     }
 
-    public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
-        this.onDeleteListener = onDeleteListener;
+    public void setOnDeleteListener(OnDoListener onDoListener) {
+        this.onDoListener = onDoListener;
     }
 
 
@@ -65,8 +68,15 @@ public class StockCheckDetailAdapter extends RecyclerView.Adapter<StockCheckDeta
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (null != onDeleteListener)
-                    onDeleteListener.onDelete(position);
+                if (null != onDoListener)
+                    onDoListener.onDelete(position);
+            }
+        });
+        holder.ivEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (null != onDoListener)
+                    onDoListener.onEdit(position);
             }
         });
     }
@@ -108,6 +118,8 @@ public class StockCheckDetailAdapter extends RecyclerView.Adapter<StockCheckDeta
         TextView tvWmsWarehouseDetailId;
         @BindView(R.id.ivDelete)
         ImageView ivDelete;
+        @BindView(R.id.ivEdit)
+        ImageView ivEdit;
 
         public ViewHolder(View itemView) {
             super(itemView);

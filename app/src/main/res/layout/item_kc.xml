@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="AWM"
+                    android:text="AWB"
                     android:textColor="@color/txt_lv6"
                     android:textSize="16sp" />
 

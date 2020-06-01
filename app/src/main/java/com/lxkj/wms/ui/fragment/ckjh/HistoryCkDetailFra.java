@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.TimeUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +65,6 @@ public class HistoryCkDetailFra extends TitleFragment {
         contentBean = ((SortingRegisterBean.ResultBean.ContentBean) getArguments().getSerializable("bean"));
         if (null != contentBean) {
             tvbarCode.setText(contentBean.getBarCode());
-            tvoutputDate.setText(contentBean.getOutputDate());
             tvladingNumber.setText(contentBean.getLadingNumber());
             tvconsignor.setText(contentBean.getConsignor());
             tvconsignorPhone.setText(contentBean.getConsignorPhone());
@@ -75,6 +75,31 @@ public class HistoryCkDetailFra extends TitleFragment {
             tvsuspicion.setText(contentBean.getSuspicion());
             tvsuspicionProblem.setText(contentBean.getSuspicionProblem());
             tvremarks.setText(contentBean.getRemarks());
+
+            if (null != contentBean.getSuspicion()) {
+                switch (contentBean.getSuspicion()) {
+                    case "1":
+                        tvsuspicion.setText(mContext.getString(R.string.suspicionY));
+                        break;
+                    default:
+                        tvsuspicion.setText(mContext.getString(R.string.suspicionN));
+                        break;
+                }
+            }
+
+            switch (contentBean.getGoodsType()) {
+                case "A":
+                    tvGoodsType.setText(R.string.goodsTypeA);
+                    break;
+                case "B":
+                    tvGoodsType.setText(R.string.goodsTypeB);
+                    break;
+                case "C":
+                    tvGoodsType.setText(R.string.goodsTypeC);
+                    break;
+            }
+            tvoutputDate.setText(TimeUtil.stampToDate(contentBean.getOutputDate(), "yyyy-MM-dd"));
+
         }
     }
 

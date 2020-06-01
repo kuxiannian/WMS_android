@@ -31,6 +31,7 @@ public class PutOnAdapter extends RecyclerView.Adapter<PutOnAdapter.ViewHolder> 
     protected LayoutInflater mInflater;
 
 
+
     public PutOnAdapter(Context mContext, List<SortingRegisterBean.ResultBean.ContentBean> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
@@ -48,11 +49,15 @@ public class PutOnAdapter extends RecyclerView.Adapter<PutOnAdapter.ViewHolder> 
         holder.tvBarCode.setText(mDatas.get(position).getBarCode());
         holder.tvWmsWarehouseDetailIdName.setText(mDatas.get(position).getWmsWarehouseDetailIdName());
         if (!StringUtil.isEmpty(mDatas.get(position).getPutOnDate()))
-            holder.tvPutOnDate.setText(TimeUtil.stampToDate(mDatas.get(position).getPutOnDate(),"yyyy-MM-dd"));
+            holder.tvPutOnDate.setText(TimeUtil.stampToDate(mDatas.get(position).getPutOnDate(), "yyyy-MM-dd"));
         holder.tvPalletNumber.setText(mDatas.get(position).getPalletNumber());
         holder.tvProductCode.setText(mDatas.get(position).getProductCode());
         holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
-        holder.tvUpdateDate.setText(mDatas.get(position).getUpdateDate());
+        holder.tvWmsWarehouseIdName.setText(mDatas.get(position).getWmsWarehouseIdName());
+        holder.tvWeight.setText(mDatas.get(position).getWeight());
+
+        if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
 
         holder.ivZk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +106,10 @@ public class PutOnAdapter extends RecyclerView.Adapter<PutOnAdapter.ViewHolder> 
         TextView tvWmsWarehouseDetailIdName;
         @BindView(R.id.tvPutOnDate)
         TextView tvPutOnDate;
+        @BindView(R.id.tvWmsWarehouseIdName)
+        TextView tvWmsWarehouseIdName;
+        @BindView(R.id.tvWeight)
+        TextView tvWeight;
         @BindView(R.id.tvPalletNumber)
         TextView tvPalletNumber;
         @BindView(R.id.llPalletNumber)

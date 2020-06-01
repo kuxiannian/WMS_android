@@ -112,7 +112,7 @@ public class Url {
     //分页查询数据接口
     public static String findBillPutOffPage =  "/wms/billPutOff/findBillPutOffPage";
     //根据条形码查询所需相关信息接口
-    public static String findInfoByBarCodeBillPutOff =  "wms/billPutOff/findInfoByBarCode";
+    public static String findInfoByBarCodeBillPutOff =  "/wms/billPutOff/findInfoByBarCode";
     //新增数据接口
     public static String addBillPutOff =  "/wms/billPutOff/addBillPutOff";
     //查询仓库列表接口

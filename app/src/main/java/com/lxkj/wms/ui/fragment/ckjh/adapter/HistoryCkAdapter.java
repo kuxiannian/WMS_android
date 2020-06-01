@@ -14,6 +14,7 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.ui.fragment.ckjh.HistoryCkDetailFra;
+import com.lxkj.wms.utils.TimeUtil;
 
 import java.util.List;
 
@@ -44,15 +45,26 @@ public class HistoryCkAdapter extends RecyclerView.Adapter<HistoryCkAdapter.View
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvbarCode.setText(mDatas.get(position).getBarCode());
-        holder.tvgoodsType.setText(mDatas.get(position).getGoodsType());
-        holder.tvoutputDate.setText(mDatas.get(position).getOutputDate());
         holder.tvwmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
         holder.tvladingNumber.setText(mDatas.get(position).getLadingNumber());
         holder.tvconsignor.setText(mDatas.get(position).getConsignor());
         holder.tvconsignorPhone.setText(mDatas.get(position).getConsignorPhone());
         holder.tvgoodsName.setText(mDatas.get(position).getGoodsName());
         holder.tvupdaterName.setText(mDatas.get(position).getUpdaterName());
-        holder.tvupdateDate.setText(mDatas.get(position).getUpdateDate());
+
+        switch (mDatas.get(position).getGoodsType()) {
+            case "A":
+                holder.tvgoodsType.setText(R.string.goodsTypeA);
+                break;
+            case "B":
+                holder.tvgoodsType.setText(R.string.goodsTypeB);
+                break;
+            case "C":
+                holder.tvgoodsType.setText(R.string.goodsTypeC);
+                break;
+        }
+        holder.tvoutputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getOutputDate(), "yyyy-MM-dd"));
+        holder.tvupdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
 
         holder.ivZk.setOnClickListener(new View.OnClickListener() {
             @Override

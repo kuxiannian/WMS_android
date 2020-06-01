@@ -38,7 +38,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:textColor="@color/txt_lv5"
-            android:text="确定"/>
+            android:text="@string/confirm"/>
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -52,7 +52,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:textColor="@color/txt_lv1"
-            android:text="取消"/>
+            android:text="@string/cancel"/>
 
 
 

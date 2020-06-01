@@ -29,6 +29,7 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
     protected Context mContext;
     protected List<SortingRegisterBean.ResultBean.ContentBean> mDatas;
     protected LayoutInflater mInflater;
+
     private List<WareHouseBean.ResultBean> wareHouseList;
 
 
@@ -55,8 +56,15 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
         if (!StringUtil.isEmpty(mDatas.get(position).getEndDate()))
             holder.tvEndDate.setText(TimeUtil.stampToDate(mDatas.get(position).getEndDate(), "yyyy-MM-dd"));
         holder.tvWmsWarehouseName.setText(getWmsWarehouseName(mDatas.get(position).getWmsWarehouseId()));
-        if (null != mDatas.get(position).getState()){
-            switch (mDatas.get(position).getState()){
+        if (!StringUtil.isEmpty(mDatas.get(position).getUpdaterName()))
+            holder.tvUpdaterId.setText(mDatas.get(position).getUpdaterName());
+        if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
+        if (!StringUtil.isEmpty(mDatas.get(position).getRemarks()))
+            holder.tvRemarks.setText(mDatas.get(position).getRemarks());
+
+        if (null != mDatas.get(position).getState()) {
+            switch (mDatas.get(position).getState()) {
                 case "1": //盘点中
                     holder.tvState.setText(mContext.getString(R.string.Inventory));
                     break;
@@ -75,14 +83,14 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("bean", mDatas.get(position));
-                bundle.putString("wmsWarehouseName",  holder.tvWmsWarehouseName.getText().toString());
+                bundle.putString("wmsWarehouseName", holder.tvWmsWarehouseName.getText().toString());
                 ActivitySwitcher.startFragment(mContext, HistoryStockCheckDetailFra.class, bundle);
             }
         });
     }
 
     private String getWmsWarehouseName(String wmsWarehouseId) {
-        if (null != wareHouseList){
+        if (null != wareHouseList) {
             for (int i = 0; i < wareHouseList.size(); i++) {
                 if (wareHouseList.get(i).getId().equals(wmsWarehouseId))
                     return wareHouseList.get(i).getName();
@@ -109,6 +117,12 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
         TextView tvEndDate;
         @BindView(R.id.tvState)
         TextView tvState;
+        @BindView(R.id.tvUpdaterId)
+        TextView tvUpdaterId;
+        @BindView(R.id.tvUpdateDate)
+        TextView tvUpdateDate;
+        @BindView(R.id.tvRemarks)
+        TextView tvRemarks;
         @BindView(R.id.ivDetail)
         ImageView ivDetail;
 

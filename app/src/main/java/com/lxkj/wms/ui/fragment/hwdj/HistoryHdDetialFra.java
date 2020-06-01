@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.BaseBean;
+import com.lxkj.wms.bean.ResultBean;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.bean.SortingRegisterDetailBean;
 import com.lxkj.wms.biz.EventCenter;
@@ -18,6 +20,7 @@ import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.HangDanDetailDialog;
 import com.lxkj.wms.view.HintDialog;
@@ -183,19 +186,27 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
         Map<String, String> params = new HashMap<>();
         params.put("id", contentBean.getId());
         params.put("version", contentBean.getVersion());
-        OkHttpHelper.getInstance().post_json(mContext, Url.deleteSortingRegister, params, new SpotsCallBack<BaseBean>(mContext) {
-
+        OkHttpHelper.getInstance().post_json(mContext, Url.deleteSortingRegister, params, new SpotsCallBack<String>(mContext) {
             @Override
-            public void onFailure(Request request, Exception e) {
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
+                if (resultBean.flag) {
+                    ToastUtil.show(mContext.getResources().getString(R.string.seDelete));
+                    eventCenter.sendType(EventCenter.EventType.EVT_DELETE);
+                    act.finishSelf();
+                } else {
+                    switch (resultBean.errorCode) {
+                        case "SE210003":
+                            List<String> errors = new ArrayList<>();
+                            errors.add(String.format(getResources().getString(R.string.SE210003), resultBean.result.barCod));
+                            ToastUtil.showCustom(mContext, errors);
+                            break;
+                        default:
+                            ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
+                            break;
+                    }
+                }
             }
-
-            @Override
-            public void onSuccess(Response response, BaseBean resultBean) {
-                ToastUtil.show(mContext.getResources().getString(R.string.seDelete));
-                eventCenter.sendType(EventCenter.EventType.EVT_DELETE);
-                act.finishSelf();
-            }
-
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -209,11 +220,9 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
         Map<String, String> params = new HashMap<>();
         params.put("sortingRegisterId", contentBean.getId());
         OkHttpHelper.getInstance().get_json(mContext, Url.findWmsSortingRegisterDetailList, params, new BaseCallback<SortingRegisterDetailBean>() {
-
             @Override
             public void onFailure(Request request, Exception e) {
             }
-
             @Override
             public void onSuccess(Response response, SortingRegisterDetailBean resultBean) {
                 if (resultBean.flag) {
@@ -224,7 +233,6 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
                     }
                 }
             }
-
             @Override
             public void onError(Response response, int code, Exception e) {
             }

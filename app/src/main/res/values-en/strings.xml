@@ -12,17 +12,18 @@
     <string name="sjzy">BILLPUTON</string>
     <string name="xjzy">BILLPUTOFF</string>
 
-    <string name="xzhwdj">appAddTitle</string>
+    <string name="xzhwdj">Add Sorting Register</string>
     <string name="hangban">Flight</string>
     <string name="hwpm">Goods name(package, volume or size)</string>
     <string name="jianshu">Number</string>
     <string name="djjs">Regist number</string>
     <string name="fjdjdd">Sorting registration place</string>
-    <string name="hwfl">goodsType</string>
+    <string name="hwfl">Cargo type</string>
     <string name="qxz">Please select</string>
     <string name="hdxq">Manifest Information</string>
     <string name="remarks">Remark</string>
     <string name="baocun">Save</string>
+    <string name="save">Save</string>
 
     <string name="sfz">Departure, first carrier address</string>
     <string name="mdd">Destination</string>
@@ -246,12 +247,23 @@
     <string name="SE120002">Bar code: %1$s, no inventory information can be checked for the goods, not in storage</string>
     <string name="VE500003">Storage slot number cannot be empty</string>
 
-    //盘点点错误提示
-    <string name="VE170001">Primary key must not be empty</string>
-    <string name="VE170002">Warehouse cannot be empty</string>
-    <string name="VE170003">Warehouse length cannot exceed 50</string>
-    <string name="VE170004">Remarks length cannot exceed 200</string>
-    <string name="VE170005">Version number cannot be empty</string>
+    //盘点单错误提示
+    <string name="VE170001">主键必须不能为空</string>
+    <string name="VE170002">仓库不能为空</string>
+    <string name="VE170003">仓库长度不能超过50</string>
+    <string name="VE170004">备注长度不能超过200</string>
+    <string name="VE170005">版本号不能为空</string>
+    <string name="SE170001">该仓库存在进行中的盘点任务</string>
+    <string name="SE170002">盘点单已经盘点结束，无法作废</string>
+    <string name="SE170003">盘点单已经作废，无法作废</string>
+    <string name="VE200001">第%1$s行，主键必须不能为空</string>
+    <string name="VE200002">第%1$s行，条形码必须不能为空</string>
+    <string name="VE200003">第%1$s行，条形码长度不能超过50</string>
+    <string name="VE200004">第%1$s行，仓库不能为空</string>
+    <string name="VE200005">第%1$s行，仓库长度不能超过50</string>
+    <string name="VE200006">第%1$s行，储位长度不能超过50</string>
+    <string name="VE200007">第%1$s行，备注长度不能超过200</string>
+    <string name="VE200008">第%1$s行，版本号不能为空</string>
 
     <string name="titleInfo">Cargo Distribution Management Module</string>
     <string name="name">Cargo security</string>

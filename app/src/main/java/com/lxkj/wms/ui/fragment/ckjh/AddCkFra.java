@@ -90,6 +90,16 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 
     private void initView() {
         barCode = getArguments().getString("barCode");
+        etBarCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    if (null != etBarCode && !TextUtils.isEmpty(etBarCode.getText()))
+                        findInfoByBarCode(etBarCode.getText().toString());
+                }
+            }
+        });
+
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,8 +114,13 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(etBarCode.getText()))
-                    findInfoByBarCode(etBarCode.getText().toString());
+//                if (!TextUtils.isEmpty(etBarCode.getText()))
+//                    findInfoByBarCode(etBarCode.getText().toString());
+
+                tvGoodsName.setText("");
+                tvGoodsType.setText("");
+                tvProductCode.setText("");
+                tvWmsWarehouseIdName.setText("");
             }
         });
         if (null != barCode)
@@ -124,28 +139,71 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     private void findInfoByBarCode(String barCode) {
         Map<String, String> params = new HashMap<>();
         params.put("barCode", barCode);
-        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillOut, params, new SpotsCallBack<ResultBean>(mContext) {
+        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillOut, params, new SpotsCallBack<String>(mContext) {
 
             @Override
             public void onFailure(Request request, Exception e) {
             }
 
             @Override
-            public void onSuccess(Response response, ResultBean resultBean) {
-                if (null != resultBean.result) {
-                    tvGoodsName.setText(resultBean.result.goodsName);
-                    tvGoodsType.setText(resultBean.result.goodsType);
-                    tvProductCode.setText(resultBean.result.productCode);
-                    tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
-                    wmsStockId = resultBean.result.wmsStockId;
-                    if (null != resultBean.result.suspicion) {
-                        if (resultBean.result.suspicion.equals("1")) {//有嫌疑
-                            tvSuspicion.setText(mContext.getString(R.string.suspicionY));
-                            etSuspicionProblem.setEnabled(false);
-                        } else {//无嫌疑
-                            tvSuspicion.setText(mContext.getString(R.string.suspicionN));
-                            etSuspicionProblem.setEnabled(true);
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
+                if (resultBean.flag) {
+                    if (null != resultBean.result) {
+                        tvGoodsName.setText(resultBean.result.goodsName);
+                        tvGoodsType.setText(resultBean.result.goodsType);
+                        switch (resultBean.result.goodsType) {
+                            case "A":
+                                tvGoodsType.setText(R.string.goodsTypeA);
+                                break;
+                            case "B":
+                               tvGoodsType.setText(R.string.goodsTypeB);
+                                break;
+                            case "C":
+                                tvGoodsType.setText(R.string.goodsTypeC);
+                                break;
                         }
+                        tvProductCode.setText(resultBean.result.productCode);
+                        tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
+                        wmsStockId = resultBean.result.wmsStockId;
+                        if (null != resultBean.result.suspicion) {
+                            if (resultBean.result.suspicion.equals("1")) {//有嫌疑
+                                tvSuspicion.setText(mContext.getString(R.string.suspicionY));
+                                etSuspicionProblem.setEnabled(true);
+                            } else {//无嫌疑
+                                tvSuspicion.setText(mContext.getString(R.string.suspicionN));
+                                etSuspicionProblem.setEnabled(false);
+                                etSuspicionProblem.setBackgroundResource(R.drawable.bg_border_efefef_unused_5dp);
+                            }
+                        }
+                    }
+                } else {
+                    etBarCode.setText("");
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "SE130001":
+                                errors.add(String.format(getResources().getString(R.string.SE130001), barCode));
+                                break;
+                            case "SE130002":
+                                errors.add(String.format(getResources().getString(R.string.SE130002), barCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    } else {
+                        List<String> errors = new ArrayList<>();
+                        switch (resultBean.errorCode) {
+                            case "SE130003":
+                                errors.add(getResources().getString(R.string.SE130003));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
                     }
                 }
             }
@@ -162,6 +220,8 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 
     private void addBillOutput() {
         Map<String, String> params = new HashMap<>();
+        if (!TextUtils.isEmpty(etBarCode.getText().toString()))
+            params.put("barCode", etBarCode.getText().toString());
         if (null != outputDate)
             params.put("outputDate", outputDate);
         if (null != wmsStockId)

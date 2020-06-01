@@ -87,22 +87,32 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
 
     private void initView() {
         barCode = getArguments().getString("barCode");
+
+        etBarCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    if (null != etBarCode && !TextUtils.isEmpty(etBarCode.getText()))
+                        findInfoByBarCodeBillPutOff(etBarCode.getText().toString());
+                }
+            }
+        });
         //条形码输入框 输入监听
         etBarCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!TextUtils.isEmpty(etBarCode.getText()))
-                    findInfoByBarCodeBillPutOn(etBarCode.getText().toString());
+                tvGoodsName.setText("");
+                tvProductCode.setText("");
+                wmsStockId = null;
+                wmsWarehouseId = null;
+                tvWmsWarehouseId.setText("");
+                tvWmsWarehouseDetailId.setText("");
             }
         });
         if (null != barCode)
@@ -112,32 +122,52 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
          */
         tvSave.setOnClickListener(this);
         tvPutOffDate.setOnClickListener(this);
-
     }
 
 
     /**
      * 根据条形码查询入库所需相关信息接口
      */
-    private void findInfoByBarCodeBillPutOn(String barCode) {
+    private void findInfoByBarCodeBillPutOff(String barCode) {
         Map<String, String> params = new HashMap<>();
         params.put("barCode", barCode);
-        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillPutOff, params, new SpotsCallBack<ResultBean>(mContext) {
+        OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillPutOff, params, new SpotsCallBack<String>(mContext) {
             @Override
             public void onFailure(Request request, Exception e) {
             }
             @Override
-            public void onSuccess(Response response, ResultBean resultBean) {
-                if (null != resultBean.result) {
-                    tvGoodsName.setText(resultBean.result.goodsName);
-                    tvProductCode.setText(resultBean.result.productCode);
-                    wmsStockId = resultBean.result.wmsStockId;
-                    wmsWarehouseId = resultBean.result.wmsWarehouseId;
-                    tvWmsWarehouseId.setText(resultBean.result.wmsWarehouseName);
-                    tvWmsWarehouseDetailId.setText(resultBean.result.wmsWarehouseDetailName);
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
+                if (resultBean.flag) {
+                    if (null != resultBean.result) {
+                        tvGoodsName.setText(resultBean.result.goodsName);
+                        tvProductCode.setText(resultBean.result.productCode);
+                        wmsStockId = resultBean.result.wmsStockId;
+                        wmsWarehouseId = resultBean.result.wmsWarehouseId;
+                        tvWmsWarehouseId.setText(resultBean.result.wmsWarehouseName);
+                        tvWmsWarehouseDetailId.setText(resultBean.result.wmsWarehouseDetailName);
+                    }
+                } else {
+                    etBarCode.setText("");
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "SE120001":
+                                errors.add(String.format(getResources().getString(R.string.SE120001), barCode));
+                                break;
+                            case "SE120002":
+                                errors.add(String.format(getResources().getString(R.string.SE120002), barCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    }
                 }
             }
-
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -171,12 +201,6 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                     act.finishSelf();
                 } else {
                     switch (resultBean.errorCode) {
-                        case "SE120001":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE110001), resultBean.result.barCod, resultBean.result.code));
-                            break;
-                        case "SE120002":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE110002), resultBean.result.code));
-                            break;
                         case "E000406":
                             List<String> errors = new ArrayList<>();
                             if (null != resultBean.result.wmsWarehouseId)

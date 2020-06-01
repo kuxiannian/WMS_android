@@ -94,6 +94,11 @@ public class StockCheckFra extends TitleFragment implements NaviActivity.NaviRig
         findWarehouseListStockCheck();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshLayout.autoRefresh();
+    }
 
     /**
      * 分页查询数据接口

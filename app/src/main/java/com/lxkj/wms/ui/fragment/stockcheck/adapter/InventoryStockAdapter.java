@@ -30,6 +30,7 @@ public class InventoryStockAdapter extends RecyclerView.Adapter<InventoryStockAd
     protected List<SortingRegisterBean.ResultBean.ContentBean> mDatas;
     protected LayoutInflater mInflater;
 
+
     private List<WareHouseBean.ResultBean> wareHouseList;
 
 
@@ -70,10 +71,11 @@ public class InventoryStockAdapter extends RecyclerView.Adapter<InventoryStockAd
             }
         }
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdaterName()))
-            holder.tvUpdaterId.setText(getWmsWarehouseName(mDatas.get(position).getUpdaterName()));
+            holder.tvUpdaterId.setText(mDatas.get(position).getUpdaterName());
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
-            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
-
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
+        if (!StringUtil.isEmpty(mDatas.get(position).getRemarks()))
+            holder.tvRemarks.setText(mDatas.get(position).getRemarks());
         holder.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +119,8 @@ public class InventoryStockAdapter extends RecyclerView.Adapter<InventoryStockAd
         TextView tvUpdaterId;
         @BindView(R.id.tvUpdateDate)
         TextView tvUpdateDate;
+        @BindView(R.id.tvRemarks)
+        TextView tvRemarks;
         @BindView(R.id.ivEdit)
         ImageView ivEdit;
 

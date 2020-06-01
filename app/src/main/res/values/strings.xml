@@ -208,12 +208,6 @@
     <string name="SE130001">条形码：%1$s，货物没有进行下架，请先下架</string>
     <string name="SE130002">条形码：%1$s，货物无库存信息可查，已经不在库存中</string>
     <string name="SE130003">该货物有嫌疑，嫌疑问题栏位不能为空</string>
-    //盘点点错误提示
-    <string name="VE170001">主键必须不能为空</string>
-    <string name="VE170002">仓库不能为空</string>
-    <string name="VE170003">仓库长度不能超过50</string>
-    <string name="VE170004">备注长度不能超过200</string>
-    <string name="VE170005">版本号不能为空</string>
 
     //上架单错误提示
     <string name="VE110001">主键必须不能为空</string>
@@ -249,6 +243,23 @@
     <string name="SE120002">条形码：%1$s，货物无库存信息可查，未入库</string>
     <string name="VE500003">储位编号不能为空</string>
 
+    //盘点单错误提示
+    <string name="VE170001">主键必须不能为空</string>
+    <string name="VE170002">仓库不能为空</string>
+    <string name="VE170003">仓库长度不能超过50</string>
+    <string name="VE170004">备注长度不能超过200</string>
+    <string name="VE170005">版本号不能为空</string>
+    <string name="SE170001">该仓库存在进行中的盘点任务</string>
+    <string name="SE170002">盘点单已经盘点结束，无法作废</string>
+    <string name="SE170003">盘点单已经作废，无法作废</string>
+    <string name="VE200001">第%1$s行，主键必须不能为空</string>
+    <string name="VE200002">第%1$s行，条形码必须不能为空</string>
+    <string name="VE200003">第%1$s行，条形码长度不能超过50</string>
+    <string name="VE200004">第%1$s行，仓库不能为空</string>
+    <string name="VE200005">第%1$s行，仓库长度不能超过50</string>
+    <string name="VE200006">第%1$s行，储位长度不能超过50</string>
+    <string name="VE200007">第%1$s行，备注长度不能超过200</string>
+    <string name="VE200008">第%1$s行，版本号不能为空</string>
 
     <string name="titleInfo">分拣管理</string>
     <string name="name">货物安检</string>
@@ -261,6 +272,7 @@
     <string name="operation">操作</string>
     <string name="edit">编辑</string>
     <string name="detail">详情</string>
+    <string name="save">保存</string>
     <string name="delete">删除</string>
     <string name="data">数据</string>
     <string name="modalDataTitleAdd">新增窗口</string>

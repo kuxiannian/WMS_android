@@ -88,6 +88,8 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
                 ivLanguage.setImageResource(R.mipmap.ic_en);
                 break;
         }
+        String ip = SharePrefUtil.getString(this, AppConsts.IP, "https://218.93.19.166:8080");
+        Url.IP = ip;
     }
 
     @Override
@@ -384,6 +386,7 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
 
                     @Override
                     public void OnLeftClick(String ip) {
+                        SharePrefUtil.saveString(mContext,AppConsts.IP,ip);
                         Url.IP = ip;
                     }
                 }).show();

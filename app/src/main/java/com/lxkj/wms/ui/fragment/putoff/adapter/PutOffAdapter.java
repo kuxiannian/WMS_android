@@ -31,6 +31,7 @@ public class PutOffAdapter extends RecyclerView.Adapter<PutOffAdapter.ViewHolder
     protected LayoutInflater mInflater;
 
 
+
     public PutOffAdapter(Context mContext, List<SortingRegisterBean.ResultBean.ContentBean> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
@@ -48,11 +49,13 @@ public class PutOffAdapter extends RecyclerView.Adapter<PutOffAdapter.ViewHolder
         holder.tvBarCode.setText(mDatas.get(position).getBarCode());
         holder.tvGoodsName.setText(mDatas.get(position).getGoodsName());
         if (!StringUtil.isEmpty(mDatas.get(position).getPutOffDate()))
-            holder.tvPutOffDate.setText(TimeUtil.stampToDate(mDatas.get(position).getPutOffDate(), "yyyy-MM-dd"));
+            holder.tvPutOffDate.setText(TimeUtil.stampToDate(mDatas.get(position).getPutOffDate(), "yyyy-MM-dd "));
         holder.tvProductCode.setText(mDatas.get(position).getProductCode());
         holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
-            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
+        holder.tvWmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
+        holder.tvWmsWarehouseDetailName.setText(mDatas.get(position).getWmsWarehouseDetailName());
 
         holder.ivZk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +102,10 @@ public class PutOffAdapter extends RecyclerView.Adapter<PutOffAdapter.ViewHolder
         TextView tvBarCode;
         @BindView(R.id.tvPutOffDate)
         TextView tvPutOffDate;
+        @BindView(R.id.tvWmsWarehouseName)
+        TextView tvWmsWarehouseName;
+        @BindView(R.id.tvWmsWarehouseDetailName)
+        TextView tvWmsWarehouseDetailName;
         @BindView(R.id.tvProductCode)
         TextView tvProductCode;
         @BindView(R.id.llProductCode)

@@ -127,13 +127,14 @@ public class KccxFra extends TitleFragment implements NaviRightListener {
         updaterName = stockSxEvent.updaterName;
         updateDateStart = stockSxEvent.updateDateStart;
         updateDateEnd = stockSxEvent.updateDateEnd;
-        stockState = stockSxEvent.updateDateEnd;
+        stockState = stockSxEvent.stockState;
         inputDateStart = stockSxEvent.inputDateStart;
         inputDateEnd = stockSxEvent.inputDateEnd;
         outputDateStart = stockSxEvent.outputDateStart;
         outputDateEnd = stockSxEvent.outputDateEnd;
         inStockDayStart = stockSxEvent.inStockDayStart;
         inStockDayEnd = stockSxEvent.inStockDayEnd;
+        productCode = stockSxEvent.productCode;
         refreshLayout.autoRefresh();
     }
 

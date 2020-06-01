@@ -2,6 +2,7 @@ package com.lxkj.wms.ui.fragment.rksh;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,9 @@ import com.lxkj.wms.view.SingleChooseDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +57,7 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
     @BindView(R.id.etPalletNumber)
     EditText etPalletNumber;
     @BindView(R.id.tvWeight)
-    TextView tvWeight;
+    EditText tvWeight;
     @BindView(R.id.ivAdd)
     ImageView ivAdd;
     @BindView(R.id.ivReduce)
@@ -72,7 +74,7 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
     TextView tvUpdateDateEnd;
     @BindView(R.id.tvCx)
     TextView tvCx;
-    private int djNum = 0;
+    private double djNum = 0;
 
     private String barCode;//条形码
     private String inputDateStart;//入库开始日期
@@ -155,9 +157,9 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
      * 选择日期
      */
     private void selectDate() {
-        Calendar startDate = Calendar.getInstance();
-        Calendar endDate = Calendar.getInstance();
-        startDate.set(DateUtil.getYear() - 10, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//        Calendar startDate = Calendar.getInstance();
+//        Calendar endDate = Calendar.getInstance();
+//        startDate.set(DateUtil.getYear() - 10, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -183,7 +185,7 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
             }
         })
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
-                .setRangDate(startDate, endDate)//起始终止年月日设定
+//                .setRangDate(startDate, endDate)//起始终止年月日设定
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)
@@ -213,13 +215,27 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivAdd:
+                if (!TextUtils.isEmpty(tvWeight.getText()))
+                    djNum = Double.parseDouble(tvWeight.getText().toString());
+                else
+                    djNum = 0;
                 djNum++;
-                tvWeight.setText(djNum + "");
+                tvWeight.setText(new BigDecimal(djNum + "").setScale(3, RoundingMode.FLOOR).toString());
                 break;
             case R.id.ivReduce:
+                if (!TextUtils.isEmpty(tvWeight.getText()))
+                    djNum = Double.parseDouble(tvWeight.getText().toString());
+                else {
+                    djNum = 0;
+                }
+
                 if (djNum > 0)
                     djNum--;
-                tvWeight.setText(djNum + "");
+
+                if (djNum > 0)
+                    tvWeight.setText(new BigDecimal(djNum + "").setScale(3, RoundingMode.FLOOR).toString());
+                else
+                    tvWeight.setText("");
                 break;
             case R.id.tvWmsWarehouseId:
                 if (ListUtil.isEmpty(wareHouseList))

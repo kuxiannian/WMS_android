@@ -12,7 +12,9 @@ public class DetailBean {
     private String id;
     private String deleteFlag;
 
-    public DetailBean(String barCode, String wmsWarehouseId, String wmsWarehouseDetailId) {
+    public DetailBean(String id, String barCode, String wmsWarehouseId, String wmsWarehouseDetailId) {
+        if (null != id)
+            this.id = id;
         this.barCode = barCode;
         this.wmsWarehouseId = wmsWarehouseId;
         this.wmsWarehouseDetailId = wmsWarehouseDetailId;

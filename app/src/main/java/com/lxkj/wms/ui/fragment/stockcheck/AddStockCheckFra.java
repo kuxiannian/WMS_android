@@ -16,6 +16,7 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.actlink.NaviRightListener;
 import com.lxkj.wms.bean.BaseBean;
 import com.lxkj.wms.bean.DetailBean;
+import com.lxkj.wms.bean.ResultBean;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.bean.WareHouseBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
@@ -27,8 +28,10 @@ import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.ui.fragment.kcpd.AddFra;
 import com.lxkj.wms.ui.fragment.stockcheck.adapter.StockCheckDetailAdapter;
 import com.lxkj.wms.utils.ListUtil;
+import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.AddStockCheckDialog;
+import com.lxkj.wms.view.EditStockCheckDialog;
 import com.lxkj.wms.view.HintDialog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -98,7 +101,7 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
         list = new ArrayList<>();
         deleteList = new ArrayList<>();
         adapter = new StockCheckDetailAdapter(mContext, list);
-        adapter.setOnDeleteListener(new StockCheckDetailAdapter.OnDeleteListener() {
+        adapter.setOnDeleteListener(new StockCheckDetailAdapter.OnDoListener() {
             @Override
             public void onDelete(int position) {
                 new HintDialog(mContext, mContext.getString(R.string.hint_delete), true).setOnButtonClickListener(new HintDialog.OnButtonClick() {
@@ -112,6 +115,18 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
                         if (null != list.get(position).getId())
                             deleteList.add(list.get(position));
                         list.remove(position);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).show();
+            }
+
+            @Override
+            public void onEdit(int position) {
+                new EditStockCheckDialog(mContext, warehouseDetailList, list.get(position).getWmsWarehouseDetailId(),  list.get(position).getBarCode(), new EditStockCheckDialog.OnConfirmListener() {
+                    @Override
+                    public void onConfirm(String barCode, String wmsWarehouseDetailId) {
+                        list.get(position).setBarCode(barCode);
+                        list.get(position).setWmsWarehouseDetailId(wmsWarehouseDetailId);
                         adapter.notifyDataSetChanged();
                     }
                 }).show();
@@ -238,7 +253,7 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
         params.put("version", bean.getVersion());
         List<DetailBean> detailBeans = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            DetailBean detailBean = new DetailBean(list.get(i).getBarCode(), list.get(i).getWmsWarehouseId(), list.get(i).getWmsWarehouseDetailId());
+            DetailBean detailBean = new DetailBean(null,list.get(i).getBarCode(), list.get(i).getWmsWarehouseId(), list.get(i).getWmsWarehouseDetailId());
             if (null != list.get(i).getId())
                 detailBean.setId(list.get(i).getId());
             if (null != list.get(i).getVersion())
@@ -246,7 +261,7 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
             detailBeans.add(detailBean);
         }
         for (int i = 0; i < deleteList.size(); i++) {
-            DetailBean detailBean = new DetailBean(deleteList.get(i).getBarCode(), deleteList.get(i).getWmsWarehouseId(), deleteList.get(i).getWmsWarehouseDetailId());
+            DetailBean detailBean = new DetailBean(null,deleteList.get(i).getBarCode(), deleteList.get(i).getWmsWarehouseId(), deleteList.get(i).getWmsWarehouseDetailId());
             detailBean.setDeleteFlag(deleteList.get(i).getDeleteFlag());
             detailBean.setId(deleteList.get(i).getId());
             detailBean.setVersion(deleteList.get(i).getVersion());
@@ -284,21 +299,90 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
         params.put("version", bean.getVersion());
         List<DetailBean> detailBeans = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            DetailBean detailBean = new DetailBean(list.get(i).getBarCode(), list.get(i).getWmsWarehouseId(), list.get(i).getWmsWarehouseDetailId());
+            DetailBean detailBean = new DetailBean(list.get(i).getId(),list.get(i).getBarCode(), list.get(i).getWmsWarehouseId(), list.get(i).getWmsWarehouseDetailId());
+            detailBean.setVersion(list.get(i).getVersion());
             detailBeans.add(detailBean);
         }
         params.put("detail", new Gson().toJson(detailBeans));
-        OkHttpHelper.getInstance().post_json(mContext, Url.updateBillStockCheckOver, params, new SpotsCallBack<BaseBean>(mContext) {
+        OkHttpHelper.getInstance().post_json(mContext, Url.updateBillStockCheckOver, params, new SpotsCallBack<String>(mContext) {
             @Override
             public void onFailure(Request request, Exception e) {
             }
 
             @Override
-            public void onSuccess(Response response, BaseBean result) {
-                if (result.flag) {
-                    ToastUtil.show(mContext.getResources().getString(R.string.seSave));
-                    act.finishSelf();
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
+                if (resultBean.flag) {
+                        ToastUtil.show(mContext.getResources().getString(R.string.seSave));
+                        act.finishSelf();
+                } else {
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String lineNumber = errorValues.get("lineNumber");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "VE200001":
+                                errors.add(String.format(getResources().getString(R.string.VE200001), lineNumber));
+                                break;
+                            case "VE200002":
+                                errors.add(String.format(getResources().getString(R.string.VE200002), lineNumber));
+                                break;
+                            case "VE200003":
+                                errors.add(String.format(getResources().getString(R.string.VE200003), lineNumber));
+                                break;
+                            case "VE200004":
+                                errors.add(String.format(getResources().getString(R.string.VE200004), lineNumber));
+                                break;
+                            case "VE200005":
+                                errors.add(String.format(getResources().getString(R.string.VE200005), lineNumber));
+                                break;
+                            case "VE200006":
+                                errors.add(String.format(getResources().getString(R.string.VE200006), lineNumber));
+                                break;
+                            case "VE200007":
+                                errors.add(String.format(getResources().getString(R.string.VE200007), lineNumber));
+                                break;
+                            case "VE200008":
+                                errors.add(String.format(getResources().getString(R.string.VE200008), lineNumber));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    } else {
+                        List<String> errors = new ArrayList<>();
+                        switch (resultBean.errorCode) {
+                            case "VE170001":
+                                errors.add(getResources().getString(R.string.VE170001));
+                                break;
+                            case "VE170002":
+                                errors.add(getResources().getString(R.string.VE170002));
+                                break;
+                            case "VE170003":
+                                errors.add(getResources().getString(R.string.VE170003));
+                                break;
+                            case "VE170004":
+                                errors.add(getResources().getString(R.string.VE170004));
+                                break;
+                            case "VE170005":
+                                errors.add(getResources().getString(R.string.VE170005));
+                                break;
+                            case "SE170001":
+                                errors.add(getResources().getString(R.string.SE170001));
+                                break;
+                            case "SE170002":
+                                errors.add(getResources().getString(R.string.SE170002));
+                                break;
+                            case "SE170003":
+                                errors.add(getResources().getString(R.string.SE170003));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    }
                 }
+
             }
 
             @Override
@@ -355,10 +439,7 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
 
     @Override
     public void onRightClicked(View v) {
-
         ActivitySwitcher.startFrgForResult(act, AddFra.class, 1);
-
-
     }
 
     @Override

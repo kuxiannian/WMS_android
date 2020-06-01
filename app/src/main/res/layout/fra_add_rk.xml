@@ -233,6 +233,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:text="保存"
+        android:text="@string/save"
         android:textColor="@color/main_color" />
 </LinearLayout>

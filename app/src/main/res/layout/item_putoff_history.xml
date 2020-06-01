@@ -65,7 +65,50 @@
                 android:layout_height="1px"
                 android:layout_marginTop="10dp"
                 android:background="@color/line" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/wmsWarehouseId_putoff"
+                android:textColor="@color/txt_lv6"
+                android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/tvWmsWarehouseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:textColor="@color/txt_lv4"
+                android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/wmsWarehouseDetailId_putoff"
+                android:textColor="@color/txt_lv6"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvWmsWarehouseDetailName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:textColor="@color/txt_lv4"
+                android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
             <LinearLayout
                 android:id="@+id/llProductCode"
                 android:layout_width="match_parent"

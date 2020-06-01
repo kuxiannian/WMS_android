@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.TimeUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,8 +59,18 @@ public class HistoryRkDetailFra extends TitleFragment {
         if (null != contentBean) {
             tvBarCode.setText(contentBean.getBarCode());
             tvGoodsName.setText(contentBean.getGoodsName());
-            tvGoodsType.setText(contentBean.getGoodsType());
-            tvInputDate.setText(contentBean.getInputDate());
+            switch (contentBean.getGoodsType()) {
+                case "A":
+                    tvGoodsType.setText(R.string.goodsTypeA);
+                    break;
+                case "B":
+                    tvGoodsType.setText(R.string.goodsTypeB);
+                    break;
+                case "C":
+                    tvGoodsType.setText(R.string.goodsTypeC);
+                    break;
+            }
+            tvInputDate.setText(TimeUtil.stampToDate(contentBean.getInputDate(), "yyyy-MM-dd"));
             tvPalletNumber.setText(contentBean.getPalletNumber());
             tvProductCode.setText(contentBean.getProductCode());
             tvWeight.setText(contentBean.getProductCode());

@@ -14,6 +14,7 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.ui.fragment.rksh.HistoryRkDetailFra;
+import com.lxkj.wms.utils.TimeUtil;
 
 import java.util.List;
 
@@ -45,8 +46,21 @@ public class HistoryRkAdapter extends RecyclerView.Adapter<HistoryRkAdapter.View
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvBarCode.setText(mDatas.get(position).getBarCode());
-        holder.tvGoodsType.setText(mDatas.get(position).getGoodsType());
-        holder.tvInputDate.setText(mDatas.get(position).getInputDate());
+        switch (mDatas.get(position).getGoodsType()) {
+            case "A":
+                holder.tvGoodsType.setText(R.string.goodsTypeA);
+                break;
+            case "B":
+                holder.tvGoodsType.setText(R.string.goodsTypeB);
+                break;
+            case "C":
+                holder.tvGoodsType.setText(R.string.goodsTypeC);
+                break;
+        }
+        holder.tvInputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getInputDate(), "yyyy-MM-dd"));
+
+        holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
+        holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
         holder.tvWmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
         holder.tvPalletNumber.setText(mDatas.get(position).getPalletNumber());
         holder.tvWeight.setText(mDatas.get(position).getWeight());
@@ -63,10 +77,14 @@ public class HistoryRkAdapter extends RecyclerView.Adapter<HistoryRkAdapter.View
             holder.llHwpm.setVisibility(View.VISIBLE);
             holder.llTph.setVisibility(View.VISIBLE);
             holder.llZhongLiang.setVisibility(View.VISIBLE);
+            holder.llUpdateDate.setVisibility(View.VISIBLE);
+            holder.llUpdaterName.setVisibility(View.VISIBLE);
         } else {
             holder.llHwpm.setVisibility(View.GONE);
             holder.llTph.setVisibility(View.GONE);
             holder.llZhongLiang.setVisibility(View.GONE);
+            holder.llUpdateDate.setVisibility(View.GONE);
+            holder.llUpdaterName.setVisibility(View.GONE);
         }
         if (mDatas.get(position).isOpen)
             holder.ivZk.setImageResource(R.mipmap.ic_arrow_up_main);
@@ -76,7 +94,7 @@ public class HistoryRkAdapter extends RecyclerView.Adapter<HistoryRkAdapter.View
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("bean",mDatas.get(position));
+                bundle.putSerializable("bean", mDatas.get(position));
                 ActivitySwitcher.startFragment(mContext, HistoryRkDetailFra.class, bundle);
             }
         });
@@ -90,7 +108,6 @@ public class HistoryRkAdapter extends RecyclerView.Adapter<HistoryRkAdapter.View
     }
 
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvBarCode)
         TextView tvBarCode;
@@ -100,6 +117,14 @@ public class HistoryRkAdapter extends RecyclerView.Adapter<HistoryRkAdapter.View
         TextView tvInputDate;
         @BindView(R.id.tvWmsWarehouseName)
         TextView tvWmsWarehouseName;
+        @BindView(R.id.tvUpdaterName)
+        TextView tvUpdaterName;
+        @BindView(R.id.llUpdaterName)
+        LinearLayout llUpdaterName;
+        @BindView(R.id.tvUpdateDate)
+        TextView tvUpdateDate;
+        @BindView(R.id.llUpdateDate)
+        LinearLayout llUpdateDate;
         @BindView(R.id.tvPalletNumber)
         TextView tvPalletNumber;
         @BindView(R.id.llTph)
@@ -116,7 +141,6 @@ public class HistoryRkAdapter extends RecyclerView.Adapter<HistoryRkAdapter.View
         ImageView ivDetail;
         @BindView(R.id.ivZk)
         ImageView ivZk;
-
 
         public ViewHolder(View itemView) {
             super(itemView);

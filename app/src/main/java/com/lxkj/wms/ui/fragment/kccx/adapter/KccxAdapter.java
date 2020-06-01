@@ -45,7 +45,20 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
         holder.tvAwb.setText(mDatas.get(position).getAwb());
         holder.tvBarCode.setText(mDatas.get(position).getBarCode());
         holder.tvGoodsName.setText(mDatas.get(position).getGoodsName());
-        holder.tvGoodsType.setText(mDatas.get(position).getGoodsType());
+        if (null != mDatas.get(position).getGoodsType()) {
+            switch (mDatas.get(position).getGoodsType()) {
+                case "A":
+                    holder.tvGoodsType.setText(R.string.goodsTypeA);
+                    break;
+                case "B":
+                    holder.tvGoodsType.setText(R.string.goodsTypeB);
+                    break;
+                case "C":
+                    holder.tvGoodsType.setText(R.string.goodsTypeC);
+                    break;
+            }
+        }
+
         if (!StringUtil.isEmpty(mDatas.get(position).getInputDate()))
             holder.tvInputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getInputDate(), "yyyy-MM-dd"));
         holder.tvInStockDay.setText(mDatas.get(position).getInStockDay());
@@ -63,7 +76,7 @@ public class KccxAdapter extends RecyclerView.Adapter<KccxAdapter.ViewHolder> {
             }
         }
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
-            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
         holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
         if (null != mDatas.get(position).getWmsWarehouseDetailName())
             holder.tvWmsWarehouseDetailName.setText(mDatas.get(position).getWmsWarehouseDetailName());

@@ -30,7 +30,6 @@ import com.lxkj.wms.view.SingleChooseDialog;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -72,7 +71,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
     @BindView(R.id.tvOutputDateEnd)
     TextView tvOutputDateEnd;
     @BindView(R.id.tvInStockDayStart)
-    TextView tvInStockDayStart;
+    EditText tvInStockDayStart;
     @BindView(R.id.ivAddStockDayStart)
     ImageView ivAddStockDayStart;
     @BindView(R.id.ivReduceStockDayStart)
@@ -138,6 +137,8 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
         tvInputDateEnd.setOnClickListener(this::onClick);
         tvUpdateDateStart.setOnClickListener(this::onClick);
         tvUpdateDateEnd.setOnClickListener(this::onClick);
+        tvOutputDateStart.setOnClickListener(this::onClick);
+        tvOutputDateEnd.setOnClickListener(this::onClick);
         wareHouseList = new ArrayList<>();
         goodsTypeList = new ArrayList<>();
         stockStateList = new ArrayList<>();
@@ -188,9 +189,9 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
      * 选择日期
      */
     private void selectDate() {
-        Calendar startDate = Calendar.getInstance();
-        Calendar endDate = Calendar.getInstance();
-        startDate.set(DateUtil.getYear() - 10, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//        Calendar startDate = Calendar.getInstance();
+//        Calendar endDate = Calendar.getInstance();
+//        startDate.set(DateUtil.getYear() - 10, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -224,8 +225,8 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
             }
         })
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
-                .setRangDate(startDate, endDate)//起始终止年月日设定
-                .setDate(endDate)
+//                .setRangDate(startDate, endDate)//起始终止年月日设定
+//                .setDate(endDate)
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)

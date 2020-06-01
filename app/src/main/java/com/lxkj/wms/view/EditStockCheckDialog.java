@@ -22,22 +22,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by kxn on 2020/5/16 0016.
+ * Created by kxn on 2020/6/1 0001.
  */
-public class AddStockCheckDialog extends Dialog {
+public class EditStockCheckDialog extends Dialog {
     EditText etBarCode;
-    TextView tvWmsWarehouseIdName, tvWmsWarehouseDetailId, tvSure, tvCancel;
+    TextView  tvWmsWarehouseDetailId, tvSure, tvCancel;
     private Context context;      // 上下文
     private List<WareHouseBean.ResultBean> warehouseDetailList;
     String wmsWarehouseDetailId;
     OnConfirmListener onConfirmListener;
 
-    public AddStockCheckDialog(Context context, List<WareHouseBean.ResultBean> warehouseDetailList, String wmsWarehouseName, String barCode, OnConfirmListener onConfirmListener) {
+    public EditStockCheckDialog(Context context, List<WareHouseBean.ResultBean> warehouseDetailList, String wmsWarehouseDetailName, String barCode, OnConfirmListener onConfirmListener) {
         super(context, R.style.Theme_dialog); //dialog的样式
         this.context = context;
         Window window = getWindow();
         window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置为居中
-        setContentView(R.layout.dialog_stockcheck_add);
+        setContentView(R.layout.dialog_stockcheck_edit);
         WindowManager windowManager = ((Activity) context).getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -48,12 +48,12 @@ public class AddStockCheckDialog extends Dialog {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         //遍历控件id,添加点击事件
         etBarCode = findViewById(R.id.etBarCode);
-        tvWmsWarehouseIdName = findViewById(R.id.tvWmsWarehouseIdName);
         tvWmsWarehouseDetailId = findViewById(R.id.tvWmsWarehouseDetailId);
         tvSure = findViewById(R.id.tv_sure);
         tvCancel = findViewById(R.id.tv_cancel);
-        tvWmsWarehouseIdName.setText(wmsWarehouseName);
         this.onConfirmListener = onConfirmListener;
+        this.warehouseDetailList = warehouseDetailList;
+        tvWmsWarehouseDetailId.setText(getWmsWarehouseDetailName(wmsWarehouseDetailName));
         etBarCode.setText(barCode);
         tvWmsWarehouseDetailId.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +86,10 @@ public class AddStockCheckDialog extends Dialog {
                     ToastUtil.show(context.getResources().getString(R.string.VE100002));
                     return;
                 }
-//                if (null == wmsWarehouseDetailId) {
-//                    ToastUtil.show(context.getResources().getString(R.string.VE500003));
-//                    return;
-//                }
+                if (null == wmsWarehouseDetailId) {
+                    ToastUtil.show(context.getResources().getString(R.string.VE500003));
+                    return;
+                }
                 onConfirmListener.onConfirm(etBarCode.getText().toString(), wmsWarehouseDetailId);
                 dismiss();
             }
@@ -100,6 +100,18 @@ public class AddStockCheckDialog extends Dialog {
                 dismiss();
             }
         });
+    }
+
+
+    private String getWmsWarehouseDetailName(String wmsWarehouseDetailId) {
+        if (null != warehouseDetailList) {
+            for (int i = 0; i < warehouseDetailList.size(); i++) {
+                if (warehouseDetailList.get(i).getId().equals(wmsWarehouseDetailId))
+                    return warehouseDetailList.get(i).getCode();
+            }
+            return "";
+        }
+        return "";
     }
 
     public interface OnConfirmListener {

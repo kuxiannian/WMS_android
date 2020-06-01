@@ -25,7 +25,6 @@ import com.lxkj.wms.view.SingleChooseDialog;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -144,9 +143,9 @@ public class ShaiXuanStockCheckFra extends TitleFragment implements  View.OnClic
      * 选择日期
      */
     private void selectDate() {
-        Calendar startDate = Calendar.getInstance();
-        Calendar endDate = Calendar.getInstance();
-        startDate.set(DateUtil.getYear() - 10, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//        Calendar startDate = Calendar.getInstance();
+//        Calendar endDate = Calendar.getInstance();
+//        startDate.set(DateUtil.getYear() - 10, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -180,7 +179,7 @@ public class ShaiXuanStockCheckFra extends TitleFragment implements  View.OnClic
             }
         })
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
-                .setRangDate(startDate, endDate)//起始终止年月日设定
+//                .setRangDate(startDate, endDate)//起始终止年月日设定
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)
