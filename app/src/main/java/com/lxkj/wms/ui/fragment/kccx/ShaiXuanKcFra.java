@@ -77,7 +77,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
     @BindView(R.id.ivReduceStockDayStart)
     ImageView ivReduceStockDayStart;
     @BindView(R.id.tvInStockDayEnd)
-    TextView tvInStockDayEnd;
+    EditText tvInStockDayEnd;
     @BindView(R.id.ivAddStockDayEnd)
     ImageView ivAddStockDayEnd;
     @BindView(R.id.ivReduceStockDayEnd)
@@ -260,6 +260,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                 else
                     djNum = Integer.parseInt(tvInStockDayStart.getText().toString());
                 djNum++;
+                inStockDayStart = djNum+"";
                 tvInStockDayStart.setText(djNum + "");
                 break;
             case R.id.ivReduceStockDayStart:
@@ -269,6 +270,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                     djNum = Integer.parseInt(tvInStockDayStart.getText().toString());
                 if (djNum > 0)
                     djNum--;
+                inStockDayStart = djNum+"";
                 tvInStockDayStart.setText(djNum + "");
                 break;
             case R.id.ivAddStockDayEnd:
@@ -277,6 +279,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                 else
                     djNum = Integer.parseInt(tvInStockDayEnd.getText().toString());
                 djNum++;
+                inStockDayEnd = djNum+"";
                 tvInStockDayEnd.setText(djNum + "");
                 break;
             case R.id.ivReduceStockDayEnd:
@@ -286,6 +289,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                     djNum = Integer.parseInt(tvInStockDayStart.getText().toString());
                 if (djNum > 0)
                     djNum--;
+                inStockDayEnd = djNum+"";
                 tvInStockDayStart.setText(djNum + "");
                 break;
             case R.id.tvWmsWarehouseId:
@@ -372,6 +376,15 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                 productCode = etProductCode.getText().toString();
                 wmsWarehouseDetailName = etWmsWarehouseDetailName.getText().toString();
                 updaterName = etUpdaterName.getText().toString();
+                if (TextUtils.isEmpty(tvInStockDayEnd.getText()))
+                    inStockDayEnd = "";
+                else
+                    inStockDayEnd = tvInStockDayEnd.getText().toString();
+                if (TextUtils.isEmpty(tvInputDateStart.getText()))
+                    inStockDayStart = "";
+                else
+                    inStockDayStart = tvInputDateStart.getText().toString();
+
                 EventBus.getDefault().post(new StockSxEvent(barCode, awb, goodsType, goodsName,
                         productCode, wmsWarehouseId, wmsWarehouseDetailName, stockState, inputDateStart, inputDateEnd
                         , outputDateStart,outputDateEnd,inStockDayStart,inStockDayEnd,updaterName,updateDateStart,updateDateEnd));

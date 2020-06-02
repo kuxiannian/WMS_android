@@ -132,7 +132,7 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
         Map<String, String> params = new HashMap<>();
         params.put("page", page + "");
         params.put("size", "10");
-        if (null != barCode)
+        if (!StringUtil.isEmpty(barCode) )
             params.put("barCode", barCode);
         if (!StringUtil.isEmpty(putOnDateStart))
             params.put("putOnDateStart", putOnDateStart);
@@ -140,9 +140,9 @@ public class HistoryPutOnFra extends TitleFragment implements NaviRightListener 
             params.put("putOnDateEnd", putOnDateEnd);
         if (!StringUtil.isEmpty(weight))
             params.put("weight", weight);
-        if (null != palletNumber)
+        if (!StringUtil.isEmpty(palletNumber))
             params.put("palletNumber", palletNumber);
-        if (null != productCode)
+        if (!StringUtil.isEmpty(productCode))
             params.put("productCode", productCode);
         if (!StringUtil.isEmpty(wmsWarehouseId))
             params.put("wmsWarehouseId", wmsWarehouseId);

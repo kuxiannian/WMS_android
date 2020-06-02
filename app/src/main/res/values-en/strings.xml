@@ -61,7 +61,7 @@
     <string name="rkck">Warehouse</string>
     <string name="tph">Pallet number</string>
     <string name="zhongliang">Weight (Kg)</string>
-    <string name="xzrk">Add Sorting Register</string>
+    <string name="xzrk">Add Input Bill</string>
     <string name="sglr">By Hand</string>
     <string name="hint_smq">Please Scan</string>
 
@@ -347,7 +347,7 @@
     <string name="numberLimit">The number must be between 0.001-9999999.999</string>
     <string name="appAddTitle">Add Put On Bill</string>
 
-    <string name="appPutOffTitle">Add Pull Off Bill</string>
+    <string name="appPutOffTitle">Add Put Off Bill</string>
     <string name="putOffDate">Withdrawal date</string>
     <string name="wmsWarehouseId_putoff">Delisted warehouse</string>
     <string name="wmsWarehouseDetailId_putoff">Removed storage</string>

@@ -57,7 +57,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/ic_bt"
                 android:gravity="center"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
@@ -77,7 +76,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="12dp"
-                android:drawableLeft="@mipmap/ic_bt"
                 android:textSize="15sp"
                 android:text="@string/goodsName"
                 android:textColor="@color/txt_lv6" />
@@ -94,7 +92,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:drawableLeft="@mipmap/ic_bt"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
                 android:text="@string/wmsWarehouseId_putoff"
@@ -112,7 +109,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:drawableLeft="@mipmap/ic_bt"
                 android:paddingTop="12dp"
                 android:textSize="15sp"
                 android:text="@string/wmsWarehouseDetailId_putoff"

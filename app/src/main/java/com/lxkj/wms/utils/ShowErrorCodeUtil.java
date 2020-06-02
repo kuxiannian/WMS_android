@@ -578,7 +578,22 @@ public class ShowErrorCodeUtil {
             case "VE170005":
                 error = context.getString(R.string.VE170005);
                 break;
-
+                //通用错误信息
+            case "CE100001":
+                error = context.getString(R.string.CE100001);
+                break;
+            case "CE100002":
+                error = context.getString(R.string.CE100002);
+                break;
+            case "CE100003":
+                error = context.getString(R.string.CE100003);
+                break;
+            case "CE210004":
+                error = context.getString(R.string.CE210004);
+                break;
+            case "CE210005":
+                error = context.getString(R.string.CE210005);
+                break;
         }
         return error;
     }

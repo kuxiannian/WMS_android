@@ -52,9 +52,9 @@ public class StockCheckAdapter extends RecyclerView.Adapter<StockCheckAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         if (!StringUtil.isEmpty(mDatas.get(position).getStartDate()))
-            holder.tvStartDate.setText(TimeUtil.stampToDate(mDatas.get(position).getStartDate(), "yyyy-MM-dd"));
+            holder.tvStartDate.setText(TimeUtil.stampToDate(mDatas.get(position).getStartDate(), "yyyy-MM-dd HH:mm:ss"));
         if (!StringUtil.isEmpty(mDatas.get(position).getEndDate()))
-            holder.tvEndDate.setText(TimeUtil.stampToDate(mDatas.get(position).getEndDate(), "yyyy-MM-dd"));
+            holder.tvEndDate.setText(TimeUtil.stampToDate(mDatas.get(position).getEndDate(), "yyyy-MM-dd HH:mm:ss"));
         holder.tvWmsWarehouseName.setText(getWmsWarehouseName(mDatas.get(position).getWmsWarehouseId()));
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdaterName()))
             holder.tvUpdaterId.setText(mDatas.get(position).getUpdaterName());

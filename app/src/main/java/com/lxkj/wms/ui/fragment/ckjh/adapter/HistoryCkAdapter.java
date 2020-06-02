@@ -64,7 +64,7 @@ public class HistoryCkAdapter extends RecyclerView.Adapter<HistoryCkAdapter.View
                 break;
         }
         holder.tvoutputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getOutputDate(), "yyyy-MM-dd"));
-        holder.tvupdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
+        holder.tvupdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
 
         holder.ivZk.setOnClickListener(new View.OnClickListener() {
             @Override

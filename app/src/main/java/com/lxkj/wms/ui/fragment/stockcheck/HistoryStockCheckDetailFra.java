@@ -55,9 +55,9 @@ public class HistoryStockCheckDetailFra extends TitleFragment {
         String wmsWarehouseName = getArguments().getString("wmsWarehouseName");
         if (null != contentBean) {
             if (!StringUtil.isEmpty(contentBean.getStartDate()))
-                tvStartDate.setText(TimeUtil.stampToDate(contentBean.getStartDate(), "yyyy-MM-dd"));
+                tvStartDate.setText(TimeUtil.stampToDate(contentBean.getStartDate(), "yyyy-MM-dd HH:mm:ss"));
             if (!StringUtil.isEmpty(contentBean.getEndDate()))
-                tvEndDate.setText(TimeUtil.stampToDate(contentBean.getEndDate(), "yyyy-MM-dd"));
+                tvEndDate.setText(TimeUtil.stampToDate(contentBean.getEndDate(), "yyyy-MM-dd HH:mm:ss"));
             tvWmsWarehouseName.setText(wmsWarehouseName);
             if (null != contentBean.getState()) {
                 switch (contentBean.getState()) {

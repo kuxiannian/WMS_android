@@ -255,7 +255,12 @@ public class ShaiXuanPutOnFra extends TitleFragment implements NaviActivity.Navi
                 selectDate();
                 break;
             case R.id.tvCx:
-                weight = djNum+"";
+                if (TextUtils.isEmpty(etWeight.getText()))
+                    djNum = 0;
+                else
+                    djNum = Double.parseDouble(etWeight.getText().toString());
+                if (djNum > 0)
+                    weight = djNum + "";
                 barCode = etBarCode.getText().toString();
                 palletNumber = etPalletNumber.getText().toString();
                 productCode = etProductCode.getText().toString();

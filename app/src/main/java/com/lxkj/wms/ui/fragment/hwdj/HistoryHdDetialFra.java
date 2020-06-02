@@ -195,16 +195,25 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
                     eventCenter.sendType(EventCenter.EventType.EVT_DELETE);
                     act.finishSelf();
                 } else {
-                    switch (resultBean.errorCode) {
-                        case "SE210003":
-                            List<String> errors = new ArrayList<>();
-                            errors.add(String.format(getResources().getString(R.string.SE210003), resultBean.result.barCod));
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "SE210003":
+                                errors.add(String.format(getResources().getString(R.string.SE210003), barCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
                             ToastUtil.showCustom(mContext, errors);
-                            break;
-                        default:
-                            ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
-                            break;
+                    } else {
+                        List<String> errors = new ArrayList<>();
+                        errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
+                        ToastUtil.showCustom(mContext, errors);
                     }
+
                 }
             }
             @Override

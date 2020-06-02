@@ -57,7 +57,7 @@ public class PutOnAdapter extends RecyclerView.Adapter<PutOnAdapter.ViewHolder> 
         holder.tvWeight.setText(mDatas.get(position).getWeight());
 
         if (!StringUtil.isEmpty(mDatas.get(position).getUpdateDate()))
-            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
+            holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
 
         holder.ivZk.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -73,7 +73,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     @BindView(R.id.etLadingNumber)
     EditText etLadingNumber;
 
-    private String outputDate, wmsStockId,barCode;
+    private String outputDate, wmsStockId, barCode;
 
     public String getTitleName() {
         return act.getString(R.string.xzck);
@@ -117,10 +117,15 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 //                if (!TextUtils.isEmpty(etBarCode.getText()))
 //                    findInfoByBarCode(etBarCode.getText().toString());
 
+                etBarCode.setText("");
                 tvGoodsName.setText("");
+                tvGoodsType.setText("");
                 tvGoodsType.setText("");
                 tvProductCode.setText("");
                 tvWmsWarehouseIdName.setText("");
+                wmsStockId = null;
+                tvSuspicion.setText("");
+                etSuspicionProblem.setEnabled(false);
             }
         });
         if (null != barCode)
@@ -157,7 +162,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                                 tvGoodsType.setText(R.string.goodsTypeA);
                                 break;
                             case "B":
-                               tvGoodsType.setText(R.string.goodsTypeB);
+                                tvGoodsType.setText(R.string.goodsTypeB);
                                 break;
                             case "C":
                                 tvGoodsType.setText(R.string.goodsTypeC);
@@ -170,6 +175,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                             if (resultBean.result.suspicion.equals("1")) {//有嫌疑
                                 tvSuspicion.setText(mContext.getString(R.string.suspicionY));
                                 etSuspicionProblem.setEnabled(true);
+                                etSuspicionProblem.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
                             } else {//无嫌疑
                                 tvSuspicion.setText(mContext.getString(R.string.suspicionN));
                                 etSuspicionProblem.setEnabled(false);
@@ -179,6 +185,14 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     }
                 } else {
                     etBarCode.setText("");
+                    tvGoodsName.setText("");
+                    tvGoodsType.setText("");
+                    tvGoodsType.setText("");
+                    tvProductCode.setText("");
+                    tvWmsWarehouseIdName.setText("");
+                    wmsStockId = null;
+                    tvSuspicion.setText("");
+                    etSuspicionProblem.setEnabled(false);
                     if (resultBean.errorCode.contains("?")) {
                         String[] error = resultBean.errorCode.split("\\?");
                         String errorCode = error[0];
@@ -200,6 +214,9 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                         switch (resultBean.errorCode) {
                             case "SE130003":
                                 errors.add(getResources().getString(R.string.SE130003));
+                                break;
+                            default:
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
                                 break;
                         }
                         if (errors.size() > 0)
@@ -258,18 +275,18 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                         case "E000406":
                             List<String> errors = new ArrayList<>();
                             if (null != resultBean.result.ladingNumber)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.ladingNumber));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.ladingNumber));
                             if (null != resultBean.result.outputDate)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.outputDate));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.outputDate));
                             if (null != resultBean.result.wmsStockId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsStockId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsStockId));
                             if (null != resultBean.result.consignor)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.consignor));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.consignor));
                             if (null != resultBean.result.barCode)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.barCode));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.barCode));
                             if (null != resultBean.result.consignorPhone)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.consignorPhone));
-                            ToastUtil.showCustom(mContext,errors);
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.consignorPhone));
+                            ToastUtil.showCustom(mContext, errors);
                             break;
                         default:
                             ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
@@ -291,7 +308,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     private void selectDate() {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        endDate.set(DateUtil.getYear() + 5, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -301,6 +318,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
         })
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
                 .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setDate(endDate)
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)

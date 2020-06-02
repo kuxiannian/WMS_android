@@ -156,12 +156,18 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 if (resultBean.flag) {
                     if (null != resultBean.result) {
                         tvGoodsName.setText(resultBean.result.goodsName);
-                        tvGoodsType.setText(ShowErrorCodeUtil.getGoodsType(mContext,resultBean.result.goodsType));
+                        tvGoodsType.setText(ShowErrorCodeUtil.getGoodsType(mContext, resultBean.result.goodsType));
                         tvProductCode.setText(resultBean.result.productCode);
                         tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
+                        tvWeight.setText(resultBean.result.weight);
                     }
                 } else {
                     etBarCode.setText("");
+                    tvGoodsName.setText("");
+                    tvGoodsType.setText("");
+                    tvProductCode.setText("");
+                    tvWmsWarehouseIdName.setText("");
+                    tvWeight.setText("");
                     if (resultBean.errorCode.contains("?")) {
                         String[] error = resultBean.errorCode.split("\\?");
                         String errorCode = error[0];
@@ -201,6 +207,9 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                         switch (resultBean.errorCode) {
                             case "SE100006":
                                 errors.add(getResources().getString(R.string.SE100006));
+                                break;
+                            default:
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
                                 break;
                         }
                         if (errors.size() > 0)
@@ -307,7 +316,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     private void selectDate() {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        endDate.set(DateUtil.getYear() + 5, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -317,6 +326,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
         })
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
                 .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setDate(endDate)
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)

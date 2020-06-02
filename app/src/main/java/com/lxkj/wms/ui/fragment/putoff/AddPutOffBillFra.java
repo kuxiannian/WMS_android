@@ -144,11 +144,18 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                         tvProductCode.setText(resultBean.result.productCode);
                         wmsStockId = resultBean.result.wmsStockId;
                         wmsWarehouseId = resultBean.result.wmsWarehouseId;
+                        wmsWarehouseDetailId = resultBean.result.wmsWarehouseDetailId;
                         tvWmsWarehouseId.setText(resultBean.result.wmsWarehouseName);
                         tvWmsWarehouseDetailId.setText(resultBean.result.wmsWarehouseDetailName);
                     }
                 } else {
                     etBarCode.setText("");
+                    tvGoodsName.setText("");
+                    tvProductCode.setText("");
+                    wmsStockId = null;
+                    wmsWarehouseId = null;
+                    tvWmsWarehouseId.setText("");
+                    tvWmsWarehouseDetailId.setText("");
                     if (resultBean.errorCode.contains("?")) {
                         String[] error = resultBean.errorCode.split("\\?");
                         String errorCode = error[0];
@@ -161,6 +168,15 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                                 break;
                             case "SE120002":
                                 errors.add(String.format(getResources().getString(R.string.SE120002), barCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+                    }else {
+                        List<String> errors = new ArrayList<>();
+                        switch (resultBean.errorCode) {
+                            default:
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
                                 break;
                         }
                         if (errors.size() > 0)
@@ -180,8 +196,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
      */
     private void addBillPutOff() {
         Map<String, String> params = new HashMap<>();
-        if (null != barCode)
-            params.put("barCode", barCode);
+            params.put("barCode", etBarCode.getText().toString());
         if (null != putOffDate)
             params.put("putOffDate", putOffDate);
         if (null != wmsWarehouseId)
@@ -234,7 +249,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
     private void selectDate() {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        endDate.set(DateUtil.getYear() + 5, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -244,6 +259,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
         })
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
                 .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setDate(endDate)
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)
@@ -274,7 +290,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
             case R.id.tvSave:
                 addBillPutOff();
                 break;
-            case R.id.tvPutOnDate:
+            case R.id.tvPutOffDate:
                 selectDate();
                 break;
         }

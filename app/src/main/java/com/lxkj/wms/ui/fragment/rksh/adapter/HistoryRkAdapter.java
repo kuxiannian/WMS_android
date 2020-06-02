@@ -59,7 +59,7 @@ public class HistoryRkAdapter extends RecyclerView.Adapter<HistoryRkAdapter.View
         }
         holder.tvInputDate.setText(TimeUtil.stampToDate(mDatas.get(position).getInputDate(), "yyyy-MM-dd"));
 
-        holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd"));
+        holder.tvUpdateDate.setText(TimeUtil.stampToDate(mDatas.get(position).getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
         holder.tvUpdaterName.setText(mDatas.get(position).getUpdaterName());
         holder.tvWmsWarehouseName.setText(mDatas.get(position).getWmsWarehouseName());
         holder.tvPalletNumber.setText(mDatas.get(position).getPalletNumber());

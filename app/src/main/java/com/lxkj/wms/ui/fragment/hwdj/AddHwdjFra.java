@@ -231,7 +231,6 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     receiverName = resultBean.getResult().getReceiverName();
                     receiverAddress = resultBean.getResult().getReceiverAddress();
                     receiverPhone = resultBean.getResult().getReceiverPhone();
-
                     awb = awbStr;
                     AppViewCanDoUtil.setCanDo(true, tvHangBan);
                     AppViewCanDoUtil.setCanDo(true, tvHwpm);

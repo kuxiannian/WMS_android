@@ -167,7 +167,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
             @Override
             public void afterTextChanged(Editable editable) {
-                    findTopByPriority();
+                findTopByPriority();
             }
         });
         etWidth.addTextChangedListener(new TextWatcher() {
@@ -183,7 +183,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
             @Override
             public void afterTextChanged(Editable editable) {
-                    findTopByPriority();
+                findTopByPriority();
             }
         });
         etHeight.addTextChangedListener(new TextWatcher() {
@@ -199,7 +199,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 
             @Override
             public void afterTextChanged(Editable editable) {
-                    findTopByPriority();
+                findTopByPriority();
             }
         });
 
@@ -250,6 +250,13 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     }
                 } else {
                     etBarCode.setText("");
+                    tvGoodsName.setText("");
+                    tvPalletNumber.setText("");
+                    tvProductCode.setText("");
+                    tvWmsWarehouseId.setText("");
+                    wmsStockId = null;
+                    wmsWarehouseId = null;
+
                     if (resultBean.errorCode.contains("?")) {
                         String[] error = resultBean.errorCode.split("\\?");
                         String errorCode = error[0];
@@ -274,6 +281,9 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                                 break;
                             case "SE110004":
                                 errors.add(getResources().getString(R.string.SE110004));
+                                break;
+                            default:
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
                                 break;
                         }
                         if (errors.size() > 0)
@@ -377,7 +387,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
         if (null != wmsStockId)
             params.put("wmsStockId", wmsStockId);
         if (null != wmsWarehouseId)
-        params.put("wmsWarehouseId", wmsWarehouseId);//仓库ID
+            params.put("wmsWarehouseId", wmsWarehouseId);//仓库ID
         OkHttpHelper.getInstance().post_json(mContext, Url.addBillPutOn, params, new SpotsCallBack<String>(mContext) {
             @Override
             public void onSuccess(Response response, String result) {
@@ -437,7 +447,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
     private void selectDate() {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        endDate.set(DateUtil.getYear() + 5, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -447,6 +457,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
         })
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
                 .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setDate(endDate)
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)
