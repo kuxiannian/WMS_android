@@ -35,6 +35,7 @@
     <string name="js">件数</string>
     <string name="rcp">运价点</string>
     <string name="grossWeight">毛重(kg)</string>
+    <string name="chargeableWeight">计费重量(kg)</string>
     <string name="rateClass">运价种类</string>
     <string name="productCode">商品代号</string>
     <string name="queren">确认</string>

@@ -444,32 +444,49 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     tvHwpm.setText("");
                     tvJs.setText("");
                 } else {
-                    switch (resultBean.errorCode) {
-                        case "SE210003":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE210003), resultBean.result.barCod));
-                            break;
-                        case "SE210004":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE210004), resultBean.result.alNumber, resultBean.result.canNumber));
-                            break;
-                        case "E000406":
-                            List<String> errors = new ArrayList<>();
-                            if (null != resultBean.result.goodsNameId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.goodsNameId));
-                            if (null != resultBean.result.wmsWarehouseId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseId));
-                            if (null != resultBean.result.wmsManifestId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsManifestId));
-                            if (null != resultBean.result.flightId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.flightId));
-                            if (null != resultBean.result.registerNumber)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.registerNumber));
-                            if (null != resultBean.result.goodsType)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.goodsType));
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "SE210003":
+                                errors.add(String.format(getResources().getString(R.string.SE210003), barCode));
+                                break;
+                            case "SE210004":
+                                errors.add(String.format(getResources().getString(R.string.SE210004), errorValues.get("alNumber"),errorValues.get("canNumber")));
+                                break;
+                        }
+                        if (errors.size() > 0)
                             ToastUtil.showCustom(mContext, errors);
-                            break;
-                        default:
-                            ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
-                            break;
+                    } else {
+                        List<String> errors = new ArrayList<>();
+                        switch (resultBean.errorCode) {
+                            case "E000406":
+                                if (null != resultBean.result.goodsNameId)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.goodsNameId));
+                                if (null != resultBean.result.wmsWarehouseId)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseId));
+                                if (null != resultBean.result.wmsManifestId)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsManifestId));
+                                if (null != resultBean.result.flightId)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.flightId));
+                                if (null != resultBean.result.registerNumber)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.registerNumber));
+                                if (null != resultBean.result.goodsType)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.goodsType));
+                                ToastUtil.showCustom(mContext, errors);
+                                break;
+                            case "SE210002":
+                                errors.add(getResources().getString(R.string.SE210002));
+                                break;
+                            default:
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
                     }
                 }
             }
@@ -598,7 +615,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 break;
             case R.id.tvHdxq:
                 new HangDanDetailDialog(mContext, departureStation, destinationStation, shipperName, shipperAddress, shipperPhone,
-                        receiverName, receiverAddress, receiverPhone, grossWeight, rateClass, number, productCode).show();
+                        receiverName, receiverAddress, receiverPhone, grossWeight,chargeableWeight, rateClass, number, productCode).show();
                 break;
             case R.id.tvSave:
                 addSortingRegister();

@@ -380,10 +380,10 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                     inStockDayEnd = "";
                 else
                     inStockDayEnd = tvInStockDayEnd.getText().toString();
-                if (TextUtils.isEmpty(tvInputDateStart.getText()))
+                if (TextUtils.isEmpty(tvInStockDayStart.getText()))
                     inStockDayStart = "";
                 else
-                    inStockDayStart = tvInputDateStart.getText().toString();
+                    inStockDayStart = tvInStockDayStart.getText().toString();
 
                 EventBus.getDefault().post(new StockSxEvent(barCode, awb, goodsType, goodsName,
                         productCode, wmsWarehouseId, wmsWarehouseDetailName, stockState, inputDateStart, inputDateEnd

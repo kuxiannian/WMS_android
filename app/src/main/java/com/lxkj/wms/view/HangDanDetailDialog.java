@@ -25,7 +25,7 @@ public class HangDanDetailDialog extends Dialog {
     TextView tvReceiverName;
     TextView tvReceiverAddress;
     TextView tvReceiverPhone;
-    TextView tvGrossWeight;
+    TextView tvGrossWeight,tvChargeableWeight;
     TextView tvRateClass;
     TextView tvNumber;
     TextView tvProductCode;
@@ -33,7 +33,7 @@ public class HangDanDetailDialog extends Dialog {
     private Context context;      // 上下文
 
     public HangDanDetailDialog(Context context, String departureStation, String destinationStation, String shipperName, String shipperAddress, String shipperPhone,
-                               String receiverName, String receiverAddress,String receiverPhone, String grossWeight, String rateClass, String number, String productCode) {
+                               String receiverName, String receiverAddress,String receiverPhone, String grossWeight,String chargeableWeight ,String rateClass, String number, String productCode) {
         super(context, R.style.Theme_dialog); //dialog的样式
         this.context = context;
         Window window = getWindow();
@@ -58,6 +58,7 @@ public class HangDanDetailDialog extends Dialog {
         tvReceiverAddress = findViewById(R.id.tvReceiverAddress);
         tvReceiverPhone = findViewById(R.id.tvReceiverPhone);
         tvGrossWeight = findViewById(R.id.tvGrossWeight);
+        tvChargeableWeight = findViewById(R.id.tvChargeableWeight);
         tvRateClass = findViewById(R.id.tvRateClass);
         tvNumber = findViewById(R.id.tvNumber);
         tvProductCode = findViewById(R.id.tvProductCode);
@@ -71,6 +72,7 @@ public class HangDanDetailDialog extends Dialog {
         tvReceiverAddress.setText(receiverAddress);
         tvReceiverPhone.setText(receiverPhone);
         tvGrossWeight.setText(grossWeight);
+        tvChargeableWeight.setText(chargeableWeight);
         tvRateClass.setText(rateClass);
         tvNumber.setText(number);
         tvProductCode.setText(productCode);

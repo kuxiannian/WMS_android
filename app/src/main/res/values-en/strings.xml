@@ -36,6 +36,7 @@
     <string name="js">Number</string>
     <string name="rcp">Freight point</string>
     <string name="grossWeight">Gross weight (kg)</string>
+    <string name="chargeableWeight">Billed weight (kg)</string>
     <string name="rateClass">Freight type</string>
     <string name="productCode">Goods code</string>
     <string name="queren">Confirm</string>
@@ -153,6 +154,7 @@
     <string name="VE210001">Primary key must not be empty</string>
     <string name="VE210002">Manifest information cannot be empty</string>
     <string name="VE210003">Flight cannot be empty</string>
+    <string name="VE180002">AWB cannot be empty</string>
     <string name="VE210004">The goods name (including packaging, volume or size) cannot be empty</string>
     <string name="VE210005">Sorting registration location cannot be empty</string>
     <string name="VE210006">Registration quantity cannot be empty</string>

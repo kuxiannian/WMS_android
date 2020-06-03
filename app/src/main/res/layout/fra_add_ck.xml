@@ -107,7 +107,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
-                android:inputType="phone"
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"

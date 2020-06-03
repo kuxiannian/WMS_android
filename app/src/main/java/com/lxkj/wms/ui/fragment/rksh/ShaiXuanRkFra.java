@@ -2,7 +2,9 @@ package com.lxkj.wms.ui.fragment.rksh;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.DateUtil;
+import com.lxkj.wms.utils.EditTextUtil;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.view.SingleChooseDialog;
 
@@ -120,6 +123,7 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
         ivAdd.setOnClickListener(this);
         ivReduce.setOnClickListener(this);
         tvCx.setOnClickListener(this);
+        tvWeight.addTextChangedListener(textWatcher);
         findWarehouseListBillInput();
     }
 
@@ -194,6 +198,21 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
         startTimePickerView.show();
     }
 
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            EditTextUtil.keepTwoDecimals(tvWeight, 10);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     @Override
     public int rightImg() {

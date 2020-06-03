@@ -27,6 +27,7 @@ import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.DateUtil;
+import com.lxkj.wms.utils.EditTextUtil;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.StringUtil;
@@ -202,7 +203,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 findTopByPriority();
             }
         });
-
+        etHeight.addTextChangedListener(textWatcher);
         if (null != barCode)
             etBarCode.setText(barCode);
         /**
@@ -394,22 +395,23 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
                 if (resultBean.flag) {
                     ToastUtil.show(mContext.getResources().getString(R.string.seSave));
-                    etBarCode.setText("");
-                    etHeight.setText("");
-                    etLength.setText("");
-                    etRemark.setText("");
-                    etWeight.setText("");
-                    etWidth.setText("");
-                    tvGoodsName.setText("");
-                    tvPalletNumber.setText("");
-                    tvProductCode.setText("");
-                    tvPutOnDate.setText("");
-                    tvWmsWarehouseDetailId.setText("");
-                    tvWmsWarehouseId.setText("");
-                    putOnDate = null;
-                    wmsStockId = null;
-                    wmsWarehouseId = null;
-                    wmsWarehouseDetailId = null;
+                    act.finishSelf();
+//                    etBarCode.setText("");
+//                    etHeight.setText("");
+//                    etLength.setText("");
+//                    etRemark.setText("");
+//                    etWeight.setText("");
+//                    etWidth.setText("");
+//                    tvGoodsName.setText("");
+//                    tvPalletNumber.setText("");
+//                    tvProductCode.setText("");
+//                    tvPutOnDate.setText("");
+//                    tvWmsWarehouseDetailId.setText("");
+//                    tvWmsWarehouseId.setText("");
+//                    putOnDate = null;
+//                    wmsStockId = null;
+//                    wmsWarehouseId = null;
+//                    wmsWarehouseDetailId = null;
                 } else {
                     switch (resultBean.errorCode) {
                         case "E000406":
@@ -465,6 +467,21 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 .build();
         startTimePickerView.show();
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            EditTextUtil.keepTwoDecimals(etWeight, 10);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     @Override
     public void onDestroyView() {

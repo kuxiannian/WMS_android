@@ -73,7 +73,7 @@ public class HistoryRkDetailFra extends TitleFragment {
             tvInputDate.setText(TimeUtil.stampToDate(contentBean.getInputDate(), "yyyy-MM-dd"));
             tvPalletNumber.setText(contentBean.getPalletNumber());
             tvProductCode.setText(contentBean.getProductCode());
-            tvWeight.setText(contentBean.getProductCode());
+            tvWeight.setText(contentBean.getWeight());
             tvWmsWarehouseName.setText(contentBean.getWmsWarehouseName());
         }
     }

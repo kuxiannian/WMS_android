@@ -117,7 +117,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 //                if (!TextUtils.isEmpty(etBarCode.getText()))
 //                    findInfoByBarCode(etBarCode.getText().toString());
 
-                etBarCode.setText("");
+
                 tvGoodsName.setText("");
                 tvGoodsType.setText("");
                 tvGoodsType.setText("");

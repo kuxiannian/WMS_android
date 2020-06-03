@@ -25,6 +25,7 @@ import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.DateUtil;
+import com.lxkj.wms.utils.EditTextUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.ToastUtil;
@@ -125,6 +126,8 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 tvWeight.setText("");
             }
         });
+
+        tvWeight.addTextChangedListener(textWatcher);
         if (null != barCode)
             etBarCode.setText(barCode);
         /**
@@ -334,6 +337,25 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 .build();
         startTimePickerView.show();
     }
+
+
+
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            EditTextUtil.keepTwoDecimals(tvWeight, 10);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     @Override
     public void onDestroyView() {

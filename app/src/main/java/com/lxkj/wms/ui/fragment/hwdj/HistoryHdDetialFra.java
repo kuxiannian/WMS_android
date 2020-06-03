@@ -261,7 +261,7 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
             case R.id.tvHdxq:
                 //展示航单详情
                 new HangDanDetailDialog(mContext, departureStation, destinationStation, shipperName, shipperAddress, shipperPhone,
-                        receiverName, receiverAddress, receiverPhone, grossWeight, rateClass, number, productCode).show();
+                        receiverName, receiverAddress, receiverPhone, grossWeight,chargeableWeight, rateClass, number, productCode).show();
                 break;
             case R.id.tvTxm:
                 //展示条形码
