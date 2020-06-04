@@ -160,7 +160,8 @@ public class ShaiXuanFra extends TitleFragment implements NaviActivity.NaviRigth
                     djNum = Integer.parseInt(tvDjjs.getText().toString());
                 else
                     djNum = 0;
-                djNum++;
+                if (djNum < 9999999)
+                    djNum++;
                 tvDjjs.setText(djNum + "");
                 break;
             case R.id.ivReduce:

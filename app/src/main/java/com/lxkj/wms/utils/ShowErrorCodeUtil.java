@@ -420,6 +420,9 @@ public class ShowErrorCodeUtil {
             case "VE210011":
                 error = context.getString(R.string.VE210008);
                 break;
+            case "SE180010":
+                error = context.getString(R.string.SE180010);
+                break;
             //入库单
             case "VE100001":
                 error = context.getString(R.string.VE100001);
@@ -518,6 +521,9 @@ public class ShowErrorCodeUtil {
                 break;
             case "VE120008":
                 error = context.getString(R.string.VE120008);
+                break;
+            case "VE120009":
+                error = context.getString(R.string.VE120009);
                 break;
             //出库单
             case "VE130001":

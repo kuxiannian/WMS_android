@@ -259,8 +259,9 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                     djNum = 0;
                 else
                     djNum = Integer.parseInt(tvInStockDayStart.getText().toString());
-                djNum++;
-                inStockDayStart = djNum+"";
+                if (djNum < 9999999)
+                    djNum++;
+                inStockDayStart = djNum + "";
                 tvInStockDayStart.setText(djNum + "");
                 break;
             case R.id.ivReduceStockDayStart:
@@ -270,7 +271,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                     djNum = Integer.parseInt(tvInStockDayStart.getText().toString());
                 if (djNum > 0)
                     djNum--;
-                inStockDayStart = djNum+"";
+                inStockDayStart = djNum + "";
                 tvInStockDayStart.setText(djNum + "");
                 break;
             case R.id.ivAddStockDayEnd:
@@ -278,8 +279,9 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                     djNum = 0;
                 else
                     djNum = Integer.parseInt(tvInStockDayEnd.getText().toString());
-                djNum++;
-                inStockDayEnd = djNum+"";
+                if (djNum < 9999999)
+                    djNum++;
+                inStockDayEnd = djNum + "";
                 tvInStockDayEnd.setText(djNum + "");
                 break;
             case R.id.ivReduceStockDayEnd:
@@ -289,7 +291,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
                     djNum = Integer.parseInt(tvInStockDayStart.getText().toString());
                 if (djNum > 0)
                     djNum--;
-                inStockDayEnd = djNum+"";
+                inStockDayEnd = djNum + "";
                 tvInStockDayStart.setText(djNum + "");
                 break;
             case R.id.tvWmsWarehouseId:
@@ -387,7 +389,7 @@ public class ShaiXuanKcFra extends TitleFragment implements NaviActivity.NaviRig
 
                 EventBus.getDefault().post(new StockSxEvent(barCode, awb, goodsType, goodsName,
                         productCode, wmsWarehouseId, wmsWarehouseDetailName, stockState, inputDateStart, inputDateEnd
-                        , outputDateStart,outputDateEnd,inStockDayStart,inStockDayEnd,updaterName,updateDateStart,updateDateEnd));
+                        , outputDateStart, outputDateEnd, inStockDayStart, inStockDayEnd, updaterName, updateDateStart, updateDateEnd));
                 act.finishSelf();
                 break;
         }

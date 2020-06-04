@@ -210,6 +210,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
+                android:maxLength="200"
                 android:enabled="false"
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/txt_size_14"
@@ -230,6 +231,7 @@
                 android:layout_marginBottom="50dp"
                 android:textColor="@color/txt_lv6"
                 android:layout_marginTop="5dp"
+                android:maxLength="200"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
                 android:background="@drawable/bg_border_efefef_5dp"/>

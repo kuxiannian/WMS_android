@@ -135,6 +135,7 @@
                 android:id="@+id/etRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="200"
                 android:textColor="@color/txt_lv6"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="50dp"

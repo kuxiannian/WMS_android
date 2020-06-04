@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:maxLength="50"
                 android:background="@drawable/bg_border_efefef_5dp"
                 android:padding="12dp"
                 android:textColor="@color/txt_lv6"

@@ -276,17 +276,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                             ToastUtil.showCustom(mContext, errors);
                     } else {
                         List<String> errors = new ArrayList<>();
-                        switch (resultBean.errorCode) {
-                            case "SE110003":
-                                errors.add(getResources().getString(R.string.SE110003));
-                                break;
-                            case "SE110004":
-                                errors.add(getResources().getString(R.string.SE110004));
-                                break;
-                            default:
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
-                                break;
-                        }
+                        errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
                         if (errors.size() > 0)
                             ToastUtil.showCustom(mContext, errors);
                     }
@@ -343,8 +333,8 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
      * 上架时输入长、宽、高自动分配储位接口
      */
     private void findTopByPriority() {
-//        if (TextUtils.isEmpty(etLength.getText()) || TextUtils.isEmpty(etWidth.getText()) || TextUtils.isEmpty(etHeight.getText()) || null != wmsWarehouseId)
-//            return;
+        if (null == wmsWarehouseId)
+            return;
         Map<String, String> params = new HashMap<>();
         params.put("length", etLength.getText().toString());//长
         params.put("width", etWidth.getText().toString());//宽
@@ -383,6 +373,22 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
      * 新增数据接口
      */
     private void addBillPutOn() {
+        List<String> errors = new ArrayList<>();
+        if (TextUtils.isEmpty(etLength.getText())){
+            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110007"));
+            ToastUtil.showCustom(mContext, errors);
+            return;
+        }
+        if (TextUtils.isEmpty(etWidth.getText())){
+            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110008"));
+            ToastUtil.showCustom(mContext, errors);
+            return;
+        }
+        if (TextUtils.isEmpty(etHeight.getText())){
+            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110009"));
+            ToastUtil.showCustom(mContext, errors);
+            return;
+        }
         Map<String, String> params = new HashMap<>();
         if (!StringUtil.isEmpty(etBarCode.getText().toString()))
             params.put("barCode", etBarCode.getText().toString());
@@ -428,28 +434,50 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 //                    wmsWarehouseId = null;
 //                    wmsWarehouseDetailId = null;
                 } else {
-                    switch (resultBean.errorCode) {
-                        case "E000406":
-                            List<String> errors = new ArrayList<>();
-                            if (null != resultBean.result.wmsStockId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsStockId));
-                            if (null != resultBean.result.wmsWarehouseId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseId));
-                            if (null != resultBean.result.putOnDate)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.putOnDate));
-                            if (null != resultBean.result.weight)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.weight));
-                            if (null != resultBean.result.wmsWarehouseDetailId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseDetailId));
-                            if (null != resultBean.result.barCode)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.barCode));
+                    if (resultBean.errorCode.contains("?")) {
+                        String[] error = resultBean.errorCode.split("\\?");
+                        String errorCode = error[0];
+                        Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
+                        String barCode = errorValues.get("barCode");
+                        List<String> errors = new ArrayList<>();
+                        switch (errorCode) {
+                            case "SE110001":
+                                errors.add(String.format(getResources().getString(R.string.SE110001), barCode, errorValues.get("code")));
+                                break;
+                            case "SE110002":
+                                errors.add(String.format(getResources().getString(R.string.SE110002), errorValues.get("code")));
+                                break;
+                        }
+                        if (errors.size() > 0)
                             ToastUtil.showCustom(mContext, errors);
-                            break;
-                        default:
-                            ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
-                            break;
+                    } else {
+                        List<String> errors = new ArrayList<>();
+                        switch (resultBean.errorCode) {
+                            case "E000406":
+                                if (null != resultBean.result.wmsStockId)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsStockId));
+                                if (null != resultBean.result.wmsWarehouseId)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseId));
+                                if (null != resultBean.result.putOnDate)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.putOnDate));
+                                if (null != resultBean.result.weight)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.weight));
+                                if (null != resultBean.result.wmsWarehouseDetailId)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseDetailId));
+                                if (null != resultBean.result.barCode)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.barCode));
+                                break;
+                            default:
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
+                                break;
+                        }
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
+
+
                     }
                 }
+
             }
 
             @Override
@@ -528,7 +556,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     djNum = 0;
                 else
                     djNum = Double.parseDouble(etWeight.getText().toString());
-                djNum++;
+                    djNum++;
                 etWeight.setText(djNum + "");
                 break;
             case R.id.ivReduce:
@@ -541,12 +569,13 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 etWeight.setText(djNum + "");
                 break;
             case R.id.ivAddLength:
-                if (TextUtils.isEmpty(etHeight.getText()))
+                if (TextUtils.isEmpty(etLength.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etHeight.getText().toString());
-                djNum++;
-                etHeight.setText(djNum + "");
+                    djNum = Double.parseDouble(etLength.getText().toString());
+                if (djNum < 9999999)
+                    djNum++;
+                etLength.setText(djNum + "");
                 break;
             case R.id.ivReduceLength:
                 if (TextUtils.isEmpty(etLength.getText()))
@@ -562,7 +591,8 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     djNum = 0;
                 else
                     djNum = Double.parseDouble(etWidth.getText().toString());
-                djNum++;
+                if (djNum < 9999999)
+                    djNum++;
                 etWidth.setText(djNum + "");
                 break;
             case R.id.ivReduceWidth:

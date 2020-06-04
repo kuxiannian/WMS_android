@@ -373,9 +373,9 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
             ToastUtil.show(mContext.getString(R.string.VE210006));
             return;
         }
-
-        if (TextUtils.isEmpty(tvFjdjdd.getText())) {
-            ToastUtil.show(mContext.getString(R.string.VE210005));
+        if (TextUtils.isEmpty(tvDjjs.getText())) {
+            Integer.parseInt(tvDjjs.getText().toString());
+            ToastUtil.show(mContext.getString(R.string.VE210006));
             return;
         }
 

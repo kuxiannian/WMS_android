@@ -102,9 +102,11 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
                 tvGoodsName.setText("");
@@ -135,6 +137,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
             @Override
             public void onFailure(Request request, Exception e) {
             }
+
             @Override
             public void onSuccess(Response response, String result) {
                 ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
@@ -172,7 +175,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                         }
                         if (errors.size() > 0)
                             ToastUtil.showCustom(mContext, errors);
-                    }else {
+                    } else {
                         List<String> errors = new ArrayList<>();
                         switch (resultBean.errorCode) {
                             default:
@@ -184,6 +187,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                     }
                 }
             }
+
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -196,7 +200,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
      */
     private void addBillPutOff() {
         Map<String, String> params = new HashMap<>();
-            params.put("barCode", etBarCode.getText().toString());
+        params.put("barCode", etBarCode.getText().toString());
         if (null != putOffDate)
             params.put("putOffDate", putOffDate);
         if (null != wmsWarehouseId)
@@ -215,25 +219,28 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                     ToastUtil.show(mContext.getResources().getString(R.string.seSave));
                     act.finishSelf();
                 } else {
+                    List<String> errors = new ArrayList<>();
                     switch (resultBean.errorCode) {
                         case "E000406":
-                            List<String> errors = new ArrayList<>();
+
                             if (null != resultBean.result.wmsWarehouseId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseId));
                             if (null != resultBean.result.wmsStockId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsStockId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsStockId));
                             if (null != resultBean.result.putOffDate)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.putOffDate));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.putOffDate));
                             if (null != resultBean.result.wmsWarehouseDetailId)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.wmsWarehouseDetailId));
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseDetailId));
                             if (null != resultBean.result.barCode)
-                                errors.add(ShowErrorCodeUtil.getErrorString(mContext,resultBean.result.barCode));
-                            ToastUtil.showCustom(mContext,errors);
+                                errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.barCode));
+
                             break;
                         default:
-                            ShowErrorCodeUtil.showError(mContext, resultBean.errorCode);
+                            errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
                             break;
                     }
+                    if (errors.size() > 0)
+                        ToastUtil.showCustom(mContext, errors);
                 }
             }
 
