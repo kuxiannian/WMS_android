@@ -75,7 +75,7 @@
     <string name="ckrq">出库日期</string>
     <string name="thdbh">提货单编号</string>
     <string name="thr">提货人</string>
-    <string name="thrlxfs">提货联系人方式</string>
+    <string name="thrlxfs">提货人联系方式</string>
     <string name="ckck">出库仓库</string>
 
     <string name="ck">仓库</string>

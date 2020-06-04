@@ -86,10 +86,10 @@ public class EditStockCheckDialog extends Dialog {
                     ToastUtil.show(context.getResources().getString(R.string.VE100002));
                     return;
                 }
-                if (null == wmsWarehouseDetailId) {
-                    ToastUtil.show(context.getResources().getString(R.string.VE500003));
-                    return;
-                }
+//                if (null == wmsWarehouseDetailId) {
+//                    ToastUtil.show(context.getResources().getString(R.string.VE500003));
+//                    return;
+//                }
                 onConfirmListener.onConfirm(etBarCode.getText().toString(), wmsWarehouseDetailId);
                 dismiss();
             }

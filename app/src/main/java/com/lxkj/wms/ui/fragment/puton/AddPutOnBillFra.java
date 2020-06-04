@@ -203,7 +203,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 findTopByPriority();
             }
         });
-        etHeight.addTextChangedListener(textWatcher);
+        etWeight.addTextChangedListener(textWatcher);
         if (null != barCode)
             etBarCode.setText(barCode);
         /**
@@ -307,7 +307,6 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
         Map<String, String> params = new HashMap<>();
         params.put("wmsWarehouseId", wmsWarehouseId);
         params.put("state", "1");
-
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseDetailList, params, new BaseCallback<WareHouseBean>() {
             @Override
             public void onFailure(Request request, Exception e) {
@@ -318,11 +317,18 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 if (resultBean.flag) {
                     if (null != resultBean.getResult()) {
                         topList = resultBean.getResult();
-                        if (resultBean.getResult().size() == 1) {
-                            wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
-                            tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
+                        if (resultBean.getResult().size() >= 1) {
+//                            wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
+//                            tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
+                            tvWmsWarehouseDetailId.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
+                        } else {
+                            wmsWarehouseDetailId = null;
+                            tvWmsWarehouseDetailId.setText("");
                         }
-                        tvWmsWarehouseDetailId.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
+
+                    } else {
+                        wmsWarehouseDetailId = null;
+                        tvWmsWarehouseDetailId.setText("");
                     }
                 }
             }
@@ -349,12 +355,21 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
             @Override
             public void onSuccess(Response response, WareHouseBean resultBean) {
                 if (resultBean.flag) {
-                    topList = resultBean.getResult();
-                    if (resultBean.getResult().size() == 1) {
-                        wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
-                        tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
+                    if (null != resultBean.getResult()) {
+//                        topList = resultBean.getResult();
+                        if (resultBean.getResult().size() >= 1) {
+                            wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
+                            tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
+                            if (topList.size() > 1)
+                                tvWmsWarehouseDetailId.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
+                        } else {
+                            wmsWarehouseDetailId = null;
+                            tvWmsWarehouseDetailId.setText("");
+                        }
+                    } else {
+                        wmsWarehouseDetailId = null;
+                        tvWmsWarehouseDetailId.setText("");
                     }
-                    tvWmsWarehouseDetailId.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
                 }
             }
 

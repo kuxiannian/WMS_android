@@ -5,11 +5,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.TimeUtil;
 
 import butterknife.BindView;
@@ -39,6 +41,12 @@ public class HistoryRkDetailFra extends TitleFragment {
     TextView tvProductCode;
     @BindView(R.id.tvGoodsName)
     TextView tvGoodsName;
+    @BindView(R.id.llFjdjdd)
+    LinearLayout llFjdjdd;
+    @BindView(R.id.llHwfl)
+    LinearLayout llHwfl;
+    @BindView(R.id.tvRemarks)
+    TextView tvRemarks;
 
     @Override
     public String getTitleName() {
@@ -70,6 +78,8 @@ public class HistoryRkDetailFra extends TitleFragment {
                     tvGoodsType.setText(R.string.goodsTypeC);
                     break;
             }
+            if (!StringUtil.isEmpty(contentBean.getRemarks()))
+                tvRemarks.setText(contentBean.getRemarks());
             tvInputDate.setText(TimeUtil.stampToDate(contentBean.getInputDate(), "yyyy-MM-dd"));
             tvPalletNumber.setText(contentBean.getPalletNumber());
             tvProductCode.setText(contentBean.getProductCode());

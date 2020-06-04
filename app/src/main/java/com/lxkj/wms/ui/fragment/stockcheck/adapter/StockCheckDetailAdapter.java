@@ -63,8 +63,13 @@ public class StockCheckDetailAdapter extends RecyclerView.Adapter<StockCheckDeta
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvBarCode.setText(mDatas.get(position).getBarCode());
+
         holder.tvWmsWarehouseId.setText(getWmsWarehouseName(mDatas.get(position).getWmsWarehouseId()));
-        holder.tvWmsWarehouseDetailId.setText(getWmsWarehouseDetailName(mDatas.get(position).getWmsWarehouseDetailId()));
+        if (null != mDatas.get(position).getWmsWarehouseDetailId())
+            holder.tvWmsWarehouseDetailId.setText(getWmsWarehouseDetailName(mDatas.get(position).getWmsWarehouseDetailId()));
+        else
+            holder.tvWmsWarehouseDetailId.setText("-");
+
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
