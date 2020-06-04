@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.SortingRegisterBean;
 import com.lxkj.wms.ui.fragment.TitleFragment;
+import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.TimeUtil;
 
 import butterknife.BindView;
@@ -73,8 +74,10 @@ public class HistoryCkDetailFra extends TitleFragment {
             tvproductCode.setText(contentBean.getProductCode());
             tvgoodsName.setText(contentBean.getGoodsName());
             tvsuspicion.setText(contentBean.getSuspicion());
-            tvsuspicionProblem.setText(contentBean.getSuspicionProblem());
-            tvremarks.setText(contentBean.getRemarks());
+            if (!StringUtil.isEmpty(contentBean.getSuspicionProblem()))
+                tvsuspicionProblem.setText(contentBean.getSuspicionProblem());
+            if (!StringUtil.isEmpty(contentBean.getRemarks()))
+                tvremarks.setText(contentBean.getRemarks());
 
             if (null != contentBean.getSuspicion()) {
                 switch (contentBean.getSuspicion()) {

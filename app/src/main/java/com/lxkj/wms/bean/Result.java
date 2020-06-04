@@ -74,4 +74,7 @@ public class Result {
     public String consignorPhone;
     public String putOnDate;
     public String putOffDate;
+    public String length;
+    public String width;
+    public String height;
 }

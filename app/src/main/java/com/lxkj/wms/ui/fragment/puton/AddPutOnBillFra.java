@@ -373,22 +373,22 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
      * 新增数据接口
      */
     private void addBillPutOn() {
-        List<String> errors = new ArrayList<>();
-        if (TextUtils.isEmpty(etLength.getText())){
-            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110007"));
-            ToastUtil.showCustom(mContext, errors);
-            return;
-        }
-        if (TextUtils.isEmpty(etWidth.getText())){
-            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110008"));
-            ToastUtil.showCustom(mContext, errors);
-            return;
-        }
-        if (TextUtils.isEmpty(etHeight.getText())){
-            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110009"));
-            ToastUtil.showCustom(mContext, errors);
-            return;
-        }
+//        List<String> errors = new ArrayList<>();
+//        if (TextUtils.isEmpty(etLength.getText())){
+//            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110007"));
+//            ToastUtil.showCustom(mContext, errors);
+//            return;
+//        }
+//        if (TextUtils.isEmpty(etWidth.getText())){
+//            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110008"));
+//            ToastUtil.showCustom(mContext, errors);
+//            return;
+//        }
+//        if (TextUtils.isEmpty(etHeight.getText())){
+//            errors.add(ShowErrorCodeUtil.getErrorString(mContext, "VE110009"));
+//            ToastUtil.showCustom(mContext, errors);
+//            return;
+//        }
         Map<String, String> params = new HashMap<>();
         if (!StringUtil.isEmpty(etBarCode.getText().toString()))
             params.put("barCode", etBarCode.getText().toString());
@@ -466,6 +466,12 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                                     errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.wmsWarehouseDetailId));
                                 if (null != resultBean.result.barCode)
                                     errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.barCode));
+                                if (null != resultBean.result.length)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.length));
+                                if (null != resultBean.result.width)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.width));
+                                if (null != resultBean.result.height)
+                                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.result.height));
                                 break;
                             default:
                                 errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));

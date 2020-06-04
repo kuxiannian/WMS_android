@@ -293,6 +293,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingTop="5dp"
+                    android:text="-"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
                 <View

@@ -78,7 +78,8 @@ public class HistoryPutOnDetailFra extends TitleFragment {
             tvWidth.setText(contentBean.getWidth());
             tvHeight.setText(contentBean.getHeight());
             tvWmsWarehouseDetailIdName.setText(contentBean.getWmsWarehouseDetailIdName());
-            tvRemarks.setText(contentBean.getRemarks());
+            if (!StringUtil.isEmpty(contentBean.getRemarks()))
+                tvRemarks.setText(contentBean.getRemarks());
         }
     }
 

@@ -173,6 +173,30 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 //                    findManifestByAwb(etAwb.getText().toString());
             }
         });
+
+        tvDjjs.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!TextUtils.isEmpty(tvDjjs.getText()))
+                    djNum = Integer.parseInt(tvDjjs.getText().toString());
+                else
+                    djNum = 0;
+                if (djNum > 1000){
+                    djNum = 1000;
+                    tvDjjs.setText("1000");
+                }
+            }
+        });
         findWarehouseList();
     }
 
@@ -373,9 +397,10 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
             ToastUtil.show(mContext.getString(R.string.VE210006));
             return;
         }
-        if (TextUtils.isEmpty(tvDjjs.getText())) {
-            Integer.parseInt(tvDjjs.getText().toString());
-            ToastUtil.show(mContext.getString(R.string.VE210006));
+        int num = Integer.parseInt(tvDjjs.getText().toString());
+        List<String> errors = new ArrayList<>();
+        if (num > 1000) {
+            errors.add(getResources().getString(R.string.SE180010));
             return;
         }
 
@@ -455,7 +480,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                                 errors.add(String.format(getResources().getString(R.string.SE210003), barCode));
                                 break;
                             case "SE210004":
-                                errors.add(String.format(getResources().getString(R.string.SE210004), errorValues.get("alNumber"),errorValues.get("canNumber")));
+                                errors.add(String.format(getResources().getString(R.string.SE210004), errorValues.get("alNumber"), errorValues.get("canNumber")));
                                 break;
                         }
                         if (errors.size() > 0)
@@ -559,7 +584,8 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     djNum = Integer.parseInt(tvDjjs.getText().toString());
                 else
                     djNum = 0;
-                djNum++;
+                if (djNum < 1000)
+                    djNum++;
                 if (djNum > 0)
                     tvDjjs.setText(djNum + "");
                 else
@@ -615,7 +641,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                 break;
             case R.id.tvHdxq:
                 new HangDanDetailDialog(mContext, departureStation, destinationStation, shipperName, shipperAddress, shipperPhone,
-                        receiverName, receiverAddress, receiverPhone, grossWeight,chargeableWeight, rateClass, number, productCode).show();
+                        receiverName, receiverAddress, receiverPhone, grossWeight, chargeableWeight, rateClass, number, productCode).show();
                 break;
             case R.id.tvSave:
                 addSortingRegister();

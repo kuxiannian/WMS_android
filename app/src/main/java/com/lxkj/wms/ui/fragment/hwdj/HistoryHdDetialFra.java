@@ -21,6 +21,7 @@ import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
+import com.lxkj.wms.utils.StringUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.HangDanDetailDialog;
 import com.lxkj.wms.view.HintDialog;
@@ -69,6 +70,8 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
     TextView tvWmsWarehouseName;
     @BindView(R.id.tvGoodsType)
     TextView tvGoodsType;
+    @BindView(R.id.tvRemarks)
+    TextView tvRemarks;
     private List<String> goodsTypeList;
 
     List<String> barCodes; //条形码集合
@@ -121,6 +124,8 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
             tvGoodsName.setText(contentBean.getGoodsName());
             tvRegisterNumber.setText(contentBean.getRegisterNumber());
             tvWmsWarehouseName.setText(contentBean.getWmsWarehouseName());
+            if (!StringUtil.isEmpty(contentBean.getRemarks()))
+                tvRemarks.setText(contentBean.getRemarks());
             goodsType = contentBean.getGoodsType();
             switch (goodsType) {
                 case "A":
@@ -216,6 +221,7 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
 
                 }
             }
+
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -232,6 +238,7 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
             @Override
             public void onFailure(Request request, Exception e) {
             }
+
             @Override
             public void onSuccess(Response response, SortingRegisterDetailBean resultBean) {
                 if (resultBean.flag) {
@@ -242,6 +249,7 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
                     }
                 }
             }
+
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -261,7 +269,7 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
             case R.id.tvHdxq:
                 //展示航单详情
                 new HangDanDetailDialog(mContext, departureStation, destinationStation, shipperName, shipperAddress, shipperPhone,
-                        receiverName, receiverAddress, receiverPhone, grossWeight,chargeableWeight, rateClass, number, productCode).show();
+                        receiverName, receiverAddress, receiverPhone, grossWeight, chargeableWeight, rateClass, number, productCode).show();
                 break;
             case R.id.tvTxm:
                 //展示条形码
