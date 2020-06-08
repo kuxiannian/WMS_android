@@ -12,7 +12,7 @@ public class AppConsts {
     public static String Language = "Language";
     public static String IP = "ip";
 
-
+    public static boolean isRestar = false;
 
 
 }

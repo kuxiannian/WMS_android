@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.tu.loadingdialog.LoadingDailog;
 
 import okhttp3.Request;
+import okhttp3.Response;
 
 
 public abstract class SpotsCallBack<T> extends BaseCallback<T> {
@@ -16,8 +17,8 @@ public abstract class SpotsCallBack<T> extends BaseCallback<T> {
         mContext = context;
         loadBuilder = new LoadingDailog.Builder(mContext)
                 .setMessage("加载中...")
-                .setCancelable(true)
-                .setCancelOutside(true);
+                .setCancelable(false)
+                .setCancelOutside(false);
         mDialog = loadBuilder.create();
     }
 
@@ -43,5 +44,16 @@ public abstract class SpotsCallBack<T> extends BaseCallback<T> {
     public void onFailure(Request request, Exception e) {
         dismissDialog();
     }
+
+    @Override
+    public void onBeforeRequest(Request request) {
+        showDialog();
+    }
+
+    @Override
+    public void onResponse(Response response) {
+        dismissDialog();
+    }
+
 
 }

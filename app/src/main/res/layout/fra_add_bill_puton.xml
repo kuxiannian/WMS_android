@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_lv6"
                 android:layout_marginTop="5dp"
+                android:singleLine="true"
                 android:textSize="@dimen/txt_size_14"
                 android:padding="12dp"
                 android:background="@drawable/bg_border_efefef_5dp"/>

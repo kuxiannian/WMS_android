@@ -20,7 +20,6 @@ import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.ui.fragment.hwdj.adapter.HistoryHdAdapter;
-import com.lxkj.wms.ui.fragment.rksh.ShaiXuanRkFra;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.StringUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -151,6 +150,16 @@ public class HistoryHdFra extends TitleFragment implements NaviRightListener {
             params.put("productCode", productCode);
 
         OkHttpHelper.getInstance().get_json(mContext, Url.findSortingRegisterPage, params, new BaseCallback<SortingRegisterBean>() {
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
             @Override
             public void onFailure(Request request, Exception e) {
                 refreshLayout.finishRefresh();

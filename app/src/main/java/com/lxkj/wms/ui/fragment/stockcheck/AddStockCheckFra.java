@@ -122,7 +122,7 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
 
             @Override
             public void onEdit(int position) {
-                new EditStockCheckDialog(mContext, warehouseDetailList, list.get(position).getWmsWarehouseDetailId(),  list.get(position).getBarCode(), new EditStockCheckDialog.OnConfirmListener() {
+                new EditStockCheckDialog(mContext, warehouseDetailList, list.get(position).getWmsWarehouseDetailId(), wmsWarehouseName, list.get(position).getBarCode(), new EditStockCheckDialog.OnConfirmListener() {
                     @Override
                     public void onConfirm(String barCode, String wmsWarehouseDetailId) {
                         list.get(position).setBarCode(barCode);
@@ -159,6 +159,16 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
         params.put("wmsBillStockCheckId", wmsBillStockCheckId);
         OkHttpHelper.getInstance().get_json(mContext, Url.findBillStockCheckDetailList, params, new BaseCallback<WareHouseBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
                 refreshLayout.finishRefresh();
                 refreshLayout.finishLoadMore();
@@ -193,6 +203,16 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseListStockCheck, params, new BaseCallback<WareHouseBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 
@@ -223,6 +243,16 @@ public class AddStockCheckFra extends TitleFragment implements NaviRightListener
         params.put("state", bean.getState());
 
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseDetailList, params, new BaseCallback<WareHouseBean>() {
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
             @Override
             public void onFailure(Request request, Exception e) {
             }

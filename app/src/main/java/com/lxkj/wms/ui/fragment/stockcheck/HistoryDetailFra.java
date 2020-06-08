@@ -96,6 +96,16 @@ public class HistoryDetailFra extends TitleFragment {
         params.put("wmsBillStockCheckId", wmsBillStockCheckId);
         OkHttpHelper.getInstance().get_json(mContext, Url.findBillStockCheckDetailList, params, new BaseCallback<WareHouseBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
                 refreshLayout.finishRefresh();
                 refreshLayout.finishLoadMore();
@@ -132,6 +142,16 @@ public class HistoryDetailFra extends TitleFragment {
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseListStockCheck, params, new BaseCallback<WareHouseBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 
@@ -160,6 +180,16 @@ public class HistoryDetailFra extends TitleFragment {
         params.put("state", "1");
 
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseDetailList, params, new BaseCallback<WareHouseBean>() {
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
             @Override
             public void onFailure(Request request, Exception e) {
             }

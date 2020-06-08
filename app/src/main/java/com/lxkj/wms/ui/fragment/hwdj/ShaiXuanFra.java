@@ -114,6 +114,16 @@ public class ShaiXuanFra extends TitleFragment implements NaviActivity.NaviRigth
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseList, params, new BaseCallback<WareHouseBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 

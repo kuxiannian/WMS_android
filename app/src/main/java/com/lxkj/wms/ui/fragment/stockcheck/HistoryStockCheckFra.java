@@ -154,6 +154,16 @@ public class HistoryStockCheckFra  extends TitleFragment implements NaviRightLis
 
         OkHttpHelper.getInstance().get_json(mContext, Url.findBillStockCheckPage, params, new BaseCallback<SortingRegisterBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
                 refreshLayout.finishRefresh();
                 refreshLayout.finishLoadMore();
@@ -195,6 +205,16 @@ public class HistoryStockCheckFra  extends TitleFragment implements NaviRightLis
     private void findWarehouseListStockCheck() {
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseListStockCheck, params, new BaseCallback<WareHouseBean>() {
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
             @Override
             public void onFailure(Request request, Exception e) {
             }

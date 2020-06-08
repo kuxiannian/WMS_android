@@ -55,6 +55,18 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        isResume = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isResume = true;
+    }
+
+    @Override
     public int rightImg() {
         return R.mipmap.ic_time;
     }
@@ -79,18 +91,18 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
             case R.id.tvOpen:
                 isOpen = false;
                 api.scan();
-                Intent it=new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");
+                Intent it = new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");
                 act.sendBroadcast(it);
                 // 添加剪贴板数据改变监听器
                 clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
                     @Override
                     public void onPrimaryClipChanged() {
-                        if (!isOpen){
+                        if (!isOpen && isResume) {
                             // 剪贴板中的数据被改变，此方法将被回调
-                            String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                            String str = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
                             Bundle bundle = new Bundle();
-                            bundle.putString("barCode",str.replace("\n",""));
-                            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+                            bundle.putString("barCode", str.replace("\n", ""));
+                            ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
                             isOpen = true;
                         }
                     }
@@ -106,10 +118,12 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
 
     @Override
     public void onBarCodeData(String data) {
-        api.closeScan();
-        Bundle bundle = new Bundle();
-        bundle.putString("barCode",data.replace("\n",""));
-        ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+        if (isResume){
+            api.closeScan();
+            Bundle bundle = new Bundle();
+            bundle.putString("barCode", data.replace("\n", ""));
+            ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
+        }
     }
 
     @Override

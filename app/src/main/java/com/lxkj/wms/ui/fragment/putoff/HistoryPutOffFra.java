@@ -153,6 +153,16 @@ public class HistoryPutOffFra extends TitleFragment implements NaviRightListener
 
         OkHttpHelper.getInstance().get_json(mContext, Url.findBillPutOffPage, params, new BaseCallback<SortingRegisterBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
                 refreshLayout.finishRefresh();
                 refreshLayout.finishLoadMore();

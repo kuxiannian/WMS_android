@@ -1,13 +1,16 @@
 package com.lxkj.wms.ui.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.lxkj.wms.GlobalBeans;
 import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivityWatcher;
 import com.lxkj.wms.biz.EventCenter;
+import com.lxkj.wms.utils.AppUtil;
 import com.yalantis.ucrop.util.ScreenUtils;
 
 
@@ -26,10 +29,12 @@ public class BaseFragAct extends AppCompatActivity {
         super.onCreate(arg0);
         initImmersionBar();
         int screenWidth = ScreenUtils.getScreenWidth(this);
-//        if (screenWidth > 950)
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//        else
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        Log.e("dpWidth",AppUtil.px2dip(this,screenWidth)+"");
+        Log.e("dpHeight",AppUtil.px2dip(this,ScreenUtils.getScreenHeight(this))+"");
+        if (AppUtil.px2dip(this,screenWidth) > 500)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
 

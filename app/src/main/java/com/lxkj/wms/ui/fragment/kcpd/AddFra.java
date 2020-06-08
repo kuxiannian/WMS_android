@@ -57,6 +57,18 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        isResume = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isResume = true;
+    }
+
+    @Override
     public int rightImg() {
         return R.mipmap.ic_time;
     }
@@ -89,7 +101,7 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
                 clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
                     @Override
                     public void onPrimaryClipChanged() {
-                        if (!isOpen){
+                        if (!isOpen && isResume){
                             // 剪贴板中的数据被改变，此方法将被回调
                             String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
 //                            Bundle bundle = new Bundle();
@@ -112,10 +124,12 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
 
     @Override
     public void onBarCodeData(String data) {
-        api.closeScan();
-        Bundle bundle = new Bundle();
-        bundle.putString("barCode",data.replace("\n",""));
-        ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+        if (isResume){
+            api.closeScan();
+            Bundle bundle = new Bundle();
+            bundle.putString("barCode",data.replace("\n",""));
+            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+        }
     }
 
     @Override

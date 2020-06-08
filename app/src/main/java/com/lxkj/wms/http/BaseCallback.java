@@ -26,6 +26,9 @@ public abstract class BaseCallback<T> {
     public BaseCallback() {
         mType = getSuperclassTypeParameter(getClass());
     }
+
+    public abstract void onBeforeRequest(Request request);
+    public abstract void onResponse(Response response);
     public abstract void onFailure(Request request, Exception e);
     /**
      * 状态码大于200，小于300 时调用此方法

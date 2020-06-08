@@ -110,6 +110,16 @@ public class ShaiXuanPutOffFra extends TitleFragment implements NaviActivity.Nav
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseListBillPutOff, params, new BaseCallback<WareHouseBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 

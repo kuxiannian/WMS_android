@@ -183,6 +183,16 @@ public class KcpdFra  extends TitleFragment implements NaviRightListener {
 
         OkHttpHelper.getInstance().get_json(mContext, Url.findStockPage, params, new BaseCallback<SortingRegisterBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
                 refreshLayout.finishRefresh();
                 refreshLayout.finishLoadMore();

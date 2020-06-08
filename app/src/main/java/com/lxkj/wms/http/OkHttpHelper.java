@@ -159,6 +159,7 @@ public class OkHttpHelper {
      * @param callback
      */
     private void request(final Request request, final BaseCallback callback) {
+        callback.onBeforeRequest(request);
         mHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -366,6 +367,7 @@ public class OkHttpHelper {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
+                callback.onResponse(response);
             }
         });
     }

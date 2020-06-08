@@ -36,11 +36,11 @@
             android:name="com.lxkj.wms.ui.activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:screenOrientation="portrait"/>
+            />
         <activity
             android:name="com.lxkj.wms.ui.activity.LoginAct"
             android:theme="@style/Theme.AppStartLoad"
-            android:screenOrientation="portrait">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -49,7 +49,7 @@
         <activity
             android:name="com.lxkj.wms.ui.activity.NaviActivity"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustPan|stateHidden|stateAlwaysHidden" />
 
 

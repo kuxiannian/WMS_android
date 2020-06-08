@@ -88,6 +88,12 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
                 ivLanguage.setImageResource(R.mipmap.ic_en);
                 break;
         }
+        LanguageUtils.SetAppLanguage(this, language);
+        if (!AppConsts.isRestar) {
+            recreate();
+            AppConsts.isRestar = true;
+        }
+
         String ip = SharePrefUtil.getString(this, AppConsts.IP, "https://218.93.19.166:8080");
         Url.IP = ip;
     }
@@ -295,13 +301,15 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
     private void initPwdRule() {
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().get_json(mContext, Url.InitPwdRule, params, new BaseCallback<ResultBean>() {
-
+            @Override
+            public void onBeforeRequest(Request request) {
+            }
+            @Override
+            public void onResponse(Response response) {
+            }
             @Override
             public void onFailure(Request request, Exception e) {
-
             }
-
-
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (resultBean.flag) {
@@ -323,12 +331,19 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
 
     /**
      * 修改密码
+     *
      * @param changeStr
      */
     private void changepassword(String changeStr) {
         Map<String, String> params = new HashMap<>();
         params.put("changeStr", changeStr);
         OkHttpHelper.getInstance().get_json(mContext, Url.changepassword, params, new BaseCallback<ResultBean>() {
+            @Override
+            public void onBeforeRequest(Request request) {
+            }
+            @Override
+            public void onResponse(Response response) {
+            }
             @Override
             public void onFailure(Request request, Exception e) {
             }
@@ -362,12 +377,12 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
                     public void onItemClick(int i) {
                         switch (i) {
                             case 0:
-                                SharePrefUtil.saveString(mContext,AppConsts.Language,"1");
+                                SharePrefUtil.saveString(mContext, AppConsts.Language, "1");
                                 ivLanguage.setImageResource(R.mipmap.ic_cn);
                                 LanguageUtils.SetAppLanguage(mContext, "1");
                                 break;
                             case 1:
-                                SharePrefUtil.saveString(mContext,AppConsts.Language,"2");
+                                SharePrefUtil.saveString(mContext, AppConsts.Language, "2");
                                 ivLanguage.setImageResource(R.mipmap.ic_en);
                                 LanguageUtils.SetAppLanguage(mContext, "2");
                                 break;
@@ -386,7 +401,7 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
 
                     @Override
                     public void OnLeftClick(String ip) {
-                        SharePrefUtil.saveString(mContext,AppConsts.IP,ip);
+                        SharePrefUtil.saveString(mContext, AppConsts.IP, ip);
                         Url.IP = ip;
                     }
                 }).show();

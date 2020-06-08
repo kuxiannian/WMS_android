@@ -233,6 +233,16 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
         OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCodeBillPutOn, params, new BaseCallback<String>() {
 
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 
@@ -298,6 +308,16 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
         params.put("wmsWarehouseId", wmsWarehouseId);
         params.put("state", "1");
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseDetailList, params, new BaseCallback<WareHouseBean>() {
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
             @Override
             public void onFailure(Request request, Exception e) {
             }

@@ -207,6 +207,16 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().get_json(mContext, Url.findWarehouseList, params, new BaseCallback<WareHouseBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 
@@ -236,6 +246,16 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
         Map<String, String> params = new HashMap<>();
         params.put("awb", awbStr);
         OkHttpHelper.getInstance().get_json(mContext, Url.findManifestByAwb, params, new BaseCallback<FindAwbBean>() {
+
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
 
             @Override
             public void onFailure(Request request, Exception e) {
@@ -278,6 +298,16 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
         OkHttpHelper.getInstance().get_json(mContext, Url.findFlightByWmsManifestId, params, new BaseCallback<FlightBean>() {
 
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 
@@ -310,6 +340,16 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
         Map<String, String> params = new HashMap<>();
         params.put("wmsManifestId", wmsManifestId);
         OkHttpHelper.getInstance().get_json(mContext, Url.findGoodsNameByWmsManifestId, params, new BaseCallback<GoodsBean>() {
+
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
 
             @Override
             public void onFailure(Request request, Exception e) {
@@ -348,6 +388,16 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
         Map<String, String> params = new HashMap<>();
         params.put("goodsNameId", goodsNameId);
         OkHttpHelper.getInstance().get_json(mContext, Url.findWmsManifestGoodsByGoodsNameId, params, new BaseCallback<ResultBean>() {
+
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
 
             @Override
             public void onFailure(Request request, Exception e) {

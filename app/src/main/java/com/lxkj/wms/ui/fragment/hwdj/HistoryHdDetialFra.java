@@ -236,6 +236,16 @@ public class HistoryHdDetialFra extends TitleFragment implements View.OnClickLis
         params.put("sortingRegisterId", contentBean.getId());
         OkHttpHelper.getInstance().get_json(mContext, Url.findWmsSortingRegisterDetailList, params, new BaseCallback<SortingRegisterDetailBean>() {
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 

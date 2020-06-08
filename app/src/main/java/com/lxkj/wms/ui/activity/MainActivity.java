@@ -114,6 +114,16 @@ public class MainActivity extends BaseFragAct implements EventCenter.EventListen
         OkHttpHelper.getInstance().post_json(this, Url.getPrmCodeList, params, new BaseCallback<PrmCodeListBean>() {
 
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
             }
 
@@ -151,6 +161,16 @@ public class MainActivity extends BaseFragAct implements EventCenter.EventListen
     private void logout() {
         Map<String, String> params = new HashMap<>();
         OkHttpHelper.getInstance().post_json(this, Url.logout, params, new BaseCallback<PrmCodeListBean>() {
+
+            @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
 
             @Override
             public void onFailure(Request request, Exception e) {

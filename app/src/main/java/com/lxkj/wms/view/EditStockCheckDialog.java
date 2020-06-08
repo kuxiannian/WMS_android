@@ -26,13 +26,13 @@ import java.util.List;
  */
 public class EditStockCheckDialog extends Dialog {
     EditText etBarCode;
-    TextView  tvWmsWarehouseDetailId, tvSure, tvCancel;
+    TextView  tvWmsWarehouseDetailId, tvSure, tvCancel,tvWmsWarehouseIdName;
     private Context context;      // 上下文
     private List<WareHouseBean.ResultBean> warehouseDetailList;
     String wmsWarehouseDetailId;
     OnConfirmListener onConfirmListener;
 
-    public EditStockCheckDialog(Context context, List<WareHouseBean.ResultBean> warehouseDetailList, String wmsWarehouseDetailName, String barCode, OnConfirmListener onConfirmListener) {
+    public EditStockCheckDialog(Context context, List<WareHouseBean.ResultBean> warehouseDetailList, String wmsWarehouseDetailName,String wmsWarehouseName,String barCode, OnConfirmListener onConfirmListener) {
         super(context, R.style.Theme_dialog); //dialog的样式
         this.context = context;
         Window window = getWindow();
@@ -49,11 +49,13 @@ public class EditStockCheckDialog extends Dialog {
         //遍历控件id,添加点击事件
         etBarCode = findViewById(R.id.etBarCode);
         tvWmsWarehouseDetailId = findViewById(R.id.tvWmsWarehouseDetailId);
+        tvWmsWarehouseIdName = findViewById(R.id.tvWmsWarehouseIdName);
         tvSure = findViewById(R.id.tv_sure);
         tvCancel = findViewById(R.id.tv_cancel);
         this.onConfirmListener = onConfirmListener;
         this.warehouseDetailList = warehouseDetailList;
         tvWmsWarehouseDetailId.setText(getWmsWarehouseDetailName(wmsWarehouseDetailName));
+        tvWmsWarehouseIdName.setText(wmsWarehouseName);
         etBarCode.setText(barCode);
         tvWmsWarehouseDetailId.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.lxkj.wms.biz.CrashHandler;
@@ -45,6 +46,7 @@ public class HcbApp extends MultiDexApplication {
 
         String language = SharePrefUtil.getString(this, AppConsts.Language, "1");
         LanguageUtils.SetAppLanguage(this, language);
+        Log.e("language",language);
 
     }
 

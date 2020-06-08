@@ -201,6 +201,16 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
         mOkHttpHelper.get_json(mContext, Url.InitPwdRule, params, new BaseCallback<ResultBean>() {
 
             @Override
+            public void onBeforeRequest(Request request) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) {
+
+            }
+
+            @Override
             public void onFailure(Request request, Exception e) {
 
             }

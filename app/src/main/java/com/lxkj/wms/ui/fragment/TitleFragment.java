@@ -37,6 +37,7 @@ public abstract class TitleFragment extends Fragment implements EventCenter.Even
     public SoftDecodingAPI api;
     public ClipboardManager clipboardManager;
     public boolean isOpen = false;//是否已经跳转  避免多次跳转
+    public boolean isResume = false;
     public TitleFragment() {
         beans = GlobalBeans.getSelf();
         screenWidth = ScreenUtil.getScreenWidth(getContext());
