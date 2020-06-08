@@ -28,6 +28,7 @@ import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.DateUtil;
 import com.lxkj.wms.utils.EditTextUtil;
+import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.StringUtil;
@@ -355,12 +356,26 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
     private void findTopByPriority() {
         if (null == wmsWarehouseId)
             return;
+        if (TextUtils.isEmpty(etLength.getText()) || TextUtils.isEmpty(etWidth.getText()) || TextUtils.isEmpty(etHeight.getText()))
+            return;
         Map<String, String> params = new HashMap<>();
         params.put("length", etLength.getText().toString());//长
         params.put("width", etWidth.getText().toString());//宽
         params.put("height", etHeight.getText().toString());//高
         params.put("wmsWarehouseId", wmsWarehouseId);//仓库ID
-        OkHttpHelper.getInstance().get_json(mContext, Url.findTopByPriority, params, new SpotsCallBack<WareHouseBean>(mContext) {
+        OkHttpHelper.getInstance().get_json(mContext, Url.findTopByPriority, params, new BaseCallback<WareHouseBean>() {
+
+            @Override
+            public void onBeforeRequest(Request request) {
+            }
+
+            @Override
+            public void onResponse(Response response) {
+            }
+
+            @Override
+            public void onFailure(Request request, Exception e) {
+            }
 
             @Override
             public void onSuccess(Response response, WareHouseBean resultBean) {
@@ -516,6 +531,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
      * 选择日期
      */
     private void selectDate() {
+        KeyboardUtil.hideKeyboard(act);
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
@@ -582,7 +598,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     djNum = 0;
                 else
                     djNum = Double.parseDouble(etWeight.getText().toString());
-                    djNum++;
+                djNum++;
                 etWeight.setText(djNum + "");
                 break;
             case R.id.ivReduce:

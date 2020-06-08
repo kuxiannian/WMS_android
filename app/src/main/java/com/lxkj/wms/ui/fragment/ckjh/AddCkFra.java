@@ -24,6 +24,7 @@ import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.DateUtil;
+import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
@@ -306,6 +307,7 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
      * 选择日期
      */
     private void selectDate() {
+        KeyboardUtil.hideKeyboard(act);
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
