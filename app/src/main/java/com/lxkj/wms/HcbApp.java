@@ -49,7 +49,11 @@ public class HcbApp extends MultiDexApplication {
         Log.e("language",language);
 
     }
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+    }
 
     private HttpProxyCacheServer proxy;
 

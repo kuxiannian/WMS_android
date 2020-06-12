@@ -199,23 +199,15 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
     private void initPwdRule() {
         Map<String, String> params = new HashMap<>();
         mOkHttpHelper.get_json(mContext, Url.InitPwdRule, params, new BaseCallback<ResultBean>() {
-
             @Override
             public void onBeforeRequest(Request request) {
-
             }
-
             @Override
             public void onResponse(Response response) {
-
             }
-
             @Override
             public void onFailure(Request request, Exception e) {
-
             }
-
-
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (resultBean.flag) {
@@ -227,7 +219,6 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
                     maxLength = resultBean.result.maxLength;
                 }
             }
-
             @Override
             public void onError(Response response, int code, Exception e) {
             }

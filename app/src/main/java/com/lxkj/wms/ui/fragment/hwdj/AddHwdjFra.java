@@ -381,28 +381,21 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 
     /**
      * 根据舱单货物ID查询舱单货物信息接口
-     *
      * @param goodsNameId 舱单货物ID
      */
     private void findWmsManifestGoodsByGoodsNameId(String goodsNameId) {
         Map<String, String> params = new HashMap<>();
         params.put("goodsNameId", goodsNameId);
         OkHttpHelper.getInstance().get_json(mContext, Url.findWmsManifestGoodsByGoodsNameId, params, new BaseCallback<ResultBean>() {
-
             @Override
             public void onBeforeRequest(Request request) {
-
             }
-
             @Override
             public void onResponse(Response response) {
-
             }
-
             @Override
             public void onFailure(Request request, Exception e) {
             }
-
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (resultBean.flag) {
@@ -410,7 +403,6 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     tvJs.setText(number);
                 }
             }
-
             @Override
             public void onError(Response response, int code, Exception e) {
             }

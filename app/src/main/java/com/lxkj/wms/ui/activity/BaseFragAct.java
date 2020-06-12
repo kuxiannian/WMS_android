@@ -11,7 +11,7 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.biz.ActivityWatcher;
 import com.lxkj.wms.biz.EventCenter;
 import com.lxkj.wms.utils.AppUtil;
-import com.yalantis.ucrop.util.ScreenUtils;
+import com.lxkj.wms.utils.ScreenUtil;
 
 
 public class BaseFragAct extends AppCompatActivity {
@@ -28,9 +28,9 @@ public class BaseFragAct extends AppCompatActivity {
         eventCenter = beans.getEventCenter();
         super.onCreate(arg0);
         initImmersionBar();
-        int screenWidth = ScreenUtils.getScreenWidth(this);
+        int screenWidth = ScreenUtil.getScreenWidth(this);
         Log.e("dpWidth",AppUtil.px2dip(this,screenWidth)+"");
-        Log.e("dpHeight",AppUtil.px2dip(this,ScreenUtils.getScreenHeight(this))+"");
+        Log.e("dpHeight",AppUtil.px2dip(this,ScreenUtil.getScreenHeight(this))+"");
         if (AppUtil.px2dip(this,screenWidth) > 500)
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         else

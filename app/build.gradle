@@ -173,5 +173,4 @@ dependencies {
 
     //仿IOS加载loading
     implementation 'com.github.gittjy:LoadingDialog:1.0.2'
-    implementation project(path: ':picture_library')
 }
