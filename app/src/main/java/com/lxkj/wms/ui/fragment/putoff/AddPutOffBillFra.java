@@ -269,6 +269,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                 .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
                 .setRangDate(startDate, endDate)//起始终止年月日设定
                 .setDate(endDate)
+                .setSubCalSize(22)
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)

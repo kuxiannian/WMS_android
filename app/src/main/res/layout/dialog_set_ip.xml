@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:padding="10dp"
-            android:singleLine="true"
             android:text=""
             android:textSize="14sp" />
 

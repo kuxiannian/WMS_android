@@ -107,7 +107,7 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
 //                            Bundle bundle = new Bundle();
 //                            bundle.putString("barCode",str.replace("\n",""));
 //                            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
-                            act.setResult(2,new Intent().putExtra("barCode",str.replace("\n","")));
+                            act.setResult(2,new Intent().putExtra("barCode",str.replace("\n","").trim()));
                             act.finishSelf();
                             isOpen = true;
                         }
@@ -124,10 +124,11 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
 
     @Override
     public void onBarCodeData(String data) {
-        if (isResume){
+        if (!isOpen && isResume){
+            isOpen = true;
             api.closeScan();
             Bundle bundle = new Bundle();
-            bundle.putString("barCode",data.replace("\n",""));
+            bundle.putString("barCode",data.replace("\n","").trim());
             ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
         }
     }

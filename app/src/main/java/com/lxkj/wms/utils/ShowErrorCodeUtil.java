@@ -440,7 +440,7 @@ public class ShowErrorCodeUtil {
                 error = context.getString(R.string.VE100005);
                 break;
             case "VE100006":
-                error =  context.getString(R.string.VE100006);
+                error = context.getString(R.string.VE100006);
                 break;
             case "VE100007":
                 error = context.getString(R.string.VE100007);
@@ -584,7 +584,7 @@ public class ShowErrorCodeUtil {
             case "VE170005":
                 error = context.getString(R.string.VE170005);
                 break;
-                //通用错误信息
+            //通用错误信息
             case "CE100001":
                 error = context.getString(R.string.CE100001);
                 break;
@@ -600,35 +600,202 @@ public class ShowErrorCodeUtil {
             case "CE210005":
                 error = context.getString(R.string.CE210005);
                 break;
+            //登录相关
+            case "E000000":
+                error = context.getString(R.string.E000000);
+                break;
+            case "E000001":
+                error = context.getString(R.string.E000001);
+                break;
+            case "E000406":
+                error = context.getString(R.string.E000406);
+                break;
+            case "E020001":
+                error = context.getString(R.string.E020001);
+                break;
+            case "E020002":
+                error = context.getString(R.string.E020002);
+                break;
+            case "E020003":
+                error = context.getString(R.string.E020003);
+                break;
+            case "E020005":
+                error = context.getString(R.string.E020005);
+                break;
+            case "E020006":
+                error = context.getString(R.string.E020006);
+                break;
+            case "E020010":
+                error = context.getString(R.string.E020010);
+                break;
+            case "E029999":
+                error = context.getString(R.string.E029999);
+                break;
+            case "I010000":
+                error = context.getString(R.string.I010000);
+                break;
+            case "I010001":
+                error = context.getString(R.string.I010001);
+                break;
+            case "I010100":
+                error = context.getString(R.string.I010100);
+                break;
+            case "I010101":
+                error = context.getString(R.string.I010101);
+                break;
+            case "I010102":
+                error = context.getString(R.string.I010102);
+                break;
+            case "I010103":
+                error = context.getString(R.string.I010103);
+                break;
+            case "I010104":
+                error = context.getString(R.string.I010104);
+                break;
+            case "I010106":
+                error = context.getString(R.string.I010106);
+                break;
+            case "I010107":
+                error = context.getString(R.string.I010107);
+                break;
+            case "I010108":
+                error = context.getString(R.string.I010108);
+                break;
+            case "I010109":
+                error = context.getString(R.string.I010109);
+                break;
+            case "I010110":
+                error = context.getString(R.string.I010110);
+                break;
+            case "I010111":
+                error = context.getString(R.string.I010111);
+                break;
+            case "I010112":
+                error = context.getString(R.string.I010112);
+                break;
+            case "I010113":
+                error = context.getString(R.string.I010113);
+                break;
+            case "I010114":
+                error = context.getString(R.string.I010114);
+                break;
+            case "I010115":
+                error = context.getString(R.string.I010115);
+                break;
+            case "I010116":
+                error = context.getString(R.string.I010116);
+                break;
+            case "I010117":
+                error = context.getString(R.string.I010117);
+                break;
+            case "I010200":
+                error = context.getString(R.string.I010200);
+                break;
+            case "I010201":
+                error = context.getString(R.string.I010201);
+                break;
+            case "I010202":
+                error = context.getString(R.string.I010202);
+                break;
+            case "I010300":
+                error = context.getString(R.string.I010300);
+                break;
+            case "I010301":
+                error = context.getString(R.string.I010301);
+                break;
+            case "I010302":
+                error = context.getString(R.string.I010302);
+                break;
+            case "I011300":
+                error = context.getString(R.string.I011300);
+                break;
+            case "I011301":
+                error = context.getString(R.string.I011301);
+                break;
+            case "I011302":
+                error = context.getString(R.string.I011302);
+                break;
+            case "I011303":
+                error = context.getString(R.string.I011303);
+                break;
+            case "I011304":
+                error = context.getString(R.string.I011304);
+                break;
+            case "I010303":
+                error = context.getString(R.string.I010303);
+                break;
+            case "I010304":
+                error = context.getString(R.string.I010304);
+                break;
+            case "I010305":
+                error = context.getString(R.string.I010305);
+                break;
+            case "I011200":
+                error = context.getString(R.string.I011200);
+                break;
+            case "I011201":
+                error = context.getString(R.string.I011201);
+                break;
+            case "I010306":
+                error = context.getString(R.string.I010306);
+                break;
+            case "E010200":
+                error = context.getString(R.string.E010200);
+                break;
+            case "E010300":
+                error = context.getString(R.string.E010300);
+                break;
+            case "E010301":
+                error = context.getString(R.string.E010301);
+                break;
+            case "E010302":
+                error = context.getString(R.string.E010302);
+                break;
+            case "I010307":
+                error = context.getString(R.string.I010307);
+                break;
+            case "I011100":
+                error = context.getString(R.string.I011100);
+                break;
+            case "I011101":
+                error = context.getString(R.string.I011101);
+                break;
+            case "I011102":
+                error = context.getString(R.string.I011102);
+                break;
+            case "I011103":
+                error = context.getString(R.string.I011103);
+                break;
+
+
         }
         return error;
     }
 
 
-
-    public static Map<String, String> getErrorValue(String errorString){
-        Map<String,String> errorValuesMap = new HashMap<>();
-        if (errorString.contains("&")){
+    public static Map<String, String> getErrorValue(String errorString) {
+        Map<String, String> errorValuesMap = new HashMap<>();
+        if (errorString.contains("&")) {
             String[] errors = errorString.split("&");
             for (int i = 0; i < errors.length; i++) {
                 String error = errors[i];
-                if (error.contains("=")){
-                   String[] errorValues = error.split("=");
-                    errorValuesMap.put(errorValues[0],errorValues[1]);
+                if (error.contains("=")) {
+                    String[] errorValues = error.split("=");
+                    errorValuesMap.put(errorValues[0], errorValues[1]);
                 }
             }
-        }else {
-            if (errorString.contains("=")){
+        } else {
+            if (errorString.contains("=")) {
                 String[] errorValues = errorString.split("=");
-                errorValuesMap.put(errorValues[0],errorValues[1]);
+                errorValuesMap.put(errorValues[0], errorValues[1]);
             }
         }
         return errorValuesMap;
     }
 
-    public static String getGoodsType(Context context,String goodsType){
+    public static String getGoodsType(Context context, String goodsType) {
         String value = "";
-        switch (goodsType){
+        switch (goodsType) {
             case "A":
                 value = context.getString(R.string.goodsTypeA);
                 break;

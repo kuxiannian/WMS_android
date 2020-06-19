@@ -27,6 +27,7 @@ import com.lxkj.wms.http.Url;
 import com.lxkj.wms.utils.LanguageUtils;
 import com.lxkj.wms.utils.PasswordUtil;
 import com.lxkj.wms.utils.SharePrefUtil;
+import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.BottomMenuFra;
 import com.lxkj.wms.view.ChangePswDialog;
@@ -153,41 +154,41 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
         }
         String account = etPsw.getText().toString();
 
-        if (null != containsUppercaseLetters && !containsUppercaseLetters.equals("0")) {
-            if (!PasswordUtil.isContainUp(account)) {
-                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.UppercaseLetter));
-                return;
-            }
-        }
-
-        if (null != containsLowercaseLetters && !containsLowercaseLetters.equals("0")) {
-            if (!PasswordUtil.isContainLower(account)) {
-                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.LowercaseLetter));
-                return;
-            }
-        }
-
-        if (null != containsDigitalNumber && !containsDigitalNumber.equals("0")) {
-            if (!PasswordUtil.isContainDigitalNumber(account)) {
-                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.number));
-                return;
-            }
-        }
-
-        if (null != containsSpecialCharacters && !containsSpecialCharacters.equals("0")) {
-            if (!PasswordUtil.isContainSpecialCharacters(account)) {
-                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.SpecialCharacter));
-                return;
-            }
-        }
-
-
-        if (maxLength > 0 && !PasswordUtil.isLength(account, minLength, maxLength)) {
-            String testStr = getResources().getString(R.string.passwordLength);
-            String result = String.format(testStr, minLength, maxLength);
-            ToastUtil.show(result);
-            return;
-        }
+//        if (null != containsUppercaseLetters && !containsUppercaseLetters.equals("0")) {
+//            if (!PasswordUtil.isContainUp(account)) {
+//                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.UppercaseLetter));
+//                return;
+//            }
+//        }
+//
+//        if (null != containsLowercaseLetters && !containsLowercaseLetters.equals("0")) {
+//            if (!PasswordUtil.isContainLower(account)) {
+//                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.LowercaseLetter));
+//                return;
+//            }
+//        }
+//
+//        if (null != containsDigitalNumber && !containsDigitalNumber.equals("0")) {
+//            if (!PasswordUtil.isContainDigitalNumber(account)) {
+//                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.number));
+//                return;
+//            }
+//        }
+//
+//        if (null != containsSpecialCharacters && !containsSpecialCharacters.equals("0")) {
+//            if (!PasswordUtil.isContainSpecialCharacters(account)) {
+//                ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.SpecialCharacter));
+//                return;
+//            }
+//        }
+//
+//
+//        if (maxLength > 0 && !PasswordUtil.isLength(account, minLength, maxLength)) {
+//            String testStr = getResources().getString(R.string.passwordLength);
+//            String result = String.format(testStr, minLength, maxLength);
+//            ToastUtil.show(result);
+//            return;
+//        }
         webview.loadUrl("file:///android_asset/crypto.html");
         webview.setWebViewClient(new WebViewClient() {
             @Override
@@ -263,9 +264,17 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
                         }
                     }).show();
                 } else if (resultBean.errorCode.equals("I010117")) {
+                    List<String> errors = new ArrayList<>();
                     String testStr = getResources().getString(R.string.hint_10117);
                     String hint = String.format(testStr, resultBean.result.leftTimes);
-                    ToastUtil.show(hint);
+                    errors.add(hint);
+                    if (errors.size() > 0)
+                        ToastUtil.showCustom(mContext, errors);
+                } else {
+                    List<String> errors = new ArrayList<>();
+                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
+                    if (errors.size() > 0)
+                        ToastUtil.showCustom(mContext, errors);
                 }
             }
 
@@ -282,7 +291,8 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 //在这里执行你想调用的js函数
-                String script = String.format("javascript:getGreetings('" + etAccount.getText().toString() + "','" + psw + "')");
+                String script = String.format("javascript:getGreetings1('" + etAccount.getText().toString() + "','" + etPsw.getText().toString() + "','" + psw + "')");
+                Log.e("script", script);
                 webview.evaluateJavascript(script, new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String value) {
@@ -304,12 +314,15 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
             @Override
             public void onBeforeRequest(Request request) {
             }
+
             @Override
             public void onResponse(Response response) {
             }
+
             @Override
             public void onFailure(Request request, Exception e) {
             }
+
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (resultBean.flag) {
@@ -337,22 +350,30 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
     private void changepassword(String changeStr) {
         Map<String, String> params = new HashMap<>();
         params.put("changeStr", changeStr);
-        OkHttpHelper.getInstance().get_json(mContext, Url.changepassword, params, new BaseCallback<ResultBean>() {
+        OkHttpHelper.getInstance().post_json(mContext, Url.changepassword, params, new BaseCallback<String>() {
             @Override
             public void onBeforeRequest(Request request) {
             }
+
             @Override
             public void onResponse(Response response) {
             }
+
             @Override
             public void onFailure(Request request, Exception e) {
             }
 
             @Override
-            public void onSuccess(Response response, ResultBean resultBean) {
+            public void onSuccess(Response response, String result) {
+                ResultBean resultBean = new Gson().fromJson(result, ResultBean.class);
                 if (resultBean.flag) {
                     etPsw.setText("");
                     ToastUtil.show(mContext.getString(R.string.beSuccess));
+                } else {
+                    List<String> errors = new ArrayList<>();
+                    errors.add(ShowErrorCodeUtil.getErrorString(mContext, resultBean.errorCode));
+                    if (errors.size() > 0)
+                        ToastUtil.showCustom(mContext, errors);
                 }
             }
 

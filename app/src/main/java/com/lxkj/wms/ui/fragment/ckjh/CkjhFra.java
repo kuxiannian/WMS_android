@@ -104,7 +104,7 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
                             // 剪贴板中的数据被改变，此方法将被回调
                             String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
                             Bundle bundle = new Bundle();
-                            bundle.putString("barCode",str.replace("\n",""));
+                            bundle.putString("barCode",str.replace("\n","").trim());
                             ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
                             isOpen = true;
                         }
@@ -121,10 +121,11 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
 
     @Override
     public void onBarCodeData(String data) {
-        if (isResume){
+        if (!isOpen && isResume){
+            isOpen =true;
             api.closeScan();
             Bundle bundle = new Bundle();
-            bundle.putString("barCode",data.replace("\n",""));
+            bundle.putString("barCode",data.replace("\n","").trim());
             ActivitySwitcher.startFragment(act, AddCkFra.class,bundle);
         }
     }

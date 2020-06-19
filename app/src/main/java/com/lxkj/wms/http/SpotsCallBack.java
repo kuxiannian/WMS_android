@@ -16,7 +16,6 @@ public abstract class SpotsCallBack<T> extends BaseCallback<T> {
     public SpotsCallBack(Context context) {
         mContext = context;
         loadBuilder = new LoadingDailog.Builder(mContext)
-                .setMessage("加载中...")
                 .setCancelable(false)
                 .setCancelOutside(false);
         mDialog = loadBuilder.create();

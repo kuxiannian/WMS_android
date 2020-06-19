@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WMS</string>
-    <string name="httperror">network error</string>
+    <string name="httperror">Network error</string>
     <string name="nomore">No more data</string>
     <string name="press_again_to_leave">Press again to exit the program</string>
 
@@ -110,6 +110,89 @@
     <string name="intputappServer">Input App Server</string>
 
 
+    //登录相关
+    <string name="E000000">Unhandled exception</string>
+    <string name="E000001">Internal error</string>
+    <string name="E000406">Parameter does not meet requirements</string>
+    <string name="E020001">The user session has timed out or was closed due to a repeated login session. Please log in again</string>
+    <string name="E020002">Unauthorized user</string>
+    <string name="E020003">User permissions is empty</string>
+    <string name="E020005">Illegal request</string>
+    <string name="E020006">Illegal request</string>
+    <string name="E020010">Illegal request</string>
+    <string name="I010000">Incorrect data</string>
+    <string name="I010001">Data constraint error</string>
+    <string name="I010100">Invalid user</string>
+    <string name="I010101">User has existed</string>
+    <string name="I010102">Organizations are disabled, users are forbidden to log in</string>
+    <string name="I010103">Incorrect password</string>
+    <string name="I010104">You are not allowed to log in until changing your password</string>
+    <string name="I010105">The user is invalid</string>
+    <string name="I010106">User is locked</string>
+    <string name="I010107">New password does not meet security rule</string>
+    <string name="I010108">New password does not meet security rule</string>
+    <string name="I010109">The user is invalid</string>
+    <string name="I010110">Password cannot be the same as the default one</string>
+    <string name="I010111">Incorrect information</string>
+    <string name="I010112">Link expired</string>
+    <string name="I010113">Built-in account prohibited operation</string>
+    <string name="I010114">The account ID has been used and it cannot be deleted</string>
+    <string name="I010115">User needs to be audited</string>
+    <string name="I010116">User does not log in</string>
+    <string name="I010117">Error, it will be locked in %1$s times</string>
+    <string name="I010200">Application does not exist</string>
+    <string name="I010201">Application has existed</string>
+    <string name="I010202">Unmatched application</string>
+    <string name="I010300">The organization does not exist</string>
+    <string name="I010301">The organization has existed</string>
+    <string name="I010302">The parent organization does not exist</string>
+    <string name="I011300">Fingerprint algorithm call failed</string>
+    <string name="I011301">Fingerprint image quality is unqualified</string>
+    <string name="I011302">Fingerprint mismatch</string>
+    <string name="I011303">Login failed, no matching fingerprint</string>
+    <string name="I011304">The number of fingerprints exceeds the limit</string>
+    <string name="I010303">The parent organization has existed</string>
+    <string name="I010304">The organization type does not exist</string>
+    <string name="I010305">The organization type has existed</string>
+    <string name="I011200">International information does not exist</string>
+    <string name="I011201">International information already exists</string>
+    <string name="I010306">Parent organization cannot be edited</string>
+    <string name="E010200">Feature not enabled</string>
+    <string name="E010300">Domain information does not exist</string>
+    <string name="E010301">Domain %1$s configuration is not available</string>
+    <string name="E010302">Domain authentication is not enabled</string>
+    <string name="I010307">If child nodes exist in this organization, it cannot be deleted</string>
+    <string name="E010001">Unsupported actions</string>
+    <string name="I010308">If account ID exists in this organization, it cannot be deleted</string>
+    <string name="I010309">If applications exist in this organization, it cannot be deleted</string>
+    <string name="I010310">Organization code has existed</string>
+    <string name="I010400">Permission does not exist</string>
+    <string name="I010401">Permission has existed</string>
+    <string name="I010402">Parent permission does not exist</string>
+    <string name="I010403">Parent organization has existed</string>
+    <string name="I010404">If child nodes exist in this organization, it cannot be deleted</string>
+    <string name="I010405">Role is assigned with permissions and it cannot be deleted</string>
+    <string name="I010406">Permission code has existed</string>
+    <string name="I010500">Role does not exist</string>
+    <string name="I010501">Role has existed</string>
+    <string name="I010502">Pre-defined role cannot be operated</string>
+    <string name="I010503">If the role has been used, it cannot be deleted</string>
+    <string name="I010600">The dictionary does not exist</string>
+    <string name="I010601">The dictionary has existed</string>
+    <string name="I010700">The dictionary item does not exist</string>
+    <string name="I010701">The dictionary item has existed</string>
+    <string name="I010702">If dictionary item has been referenced, it cannot be deleted</string>
+    <string name="I010800">The authorized data does noto exist</string>
+    <string name="I010801">Authorized data has existed</string>
+    <string name="I010900">The rule of authorized data control does not exist</string>
+    <string name="I010901">The rule of authorized data control has existed</string>
+    <string name="I011001">Illegal Email address</string>
+    <string name="I011100">Incorrect account ID or password</string>
+    <string name="I011101">Incorrect Verification Code</string>
+    <string name="I011102">Verification code has expired</string>
+    <string name="I011103">Incorrect account ID or password</string>
+
+
     <string name="hint_00000">Unhandled exception</string>
     <string name="hint_00001">Internal error</string>
     <string name="hint_00406">Parameter does not meet requirements</string>
@@ -211,7 +294,7 @@
     <string name="VE130011">Suspect problem, only 1 ~ 200 characters length can be entered</string>
     <string name="VE130012">Remarks, only 1 ~ 200 characters length can be entered</string>
     <string name="VE130013">Version number cannot be empty</string>
-    <string name="VE130014">Inventory table Id cannot be empty</string>
+    <string name="VE130014">No information about this bar code was found</string>
     <string name="SE130001">Barcode: %1$s, the goods have not been removed, please remove them first</string>
     <string name="SE130002">Barcode: %1$s, the goods have no inventory information to check, it is no longer in stock</string>
     <string name="SE130003">The goods are suspected. The suspected problem field cannot be empty</string>

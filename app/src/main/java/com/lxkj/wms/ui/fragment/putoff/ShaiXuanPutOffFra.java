@@ -178,6 +178,7 @@ public class ShaiXuanPutOffFra extends TitleFragment implements NaviActivity.Nav
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)
+                .setSubCalSize(22)
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .build();
         startTimePickerView.show();

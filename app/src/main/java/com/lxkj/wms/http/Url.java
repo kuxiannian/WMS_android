@@ -17,7 +17,7 @@ public class Url {
     //登出
     public static String logout = "/upmsapi/user/logout";
     //修改密码
-    public static String changepassword =  "/upmsapi/user/changepassword";
+    public static String changepassword =  "/upmsapi/user/changePassword";
 
     /**
      * 分拣登记

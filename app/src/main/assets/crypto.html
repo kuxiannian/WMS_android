@@ -14,7 +14,11 @@ function getGreetings() {
 } 
 function getGreetings(account, pwd) { 
  return encrypt(account,pwd); 
-} 
+}
+
+function getGreetings1(account, oldpwd, pwd) {
+ return encrypt(account,oldpwd,pwd);
+}
 
 </script>
 </body>

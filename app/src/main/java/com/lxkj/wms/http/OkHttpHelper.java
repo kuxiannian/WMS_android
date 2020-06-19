@@ -87,6 +87,7 @@ public class OkHttpHelper {
 
     /**
      * 获取 OkHttp 实例
+     *
      * @return
      */
     public static OkHttpHelper getInstance() {
@@ -95,6 +96,7 @@ public class OkHttpHelper {
 
     /**
      * get 请求
+     *
      * @param url
      * @param callback
      */
@@ -108,6 +110,7 @@ public class OkHttpHelper {
 
     /**
      * post 请求方法
+     *
      * @param url
      * @param param
      * @param callback
@@ -128,12 +131,15 @@ public class OkHttpHelper {
      */
     public void post_json(Context context, String url, Map<String, String> params, BaseCallback callback) {
         this.context = context;
+        Log.e("json",new Gson().toJson(params));
         Request request = buildPostRequest(url, params);
-        request(request, callback);
+        if (null != request)
+            request(request, callback);
     }
 
     /**
      * get请求 将请求参数封装为json
+     *
      * @param context
      * @param url
      * @param params   json 参数Map
@@ -142,7 +148,8 @@ public class OkHttpHelper {
     public void get_json(Context context, String url, Map<String, String> params, BaseCallback callback) {
         this.context = context;
         Request request = buildGetRequest(url, params);
-        request(request, callback);
+        if (null != request)
+            request(request, callback);
     }
 
     public void post_file(Context context, String url, Map<String, List<File>> fileParams, BaseCallback callback) {
@@ -178,7 +185,7 @@ public class OkHttpHelper {
                     } else {
                         try {
 //                            Object obj = mGson.fromJson(resultStr, callback.mType);
-                            callbackSuccess(callback,response, resultStr);
+                            callbackSuccess(callback, response, resultStr);
                         } catch (com.google.gson.JsonParseException e) { // Json解析的错误
                             e.printStackTrace();
                             callbackError(callback, response, e);
@@ -200,7 +207,12 @@ public class OkHttpHelper {
      * @return
      */
     private Request buildRequest(String url, HttpMethodType methodType, Map<String, String> params) {
-
+        if (!Url.IP.startsWith("http")) {
+            List<String> error = new ArrayList<>();
+            error.add(context.getString(R.string.httperror));
+            ToastUtil.showCustom(context, error);
+            return null;
+        }
         Request.Builder builder = new Request.Builder()
                 .url(Url.IP + url)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
@@ -210,13 +222,13 @@ public class OkHttpHelper {
             builder.post(body);
             return builder.build();
         } else {
-            HttpUrl.Builder httpBuilder = HttpUrl.parse(Url.IP +url).newBuilder();
+            HttpUrl.Builder httpBuilder = HttpUrl.parse(Url.IP + url).newBuilder();
             if (params != null) {
                 for (Map.Entry<String, String> param : params.entrySet()) {
                     httpBuilder.addQueryParameter(param.getKey(), param.getValue());
                 }
             }
-           return new Request.Builder().url(httpBuilder.build()).build();
+            return new Request.Builder().url(httpBuilder.build()).build();
         }
     }
 
@@ -319,7 +331,7 @@ public class OkHttpHelper {
         return requestBody.build();
     }
 
-    private void callbackSuccess(final BaseCallback callback, Response response,final String resultStr) {
+    private void callbackSuccess(final BaseCallback callback, Response response, final String resultStr) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -330,7 +342,7 @@ public class OkHttpHelper {
                         BaseBean baseBean = mGson.fromJson(resultStr, BaseBean.class);
                         if (!baseBean.flag && !baseBean.errorCode.equals("E000406"))
                             ShowErrorCodeUtil.showError(context, baseBean.errorCode);
-                        else{
+                        else {
                             Object obj = mGson.fromJson(resultStr, callback.mType);
                             callback.onSuccess(response, obj);
                         }

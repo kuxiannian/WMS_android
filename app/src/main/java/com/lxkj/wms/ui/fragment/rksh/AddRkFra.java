@@ -256,36 +256,40 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     act.finishSelf();
                 } else {
                     if (resultBean.errorCode.contains("?")) {
+                        List<String> errors = new ArrayList<>();
                         String[] error = resultBean.errorCode.split("\\?");
                         String errorCode = error[0];
                         Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
                         String barCode = errorValues.get("barCode");
                         switch (errorCode) {
                             case "SE100001":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100001), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100001), barCode));
                                 break;
                             case "SE100002":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100002), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100002), barCode));
                                 break;
                             case "SE100003":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100003), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100003), barCode));
                                 break;
                             case "SE100004":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100004), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100004), barCode));
                                 break;
                             case "SE100005":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100005), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100005), barCode));
                                 break;
                             case "SE100007":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100007), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100007), barCode));
                                 break;
                             case "SE100008":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100008), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100008), barCode));
                                 break;
                             case "SE100009":
-                                ToastUtil.show(String.format(getResources().getString(R.string.SE100009), barCode));
+                                errors.add(String.format(getResources().getString(R.string.SE100009), barCode));
                                 break;
                         }
+
+                        if (errors.size() > 0)
+                            ToastUtil.showCustom(mContext, errors);
                     }
                     switch (resultBean.errorCode) {
                         case "E000406":
@@ -335,12 +339,11 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 .setTextColorCenter(0xffFF8201)
                 .setTitleBgColor(0xffffffff)
                 .setSubmitColor(0xffFF8201)
+                .setSubCalSize(22)
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .build();
         startTimePickerView.show();
     }
-
-
 
 
     private TextWatcher textWatcher = new TextWatcher() {

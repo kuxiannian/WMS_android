@@ -16,6 +16,7 @@ public class Result {
     public String containsDigitalNumber;//是否包含小写字母（非0校验, 0不校验）
     public String containsSpecialCharacters;//是否包含小写字母（非0校验, 0不校验）
     public String leftTimes;
+    public String domainName;
 
     public String chargeableWeight;    //计费重量
     public String createDate;    //创建日期

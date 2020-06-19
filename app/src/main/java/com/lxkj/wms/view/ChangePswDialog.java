@@ -36,7 +36,7 @@ public class ChangePswDialog extends Dialog {
         getWindow().setAttributes(lp);
         //要达到背景全变暗的效果，需设置getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND); 否则，背景无效果
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        setCanceledOnTouchOutside(isCan);// 点击Dialog外部消失
+        setCanceledOnTouchOutside(false);// 点击Dialog外部消失
         etPsw = findViewById(R.id.etPsw);
         etPswAgain = findViewById(R.id.etPswAgain);
 

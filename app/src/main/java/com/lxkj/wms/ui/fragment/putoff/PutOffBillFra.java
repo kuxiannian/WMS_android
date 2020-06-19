@@ -14,7 +14,6 @@ import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.serialportapi.SoftDecodingAPI;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.ui.fragment.rksh.AddRkFra;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,8 +102,8 @@ public class PutOffBillFra extends TitleFragment implements NaviActivity.NaviRig
                             // 剪贴板中的数据被改变，此方法将被回调
                             String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
                             Bundle bundle = new Bundle();
-                            bundle.putString("barCode",str.replace("\n",""));
-                            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+                            bundle.putString("barCode",str.replace("\n","").trim());
+                            ActivitySwitcher.startFragment(act, AddPutOffBillFra.class,bundle);
                             isOpen = true;
                         }
                     }
@@ -120,10 +119,11 @@ public class PutOffBillFra extends TitleFragment implements NaviActivity.NaviRig
 
     @Override
     public void onBarCodeData(String data) {
-        if (isResume){
+        if (!isOpen && isResume){
+            isOpen = true;
             api.closeScan();
             Bundle bundle = new Bundle();
-            bundle.putString("barCode",data.replace("\n",""));
+            bundle.putString("barCode",data.replace("\n","").trim());
             ActivitySwitcher.startFragment(act, AddPutOffBillFra.class,bundle);
         }
     }
