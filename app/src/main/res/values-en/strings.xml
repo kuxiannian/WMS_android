@@ -4,13 +4,13 @@
     <string name="nomore">No more data</string>
     <string name="press_again_to_leave">Press again to exit the program</string>
 
-    <string name="hwdj">SORTINGREGISTER</string>
-    <string name="rksh">BILLINPUT</string>
-    <string name="ckjh">BILLOUTPUT</string>
-    <string name="kccx">STOCK</string>
-    <string name="kcpd">BILLSTOCKCHECK</string>
-    <string name="sjzy">BILLPUTON</string>
-    <string name="xjzy">BILLPUTOFF</string>
+    <string name="hwdj">Sort registration</string>
+    <string name="rksh">Warehouse receipt</string>
+    <string name="ckjh">Outbound order</string>
+    <string name="kccx">Stock inquiry</string>
+    <string name="kcpd">Check list</string>
+    <string name="sjzy">Shelf list</string>
+    <string name="xjzy">Lower shelf list</string>
 
     <string name="xzhwdj">Add Sorting Register</string>
     <string name="hangban">Flight</string>

@@ -64,6 +64,7 @@ public class HistoryDetailAdapter extends RecyclerView.Adapter<HistoryDetailAdap
         switch (mDatas.get(position).getDiffFlag()) {//diffFlag: 0:无差异 2：储位有差异 3：遗漏盘点 4：无库存匹配
             case "0"://无差异
                 holder.llItem.setBackgroundResource(R.drawable.bg_border_line);
+                holder.tvDiffFlag.setText(mContext.getString(R.string.ND));
                 break;
             case "1"://有差异
                 holder.llItem.setBackgroundResource(R.drawable.bg_error);

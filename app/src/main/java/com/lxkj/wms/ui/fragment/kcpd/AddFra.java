@@ -14,7 +14,6 @@ import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.serialportapi.SoftDecodingAPI;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.ui.fragment.rksh.AddRkFra;
 import com.lxkj.wms.ui.fragment.rksh.HistoryRkFra;
 
 import butterknife.BindView;
@@ -127,9 +126,9 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
         if (!isOpen && isResume){
             isOpen = true;
             api.closeScan();
-            Bundle bundle = new Bundle();
-            bundle.putString("barCode",data.replace("\n","").trim());
-            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
+            act.setResult(2,new Intent().putExtra("barCode",data.replace("\n","").trim()));
+            act.finishSelf();
+            isOpen = true;
         }
     }
 
