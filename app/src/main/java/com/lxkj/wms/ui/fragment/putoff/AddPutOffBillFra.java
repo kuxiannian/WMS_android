@@ -118,8 +118,11 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                 tvWmsWarehouseDetailId.setText("");
             }
         });
-        if (null != barCode)
+        if (null != barCode){
             etBarCode.setText(barCode);
+            findInfoByBarCodeBillPutOff(barCode);
+        }
+
         /**
          * 设置事件的点击事件
          */

@@ -81,6 +81,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     private String palletNumber;//托盘号
     private String weight;//重量
     private double djNum = 0;
+    private boolean isAdd = false;
 
     public String getTitleName() {
         return act.getString(R.string.xzrk);
@@ -115,7 +116,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                isAdd = false;
             }
 
             @Override
@@ -129,8 +130,11 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
         });
 
         tvWeight.addTextChangedListener(textWatcher);
-        if (null != barCode)
+        if (null != barCode) {
             etBarCode.setText(barCode);
+            findInfoByBarCode(etBarCode.getText().toString());
+        }
+
         /**
          * 设置事件的点击事件
          */
@@ -149,7 +153,6 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
         Map<String, String> params = new HashMap<>();
         params.put("barCode", barCode);
         OkHttpHelper.getInstance().get_json(mContext, Url.findInfoByBarCode, params, new SpotsCallBack<String>(mContext) {
-
             @Override
             public void onFailure(Request request, Exception e) {
             }
@@ -164,6 +167,8 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                         tvProductCode.setText(resultBean.result.productCode);
                         tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
                         tvWeight.setText(resultBean.result.weight);
+                        if (isAdd)
+                            addBillInput();
                     }
                 } else {
                     etBarCode.setText("");
@@ -382,7 +387,13 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvSave:
-                addBillInput();
+                isAdd = false;
+                if (TextUtils.isEmpty(tvWeight.getText()) && !TextUtils.isEmpty(etBarCode.getText())){
+                    isAdd = true;
+                    findInfoByBarCode(etBarCode.getText().toString());
+                }else{
+                    addBillInput();
+                }
                 break;
             case R.id.tvInputDate:
                 selectDate();

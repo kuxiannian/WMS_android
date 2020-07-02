@@ -205,8 +205,11 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
             }
         });
         etWeight.addTextChangedListener(textWatcher);
-        if (null != barCode)
+        if (null != barCode){
             etBarCode.setText(barCode);
+            findInfoByBarCodeBillPutOn(barCode);
+        }
+
         /**
          * 设置事件的点击事件
          */

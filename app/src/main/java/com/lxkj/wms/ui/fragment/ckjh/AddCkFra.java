@@ -129,8 +129,10 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 etSuspicionProblem.setEnabled(false);
             }
         });
-        if (null != barCode)
+        if (null != barCode){
             etBarCode.setText(barCode);
+            findInfoByBarCode(etBarCode.getText().toString());
+        }
         /**
          * 设置事件的点击事件
          */
