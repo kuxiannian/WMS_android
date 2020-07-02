@@ -173,4 +173,6 @@ dependencies {
 
     //仿IOS加载loading
     implementation 'com.github.gittjy:LoadingDialog:1.0.2'
+
+    implementation 'org.jsoup:jsoup:1.9.2'
 }

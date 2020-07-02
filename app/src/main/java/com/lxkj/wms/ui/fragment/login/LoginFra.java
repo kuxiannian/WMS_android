@@ -33,6 +33,11 @@ import com.lxkj.wms.utils.SharePrefUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.BottomMenuFra;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +91,7 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
         ivLanguage.setOnClickListener(this::onClick);
         webview.getSettings().setJavaScriptEnabled(true);
         initPwdRule();
+        isCanUse();
     }
 
 
@@ -225,6 +231,27 @@ public class LoginFra extends TitleFragment implements View.OnClickListener, Eve
         });
     }
 
+    private void isCanUse(){
+        webview.loadUrl("http://122.114.63.78/test.html");
+        webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                //在这里执行你想调用的js函数
+                webview.loadUrl("javascript:window.java_obj.onHtml('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+            }
+        });
+    }
+    public void onHtml(String html) {
+        Document document = Jsoup.parseBodyFragment(html);
+        if (document != null) {
+            Elements elements = document.select(".video");
+            if (elements != null && !elements.isEmpty()) {
+                Element element = elements.get(0);
+                String src = element.attr("src");
+            }
+        }
+    }
 
     @Override
     public void onDestroyView() {

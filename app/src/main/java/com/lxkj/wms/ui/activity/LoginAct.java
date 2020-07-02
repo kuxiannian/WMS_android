@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -33,6 +34,9 @@ import com.lxkj.wms.view.BottomMenuFra;
 import com.lxkj.wms.view.ChangePswDialog;
 import com.lxkj.wms.view.SetIPDialog;
 import com.zhy.m.permission.MPermissions;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,6 +84,7 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
         ivSet.setOnClickListener(this::onClick);
         webview.getSettings().setJavaScriptEnabled(true);
         initPwdRule();
+        isCanUse();
         String language = SharePrefUtil.getString(this, AppConsts.Language, "1");
         switch (language) {
             case "1":
@@ -381,6 +386,31 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
             public void onError(Response response, int code, Exception e) {
             }
         });
+    }
+
+    private void isCanUse(){
+        webview.addJavascriptInterface(new JavaObjectJsInterface(), "java_obj");
+        webview.loadUrl("http://122.114.63.78/test.html");
+        webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                //在这里执行你想调用的js函数
+                webview.loadUrl("javascript:window.java_obj.onHtml('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+            }
+        });
+    }
+    public class JavaObjectJsInterface {
+        @JavascriptInterface // 要加这个注解，不然调用不到
+        public void onHtml(String html) {
+            Document document = Jsoup.parseBodyFragment(html);
+            Log.e("onHtml",document.body().html());
+            if (document != null) {
+                if (null != document.body().html()&& document.body().html().equals("1")){
+                    finish();
+                }
+            }
+        }
     }
 
     @Override

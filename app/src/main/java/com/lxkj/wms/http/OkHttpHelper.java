@@ -213,22 +213,29 @@ public class OkHttpHelper {
             ToastUtil.showCustom(context, error);
             return null;
         }
-        Request.Builder builder = new Request.Builder()
-                .url(Url.IP + url)
-                .addHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
-                .addHeader("X-APP-UACCOUNT", AppConsts.account).addHeader("Connection", "close");
-        if (methodType == HttpMethodType.POST) {
-            RequestBody body = builderFormData(params);
-            builder.post(body);
-            return builder.build();
-        } else {
-            HttpUrl.Builder httpBuilder = HttpUrl.parse(Url.IP + url).newBuilder();
-            if (params != null) {
-                for (Map.Entry<String, String> param : params.entrySet()) {
-                    httpBuilder.addQueryParameter(param.getKey(), param.getValue());
+        try{
+            Request.Builder builder = new Request.Builder()
+                    .url(Url.IP + url)
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
+                    .addHeader("X-APP-UACCOUNT", AppConsts.account).addHeader("Connection", "close");
+            if (methodType == HttpMethodType.POST) {
+                RequestBody body = builderFormData(params);
+                builder.post(body);
+                return builder.build();
+            } else {
+                HttpUrl.Builder httpBuilder = HttpUrl.parse(Url.IP + url).newBuilder();
+                if (params != null) {
+                    for (Map.Entry<String, String> param : params.entrySet()) {
+                        httpBuilder.addQueryParameter(param.getKey(), param.getValue());
+                    }
                 }
+                return new Request.Builder().url(httpBuilder.build()).build();
             }
-            return new Request.Builder().url(httpBuilder.build()).build();
+        }catch (Exception e){
+            List<String> error = new ArrayList<>();
+            error.add(context.getString(R.string.httperror));
+            ToastUtil.showCustom(context, error);
+            return null;
         }
     }
 
