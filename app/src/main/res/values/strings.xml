@@ -454,7 +454,7 @@
     <string name="endBtnText">完成盘点</string>
 
 
-    <string name="hbxq">航班详情</string>
+    <string name="hbxq">航单详情</string>
     <string name="VE180002">AWB不能为空</string>
     <string name="VE210006">登记数量不能为空</string>
     <string name="VE210005">分拣登记地点不能为空</string>

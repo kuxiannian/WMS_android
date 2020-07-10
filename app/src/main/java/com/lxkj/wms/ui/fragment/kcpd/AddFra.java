@@ -100,15 +100,19 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
                 clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
                     @Override
                     public void onPrimaryClipChanged() {
-                        if (!isOpen && isResume){
-                            // 剪贴板中的数据被改变，此方法将被回调
-                            String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                        try {
+                            if (!isOpen && isResume){
+                                // 剪贴板中的数据被改变，此方法将被回调
+                                String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
 //                            Bundle bundle = new Bundle();
 //                            bundle.putString("barCode",str.replace("\n",""));
 //                            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
-                            act.setResult(2,new Intent().putExtra("barCode",str.replace("\n","").trim()));
-                            act.finishSelf();
-                            isOpen = true;
+                                act.setResult(2,new Intent().putExtra("barCode",str.replace("\n","").trim()));
+                                act.finishSelf();
+                                isOpen = true;
+                            }
+                        }catch (Exception e){
+
                         }
                     }
                 });
@@ -123,12 +127,16 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
 
     @Override
     public void onBarCodeData(String data) {
-        if (!isOpen && isResume){
-            isOpen = true;
-            api.closeScan();
-            act.setResult(2,new Intent().putExtra("barCode",data.replace("\n","").trim()));
-            act.finishSelf();
-            isOpen = true;
+        try {
+            if (!isOpen && isResume){
+                isOpen = true;
+                api.closeScan();
+                act.setResult(2,new Intent().putExtra("barCode",data.replace("\n","").trim()));
+                act.finishSelf();
+                isOpen = true;
+            }
+        }catch (Exception e){
+
         }
     }
 

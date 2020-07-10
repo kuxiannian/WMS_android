@@ -97,13 +97,17 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
                 clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
                     @Override
                     public void onPrimaryClipChanged() {
-                        if (!isOpen && isResume) {
-                            // 剪贴板中的数据被改变，此方法将被回调
-                            String str = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("barCode", str.replace("\n", "").trim());
-                            ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
-                            isOpen = true;
+                        try {
+                            if (!isOpen && isResume) {
+                                // 剪贴板中的数据被改变，此方法将被回调
+                                String str = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("barCode", str.replace("\n", "").trim());
+                                ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
+                                isOpen = true;
+                            }
+                        }catch (Exception e){
+
                         }
                     }
                 });
@@ -118,12 +122,16 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
 
     @Override
     public void onBarCodeData(String data) {
-        if (!isOpen && isResume){
-            isOpen = true;
-            api.closeScan();
-            Bundle bundle = new Bundle();
-            bundle.putString("barCode", data.replace("\n", "").trim());
-            ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
+        try {
+            if (!isOpen && isResume){
+                isOpen = true;
+                api.closeScan();
+                Bundle bundle = new Bundle();
+                bundle.putString("barCode", data.replace("\n", "").trim());
+                ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
+            }
+        }catch (Exception e){
+
         }
     }
 

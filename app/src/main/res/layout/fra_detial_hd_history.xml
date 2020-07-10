@@ -87,7 +87,6 @@
                     android:id="@+id/tvGoodsName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
@@ -111,7 +110,6 @@
                     android:id="@+id/tvRegisterNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:paddingTop="5dp"
                     android:textColor="@color/txt_lv4"
                     android:textSize="15sp" />
@@ -141,7 +139,6 @@
                         android:id="@+id/tvWmsWarehouseName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:paddingTop="5dp"
                         android:textColor="@color/txt_lv4"
                         android:textSize="15sp" />

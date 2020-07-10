@@ -388,7 +388,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
         switch (view.getId()) {
             case R.id.tvSave:
                 isAdd = false;
-                if (TextUtils.isEmpty(tvWeight.getText()) && !TextUtils.isEmpty(etBarCode.getText())){
+                if (TextUtils.isEmpty(tvWmsWarehouseIdName.getText()) && !TextUtils.isEmpty(etBarCode.getText())){
                     isAdd = true;
                     findInfoByBarCode(etBarCode.getText().toString());
                 }else{

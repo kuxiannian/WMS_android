@@ -99,14 +99,19 @@ public class PutOnBillFra extends TitleFragment implements NaviActivity.NaviRigt
                 clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
                     @Override
                     public void onPrimaryClipChanged() {
-                        if (!isOpen && isResume){
-                            // 剪贴板中的数据被改变，此方法将被回调
-                            String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("barCode",str.replace("\n","").trim());
-                            ActivitySwitcher.startFragment(act, AddPutOnBillFra.class,bundle);
-                            isOpen = true;
+                        try {
+                            if (!isOpen && isResume){
+                                // 剪贴板中的数据被改变，此方法将被回调
+                                String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("barCode",str.replace("\n","").trim());
+                                ActivitySwitcher.startFragment(act, AddPutOnBillFra.class,bundle);
+                                isOpen = true;
+                            }
+                        }catch (Exception e){
+
                         }
+
                     }
                 });
                 break;
@@ -120,13 +125,18 @@ public class PutOnBillFra extends TitleFragment implements NaviActivity.NaviRigt
 
     @Override
     public void onBarCodeData(String data) {
-        if (!isOpen && isResume){
-            isOpen = true;
-            api.closeScan();
-            Bundle bundle = new Bundle();
-            bundle.putString("barCode",data.replace("\n","").trim());
-            ActivitySwitcher.startFragment(act, AddPutOnBillFra.class,bundle);
+        try {
+            if (!isOpen && isResume){
+                isOpen = true;
+                api.closeScan();
+                Bundle bundle = new Bundle();
+                bundle.putString("barCode",data.replace("\n","").trim());
+                ActivitySwitcher.startFragment(act, AddPutOnBillFra.class,bundle);
+            }
+        }catch (Exception e){
+
         }
+
     }
 
     @Override

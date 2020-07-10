@@ -366,8 +366,9 @@ public class OkHttpHelper {
             @Override
             public void run() {
                 callback.onError(response, response.code(), e);
-                ToastUtil.show(context.getString(R.string.httperror));
-
+                List<String> error = new ArrayList<>();
+                error.add(context.getString(R.string.httperror));
+                ToastUtil.showCustom(context, error);
             }
         });
     }
@@ -377,7 +378,9 @@ public class OkHttpHelper {
             @Override
             public void run() {
                 callback.onFailure(request, e);
-                ToastUtil.show(context.getString(R.string.httperror));
+                List<String> error = new ArrayList<>();
+                error.add(context.getString(R.string.httperror));
+                ToastUtil.showCustom(context, error);
             }
         });
     }
