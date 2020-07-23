@@ -1,5 +1,6 @@
 package com.lxkj.wms.ui.fragment.rksh;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -8,13 +9,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.TimePickerView;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.WareHouseBean;
 import com.lxkj.wms.event.BillInputSxEvent;
@@ -23,7 +22,6 @@ import com.lxkj.wms.http.OkHttpHelper;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.utils.DateUtil;
 import com.lxkj.wms.utils.EditTextUtil;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.view.SingleChooseDialog;
@@ -33,7 +31,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,47 +164,79 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
         });
     }
 
+    Calendar c = Calendar.getInstance();
+
+    int mYear = c.get(Calendar.YEAR);
+    int mMonth = c.get(Calendar.MONTH);
+    int mDay = c.get(Calendar.DAY_OF_MONTH);
 
     /**
      * 选择日期
      */
     private void selectDate() {
+        new DatePickerDialog(mContext,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        monthOfYear++;
+                        switch (type) {
+                            case 0://inputDateStart
+                                inputDateStart = year + "-" + monthOfYear + "-" + dayOfMonth;
+                                tvInputDateStart.setText(inputDateStart);
+                                break;
+                            case 1://inputDateEnd
+                                inputDateEnd = year + "-" + monthOfYear + "-" + dayOfMonth;
+                                tvInputDateEnd.setText(inputDateEnd);
+                                break;
+                            case 2://updateDateStart
+                                updateDateStart = year + "-" + monthOfYear + "-" + dayOfMonth;
+                                tvUpdateDateStart.setText(updateDateStart);
+                                break;
+                            case 3://updateDateEnd
+                                updateDateEnd = year + "-" + monthOfYear + "-" + dayOfMonth;
+                                tvUpdateDateEnd.setText(updateDateEnd);
+                                break;
+                        }
+                    }
+                }, mYear, mMonth, mDay).show();
+
 //        Calendar startDate = Calendar.getInstance();
 //        Calendar endDate = Calendar.getInstance();
 //        startDate.set(DateUtil.getYear() - 10, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date, View v) {
-                switch (type) {
-                    case 0://inputDateStart
-                        inputDateStart = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
-                        tvInputDateStart.setText(inputDateStart);
-                        break;
-                    case 1://inputDateEnd
-                        inputDateEnd = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
-                        tvInputDateEnd.setText(inputDateEnd);
-                        break;
-                    case 2://updateDateStart
-                        updateDateStart = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
-                        tvUpdateDateStart.setText(updateDateStart);
-                        break;
-                    case 3://updateDateEnd
-                        updateDateEnd = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
-                        tvUpdateDateEnd.setText(updateDateEnd);
-                        break;
-
-                }
-            }
-        })
-                .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
-//                .setRangDate(startDate, endDate)//起始终止年月日设定
-                .setTextColorCenter(0xffFF8201)
-                .setTitleBgColor(0xffffffff)
-                .setSubmitColor(0xffFF8201)
-                .setSubCalSize(22)
-                .setType(new boolean[]{true, true, true, false, false, false})
-                .build();
-        startTimePickerView.show();
+//        final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
+//            @Override
+//            public void onTimeSelect(Date date, View v) {
+//                switch (type) {
+//                    case 0://inputDateStart
+//                        inputDateStart = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
+//                        tvInputDateStart.setText(inputDateStart);
+//                        break;
+//                    case 1://inputDateEnd
+//                        inputDateEnd = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
+//                        tvInputDateEnd.setText(inputDateEnd);
+//                        break;
+//                    case 2://updateDateStart
+//                        updateDateStart = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
+//                        tvUpdateDateStart.setText(updateDateStart);
+//                        break;
+//                    case 3://updateDateEnd
+//                        updateDateEnd = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
+//                        tvUpdateDateEnd.setText(updateDateEnd);
+//                        break;
+//
+//                }
+//            }
+//        })
+//                .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
+////                .setRangDate(startDate, endDate)//起始终止年月日设定
+//                .setTextColorCenter(0xffFF8201)
+//                .setTitleBgColor(0xffffffff)
+//                .setSubmitColor(0xffFF8201)
+//                .setSubCalSize(22)
+//                .setType(new boolean[]{true, true, true, false, false, false})
+//                .build();
+//        startTimePickerView.show();
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -327,7 +357,7 @@ public class ShaiXuanRkFra extends TitleFragment implements NaviActivity.NaviRig
                 goodsName = etGoodsName.getText().toString();
                 updaterName = etUpdaterName.getText().toString();
                 EventBus.getDefault().post(new BillInputSxEvent(barCode, inputDateStart, inputDateEnd, wmsWarehouseId,
-                        palletNumber, weight, goodsType, goodsName, updaterName,updateDateStart,updateDateEnd));
+                        palletNumber, weight, goodsType, goodsName, updaterName, updateDateStart, updateDateEnd));
                 act.finishSelf();
                 break;
         }

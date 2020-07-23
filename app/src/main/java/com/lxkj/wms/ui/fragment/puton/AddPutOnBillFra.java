@@ -1,5 +1,6 @@
 package com.lxkj.wms.ui.fragment.puton;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -8,13 +9,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.Gson;
 import com.lxkj.wms.R;
 import com.lxkj.wms.bean.ResultBean;
@@ -26,7 +25,6 @@ import com.lxkj.wms.http.SpotsCallBack;
 import com.lxkj.wms.http.Url;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.utils.DateUtil;
 import com.lxkj.wms.utils.EditTextUtil;
 import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ListUtil;
@@ -37,7 +35,6 @@ import com.lxkj.wms.view.SingleChooseDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -276,7 +273,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                         String[] error = resultBean.errorCode.split("\\?");
                         String errorCode = error[0];
                         Map<String, String> errorValues = ShowErrorCodeUtil.getErrorValue(error[1]);
-                        String barCode = errorValues.get("barCode");
+                        String barCode = errorValues.get("code");
                         List<String> errors = new ArrayList<>();
                         switch (errorCode) {
                             case "SE110001":
@@ -529,32 +526,48 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
             }
         });
     }
+    Calendar c = Calendar.getInstance();
 
+    int mYear = c.get(Calendar.YEAR);
+    int mMonth = c.get(Calendar.MONTH);
+    int mDay = c.get(Calendar.DAY_OF_MONTH);
     /**
      * 选择日期
      */
     private void selectDate() {
         KeyboardUtil.hideKeyboard(act);
-        Calendar startDate = Calendar.getInstance();
-        Calendar endDate = Calendar.getInstance();
-        startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date, View v) {
-                putOnDate = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
-                tvPutOnDate.setText(putOnDate);
-            }
-        })
-                .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
-                .setRangDate(startDate, endDate)//起始终止年月日设定
-                .setDate(endDate)
-                .setTextColorCenter(0xffFF8201)
-                .setTitleBgColor(0xffffffff)
-                .setSubmitColor(0xffFF8201)
-                .setSubCalSize(22)
-                .setType(new boolean[]{true, true, true, false, false, false})
-                .build();
-        startTimePickerView.show();
+        new DatePickerDialog(mContext,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        monthOfYear++;
+                        putOnDate = year + "-" + monthOfYear + "-" + dayOfMonth;
+                        tvPutOnDate.setText(putOnDate);
+                    }
+                }, mYear, mMonth, mDay).show();
+
+
+//        Calendar startDate = Calendar.getInstance();
+//        Calendar endDate = Calendar.getInstance();
+//        startDate.set(DateUtil.getYear() - 100, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//        final TimePickerView startTimePickerView = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
+//            @Override
+//            public void onTimeSelect(Date date, View v) {
+//                putOnDate = DateUtil.formatDate(date.getTime(), "yyyy-MM-dd");
+//                tvPutOnDate.setText(putOnDate);
+//            }
+//        })
+//                .setCancelColor(R.color.txt_lv1)//取消按钮文字颜色
+//                .setRangDate(startDate, endDate)//起始终止年月日设定
+//                .setDate(endDate)
+//                .setTextColorCenter(0xffFF8201)
+//                .setTitleBgColor(0xffffffff)
+//                .setSubmitColor(0xffFF8201)
+//                .setSubCalSize(22)
+//                .setType(new boolean[]{true, true, true, false, false, false})
+//                .build();
+//        startTimePickerView.show();
     }
 
     private TextWatcher textWatcher = new TextWatcher() {

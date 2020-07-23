@@ -312,7 +312,7 @@
     <string name="VE110011">Remarks, only 1 ~ 200 characters length can be entered</string>
     <string name="VE110012">Version number cannot be empty</string>
     <string name="VE110013">Warehouse cannot be empty</string>
-    <string name="VE110014">Inventory table Id cannot be empty</string>
+    <string name="VE110014">No information about this bar code was found</string>
     <string name="SE110001">Barcode: %1$s, the goods have been stored in the storage place: %2$s, can not be repeatedly placed on the shelf, if you need to change the storage position, please remove the shelf</string>
     <string name="SE110002">Barcode: %1$s, the goods have no inventory information to check, they are not in storage</string>
     <string name="SE110003">The selected storage location information is incorrect, please try again</string>
@@ -327,7 +327,7 @@
     <string name="VE120006">Version number cannot be empty</string>
     <string name="VE120007">Warehouse cannot be empty</string>
     <string name="VE120008">Storage cannot be empty</string>
-    <string name="VE120009">Inventory table Id cannot be empty</string>
+    <string name="VE120009">No information about this bar code was found</string>
     <string name="SE120001">Bar code: %1$s, the goods are not on the shelves and cannot be removed</string>
     <string name="SE120002">Bar code: %1$s, no inventory information can be checked for the goods, not in storage</string>
     <string name="VE500003">Storage slot number cannot be empty</string>

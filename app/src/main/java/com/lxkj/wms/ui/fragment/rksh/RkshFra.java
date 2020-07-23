@@ -52,18 +52,38 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
         if (api != null) {
             api.setScannerStatus(true);
         }
+        // 添加剪贴板数据改变监听器
+        clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
+            @Override
+            public void onPrimaryClipChanged() {
+                try {
+                    if (!isOpen && isResume) {
+                        // 剪贴板中的数据被改变，此方法将被回调
+                        String str = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("barCode", str.replace("\n", "").trim());
+                        ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
+                        isOpen = true;
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        });
     }
 
     @Override
     public void onPause() {
         super.onPause();
         isResume = false;
+        isOpen = true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         isResume = true;
+        isOpen = false;
     }
 
     @Override
@@ -91,26 +111,10 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
             case R.id.tvOpen:
                 isOpen = false;
                 api.scan();
+                api.closeScan();
+                api.CloseScanning();
                 Intent it = new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");
                 act.sendBroadcast(it);
-                // 添加剪贴板数据改变监听器
-                clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
-                    @Override
-                    public void onPrimaryClipChanged() {
-                        try {
-                            if (!isOpen && isResume) {
-                                // 剪贴板中的数据被改变，此方法将被回调
-                                String str = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("barCode", str.replace("\n", "").trim());
-                                ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
-                                isOpen = true;
-                            }
-                        }catch (Exception e){
-
-                        }
-                    }
-                });
                 break;
         }
     }
@@ -125,7 +129,6 @@ public class RkshFra extends TitleFragment implements NaviActivity.NaviRigthImag
         try {
             if (!isOpen && isResume){
                 isOpen = true;
-                api.closeScan();
                 Bundle bundle = new Bundle();
                 bundle.putString("barCode", data.replace("\n", "").trim());
                 ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);

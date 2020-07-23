@@ -37,6 +37,7 @@ public final class ToastUtil {
         }
         mToast.setText(title);
         mToast.show();
+
     }
 
     public static void showCustom(Context context, List<String> errorList) {

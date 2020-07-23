@@ -43,21 +43,13 @@ public abstract class TitleFragment extends Fragment implements EventCenter.Even
         screenWidth = ScreenUtil.getScreenWidth(getContext());
         mOkHttpHelper = OkHttpHelper.getInstance();
         eventCenter = beans.getEventCenter();
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        try {
-            // 获取系统剪贴板
-            clipboardManager=(ClipboardManager)act.getSystemService(Context.CLIPBOARD_SERVICE);
-            mContext = act;
-            eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGIN);
-            eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGOUT);
-            act.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }catch (Exception e){
 
-        }
     }
 
     @Override
@@ -69,6 +61,16 @@ public abstract class TitleFragment extends Fragment implements EventCenter.Even
         mContext = act;
         userPhone = AppConsts.account;
         userId = AppConsts.userId;
+        try {
+            // 获取系统剪贴板
+            clipboardManager=(ClipboardManager)act.getSystemService(Context.CLIPBOARD_SERVICE);
+            mContext = act;
+            eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGIN);
+            eventCenter.registEvent(this, EventCenter.EventType.EVT_LOGOUT);
+            act.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }catch (Exception e){
+
+        }
     }
 
     @Override

@@ -50,18 +50,38 @@ public class PutOffBillFra extends TitleFragment implements NaviActivity.NaviRig
         if (api != null) {
             api.setScannerStatus(true);
         }
+        // 添加剪贴板数据改变监听器
+        clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
+            @Override
+            public void onPrimaryClipChanged() {
+                try {
+                    if (!isOpen && isResume){
+                        // 剪贴板中的数据被改变，此方法将被回调
+                        String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("barCode",str.replace("\n","").trim());
+                        ActivitySwitcher.startFragment(act, AddPutOffBillFra.class,bundle);
+                        isOpen = true;
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        });
     }
 
     @Override
     public void onPause() {
         super.onPause();
         isResume = false;
+        isOpen = true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         isResume = true;
+        isOpen = false;
     }
 
     @Override
@@ -90,28 +110,11 @@ public class PutOffBillFra extends TitleFragment implements NaviActivity.NaviRig
                 isOpen = false;
                 //手持打开扫描
                 api.scan();
-
+                api.closeScan();
+                api.CloseScanning();
                 //平板打开扫描
                 Intent it=new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");
                 act.sendBroadcast(it);
-                // 添加剪贴板数据改变监听器
-                clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
-                    @Override
-                    public void onPrimaryClipChanged() {
-                        try {
-                            if (!isOpen && isResume){
-                                // 剪贴板中的数据被改变，此方法将被回调
-                                String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("barCode",str.replace("\n","").trim());
-                                ActivitySwitcher.startFragment(act, AddPutOffBillFra.class,bundle);
-                                isOpen = true;
-                            }
-                        }catch (Exception e){
-
-                        }
-                    }
-                });
                 break;
         }
     }
@@ -126,7 +129,6 @@ public class PutOffBillFra extends TitleFragment implements NaviActivity.NaviRig
         try {
             if (!isOpen && isResume){
                 isOpen = true;
-                api.closeScan();
                 Bundle bundle = new Bundle();
                 bundle.putString("barCode",data.replace("\n","").trim());
                 ActivitySwitcher.startFragment(act, AddPutOffBillFra.class,bundle);

@@ -101,6 +101,8 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
     private String rateClass;//运价种类
     private String productCode;//商品代号
 
+    private boolean isOnChange = false;
+
     @Override
     public String getTitleName() {
         return act.getString(R.string.xzhwdj);
@@ -191,7 +193,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     djNum = Integer.parseInt(tvDjjs.getText().toString());
                 else
                     djNum = 0;
-                if (djNum > 1000){
+                if (djNum > 1000) {
                     djNum = 1000;
                     tvDjjs.setText("1000");
                 }
@@ -319,6 +321,10 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                         if (resultBean.getResult().size() == 1) {
                             flightId = resultBean.getResult().get(0).getId();
                             tvHangBan.setText(resultBean.getResult().get(0).getFlight());
+                            if (isOnChange && null != goodsNameId){
+                                isOnChange = false;
+                                addSortingRegister();
+                            }
                         }
                         AppViewCanDoUtil.setBtnCanDo(true, tvHdxq);
                     }
@@ -368,11 +374,14 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                             chargeableWeight = resultBean.getResult().get(0).getChargeableWeight();
                             rateClass = resultBean.getResult().get(0).getRateClass();
                             productCode = resultBean.getResult().get(0).getProductCode();
+                            if (isOnChange && null != flightId){
+                                isOnChange = false;
+                                addSortingRegister();
+                            }
                         }
                     }
                 }
             }
-
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -381,6 +390,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
 
     /**
      * 根据舱单货物ID查询舱单货物信息接口
+     *
      * @param goodsNameId 舱单货物ID
      */
     private void findWmsManifestGoodsByGoodsNameId(String goodsNameId) {
@@ -390,12 +400,15 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
             @Override
             public void onBeforeRequest(Request request) {
             }
+
             @Override
             public void onResponse(Response response) {
             }
+
             @Override
             public void onFailure(Request request, Exception e) {
             }
+
             @Override
             public void onSuccess(Response response, ResultBean resultBean) {
                 if (resultBean.flag) {
@@ -403,6 +416,7 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
                     tvJs.setText(number);
                 }
             }
+
             @Override
             public void onError(Response response, int code, Exception e) {
             }
@@ -414,6 +428,12 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
      * 新增货物登记数据
      */
     private void addSortingRegister() {
+        if (null == awb && !TextUtils.isEmpty(etAwb.getText())) {
+            findManifestByAwb(etAwb.getText().toString());
+            isOnChange = true;
+            return;
+        }
+
         if (!TextUtils.isEmpty(tvDjjs.getText()))
             djNum = Integer.parseInt(tvDjjs.getText().toString());
         else
@@ -422,32 +442,44 @@ public class AddHwdjFra extends TitleFragment implements NaviActivity.NaviRigthI
             registerNumber = djNum + "";
         Map<String, String> params = new HashMap<>();
         if (null == awb) {
-            ToastUtil.show(mContext.getString(R.string.VE180002));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.VE180002));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
         if (null == flightId) {
-            ToastUtil.show(mContext.getString(R.string.VE210003));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.VE210003));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
 
         if (TextUtils.isEmpty(tvHwpm.getText())) {
-            ToastUtil.show(mContext.getString(R.string.VE210004));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.VE210004));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
 
         if (TextUtils.isEmpty(tvDjjs.getText())) {
-            ToastUtil.show(mContext.getString(R.string.VE210006));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.VE210006));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
         int num = Integer.parseInt(tvDjjs.getText().toString());
         List<String> errors = new ArrayList<>();
         if (num > 1000) {
-            errors.add(getResources().getString(R.string.SE180010));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.SE180010));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
 
         if (TextUtils.isEmpty(tvHwfl.getText())) {
-            ToastUtil.show(mContext.getString(R.string.VE210008));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.VE210008));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
         if (null != awb)

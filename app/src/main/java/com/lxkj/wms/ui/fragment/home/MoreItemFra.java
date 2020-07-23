@@ -12,7 +12,6 @@ import com.lxkj.wms.R;
 import com.lxkj.wms.adapter.HomeAdapter;
 import com.lxkj.wms.bean.HomeItemBean;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +52,6 @@ public class MoreItemFra extends TitleFragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ToastUtil.show(items.get(i).name);
             }
         });
     }

@@ -268,12 +268,15 @@ public class AddCkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     ToastUtil.show(mContext.getResources().getString(R.string.beSuccess));
                     act.finishSelf();
                 } else {
+                    List<String> error = new ArrayList<>();
                     switch (resultBean.errorCode) {
                         case "SE130001":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE130001), etBarCode.getText().toString()));
+                            error.add(String.format(getResources().getString(R.string.SE130001), etBarCode.getText().toString()));
+                            ToastUtil.showCustom(mContext, error);
                             break;
                         case "SE130002":
-                            ToastUtil.show(String.format(getResources().getString(R.string.SE130002), etBarCode.getText().toString()));
+                            error.add(String.format(getResources().getString(R.string.SE130002), etBarCode.getText().toString()));
+                            ToastUtil.showCustom(mContext, error);
                             break;
                         case "E000406":
                             List<String> errors = new ArrayList<>();

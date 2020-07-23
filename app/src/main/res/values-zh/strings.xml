@@ -317,7 +317,7 @@
     <string name="VE110011">备注，只能输入1~200位长度</string>
     <string name="VE110012">版本号不能为空</string>
     <string name="VE110013">仓库不能为空</string>
-    <string name="VE110014">库存表Id不能为空</string>
+    <string name="VE110014">未查询到此条形码相关的货物信息</string>
     <string name="SE110001">条形码：%1$s，货物已上架到储位：%2$s，无法重复上架，若需更换储位，请先进行下架操作</string>
     <string name="SE110002">条形码：%1$s，货物无库存信息可查，未入库</string>
     <string name="SE110003">选择的储位信息不正确，请重新操作</string>
@@ -332,7 +332,7 @@
     <string name="VE120006">版本号不能为空</string>
     <string name="VE120007">仓库不能为空</string>
     <string name="VE120008">储位不能为空</string>
-    <string name="VE120009">库存表Id不能为空</string>
+    <string name="VE120009">未查询到此条形码相关的货物信息</string>
     <string name="SE120001">条形码：%1$s，货物并未上架，无法下架</string>
     <string name="SE120002">条形码：%1$s，货物无库存信息可查，未入库</string>
     <string name="VE500003">储位编号不能为空</string>

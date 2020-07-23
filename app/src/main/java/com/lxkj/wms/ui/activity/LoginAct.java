@@ -150,11 +150,15 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
 
     private void userLogin() {
         if (TextUtils.isEmpty(etAccount.getText())) {
-            ToastUtil.show(mContext.getString(R.string.qsrzh));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.qsrzh));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
         if (TextUtils.isEmpty(etPsw.getText())) {
-            ToastUtil.show(mContext.getString(R.string.qsrmm));
+            List<String> error = new ArrayList<>();
+            error.add(mContext.getString(R.string.qsrmm));
+            ToastUtil.showCustom(mContext, error);
             return;
         }
         String account = etPsw.getText().toString();
@@ -241,21 +245,27 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
                         public void OnLeftClick(String account) {
                             if (null != containsUppercaseLetters && !containsUppercaseLetters.equals("0")) {
                                 if (!PasswordUtil.isContainUp(account)) {
-                                    ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.UppercaseLetter));
+                                    List<String> error = new ArrayList<>();
+                                    error.add(mContext.getString(R.string.mustHave) + mContext.getString(R.string.UppercaseLetter));
+                                    ToastUtil.showCustom(mContext, error);
                                     return;
                                 }
                             }
 
                             if (null != containsLowercaseLetters && !containsLowercaseLetters.equals("0")) {
                                 if (!PasswordUtil.isContainLower(account)) {
-                                    ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.LowercaseLetter));
+                                    List<String> error = new ArrayList<>();
+                                    error.add(mContext.getString(R.string.mustHave) + mContext.getString(R.string.LowercaseLetter));
+                                    ToastUtil.showCustom(mContext, error);
                                     return;
                                 }
                             }
 
                             if (null != containsDigitalNumber && !containsDigitalNumber.equals("0")) {
                                 if (!PasswordUtil.isContainDigitalNumber(account)) {
-                                    ToastUtil.show(mContext.getString(R.string.mustHave) + mContext.getString(R.string.number));
+                                    List<String> error = new ArrayList<>();
+                                    error.add(mContext.getString(R.string.mustHave) + mContext.getString(R.string.number));
+                                    ToastUtil.showCustom(mContext, error);
                                     return;
                                 }
                             }
@@ -263,6 +273,9 @@ public class LoginAct extends BaseFragAct implements View.OnClickListener {
                                 String testStr = getResources().getString(R.string.passwordLength);
                                 String result = String.format(testStr, minLength, maxLength);
                                 ToastUtil.show(result);
+                                List<String> error = new ArrayList<>();
+                                error.add(result);
+                                ToastUtil.showCustom(mContext, error);
                                 return;
                             }
                             encodePassword(account);

@@ -53,18 +53,37 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
         if (api != null) {
             api.setScannerStatus(true);
         }
+        // 添加剪贴板数据改变监听器
+        clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
+            @Override
+            public void onPrimaryClipChanged() {
+                try {
+                    if (!isOpen && isResume){
+                        // 剪贴板中的数据被改变，此方法将被回调
+                        String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                        act.setResult(2,new Intent().putExtra("barCode",str.replace("\n","").trim()));
+                        act.finishSelf();
+                        isOpen = true;
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        });
     }
 
     @Override
     public void onPause() {
         super.onPause();
         isResume = false;
+        isOpen = true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         isResume = true;
+        isOpen = false;
     }
 
     @Override
@@ -94,28 +113,11 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
             case R.id.tvOpen:
                 isOpen = false;
                 api.scan();
+                api.closeScan();
+                api.CloseScanning();
                 Intent it=new Intent("com.android.action.keyevent.KEYCODE_KEYCODE_SCAN_L_DOWN");
                 act.sendBroadcast(it);
-                // 添加剪贴板数据改变监听器
-                clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
-                    @Override
-                    public void onPrimaryClipChanged() {
-                        try {
-                            if (!isOpen && isResume){
-                                // 剪贴板中的数据被改变，此方法将被回调
-                                String str=clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
-//                            Bundle bundle = new Bundle();
-//                            bundle.putString("barCode",str.replace("\n",""));
-//                            ActivitySwitcher.startFragment(act, AddRkFra.class,bundle);
-                                act.setResult(2,new Intent().putExtra("barCode",str.replace("\n","").trim()));
-                                act.finishSelf();
-                                isOpen = true;
-                            }
-                        }catch (Exception e){
 
-                        }
-                    }
-                });
                 break;
         }
     }
@@ -130,7 +132,6 @@ public class AddFra extends TitleFragment implements NaviActivity.NaviRigthImage
         try {
             if (!isOpen && isResume){
                 isOpen = true;
-                api.closeScan();
                 act.setResult(2,new Intent().putExtra("barCode",data.replace("\n","").trim()));
                 act.finishSelf();
                 isOpen = true;

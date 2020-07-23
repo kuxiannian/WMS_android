@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -54,6 +55,7 @@ public class AddStockCheckDialog extends Dialog {
         tvCancel = findViewById(R.id.tv_cancel);
         tvWmsWarehouseIdName.setText(wmsWarehouseName);
         this.onConfirmListener = onConfirmListener;
+        Log.e("AddStockCheckDialogbar",barCode);
         etBarCode.setText(barCode);
         tvWmsWarehouseDetailId.setOnClickListener(new View.OnClickListener() {
             @Override
