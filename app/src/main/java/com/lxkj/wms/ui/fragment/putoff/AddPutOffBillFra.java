@@ -25,8 +25,10 @@ import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
 import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
+import com.lxkj.wms.utils.TimeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -69,7 +71,7 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
     private String wmsWarehouseId;//仓库Id
     private List<TopBean.ResultBean> topList;//储位列表
     private double djNum = 0;
-
+    private boolean isOnChange = false;
     public String getTitleName() {
         return act.getString(R.string.appPutOffTitle);
     }
@@ -151,6 +153,10 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                         wmsWarehouseDetailId = resultBean.result.wmsWarehouseDetailId;
                         tvWmsWarehouseId.setText(resultBean.result.wmsWarehouseName);
                         tvWmsWarehouseDetailId.setText(resultBean.result.wmsWarehouseDetailName);
+                        if (isOnChange){
+                            isOnChange = false;
+                            addBillPutOff();
+                        }
                     }
                 } else {
                     etBarCode.setText("");
@@ -200,6 +206,11 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
      * 新增数据接口
      */
     private void addBillPutOff() {
+        if (null == wmsStockId && !TextUtils.isEmpty(etBarCode.getText())) {
+            findInfoByBarCodeBillPutOff(etBarCode.getText().toString());
+            isOnChange = true;
+            return;
+        }
         Map<String, String> params = new HashMap<>();
         params.put("barCode", etBarCode.getText().toString());
         if (null != putOffDate)
@@ -266,8 +277,19 @@ public class AddPutOffBillFra extends TitleFragment implements NaviActivity.Navi
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear,
                                           int dayOfMonth) {
                         monthOfYear++;
-                        putOffDate = year + "-" + monthOfYear + "-" + dayOfMonth;
-                        tvPutOffDate.setText(putOffDate);
+                        String month = TimeUtil.formatMonth(monthOfYear);
+                        putOffDate = year + "-" + month + "-" + dayOfMonth;
+                        try {
+                            if (Long.parseLong(TimeUtil.dateToStamp(putOffDate, "yyyy-MM-dd")) > System.currentTimeMillis()) {
+                                ShowErrorCodeUtil.showError(mContext, "SE120003");
+                                putOffDate = null;
+                                tvPutOffDate.setText("");
+                                return;
+                            }
+                            tvPutOffDate.setText(putOffDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, mYear, mMonth, mDay).show();
 

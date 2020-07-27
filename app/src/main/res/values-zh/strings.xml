@@ -278,7 +278,7 @@
     <string name="SE100007">条形码：%1$s，此货物为C类小件无嫌疑货物，必须进[小件仓库]类型的仓库，请进行分拨配送</string>
     <string name="SE100008">条形码：%1$s，此货物为C类小件有嫌疑货物，必须进[使馆人员、侨民、居民进口货物仓库]，[居民进口货物小件分拨/大件库仓库]类型的仓库，请进行分拨配送</string>
     <string name="SE100009">条形码：%1$s，此货物进行过分拨配送，入库前请先确认收货</string>
-
+    <string name="SE100010">入库日期最大只能选择到当前日期</string>
     <string name="CE100001">页面信息已过期，请刷新页面</string>
     <string name="CE100002">未知错误</string>
     <string name="CE100003">新增操作，主键必须为空</string>
@@ -303,6 +303,7 @@
     <string name="SE130001">条形码：%1$s，货物没有进行下架，请先下架</string>
     <string name="SE130002">条形码：%1$s，货物无库存信息可查，已经不在库存中</string>
     <string name="SE130003">该货物有嫌疑，嫌疑问题栏位不能为空</string>
+    <string name="SE130004">出库日期最大只能选择到当前日期</string>
     //上架单错误提示
     <string name="VE110001">主键必须不能为空</string>
     <string name="VE110002">条形码不能为空</string>
@@ -322,7 +323,7 @@
     <string name="SE110002">条形码：%1$s，货物无库存信息可查，未入库</string>
     <string name="SE110003">选择的储位信息不正确，请重新操作</string>
     <string name="SE110004">储位上已经有货物，请选择其他储位</string>
-
+    <string name="SE110005">上架日期最大只能选择到当前日期</string>
     // 下架单错误提示
     <string name="VE120001">主键必须不能为空</string>
     <string name="VE120002">条形码不能为空</string>
@@ -335,6 +336,7 @@
     <string name="VE120009">未查询到此条形码相关的货物信息</string>
     <string name="SE120001">条形码：%1$s，货物并未上架，无法下架</string>
     <string name="SE120002">条形码：%1$s，货物无库存信息可查，未入库</string>
+    <string name="SE120003">下架日期最大只能选择到当前日期</string>
     <string name="VE500003">储位编号不能为空</string>
 
 

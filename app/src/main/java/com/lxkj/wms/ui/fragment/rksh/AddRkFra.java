@@ -27,10 +27,12 @@ import com.lxkj.wms.utils.EditTextUtil;
 import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.StringUtil;
+import com.lxkj.wms.utils.TimeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -122,7 +124,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                 tvGoodsType.setText("");
                 tvProductCode.setText("");
                 tvWmsWarehouseIdName.setText("");
-                tvWeight.setText("");
+//                tvWeight.setText("");
             }
         });
 
@@ -163,7 +165,8 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                         tvGoodsType.setText(ShowErrorCodeUtil.getGoodsType(mContext, resultBean.result.goodsType));
                         tvProductCode.setText(resultBean.result.productCode);
                         tvWmsWarehouseIdName.setText(resultBean.result.wmsWarehouseIdName);
-                        tvWeight.setText(resultBean.result.weight);
+                        if (TextUtils.isEmpty(tvWeight.getText()))
+                            tvWeight.setText(resultBean.result.weight);
                         if (isAdd)
                             addBillInput();
                     }
@@ -324,6 +327,7 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
     int mYear = c.get(Calendar.YEAR);
     int mMonth = c.get(Calendar.MONTH);
     int mDay = c.get(Calendar.DAY_OF_MONTH);
+
     /**
      * 选择日期
      */
@@ -335,8 +339,19 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear,
                                           int dayOfMonth) {
                         monthOfYear++;
-                        inputDate = year + "-" + monthOfYear + "-" + dayOfMonth;
-                        tvInputDate.setText(inputDate);
+                        String month = TimeUtil.formatMonth(monthOfYear);
+                        inputDate = year + "-" + month + "-" + dayOfMonth;
+                        try {
+                            if (Long.parseLong(TimeUtil.dateToStamp(inputDate, "yyyy-MM-dd")) > System.currentTimeMillis()) {
+                                ShowErrorCodeUtil.showError(mContext, "SE100010");
+                                inputDate = null;
+                                tvInputDate.setText("");
+                                return;
+                            }
+                            tvInputDate.setText(inputDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, mYear, mMonth, mDay).show();
 
@@ -401,10 +416,10 @@ public class AddRkFra extends TitleFragment implements NaviActivity.NaviRigthIma
         switch (view.getId()) {
             case R.id.tvSave:
                 isAdd = false;
-                if (TextUtils.isEmpty(tvWmsWarehouseIdName.getText()) && !TextUtils.isEmpty(etBarCode.getText())){
+                if (TextUtils.isEmpty(tvWmsWarehouseIdName.getText()) && !TextUtils.isEmpty(etBarCode.getText())) {
                     isAdd = true;
                     findInfoByBarCode(etBarCode.getText().toString());
-                }else{
+                } else {
                     addBillInput();
                 }
                 break;

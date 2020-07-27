@@ -30,9 +30,11 @@ import com.lxkj.wms.utils.KeyboardUtil;
 import com.lxkj.wms.utils.ListUtil;
 import com.lxkj.wms.utils.ShowErrorCodeUtil;
 import com.lxkj.wms.utils.StringUtil;
+import com.lxkj.wms.utils.TimeUtil;
 import com.lxkj.wms.utils.ToastUtil;
 import com.lxkj.wms.view.SingleChooseDialog;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -106,6 +108,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
     private String wmsWarehouseId;//仓库Id
     private List<WareHouseBean.ResultBean> topList;//储位列表
     private double djNum = 0;
+    private boolean isOnChange = false;
 
     public String getTitleName() {
         return act.getString(R.string.appAddTitle);
@@ -259,6 +262,10 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                         wmsStockId = resultBean.result.wmsStockId;
                         wmsWarehouseId = resultBean.result.wmsWarehouseId;
                         findWarehouseDetailList(wmsWarehouseId);
+                        if (isOnChange){
+                            isOnChange = false;
+                            addBillPutOn();
+                        }
                     }
                 } else {
                     etBarCode.setText("");
@@ -268,7 +275,6 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     tvWmsWarehouseId.setText("");
                     wmsStockId = null;
                     wmsWarehouseId = null;
-
                     if (resultBean.errorCode.contains("?")) {
                         String[] error = resultBean.errorCode.split("\\?");
                         String errorCode = error[0];
@@ -292,7 +298,6 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                             ToastUtil.showCustom(mContext, errors);
                     }
                 }
-
             }
 
             @Override
@@ -329,9 +334,8 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     if (null != resultBean.getResult()) {
                         topList = resultBean.getResult();
                         if (resultBean.getResult().size() >= 1) {
-//                            wmsWarehouseDetailId = resultBean.getResult().get(0).getId();
-//                            tvWmsWarehouseDetailId.setText(resultBean.getResult().get(0).getCode());
                             tvWmsWarehouseDetailId.setBackgroundResource(R.drawable.bg_border_efefef_5dp);
+
                         } else {
                             wmsWarehouseDetailId = null;
                             tvWmsWarehouseDetailId.setText("");
@@ -424,6 +428,12 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
 //            ToastUtil.showCustom(mContext, errors);
 //            return;
 //        }
+        if (null == wmsStockId && !TextUtils.isEmpty(etBarCode.getText())) {
+            findInfoByBarCodeBillPutOn(etBarCode.getText().toString());
+            isOnChange = true;
+            return;
+        }
+
         Map<String, String> params = new HashMap<>();
         if (!StringUtil.isEmpty(etBarCode.getText().toString()))
             params.put("barCode", etBarCode.getText().toString());
@@ -542,8 +552,19 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear,
                                           int dayOfMonth) {
                         monthOfYear++;
-                        putOnDate = year + "-" + monthOfYear + "-" + dayOfMonth;
-                        tvPutOnDate.setText(putOnDate);
+                        String month = TimeUtil.formatMonth(monthOfYear);
+                        putOnDate = year + "-" + month + "-" + dayOfMonth;
+                        try {
+                            if (Long.parseLong(TimeUtil.dateToStamp(putOnDate, "yyyy-MM-dd")) > System.currentTimeMillis()) {
+                                ShowErrorCodeUtil.showError(mContext, "SE110005");
+                                putOnDate = null;
+                                tvPutOnDate.setText("");
+                                return;
+                            }
+                            tvPutOnDate.setText(putOnDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, mYear, mMonth, mDay).show();
 

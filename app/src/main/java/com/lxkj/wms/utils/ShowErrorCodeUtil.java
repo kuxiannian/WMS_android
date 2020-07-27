@@ -382,6 +382,18 @@ public class ShowErrorCodeUtil {
             case "VE120009":
                 error= context.getString(R.string.VE120009);
                 break;
+            case "SE100010":
+                error= context.getString(R.string.SE100010);
+                break;
+            case "SE110005":
+                error= context.getString(R.string.SE110005);
+                break;
+            case "SE120003":
+                error= context.getString(R.string.SE120003);
+                break;
+            case "SE130004":
+                error= context.getString(R.string.SE130004);
+                break;
 
 
         }

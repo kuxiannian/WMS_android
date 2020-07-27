@@ -273,7 +273,7 @@
     <string name="SE100007">Bar code: %1$s, this cargo is a C-type small piece without suspicious goods. It must be entered into a warehouse of the type [small warehouse]</string>
     <string name="SE100008">Bar code: %1$s, this cargo is a suspected small cargo of category C. It must be entered into the warehouse of [embassy personnel, diaspora, residents import goods warehouse], [resident import goods distribution of small goods / large warehouse] type warehouse, please Make distribution</string>
     <string name="SE100009">Bar code: %1$s, this product has been over-allocated, please confirm receipt before entering the warehouse</string>
-
+    <string name="SE100010">The storage date can only be selected up to the current date</string>
     <string name="CE100001">Page information has expired, please refresh the page</string>
     <string name="CE100002">unknown mistake</string>
     <string name="CE100003">New operation, primary key must be empty</string>
@@ -298,6 +298,7 @@
     <string name="SE130001">Barcode: %1$s, the goods have not been removed, please remove them first</string>
     <string name="SE130002">Barcode: %1$s, the goods have no inventory information to check, it is no longer in stock</string>
     <string name="SE130003">The goods are suspected. The suspected problem field cannot be empty</string>
+    <string name="SE130004">The outbound date can only be selected up to the current date</string>
     //上架单错误提示
     <string name="VE110001">Primary key must not be empty</string>
     <string name="VE110002">Barcode cannot be empty</string>
@@ -317,7 +318,7 @@
     <string name="SE110002">Barcode: %1$s, the goods have no inventory information to check, they are not in storage</string>
     <string name="SE110003">The selected storage location information is incorrect, please try again</string>
     <string name="SE110004">There are already goods in the storage space, please choose another storage space</string>
-
+    <string name="SE110005">The shelves date can only be selected up to the current date</string>
     // 下架单错误提示
     <string name="VE120001">Primary key must not be empty</string>
     <string name="VE120002">Barcode cannot be empty</string>
@@ -330,6 +331,7 @@
     <string name="VE120009">No information about this bar code was found</string>
     <string name="SE120001">Bar code: %1$s, the goods are not on the shelves and cannot be removed</string>
     <string name="SE120002">Bar code: %1$s, no inventory information can be checked for the goods, not in storage</string>
+    <string name="SE120003">The off shelf date can only be selected up to the current date</string>
     <string name="VE500003">Storage slot number cannot be empty</string>
 
     //盘点单错误提示

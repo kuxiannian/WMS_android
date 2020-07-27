@@ -83,12 +83,23 @@ public class TimeUtil {
 
 
     /*
-
      * 将时间转换为时间戳
      */
     public static String dateToStamp(String s) throws ParseException {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = simpleDateFormat.parse(s);
+        long ts = date.getTime();
+        res = String.valueOf(ts);
+        return res;
+    }
+
+    /*
+     * 将时间转换为时间戳
+     */
+    public static String dateToStamp(String s,String format) throws ParseException {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         Date date = simpleDateFormat.parse(s);
         long ts = date.getTime();
         res = String.valueOf(ts);
@@ -106,6 +117,19 @@ public class TimeUtil {
         res = simpleDateFormat.format(date);
         return res;
     }
+
+    /*
+     * 将时间戳转换为时间
+     */
+    public static String formatMonth(int month) {
+        String formatMonth = "";
+        if (month <10)
+            formatMonth = "0" + month;
+        else
+            formatMonth = month+"";
+        return formatMonth;
+    }
+
 
     /**
      * 毫秒转化成时间
