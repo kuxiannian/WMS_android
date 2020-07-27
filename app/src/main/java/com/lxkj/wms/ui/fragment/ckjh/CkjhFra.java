@@ -14,7 +14,6 @@ import com.lxkj.wms.biz.ActivitySwitcher;
 import com.lxkj.wms.serialportapi.SoftDecodingAPI;
 import com.lxkj.wms.ui.activity.NaviActivity;
 import com.lxkj.wms.ui.fragment.TitleFragment;
-import com.lxkj.wms.ui.fragment.rksh.AddRkFra;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +61,7 @@ public class CkjhFra extends TitleFragment implements NaviActivity.NaviRigthImag
                         String str = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
                         Bundle bundle = new Bundle();
                         bundle.putString("barCode", str.replace("\n", "").trim());
-                        ActivitySwitcher.startFragment(act, AddRkFra.class, bundle);
+                        ActivitySwitcher.startFragment(act, AddCkFra.class, bundle);
                         isOpen = true;
                     }
                 }catch (Exception e){

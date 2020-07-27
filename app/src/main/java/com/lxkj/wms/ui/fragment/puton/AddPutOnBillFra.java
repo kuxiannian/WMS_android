@@ -107,7 +107,8 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
     private String wmsStockId;//库存表ID
     private String wmsWarehouseId;//仓库Id
     private List<WareHouseBean.ResultBean> topList;//储位列表
-    private double djNum = 0;
+    private int djNum = 0;
+    private double weightNum = 0;
     private boolean isOnChange = false;
 
     public String getTitleName() {
@@ -633,17 +634,17 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 break;
             case R.id.ivAdd:
                 if (TextUtils.isEmpty(etWeight.getText()))
-                    djNum = 0;
+                    weightNum = 0;
                 else
-                    djNum = Double.parseDouble(etWeight.getText().toString());
-                djNum++;
-                etWeight.setText(djNum + "");
+                    weightNum = Double.parseDouble(etWeight.getText().toString());
+                weightNum++;
+                etWeight.setText(weightNum + "");
                 break;
             case R.id.ivReduce:
                 if (TextUtils.isEmpty(etWeight.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etWeight.getText().toString());
+                    djNum = Integer.parseInt(etWeight.getText().toString());
                 if (djNum > 0)
                     djNum--;
                 etWeight.setText(djNum + "");
@@ -652,7 +653,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 if (TextUtils.isEmpty(etLength.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etLength.getText().toString());
+                    djNum = Integer.parseInt(etLength.getText().toString());
                 if (djNum < 9999999)
                     djNum++;
                 etLength.setText(djNum + "");
@@ -661,7 +662,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 if (TextUtils.isEmpty(etLength.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etLength.getText().toString());
+                    djNum = Integer.parseInt(etLength.getText().toString());
                 if (djNum > 0)
                     djNum--;
                 etLength.setText(djNum + "");
@@ -670,7 +671,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 if (TextUtils.isEmpty(etWidth.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etWidth.getText().toString());
+                    djNum = Integer.parseInt(etWidth.getText().toString());
                 if (djNum < 9999999)
                     djNum++;
                 etWidth.setText(djNum + "");
@@ -679,7 +680,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 if (TextUtils.isEmpty(etWidth.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etWidth.getText().toString());
+                    djNum = Integer.parseInt(etWidth.getText().toString());
                 if (djNum > 0)
                     djNum--;
                 etWidth.setText(djNum + "");
@@ -688,7 +689,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 if (TextUtils.isEmpty(etHeight.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etHeight.getText().toString());
+                    djNum = Integer.parseInt(etHeight.getText().toString());
                 djNum++;
                 etHeight.setText(djNum + "");
                 break;
@@ -696,7 +697,7 @@ public class AddPutOnBillFra extends TitleFragment implements NaviActivity.NaviR
                 if (TextUtils.isEmpty(etHeight.getText()))
                     djNum = 0;
                 else
-                    djNum = Double.parseDouble(etHeight.getText().toString());
+                    djNum = Integer.parseInt(etHeight.getText().toString());
                 if (djNum > 0)
                     djNum--;
                 etHeight.setText(djNum + "");
